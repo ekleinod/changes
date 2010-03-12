@@ -2,7 +2,7 @@
 %
 %  Copyright (C) 2007-2010
 %  Ekkart Kleinod (ekkart@ekkart.de)
-% --------------------------------------------------------------
+% --------------------------------------------------------------------------
 %
 %  This work may be distributed and/or modified under the
 %  conditions of the \LaTeX\ Project Public License, either version~1.3
@@ -14,9 +14,46 @@
 %
 %  This work has the LPPL maintenance status "maintained".
 %  The current maintainer of this work is Ekkart Kleinod.
+%
+%  Some code for providing multilanguage documentation was
+%  used from the pst-pdf package by Rolf Niepraschk and Hubert Gaesslein.
 % \fi
 %
 % \CheckSum{432}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v0.1}{2007/01/16}{Initial version.}
+% \changes{v0.2}{2007/01/17}{new convenience commands, LPPL, bugfixes: missing babel package, ifthen-placement, loc, author markup}
+% \changes{v0.3}{2007/01/22}{english documentation, replaced command changed with command replaced}
+% \changes{v0.4}{2007/01/24}{pdfcolmk for improved markup, introduced author-ids, first CTAN version}
+% \changes{v0.5}{2007/08/26}{reimplementation without array package, UTF-8, grayed text, change pf command arguments}
+% \changes{v0.5.1}{2007/08/27}{deleted text is striked out again using package ulem, greying didn't work}
+% \changes{v0.5.2}{2007/10/10}{package options for pdfcolmk, ulem, and xcolor}
+% \GetFileInfo{changes.dtx}
+%
+%^^A --------------------------------------------------------------------------
+%^^A definition for multilanguage documentation
+%
+% \newif\ifGERMAN  \GERMANfalse
+% \newif\ifENGLISH \ENGLISHfalse
+% \iflanguage{ngerman}{\GERMANtrue}{%
+%   \iflanguage{german}{\GERMANtrue}{\GERMANfalse}}
+% \iflanguage{english}{\ENGLISHtrue}{\ENGLISHfalse}
 %
 %^^A --------------------------------------------------------------------------
 %
