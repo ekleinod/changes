@@ -1,0 +1,88 @@
+%%%
+%
+% Treiberdatei für changes-Paket
+%
+%
+
+% Artikel-Klasse
+%
+% Voreingestellt: 11pt, a4paper, bigheadings
+% twoside - zweiseitiges Layout
+% titlepage - Titelseite kreieren
+% halfparskip - neuer Absatz ohne Einzug mit halber Zeile Abstand
+% tocleft - Inhaltsverzeichnis nicht eingerückt, sondern linksbündig
+% cleardoubleempty - cleardoublepage erzeugt ganz leere Seiten (ohne Seitennummer)
+% noonelinecaption - alle Tabellen- und Abbildungsbezeichnungen linksbündig
+% origlongtable - caption-Befehl der longtable-Klasse nutzen
+% ngerman - Spracheinstellung für babel
+\documentclass[twoside, titlepage, halfparskip, tocleft, cleardoubleempty, noonelinecaption, origlongtable, english, ngerman]{scrartcl}
+
+% Doc-Paket
+\usepackage{doc}
+
+% im Basis-Layout setzen
+% http://www.dr-kleinod.de/schreiben/latex.html
+\usepackage[font=charter]{basis}
+
+% Änderungsmarkierungen ermöglichen ;)
+\usepackage{changes}
+\definechangesauthor{EK}{orange}
+
+% voller Index
+\EnableCrossrefs
+
+% Angabe nach Zeilennummern
+\CodelineIndex
+
+% Umgebung für Einsatz
+\newenvironment{einspiel}[1][false]{%
+ \small
+ \begin{tabbing}
+  Definitionm\=\kill
+  \textsl{%
+   \ifthenelse{\equal{#1}{false}}%
+    {Definition}%
+    {\iflanguage{english}{Example}{Beispiel}}%
+  }
+}{%
+ \end{tabbing}
+}
+
+% Formatierungsbefehle
+\newcommand{\paket}[1]{\textsl{#1}}
+\newcommand{\option}[1]{\texttt{#1}}
+\newcommand{\datei}[1]{\texttt{#1}}
+\newcommand{\befehl}[1]{\texttt{\textbackslash{}#1}}
+
+% Makroüberschriften
+\makeatletter
+\def\Describe@Macro#1{%
+ \endgroup%
+ \fbox{\PrintDescribeMacro{#1}}\par%
+ \SpecialUsageIndex{#1}\@esphack\ignorespaces%
+}
+\def\Describe@Env#1{%
+ \endgroup%
+ \fbox{\PrintDescribeEnv{#1}}\par%
+ \SpecialEnvIndex{#1}\@esphack\ignorespaces
+}
+\makeatother
+
+
+\title{\iflanguage{english}{The \paket{changes}-package}{Das \paket{changes}-Paket}}
+\subtitle{\iflanguage{english}{Manual change markup --- version}{Manuelle Änderungsmarkierung -- Version} 0.5.2} %$^\alpha$}
+\author{Ekkart Kleinod}
+\email{ekkart@ekkart.de}
+
+% nur Beschreibungsteil ausgeben
+\OnlyDescription
+
+% Eigentliches Dokument
+\begin{document}
+
+  % Englische Dokumentation
+  %\selectlanguage{english}
+
+  \DocInput{changes.dtx}
+
+\end{document}
