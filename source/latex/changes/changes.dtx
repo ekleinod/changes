@@ -1,3 +1,5 @@
+% \CheckSum{4}
+%
 % \iffalse meta-comment
 %
 %  Copyright (C) 2007-2010
@@ -18,8 +20,6 @@
 %  Some code for providing multilanguage documentation was
 %  used from the pst-pdf package by Rolf Niepraschk and Hubert Gaesslein.
 % \fi
-%
-% \CheckSum{432}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -44,6 +44,7 @@
 % \changes{v0.5}{2007/08/26}{reimplementation without array package, UTF-8, grayed text, change pf command arguments}
 % \changes{v0.5.1}{2007/08/27}{deleted text is striked out again using package ulem, greying didn't work}
 % \changes{v0.5.2}{2007/10/10}{package options for pdfcolmk, ulem, and xcolor}
+% \changes{v0.5.3}{2010/11/21}{use class options as well}
 % \GetFileInfo{changes.dtx}
 %
 %^^A --------------------------------------------------------------------------
@@ -117,9 +118,9 @@
 % \befehl{usepackage\{changes\}}
 %
 % \iflanguage{english}{
-%  Options for the package are described in \autoref{sec:Optionen}.
+%  Options for the package are described in \autoref{sec:options}.
 % }{
-%  Die Paketoptionen werden in \autoref{sec:Optionen} erläutert.
+%  Die Paketoptionen werden in \autoref{sec:options} erläutert.
 % }
 %
 %^^A -- Pakete ----------------------------------------------------------------
@@ -161,17 +162,23 @@
 % }{
 %  \subsection{Optionen}
 % }
-% \label{sec:Optionen}
+% \label{sec:options}
 %
 % \minisec{draft}
 % \iflanguage{english}{
 %  The \option{draft}-option enables markup of changes.
 %  The list of changes is available via \befehl{listofchanges}.
 %  This option is the default option, if no other option is selected.
+%
+%  The \paket{changes} package reuses the declaration of \option{draft} in \befehl{documentclass}.
+%  The local declaration of \option{final} overrules the declaration of \option{draft} in \befehl{documentclass}.
 % }{
 %  Die \option{draft}-Option bewirkt, dass alle Änderungen markiert werden.
 %  Die Änderungsliste kann durch \befehl{listofchanges} ausgegeben werden.
 %  Ohne Optionsangabe wird \option{draft} automatisch eingestellt.
+%
+%  Die Angabe von \option{draft} in \befehl{documentclass} wird vom \paket{changes}-Paket mitgenutzt.
+%  Die lokale Angabe von \option{final} überstimmt die Angabe von \option{draft} in \befehl{documentclass}.
 % }
 %
 % \befehl{usepackage[draft]\{changes\}}
@@ -181,9 +188,15 @@
 % \iflanguage{english}{
 %  The \option{final}-option disables markup of changes, only the correct text will be shown.
 %  The list of changes is disabled, too.
+%
+%  The \paket{changes} package reuses the declaration of \option{final} in \befehl{documentclass}.
+%  The local declaration of \option{draft} overrules the declaration of \option{final} in \befehl{documentclass}.
 % }{
 %  Die \option{final}-Option bewirkt, dass alle Änderungsmarkierungen ausgeblendet werden und nur noch der korrekte Text ausgegeben wird.
 %  Die Änderungsliste wird ebenfalls unterdrückt.
+%
+%  Die Angabe von \option{final} in \befehl{documentclass} wird vom \paket{changes}-Paket mitgenutzt.
+%  Die lokale Angabe von \option{draft} überstimmt die Angabe von \option{final} in \befehl{documentclass}.
 % }
 %
 % \befehl{usepackage[final]\{changes\}}
@@ -426,10 +439,30 @@
 % \StopEventually{
 %
 % \iflanguage{english}{
+%  \section{Authors}
+% }{
+%  \section{Autoren}
+% }
+% \label{sec:authors}
+%
+% \iflanguage{english}{
+%  The \paket{changes} packages was written by several authors.
+%  The authors are (in alphabetical order):
+% }{
+%  Am \paket{changes}-Paket haben mehrere Autoren mitgewirkt.
+%  Dies sind in alphabetischer Reihenfolge:
+% }
+% \begin{itemize}
+%  \item Kleinod, Ekkart
+%  \item Wolter, Steve
+% \end{itemize}
+%
+% \iflanguage{english}{
 %  \section{Versions}
 % }{
 %  \section{Versionen}
 % }
+% \label{sec:versions}
 %
 % \iflanguage{english}{
 %  \subsection{TODO/known bugs}
@@ -450,6 +483,20 @@
 %   \item Änderungsumgebungen für längere Passagen
 %   \item bei fehlenden T1-Fonts (Umlautkodierung) und \paket{inputenc} gibt es Fehler
 %   \item evtl.\ zweite Klasse von Änderungen: nicht so wichtige (extra ausblendbar), vielleicht über Stern-Variante?
+%  \end{itemize}
+% }
+%
+% \subsection{Version 0.5.3}
+%
+% \iflanguage{english}{
+%  Date: 2010/11/21
+%  \begin{itemize}
+%   \item document options of \befehl{documentclass} are used as well (suggestion and code of Steve Wolter)
+%  \end{itemize}
+% }{
+%  Datum: 21.\,11.~2010
+%  \begin{itemize}
+%   \item Dokumentoptionen von \befehl{documentclass} werden ebenfalls genutzt (Vorschlag und Code von Steve Wolter)
 %  \end{itemize}
 % }
 %
@@ -598,7 +645,7 @@
 % \iflanguage{english}{
 %  \section{Distribution, Copyright, License}
 %
-%  Copyright 2007 Ekkart Kleinod (\href{mailto:ekkart@ekkart.de}{ekkart@ekkart.de})
+%  Copyright 2007-2010 Ekkart Kleinod (\href{mailto:ekkart@ekkart.de}{ekkart@ekkart.de})
 %
 %  This work may be distributed and/or modified under the
 %  conditions of the \LaTeX\ Project Public License, either version~1.3
@@ -631,7 +678,7 @@
 % }{
 %  \section{Weitergabe, Copyright, Lizenz}
 %
-%  Copyright 2007 Ekkart Kleinod (\href{mailto:ekkart@ekkart.de}{ekkart@ekkart.de})
+%  Copyright 2007-2010 Ekkart Kleinod (\href{mailto:ekkart@ekkart.de}{ekkart@ekkart.de})
 %
 %  Dieses Paket darf unter der "`\LaTeX\ Project Public License"' Version~1.3 oder jeder späteren Version weitergegeben und/oder geändert werden.
 %  Die neueste Version dieser Lizenz steht auf\\
@@ -690,8 +737,8 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{changes}
-[2007/10/10 v0.5.2 changes-Paket]
-\typeout{*** changes-Paket 2007/10/10 v0.5.2 ***}
+[2010/11/21 v0.5.3 changes-Paket]
+\typeout{*** changes-Paket 2010/11/21 v0.5.3 ***}
 %    \end{macrocode}
 %
 % \iflanguage{english}{
@@ -723,6 +770,7 @@
 \newboolean{Changes@optiondraft}
 \setboolean{Changes@optiondraft}{true}
 \DeclareOptionX{draft}{
+ \setboolean{Changes@optiondraft}{true}
  \typeout{changes-option '\CurrentOption'}
 }
 %    \end{macrocode}
@@ -780,7 +828,7 @@
 %  Ausführung des Optionenbearbeitens.
 % }
 %    \begin{macrocode}
-\ProcessOptionsX\relax
+\ProcessOptionsX*\relax
 %    \end{macrocode}
 %
 % \iflanguage{english}{
@@ -820,41 +868,41 @@
 %    \begin{macrocode}
 \ifthenelse{\isundefined{\addto}}
  {
-  \def\listchangesname{\"Anderungen}
-  \def\changesaddname{Eingef\"ugt}
-  \def\changesdeletename{Gel\"oscht}
-  \def\changesreplacename{Ersetzt}
-  \def\changesauthorname{Autor}
-  \def\changesanonymousname{Anonym}
-  \def\changesnoloc{\"Anderungsliste erst nach dem n\"achsten Durchlauf verf\"ugbar.}
+	\def\listchangesname{\"Anderungen}
+	\def\changesaddname{Eingef\"ugt}
+	\def\changesdeletename{Gel\"oscht}
+	\def\changesreplacename{Ersetzt}
+	\def\changesauthorname{Autor}
+	\def\changesanonymousname{Anonym}
+	\def\changesnoloc{\"Anderungsliste erst nach dem n\"achsten Durchlauf verf\"ugbar.}
  }{
-  \addto\captionsngerman{\def\listchangesname{\"Anderungen}}
-  \addto\captionsgerman{\def\listchangesname{\"Anderungen}}
-  \addto\captionsenglish{\def\listchangesname{Changes}}
+	\addto\captionsngerman{\def\listchangesname{\"Anderungen}}
+	\addto\captionsgerman{\def\listchangesname{\"Anderungen}}
+	\addto\captionsenglish{\def\listchangesname{Changes}}
 
-  \addto\captionsngerman{\def\changesaddname{Eingef\"ugt}}
-  \addto\captionsgerman{\def\changesaddname{Eingef\"ugt}}
-  \addto\captionsenglish{\def\changesaddname{Added}}
+	\addto\captionsngerman{\def\changesaddname{Eingef\"ugt}}
+	\addto\captionsgerman{\def\changesaddname{Eingef\"ugt}}
+	\addto\captionsenglish{\def\changesaddname{Added}}
 
-  \addto\captionsngerman{\def\changesdeletename{Gel\"oscht}}
-  \addto\captionsgerman{\def\changesdeletename{Gel\"oscht}}
-  \addto\captionsenglish{\def\changesdeletename{Deleted}}
+	\addto\captionsngerman{\def\changesdeletename{Gel\"oscht}}
+	\addto\captionsgerman{\def\changesdeletename{Gel\"oscht}}
+	\addto\captionsenglish{\def\changesdeletename{Deleted}}
 
-  \addto\captionsngerman{\def\changesreplacename{Ersetzt}}
-  \addto\captionsgerman{\def\changesreplacename{Ersetzt}}
-  \addto\captionsenglish{\def\changesreplacename{Replaced}}
+	\addto\captionsngerman{\def\changesreplacename{Ersetzt}}
+	\addto\captionsgerman{\def\changesreplacename{Ersetzt}}
+	\addto\captionsenglish{\def\changesreplacename{Replaced}}
 
-  \addto\captionsngerman{\def\changesauthorname{Autor}}
-  \addto\captionsgerman{\def\changesauthorname{Autor}}
-  \addto\captionsenglish{\def\changesauthorname{Author}}
+	\addto\captionsngerman{\def\changesauthorname{Autor}}
+	\addto\captionsgerman{\def\changesauthorname{Autor}}
+	\addto\captionsenglish{\def\changesauthorname{Author}}
 
-  \addto\captionsngerman{\def\changesanonymousname{Anonym}}
-  \addto\captionsgerman{\def\changesanonymousname{Anonym}}
-  \addto\captionsenglish{\def\changesanonymousname{anonymous}}
+	\addto\captionsngerman{\def\changesanonymousname{Anonym}}
+	\addto\captionsgerman{\def\changesanonymousname{Anonym}}
+	\addto\captionsenglish{\def\changesanonymousname{anonymous}}
 
-  \addto\captionsngerman{\def\changesnoloc{\"Anderungsliste erst nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
-  \addto\captionsgerman{\def\changesnoloc{\"Anderungsliste erst nach dem n\"achsten Durchlauf verf\"ugbar.}}
-  \addto\captionsenglish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
+	\addto\captionsngerman{\def\changesnoloc{\"Anderungsliste erst nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
+	\addto\captionsgerman{\def\changesnoloc{\"Anderungsliste erst nach dem n\"achsten Durchlauf verf\"ugbar.}}
+	\addto\captionsenglish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
  }
 %    \end{macrocode}
 %
@@ -970,8 +1018,8 @@
 %    \begin{macrocode}
 \newcommand{\setauthormarkup}[2][left]{%
  \ifthenelse{\equal{#1}{left}}
-  {\setboolean{Changes@AuthorPositionLeft}{true}}
-  {\setboolean{Changes@AuthorPositionLeft}{false}}
+	{\setboolean{Changes@AuthorPositionLeft}{true}}
+	{\setboolean{Changes@AuthorPositionLeft}{false}}
  \renewcommand{\Changes@AuthorMark}[1]{#2}
 }
 %    \end{macrocode}
@@ -1035,22 +1083,22 @@
 }
 \newcommand{\Changes@added}[2][\@empty]{%
  \ifthenelse{\boolean{Changes@optiondraft}}%
-  {%
-   \textcolor{Changes@Color\Changes@temp}{%
-    \ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
-     {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
-      {}{\Changes@AuthorMark{\Changes@temp}}%
-     }{}%
-    #2%
-    \ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
-     {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
-      {}{\Changes@AuthorMark{\Changes@temp}}%
-     }{}%
-    \ifthenelse{\equal{\@empty}{#1}}%
-     {}{\Changes@Remark{\Changes@temp}{#1}}%
-   }%
-   \stepcounter{Changes@AddCount\Changes@temp}%
-  }{#2}%
+	{%
+	 \textcolor{Changes@Color\Changes@temp}{%
+		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
+		 {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
+			{}{\Changes@AuthorMark{\Changes@temp}}%
+		 }{}%
+		#2%
+		\ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
+		 {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
+			{}{\Changes@AuthorMark{\Changes@temp}}%
+		 }{}%
+		\ifthenelse{\equal{\@empty}{#1}}%
+		 {}{\Changes@Remark{\Changes@temp}{#1}}%
+	 }%
+	 \stepcounter{Changes@AddCount\Changes@temp}%
+	}{#2}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1080,22 +1128,22 @@
 }
 \newcommand{\Changes@deleted}[2][\@empty]{%
  \ifthenelse{\boolean{Changes@optiondraft}}%
-  {%
-   \textcolor{Changes@Color\Changes@temp}{%
-    \ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
-     {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
-      {}{\Changes@AuthorMark{\Changes@temp}}%
-     }{}%
-    \sout{#2}%
-    \ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
-     {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
-      {}{\Changes@AuthorMark{\Changes@temp}}%
-     }{}%
-    \ifthenelse{\equal{\@empty}{#1}}%
-     {}{\Changes@Remark{\Changes@temp}{#1}}%
-   }%
-   \stepcounter{Changes@DeleteCount\Changes@temp}%
-  }{\@bsphack \expandafter \@esphack}%
+	{%
+	 \textcolor{Changes@Color\Changes@temp}{%
+		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
+		 {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
+			{}{\Changes@AuthorMark{\Changes@temp}}%
+		 }{}%
+		\sout{#2}%
+		\ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
+		 {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
+			{}{\Changes@AuthorMark{\Changes@temp}}%
+		 }{}%
+		\ifthenelse{\equal{\@empty}{#1}}%
+		 {}{\Changes@Remark{\Changes@temp}{#1}}%
+	 }%
+	 \stepcounter{Changes@DeleteCount\Changes@temp}%
+	}{\@bsphack \expandafter \@esphack}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1119,23 +1167,23 @@
 }
 \newcommand{\Changes@replaced}[3][\@empty]{%
  \ifthenelse{\boolean{Changes@optiondraft}}%
-  {%
-   \textcolor{Changes@Color\Changes@temp}{%
-    \ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
-     {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
-      {}{\Changes@AuthorMark{\Changes@temp}}%
-     }{}%
-    #2%
-    \sout{#3}%
-    \ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
-     {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
-      {}{\Changes@AuthorMark{\Changes@temp}}%
-     }{}%
-    \ifthenelse{\equal{\@empty}{#1}}%
-     {}{\Changes@Remark{\Changes@temp}{#1}}%
-   }%
-   \stepcounter{Changes@ReplaceCount\Changes@temp}%
-  }{#2}%
+	{%
+	 \textcolor{Changes@Color\Changes@temp}{%
+		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
+		 {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
+			{}{\Changes@AuthorMark{\Changes@temp}}%
+		 }{}%
+		#2%
+		\sout{#3}%
+		\ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
+		 {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
+			{}{\Changes@AuthorMark{\Changes@temp}}%
+		 }{}%
+		\ifthenelse{\equal{\@empty}{#1}}%
+		 {}{\Changes@Remark{\Changes@temp}{#1}}%
+	 }%
+	 \stepcounter{Changes@ReplaceCount\Changes@temp}%
+	}{#2}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1175,40 +1223,40 @@
 %    \begin{macrocode}
 \newcommand{\listofchanges}{%
  \ifthenelse{\boolean{Changes@optiondraft}}
-  {
-   \section*{\listchangesname}
-   \IfFileExists{\jobname.\Changes@extension}
-    {
-     \newboolean{Changes@MoreLines}
-     \setboolean{Changes@MoreLines}{true}
-     \newread\Changes@InFile
-     \openin\Changes@InFile = \jobname.\Changes@extension
-      \whiledo{\boolean{Changes@MoreLines}}{
-      \read\Changes@InFile to \Changes@Line
-       \ifeof\Changes@InFile
-        \setboolean{Changes@MoreLines}{false}
-       \else
-        \expandafter\changes@chopline\Changes@Line\\
-        \begin{tabbing}
-         mm\=mmmmmm\=\kill
-         \ifthenelse{\equal{\Changes@InID}{}}
-          {\textcolor{\Changes@InColor}{\changesauthorname: \changesanonymousname}\\}
-          {\textcolor{\Changes@InColor}{\changesauthorname: \Changes@InID}
-           \ifthenelse{\equal{\Changes@InName}{}}{}
-           { \textcolor{\Changes@InColor}{(\Changes@InName)}}
-           \\
-          }
-         \>\changesaddname:\>\Changes@InAdded\\
-         \>\changesdeletename:\>\Changes@InDeleted\\
-         \>\changesreplacename:\>\Changes@InReplaced\\
-        \end{tabbing}
-       \fi
-      }
-     \closein\Changes@InFile
-    }{
-     \emph{\changesnoloc}
-    }
-  }{}
+	{
+	 \section*{\listchangesname}
+	 \IfFileExists{\jobname.\Changes@extension}
+		{
+		 \newboolean{Changes@MoreLines}
+		 \setboolean{Changes@MoreLines}{true}
+		 \newread\Changes@InFile
+		 \openin\Changes@InFile = \jobname.\Changes@extension
+			\whiledo{\boolean{Changes@MoreLines}}{
+			\read\Changes@InFile to \Changes@Line
+			 \ifeof\Changes@InFile
+				\setboolean{Changes@MoreLines}{false}
+			 \else
+				\expandafter\changes@chopline\Changes@Line\\
+				\begin{tabbing}
+				 mm\=mmmmmm\=\kill
+				 \ifthenelse{\equal{\Changes@InID}{}}
+					{\textcolor{\Changes@InColor}{\changesauthorname: \changesanonymousname}\\}
+					{\textcolor{\Changes@InColor}{\changesauthorname: \Changes@InID}
+					 \ifthenelse{\equal{\Changes@InName}{}}{}
+					 { \textcolor{\Changes@InColor}{(\Changes@InName)}}
+					 \\
+					}
+				 \>\changesaddname:\>\Changes@InAdded\\
+				 \>\changesdeletename:\>\Changes@InDeleted\\
+				 \>\changesreplacename:\>\Changes@InReplaced\\
+				\end{tabbing}
+			 \fi
+			}
+		 \closein\Changes@InFile
+		}{
+		 \emph{\changesnoloc}
+		}
+	}{}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1230,14 +1278,14 @@
  \immediate\openout\Changes@OutFile = \jobname.\Changes@extension
  \setcounter{Changes@iAuthor}{0}
  \whiledo{\value{Changes@iAuthor} < \value{Changes@AuthorCount}}{
-  \stepcounter{Changes@iAuthor}
-  \def\Changes@ID{\@nameuse{Changes@Author\theChanges@iAuthor}}
-  \immediate\write\Changes@OutFile{\Changes@ID;%
-   \@nameuse{Changes@AuthorColor\Changes@ID};%
-   \@nameuse{Changes@AuthorName\Changes@ID};%
-   \the\value{Changes@AddCount\Changes@ID};%
-   \the\value{Changes@DeleteCount\Changes@ID};%
-   \the\value{Changes@ReplaceCount\Changes@ID}}
+	\stepcounter{Changes@iAuthor}
+	\def\Changes@ID{\@nameuse{Changes@Author\theChanges@iAuthor}}
+	\immediate\write\Changes@OutFile{\Changes@ID;%
+	 \@nameuse{Changes@AuthorColor\Changes@ID};%
+	 \@nameuse{Changes@AuthorName\Changes@ID};%
+	 \the\value{Changes@AddCount\Changes@ID};%
+	 \the\value{Changes@DeleteCount\Changes@ID};%
+	 \the\value{Changes@ReplaceCount\Changes@ID}}
  }
  \closeout\Changes@OutFile
 }
