@@ -4,18 +4,7 @@
 %
 %
 
-% Artikel-Klasse
-%
-% Voreingestellt: 11pt, a4paper, bigheadings
-% twoside - zweiseitiges Layout
-% titlepage - Titelseite kreieren
-% halfparskip - neuer Absatz ohne Einzug mit halber Zeile Abstand
-% tocleft - Inhaltsverzeichnis nicht eingerückt, sondern linksbündig
-% cleardoubleempty - cleardoublepage erzeugt ganz leere Seiten (ohne Seitennummer)
-% noonelinecaption - alle Tabellen- und Abbildungsbezeichnungen linksbündig
-% origlongtable - caption-Befehl der longtable-Klasse nutzen
-% ngerman - Spracheinstellung für babel
-\documentclass[twoside, titlepage, halfparskip, tocleft, cleardoubleempty, noonelinecaption, origlongtable, english, ngerman]{scrartcl}
+\documentclass[twoside, titlepage, parskip=half, toc=flat, cleardoublepage=empty, captions=nooneline, origlongtable, english, ngerman]{scrartcl}
 
 % Doc-Paket
 \usepackage{doc}
@@ -38,12 +27,12 @@
 \newenvironment{einspiel}[1][false]{%
  \small
  \begin{tabbing}
-  Definitionm\=\kill
-  \textsl{%
-   \ifthenelse{\equal{#1}{false}}%
-    {Definition}%
-    {\iflanguage{english}{Example}{Beispiel}}%
-  }
+	Definitionm\=\kill
+	\textsl{%
+	 \ifthenelse{\equal{#1}{false}}%
+		{Definition}%
+		{\iflanguage{english}{Example}{Beispiel}}%
+	}
 }{%
  \end{tabbing}
 }
@@ -70,7 +59,7 @@
 
 
 \title{\iflanguage{english}{The \paket{changes}-package}{Das \paket{changes}-Paket}}
-\subtitle{\iflanguage{english}{Manual change markup --- version}{Manuelle Änderungsmarkierung -- Version} 0.5.2} %$^\alpha$}
+\subtitle{\iflanguage{english}{Manual change markup --- version}{Manuelle Änderungsmarkierung -- Version} 0.5.3} %$^\alpha$}
 \author{Ekkart Kleinod}
 \email{ekkart@ekkart.de}
 
@@ -80,9 +69,9 @@
 % Eigentliches Dokument
 \begin{document}
 
-  % Englische Dokumentation
-  %\selectlanguage{english}
+	% Englische Dokumentation
+	%\selectlanguage{english}
 
-  \DocInput{changes.dtx}
+	\DocInput{changes.dtx}
 
 \end{document}
