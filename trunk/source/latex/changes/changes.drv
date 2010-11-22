@@ -63,15 +63,13 @@
 \author{Ekkart Kleinod}
 \email{ekkart@ekkart.de}
 
-% nur Beschreibungsteil ausgeben
-\OnlyDescription
+% nur Beschreibungsteil ausgeben?
+%\OnlyDescription
 
 % Eigentliches Dokument
 \begin{document}
 
-	% Englische Dokumentation
-	%\selectlanguage{english}
-
+	\selectlanguage{ngerman}
 	\DocInput{changes.dtx}
 
 \end{document}
