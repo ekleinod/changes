@@ -13,6 +13,7 @@
 	<property name="file:log" value="build.log" />                  <!-- Log-Datei -->
 	<property name="count:runs" value="1" />                        <!-- LaTeX-Durchlaufzähler -->
 
+	<property name="path:examples" value="examples/" /> <!-- LaTeX-doc-examples-Pfad -->
 	<property name="path:latex:base" value="../../../" /> <!-- LaTeX-base-Pfad -->
 	<property name="path:latex:doc" value="doc/latex/" /> <!-- LaTeX-doc-Pfad -->
 	<property name="path:latex:tex" value="tex/latex/" /> <!-- LaTeX-tex-Pfad -->
@@ -147,6 +148,11 @@
 		<move todir="${path:latex:base}${path:latex:doc}${file:targetname}/" failonerror="false">
 			<fileset dir=".">
 				<include name="${file:targetname}*.pdf" />
+			</fileset>
+		</move>
+
+		<move todir="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}" failonerror="false">
+			<fileset dir=".">
 				<include name="${file:targetname}.example*.tex" />
 			</fileset>
 		</move>
@@ -164,6 +170,7 @@
 
 		<mkdir dir="${path:ctan}${path:texmf}${path:latex:tex}${file:targetname}" />
 		<mkdir dir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}" />
+		<mkdir dir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/${path:examples}" />
 		<mkdir dir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}" />
 
 		<!-- Dateien -->
@@ -173,9 +180,14 @@
 		<copy todir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/">
 			<fileset dir="${path:latex:base}${path:latex:doc}${file:targetname}/">
 				<include name="*.pdf" />
+			</fileset>
+		</copy>
+		<copy todir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/${path:examples}">
+			<fileset dir="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}">
 				<include name="*.tex" />
 			</fileset>
 		</copy>
+
 		<copy todir="${path:ctan}${file:targetname}/">
 			<fileset dir="${path:latex:base}${path:latex:doc}${file:targetname}/">
 				<include name="*.pdf" />
@@ -201,15 +213,6 @@
 			file="README" />
 
 		<!-- Archive -->
-		<zip
-			destfile="${path:ctan}${file:targetname}.drkleinod.zip">
-			<fileset dir="${path:ctan}">
-				<include name="${path:texmf}" />
-			</fileset>
-		</zip>
-		<move todir="."
-			file="${path:ctan}${file:targetname}.drkleinod.zip" />
-
 		<zip
 			destfile="${path:ctan}${file:targetname}.tds.zip"
 			basedir="${path:ctan}${path:texmf}" />
