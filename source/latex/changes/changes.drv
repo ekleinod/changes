@@ -59,7 +59,7 @@
 
 
 \title{\iflanguage{english}{The \paket{changes}-package}{Das \paket{changes}-Paket}}
-\subtitle{\iflanguage{english}{Manual change markup --- version}{Manuelle Änderungsmarkierung -- Version} 0.5.3} %$^\alpha$}
+\subtitle{\iflanguage{english}{Manual change markup --- version}{Manuelle Änderungsmarkierung -- Version} 0.5.4} %$^\alpha$}
 \author{Ekkart Kleinod}
 \email{ekkart@ekkart.de}
 
