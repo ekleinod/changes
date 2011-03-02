@@ -1,4 +1,4 @@
-% \CheckSum{511}
+% \CheckSum{507}
 %
 % \iffalse meta-comment
 %
@@ -156,13 +156,13 @@
 %    \begin{macrocode}
 \ifthenelse{\isundefined{\addto}}
  {
-	\def\listchangesname{\"Anderungen}
-	\def\changesaddname{Eingef\"ugt}
-	\def\changesdeletename{Gel\"oscht}
-	\def\changesreplacename{Ersetzt}
-	\def\changesauthorname{Autor}
-	\def\changesanonymousname{Anonym}
-	\def\changesnoloc{\"Anderungsliste erst nach dem n\"achsten Durchlauf verf\"ugbar.}
+	\def\listchangesname{Changes}
+	\def\changesaddname{Added}
+	\def\changesdeletename{Deleted}
+	\def\changesreplacename{Replaced}
+	\def\changesauthorname{Author}
+	\def\changesanonymousname{anonymous}
+	\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}
  }{
 	\addto\captionsngerman{\def\listchangesname{\"Anderungen}}
 	\addto\captionsgerman{\def\listchangesname{\"Anderungen}}
@@ -188,29 +188,20 @@
 	\addto\captionsgerman{\def\changesanonymousname{Anonym}}
 	\addto\captionsenglish{\def\changesanonymousname{anonymous}}
 
-	\addto\captionsngerman{\def\changesnoloc{\"Anderungsliste erst nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
-	\addto\captionsgerman{\def\changesnoloc{\"Anderungsliste erst nach dem n\"achsten Durchlauf verf\"ugbar.}}
+	\addto\captionsngerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
+	\addto\captionsgerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten Durchlauf verf\"ugbar.}}
 	\addto\captionsenglish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
  }
 %    \end{macrocode}
 %
-% \iflanguage{english}{
-%  File extension.
-% }{
-%  Dateiendung.
-% }
+% File extension.
 %    \begin{macrocode}
 \newcommand{\Changes@extension}{loc}
 %    \end{macrocode}
 %
 % \begin{macro}{\setlocextension}
-% \iflanguage{english}{
-%  Set new file extension.
+%  Set a new file extension.
 %  Argument: new extension.
-% }{
-%  Dieser Befehl überschreibt die Default-Dateiendung.
-%  Argument: neue Endung
-% }
 %    \begin{macrocode}
 \newcommand{\setlocextension}[1]{
  \renewcommand{\Changes@extension}{#1}
@@ -218,13 +209,9 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \iflanguage{english}{
-%  \subsection{management of authors}
-%  Authorcount.
-% }{
-%  \subsection{Autorenverwaltung}
-%  Autoren-Zähler.
-% }
+% \subsection{management of authors}
+%
+% Author counter.
 %    \begin{macrocode}
 \newcounter{Changes@AuthorCount}
 \setcounter{Changes@AuthorCount}{0}
@@ -232,21 +219,12 @@
 %    \end{macrocode}
 %
 % \begin{macro}{\definechangesauthor}
-% \iflanguage{english}{
 %  Define a new author.
-%  Arguments: author-id and author's colour.
-%  Optional argument: author name.
+%  Mandatory arguments: author's id and author's colour.
+%  Optional argument: author's name.
 %
-%  Store author id, name and colour using named variables.
+%  Store id, name and colour using named variables.
 %  Define counter and colour per author.
-% }{
-%  Dieser Befehl definiert einen neuen Autor.
-%  Argumente: Autor-ID und Farbe des Autors.
-%  Optionales Argument: Autorenname.
-%
-%  Autor-ID, Name und Farbe mit benannten Variablen merken.
-%  Pro Autor eigenen Zähler und Farben definieren.
-% }
 %    \begin{macrocode}
 \newcommand{\definechangesauthor}[3][\@empty]{
  \stepcounter{Changes@AuthorCount}
@@ -261,35 +239,21 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \iflanguage{english}{
-%  Define default-author (anonymous).
-% }{
-%  Default-Autor definieren (anonym).
-% }
+% Define default-author (anonymous) with empty id and blue color.
 %    \begin{macrocode}
 \definechangesauthor{\@empty}{blue}
 %    \end{macrocode}
 %
-% \iflanguage{english}{
 %  Position of the authors markup relative to the text.
 %  \emph{true} = left, \emph{false} = right (default).
-% }{
-%  Position der Autormarkierung bzgl.\ eingegebenem Text.
-%  \emph{true} = links, \emph{false} = rechts (default).
-% }
 %    \begin{macrocode}
 \newboolean{Changes@AuthorPositionLeft}
 \setboolean{Changes@AuthorPositionLeft}{false}
 %    \end{macrocode}
 %
 % \begin{macro}{\Changes@AuthorMark}
-% \iflanguage{english}{
 %  Markup of the author.
 %  Default: superscripted.
-% }{
-%  Ausgabe des Autors bei eingegebenem Text.
-%  Default: hochgestellt.
-% }
 %    \begin{macrocode}
 \newcommand{\Changes@AuthorMark}[1]{%
  \textsuperscript{#1}%
@@ -298,11 +262,9 @@
 % \end{macro}
 %
 % \begin{macro}{\setauthormarkup}
-% \iflanguage{english}{
-%  Redefining the author markup.
-% }{
-%  Neudefinition der Autorenausgabe.
-% }
+%  Redefine the author markup.
+%  Mandatory argument: markup definition.
+%  Optional argument: markup position (default = left).
 %    \begin{macrocode}
 \newcommand{\setauthormarkup}[2][left]{%
  \ifthenelse{\equal{#1}{left}}
@@ -314,13 +276,8 @@
 % \end{macro}
 %
 % \begin{macro}{\Changes@Remark}
-% \iflanguage{english}{
 %  Markup of remarks.
 %  Default: in a footnote.
-% }{
-%  Ausgabe der Anmerkung.
-%  Default: als Fußnote.
-% }
 %    \begin{macrocode}
 \newcommand{\Changes@Remark}[2]{%
  \footnote{\textcolor{Changes@Color#1}{#2}}%
@@ -329,11 +286,8 @@
 % \end{macro}
 %
 % \begin{macro}{\setremarkmarkup}
-% \iflanguage{english}{
 %  Redefining the remark markup.
-% }{
-%  Neudefinition der Anmerkungen.
-% }
+%  Mandatory argument: markup definition.
 %    \begin{macrocode}
 \newcommand{\setremarkmarkup}[1]{%
  \renewcommand{\Changes@Remark}[2]{#1}%
@@ -341,29 +295,19 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \iflanguage{english}{
-%  \subsection{Change commands}
-%  Temporary variable for exchange of optional parameters between interlocked commands.
-% }{
-%  \subsection{Änderungsbefehle}
-%  Temporärer Speicher, um Parameterübergabe zwischen den geschachtelten Kommandos zu erledigen.
-% }
+% \subsection{Change commands}
+%
+% Temporary variable for exchange of optional parameters between interlocked commands.
 %    \begin{macrocode}
 \newcommand{\Changes@temp}{\@empty}
 %    \end{macrocode}
 %
 % \begin{macro}{\added}
-% \iflanguage{english}{
 %  The command formats text as new text.
 %  It's rather complicated for defining a command with two optional parameters.
 %
-%  Arguments: author-id (opt.), remark (opt), and new text
-% }{
-%  Dieser Befehl formatiert den Text als neuen Text.
-%  Die komplizierte Konstruktion ist nötig, um ein Kommando mit zwei optionalen Argumenten zu definieren.
-%
-%  Argumente: Autor-ID (opt.), Erläuterung (opt.) und neuer Text
-% }
+%  Mandatory argument: added text.
+%  Optional arguments: author's id, remark
 %    \begin{macrocode}
 \newcommand{\added}[1][\@empty]{%
  \renewcommand{\Changes@temp}{#1}%
@@ -392,23 +336,14 @@
 % \end{macro}
 %
 % \begin{macro}{\deleted}
-% \iflanguage{english}{
 %  The command formats text as deleted text.
 %  It's rather complicated for defining a command with two optional parameters.
 %
 %  The \option{final}-part is taken from a tip from \texttt{de.comp.text.tex}.
 %  It solves the problem of additional space caused by an empty command.
 %
-%  Arguments: author-id (opt.), remark (opt), and deleted text
-% }{
-%  Dieser Befehl formatiert den Text als gelöschten Text.
-%  Die komplizierte Konstruktion ist nötig, um ein Kommando mit zwei optionalen Argumenten zu definieren.
-%
-%  Der \option{final}-Teil ist einem Tip von \texttt{de.comp.text.tex} entnommen.
-%  Er löst das Problem des zusätzlichen Leerraums bei leeren Kommandos.
-%
-%  Argumente: Autor-ID (opt.), Erläuterung (opt.) und gelöschter Text
-% }
+%  Mandatory argument: deleted text.
+%  Optional arguments: author's id, remark
 %    \begin{macrocode}
 \newcommand{\deleted}[1][\@empty]{%
  \renewcommand{\Changes@temp}{#1}%
@@ -437,17 +372,11 @@
 % \end{macro}
 %
 % \begin{macro}{\replaced}
-% \iflanguage{english}{
 %  The command formats text as replaced text.
 %  It's rather complicated for defining a command with two optional parameters.
 %
-%  Arguments: author-id (opt.), remark (opt), new text, and old text
-% }{
-%  Dieser Befehl formatiert den Text als ersetzten Text.
-%  Die komplizierte Konstruktion ist nötig, um ein Kommando mit zwei optionalen Argumenten zu definieren.
-%
-%  Argumente: Autor-ID (opt.), Erläuterung (opt.), neuer Text und alter Text
-% }
+%  Mandatory arguments: new text and old text.
+%  Optional arguments: author's id, remark
 %    \begin{macrocode}
 \newcommand{\replaced}[1][\@empty]{%
  \renewcommand{\Changes@temp}{#1}%
@@ -476,18 +405,13 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \iflanguage{english}{
-%  \subsection{List of changes}
-% }{
-%  \subsection{Änderungsliste}
-% }
+% \subsection{List of changes}
 %
 % \begin{macro}{\changes@chopline}
-% \iflanguage{english}{
 %  Auxiliary command for reading the content of the loc-files.
-% }{
-%  Hilfsbefehl zum Einlesen der loc-Dateien.
-% }
+%  The content is read line by line.
+%  One line is parsed with this macro, the order of entries is: id, color, name, added, deleted, replaced.
+%  The contents have to be separated by a semicolon.
 %    \begin{macrocode}
 \def\changes@chopline#1;#2;#3;#4;#5;#6 \\{
  \def\Changes@InID{#1}
@@ -501,13 +425,9 @@
 % \end{macro}
 %
 % \begin{macro}{\listofchanges}
-% \iflanguage{english}{
 %  This command outputs a list of changes, sorted by authors.
 %  The values are read from the loc-file, if it exists.
-% }{
-%  Dieser Befehl gibt eine Liste der Änderungen nach Autoren aus.
-%  Die Werte werden aus der loc-Datei gelesen, wenn diese existiert.
-% }
+%  If no loc-file exists, an according message is generated.
 %    \begin{macrocode}
 \newcommand{\listofchanges}{%
  \ifthenelse{\boolean{Changes@optiondraft}}
@@ -549,17 +469,11 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \iflanguage{english}{
-%  Writing the list of changes in the loc-file, therefore open file, write values, close file.
+%  At the end of the document: write the list of changes in the loc-file, therefore open file, write values, close file.
 %  Changes are written as \LaTeX-formatted text, so they can simply be read via \befehl{input}.
 %
-%  Line format: ID;colour;name;added;deleted;replaced
-% }{
-%  Ausgabe der Änderungen in loc-Datei, dazu Datei öffnen, Werte herausschreiben, Datei schließen.
-%  Die Änderungen werden als \LaTeX-formatierter Text ausgegeben, der mit \befehl{input} eingelesen werden kann.
-%
-%  Zeilenformat: ID;Farbe;Name;Zugefügte;Gelöschte;Geänderte
-% }
+%  The order of entries is: id, color, name, added, deleted, replaced.
+%  The contents have to be separated by a semicolon.
 %    \begin{macrocode}
 \AtEndDocument{
  \newwrite\Changes@OutFile
@@ -585,13 +499,10 @@
 %
 %^^A -- Beispieldateien -------------------------------------------------------
 %
-% \iflanguage{english}{
-%  \section{Example files}
-%  \subsection{Basic example without \paket{babel}}
-% }{
-%  \section{Beispieldateien}
-%  \subsection{Rudimentär ohne \paket{babel}}
-% }
+% \section{Example files}
+%
+% \subsection{Basic example without \paket{babel}}
+%
 %    \begin{macrocode}
 %<*example:1>
 \documentclass{article}
@@ -622,11 +533,7 @@
 %</example:1>
 %    \end{macrocode}
 %
-% \iflanguage{english}{
 %  \subsection{Basic example using \paket{babel}}
-% }{
-%  \subsection{Rudimentär mit \paket{babel}}
-% }
 %
 %    \begin{macrocode}
 %<*example:2>
@@ -663,11 +570,7 @@
 %</example:2>
 %    \end{macrocode}
 %
-% \iflanguage{english}{
-%  \subsection{Additional definitions}
-% }{
-%  \subsection{Erweiterte Einstellungen}
-% }
+% \subsection{Additional definitions}
 %
 %    \begin{macrocode}
 %<*example:3>
