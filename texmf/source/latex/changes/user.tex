@@ -1,45 +1,57 @@
 %^^A user documentation - default is English
 
-%^^A german language switch
-\newif\ifGERMAN\GERMANfalse
-\iflanguage{ngerman}{\GERMANtrue}{}
-\iflanguage{german}{\GERMANtrue}{}
+%^^A 	for new languages extend the language switches as follows
+%^^A 	original:
+%^^A 	\iflanguage{ngerman}{
+%^^A  	<german text>
+%^^A 	}{
+%^^A  	<default text (english)>
+%^^A 	}
+%^^A 	extended with french (example):
+%^^A 	\iflanguage{ngerman}{
+%^^A   	<german text>
+%^^A 	}{
+%^^A 		\iflanguage{french}{
+%^^A  		<french text>
+%^^A 	 	}{
+%^^A   	 	<default text (english)>
+%^^A 		}
+%^^A 	}
 
-\iflanguage{english}{
- \section{Introduction}
-%
- This package provides manual change markup.
-%
- Any comments, thoughts or improvements are welcome, just send an email.
-%
- If you want to see the commented package-sourcecode, please uncomment \befehl{OnlyDescription} in \datei{changes.drv} and translate the document.
-%
- \begin{quote}
-	 \small\textsc{README:}
-	 The changes-package allows users to manually markup changes of text such as additions, deletions, or replacements.
-	 Changed text is shown in a different colour; deleted text is striked out.
-	 The package allows free defining of additional authors and their associated colour.
-	 It also allows you to define a markup for authors or annotations.
- \end{quote}
-%
- As I'm not a native speaker, please feel free to report any grammatic or orthographic errors.
+%^^A introduction
+\iflanguage{ngerman}{
+	\section{Einleitung}
 }{
- \section{Einleitung}
-%
- Dieses Paket dient dazu, manuelle Änderungsmarkierung anzubieten.
-%
- Ein offenes Ohr für Verbesserungsvorschläge oder Kritik habe ich per Mail immer.
-%
- Diejenigen, die den kommentierten Quellcode des Pakets lesen wollen, kommentieren bitte die Anweisung \befehl{OnlyDescription} in der Datei \datei{changes.drv} aus und übersetzen diese.
-%
- \begin{quote}
-	 \small\textsc{README:}
-	 Das changes-Paket dient zur manuellen Markierung von geändertem Text, insbesondere Einfügungen, Löschungen und Ersetzungen.
-	 Der geänderte Text wird farbig markiert und, bei gelöschtem Text, durchgestrichen.
-	 Das Paket ermöglicht die freie Definition von Autoren und deren zugeordneten Farben.
-	 Es erlaubt zusätzlich die Definition des Autor- und Anmerkungsmarkups.
- \end{quote}
+	\section{Introduction}
 }
+
+\iflanguage{ngerman}{
+	Dieses Paket dient dazu, manuelle Änderungsmarkierung anzubieten.
+
+	Ein offenes Ohr für Verbesserungsvorschläge oder Kritik habe ich per Mail immer.
+
+	\begin{quote}
+		\small\textsc{README:}
+		Das changes-Paket dient zur manuellen Markierung von geändertem Text, insbesondere Einfügungen, Löschungen und Ersetzungen.
+		Der geänderte Text wird farbig markiert und, bei gelöschtem Text, durchgestrichen.
+		Das Paket ermöglicht die freie Definition von Autoren und deren zugeordneten Farben.
+		Es erlaubt zusätzlich die Definition des Autor- und Anmerkungsmarkups.
+	\end{quote}
+}{
+	This package provides manual change markup.
+
+	Any comments, thoughts or improvements are welcome, just send an email.
+
+	\begin{quote}
+		\small\textsc{README:}
+		The changes-package allows users to manually markup changes of text such as additions, deletions, or replacements.
+		Changed text is shown in a different colour; deleted text is striked out.
+		The package allows free defining of additional authors and their associated colour.
+		It also allows you to define a markup for authors or annotations.
+	\end{quote}
+}
+
+
 %
 %^^A -- Nutzerschnittstelle----------------------------------------------------
 %
