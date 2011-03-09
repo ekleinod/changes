@@ -38,10 +38,10 @@
 }
 
 % Formatierungsbefehle
-\newcommand{\paket}[1]{\textsl{#1}}
-\newcommand{\option}[1]{\texttt{#1}}
-\newcommand{\datei}[1]{\texttt{#1}}
-\newcommand{\befehl}[1]{\texttt{\textbackslash{}#1}}
+\newcommand{\chpackage}[1]{\textsl{#1}}
+\newcommand{\choption}[1]{\texttt{#1}}
+\newcommand{\chfile}[1]{\texttt{#1}}
+\newcommand{\chcommand}[1]{\texttt{\textbackslash{}#1}}
 
 % Makroüberschriften
 \makeatletter
@@ -58,7 +58,7 @@
 \makeatother
 
 
-\title{\iflanguage{english}{The \paket{changes}-package}{Das \paket{changes}-Paket}}
+\title{\iflanguage{english}{The \chpackage{changes}-package}{Das \chpackage{changes}-Paket}}
 \subtitle{\iflanguage{english}{Manual change markup --- version}{Manuelle Änderungsmarkierung -- Version} 0.5.4} %$^\alpha$}
 \author{Ekkart Kleinod}
 \email{ekkart@ekkart.de}

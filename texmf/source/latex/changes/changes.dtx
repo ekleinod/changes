@@ -81,18 +81,18 @@
 \typeout{*** changes-Paket 2011/03/01 v0.5.4 ***}
 %    \end{macrocode}
 %
-% Package \paket{xkeyval} provides options with key-value-pairs.
+% Package \chpackage{xkeyval} provides options with key-value-pairs.
 %    \begin{macrocode}
 \RequirePackage{xkeyval}
 %    \end{macrocode}
 %
-% Package \paket{ifthen} provides improved \texttt{if} as well as a \texttt{while}-loop.
+% Package \chpackage{ifthen} provides improved \texttt{if} as well as a \texttt{while}-loop.
 %    \begin{macrocode}
 \RequirePackage{ifthen}
 %    \end{macrocode}
 %
 % \minisec{Options}
-% Option \option{draft}, \emph{default} is \texttt{true}.
+% Option \choption{draft}, \emph{default} is \texttt{true}.
 %    \begin{macrocode}
 \newboolean{Changes@optiondraft}
 \setboolean{Changes@optiondraft}{true}
@@ -102,7 +102,7 @@
 }
 %    \end{macrocode}
 %
-% Option \option{final}, sets \option{draft} to \texttt{false}.
+% Option \choption{final}, sets \choption{draft} to \texttt{false}.
 %    \begin{macrocode}
 \DeclareOptionX{final}{
  \setboolean{Changes@optiondraft}{false}
@@ -110,7 +110,7 @@
 }
 %    \end{macrocode}
 %
-% Options for package \paket{ulem} are directly passed to the package.
+% Options for package \chpackage{ulem} are directly passed to the package.
 %    \begin{macrocode}
 \DeclareOptionX{ulem}{
  \typeout{ulem-option '#1', passed to package ulem}
@@ -118,7 +118,7 @@
 }
 %    \end{macrocode}
 %
-% Options for package \paket{xcolor} are directly passed to the package.
+% Options for package \chpackage{xcolor} are directly passed to the package.
 %    \begin{macrocode}
 \DeclareOptionX{xcolor}{
  \typeout{xcolor-option '#1', passed to package xcolor}
@@ -138,17 +138,17 @@
 \ProcessOptionsX*\relax
 %    \end{macrocode}
 %
-% Package \paket{xcolor} provides coloured text.
+% Package \chpackage{xcolor} provides coloured text.
 %    \begin{macrocode}
 \RequirePackage{xcolor}
 %    \end{macrocode}
 %
-%  Package \paket{pdfcolmk} solves the problem of coloured text and page breaks (has to be loaded after \paket{xcolor}).
+%  Package \chpackage{pdfcolmk} solves the problem of coloured text and page breaks (has to be loaded after \chpackage{xcolor}).
 %    \begin{macrocode}
 \RequirePackage{pdfcolmk}
 %    \end{macrocode}
 %
-% Package \paket{ulem} provides commands for striking out text.
+% Package \chpackage{ulem} provides commands for striking out text.
 %    \begin{macrocode}
 \RequirePackage{ulem}
 %    \end{macrocode}
@@ -156,7 +156,7 @@
 % \subsection{Definitions}
 %
 % Declaration of language dependent names and identifiers.
-% The check for \befehl{addto} is a check for the \paket{babel} package.
+% The check for \chcommand{addto} is a check for the \chpackage{babel} package.
 % If the babel package is not loaded, the default language is English, in order to use an own language, the user has to redefine the variables.
 %    \begin{macrocode}
 \ifthenelse{\isundefined{\addto}}
@@ -344,7 +344,7 @@
 %  The command formats text as deleted text.
 %  It's rather complicated for defining a command with two optional parameters.
 %
-%  The \option{final}-part is taken from a tip from \texttt{de.comp.text.tex}.
+%  The \choption{final}-part is taken from a tip from \texttt{de.comp.text.tex}.
 %  It solves the problem of additional space caused by an empty command.
 %
 %  Mandatory argument: deleted text.
@@ -475,7 +475,7 @@
 % \end{macro}
 %
 %  At the end of the document: write the list of changes in the loc-file, therefore open file, write values, close file.
-%  Changes are written as \LaTeX-formatted text, so they can simply be read via \befehl{input}.
+%  Changes are written as \LaTeX-formatted text, so they can simply be read via \chcommand{input}.
 %
 %  The order of entries is: id, color, name, added, deleted, replaced.
 %  The contents have to be separated by a semicolon.
@@ -506,7 +506,7 @@
 %
 % \section{Example files}
 %
-% \subsection{Basic example without \paket{babel}}
+% \subsection{Basic example without \chpackage{babel}}
 %
 %    \begin{macrocode}
 %<*example:1>
@@ -538,7 +538,7 @@
 %</example:1>
 %    \end{macrocode}
 %
-%  \subsection{Basic example using \paket{babel}}
+%  \subsection{Basic example using \chpackage{babel}}
 %
 %    \begin{macrocode}
 %<*example:2>

@@ -1,43 +1,28 @@
 %^^A user documentation - default is English
 
-%^^A 	for new languages extend the language switches as follows
-%^^A 	original:
-%^^A 	\iflanguage{ngerman}{
-%^^A  	<german text>
-%^^A 	}{
-%^^A  	<default text (english)>
-%^^A 	}
-%^^A 	extended with french (example):
-%^^A 	\iflanguage{ngerman}{
-%^^A   	<german text>
-%^^A 	}{
-%^^A 		\iflanguage{french}{
-%^^A  		<french text>
-%^^A 	 	}{
-%^^A   	 	<default text (english)>
-%^^A 		}
-%^^A 	}
+%^^A -- language switches
 
-%^^A introduction
-\iflanguage{ngerman}{
-	\section{Einleitung}
-}{
+%^^A catchall - english
+\newif\ifENGLISH\ENGLISHtrue
+
+%^^A german
+\newif\ifGERMAN\GERMANfalse
+\iflanguage{ngerman}{\GERMANtrue}{\ENGLISHfalse}
+\iflanguage{german}{\GERMANtrue}{\ENGLISHfalse}
+
+%^^A new language example: french
+%^^A \newif\ifFRENCH\FRENCHfalse
+%^^A \iflanguage{french}{\FRENCHtrue}{\ENGLISHfalse}
+
+%^^A ---- introduction
+\ifENGLISH
 	\section{Introduction}
-}
+\fi
+	\ifGERMAN
+		\section{Einleitung}
+	\fi
 
-\iflanguage{ngerman}{
-	Dieses Paket dient dazu, manuelle Änderungsmarkierung anzubieten.
-
-	Ein offenes Ohr für Verbesserungsvorschläge oder Kritik habe ich per Mail immer.
-
-	\begin{quote}
-		\small\textsc{README:}
-		Das changes-Paket dient zur manuellen Markierung von geändertem Text, insbesondere Einfügungen, Löschungen und Ersetzungen.
-		Der geänderte Text wird farbig markiert und, bei gelöschtem Text, durchgestrichen.
-		Das Paket ermöglicht die freie Definition von Autoren und deren zugeordneten Farben.
-		Es erlaubt zusätzlich die Definition des Autor- und Anmerkungsmarkups.
-	\end{quote}
-}{
+\ifENGLISH
 	This package provides manual change markup.
 
 	Any comments, thoughts or improvements are welcome, just send an email.
@@ -49,53 +34,69 @@
 		The package allows free defining of additional authors and their associated colour.
 		It also allows you to define a markup for authors or annotations.
 	\end{quote}
-}
+\fi
+	\ifGERMAN
+		\section{Einleitung}
+		Dieses Paket dient dazu, manuelle Änderungsmarkierung anzubieten.
+
+		Ein offenes Ohr für Verbesserungsvorschläge oder Kritik habe ich per Mail immer.
+
+		\begin{quote}
+			\small\textsc{README:}
+			Das changes-Paket dient zur manuellen Markierung von geändertem Text, insbesondere Einfügungen, Löschungen und Ersetzungen.
+			Der geänderte Text wird farbig markiert und, bei gelöschtem Text, durchgestrichen.
+			Das Paket ermöglicht die freie Definition von Autoren und deren zugeordneten Farben.
+			Es erlaubt zusätzlich die Definition des Autor- und Anmerkungsmarkups.
+		\end{quote}
+	\fi
 
 
-%
-%^^A -- Nutzerschnittstelle----------------------------------------------------
-%
-\iflanguage{english}{
- \section{User interface of the \paket{changes}-package}
-}{
- \section{Die Benutzerschnittstelle des \paket{changes}-Pakets}
-}
-%
-\iflanguage{english}{
- For activating manual change management, address the \paket{changes}-package as follows:
-}{
- Um die Änderungsverfolgung zu aktivieren, ist das \paket{changes}-Paket wie folgt einzubinden:
-}
-%
-\befehl{usepackage\{changes\}}
-%
-\iflanguage{english}{
- Options for the package are described in \autoref{sec:options}.
-}{
- Die Paketoptionen werden in \autoref{sec:options} erläutert.
-}
+%^^A ---- user interface
+\ifENGLISH
+	\section{User interface of the \chpackage{changes}-package}
+\fi
+	\ifGERMAN
+		\section{Die Benutzerschnittstelle des \chpackage{changes}-Pakets}
+	\fi
+
+\ifENGLISH
+	For activating manual change management, address the \chpackage{changes}-package as follows:
+
+	\chcommand{usepackage\{changes\}}
+
+	Options for the package are described in \autoref{sec:options}.
+\fi
+\ifGERMAN
+	Um die Änderungsverfolgung zu aktivieren, ist das \chpackage{changes}-Paket wie folgt einzubinden:
+
+	\chcommand{usepackage\{changes\}}
+
+	Die Paketoptionen werden in \autoref{sec:options} erläutert.
+\fi
+
 %
 %^^A -- Pakete ----------------------------------------------------------------
 %
-\iflanguage{english}{
+\ifENGLISH
  \subsection{Used packages}
 %
- The \paket{changes}-package uses already existing packages.
- The following packages have to be installed for the \paket{changes}-package; otherwise errors may occur.
+ The \chpackage{changes}-package uses already existing packages.
+ The following packages have to be installed for the \chpackage{changes}-package; otherwise errors may occur.
 %
  You will find detailed description of the packages in their distributions.
  \begin{description}
-	\item [ifthen] provides an enhanced \befehl{if}-command as well as a \texttt{while}-loop
+	\item [ifthen] provides an enhanced \chcommand{if}-command as well as a \texttt{while}-loop
 	\item [pdfcolmk] solves the problem of coloured text and page breaks (with pdflatex)
 	\item [ulem] striking out texts
 	\item [xcolor] provides colourised markup of texts
 	\item [xkeyval] provides options with key-value-pairs
  \end{description}
-}{
+\fi
+\ifGERMAN
  \subsection{Benötigte Pakete}
 %
- Das \paket{changes}-Paket bindet bereits Pakete ein, die für das Paket notwendig sind.
- Die Pakete werden im folgenden kurz vorgestellt und müssen für die Nutzung des \paket{changes}-Pakets zur Verfügung stehen, sonst gibt es Fehlermeldungen.
+ Das \chpackage{changes}-Paket bindet bereits Pakete ein, die für das Paket notwendig sind.
+ Die Pakete werden im folgenden kurz vorgestellt und müssen für die Nutzung des \chpackage{changes}-Pakets zur Verfügung stehen, sonst gibt es Fehlermeldungen.
 %
  Eine genauere Beschreibung der einzelnen Pakete ist in der Dokumentation der Pakete selbst zu finden.
  \begin{description}
@@ -109,299 +110,319 @@
 %
 %^^A -- Optionen --------------------------------------------------------------
 %
-\iflanguage{english}{
+\ifENGLISH
  \subsection{Options}
-}{
+\fi
+\ifGERMAN
  \subsection{Optionen}
 }
 \label{sec:options}
 %
 \minisec{draft}
-\iflanguage{english}{
- The \option{draft}-option enables markup of changes.
- The list of changes is available via \befehl{listofchanges}.
+\ifENGLISH
+ The \choption{draft}-option enables markup of changes.
+ The list of changes is available via \chcommand{listofchanges}.
  This option is the default option, if no other option is selected.
 %
- The \paket{changes} package reuses the declaration of \option{draft} in \befehl{documentclass}.
- The local declaration of \option{final} overrules the declaration of \option{draft} in \befehl{documentclass}.
-}{
- Die \option{draft}-Option bewirkt, dass alle Änderungen markiert werden.
- Die Änderungsliste kann durch \befehl{listofchanges} ausgegeben werden.
- Ohne Optionsangabe wird \option{draft} automatisch eingestellt.
+ The \chpackage{changes} package reuses the declaration of \choption{draft} in \chcommand{documentclass}.
+ The local declaration of \choption{final} overrules the declaration of \choption{draft} in \chcommand{documentclass}.
+\fi
+\ifGERMAN
+ Die \choption{draft}-Option bewirkt, dass alle Änderungen markiert werden.
+ Die Änderungsliste kann durch \chcommand{listofchanges} ausgegeben werden.
+ Ohne Optionsangabe wird \choption{draft} automatisch eingestellt.
 %
- Die Angabe von \option{draft} in \befehl{documentclass} wird vom \paket{changes}-Paket mitgenutzt.
- Die lokale Angabe von \option{final} überstimmt die Angabe von \option{draft} in \befehl{documentclass}.
+ Die Angabe von \choption{draft} in \chcommand{documentclass} wird vom \chpackage{changes}-Paket mitgenutzt.
+ Die lokale Angabe von \choption{final} überstimmt die Angabe von \choption{draft} in \chcommand{documentclass}.
 }
 %
-\befehl{usepackage[draft]\{changes\}}
+\chcommand{usepackage[draft]\{changes\}}
 %
 \minisec{final}
 %
-\iflanguage{english}{
- The \option{final}-option disables markup of changes, only the correct text will be shown.
+\ifENGLISH
+ The \choption{final}-option disables markup of changes, only the correct text will be shown.
  The list of changes is disabled, too.
 %
- The \paket{changes} package reuses the declaration of \option{final} in \befehl{documentclass}.
- The local declaration of \option{draft} overrules the declaration of \option{final} in \befehl{documentclass}.
-}{
- Die \option{final}-Option bewirkt, dass alle Änderungsmarkierungen ausgeblendet werden und nur noch der korrekte Text ausgegeben wird.
+ The \chpackage{changes} package reuses the declaration of \choption{final} in \chcommand{documentclass}.
+ The local declaration of \choption{draft} overrules the declaration of \choption{final} in \chcommand{documentclass}.
+\fi
+\ifGERMAN
+ Die \choption{final}-Option bewirkt, dass alle Änderungsmarkierungen ausgeblendet werden und nur noch der korrekte Text ausgegeben wird.
  Die Änderungsliste wird ebenfalls unterdrückt.
 %
- Die Angabe von \option{final} in \befehl{documentclass} wird vom \paket{changes}-Paket mitgenutzt.
- Die lokale Angabe von \option{draft} überstimmt die Angabe von \option{final} in \befehl{documentclass}.
+ Die Angabe von \choption{final} in \chcommand{documentclass} wird vom \chpackage{changes}-Paket mitgenutzt.
+ Die lokale Angabe von \choption{draft} überstimmt die Angabe von \choption{final} in \chcommand{documentclass}.
 }
 %
-\befehl{usepackage[final]\{changes\}}
+\chcommand{usepackage[final]\{changes\}}
 %
 \minisec{ulem}
 %
-\iflanguage{english}{
- All options for the \paket{ulem} package can be specified as parameters of the \option{ulem}-option.
+\ifENGLISH
+ All options for the \chpackage{ulem} package can be specified as parameters of the \choption{ulem}-option.
  Two or more options have to be embraced in curly brackets.
-}{
- Optionen für das \paket{ulem}-Paket können als Parameter der \option{ulem}-Option angegeben werden.
+\fi
+\ifGERMAN
+ Optionen für das \chpackage{ulem}-Paket können als Parameter der \choption{ulem}-Option angegeben werden.
  Zwei oder mehr Optionen müssen in geschweifte Klammern gesetzt werden.
 }
 %
-\befehl{usepackage[ulem=normalem]\{changes\}}\\
-\befehl{usepackage[ulem=\{normalem,normalbf\}]\{changes\}}
+\chcommand{usepackage[ulem=normalem]\{changes\}}\\
+\chcommand{usepackage[ulem=\{normalem,normalbf\}]\{changes\}}
 %
 \minisec{xcolor}
 %
-\iflanguage{english}{
- All options for the \paket{xcolor} package can be specified as parameters of the \option{xcolor}-option.
+\ifENGLISH
+ All options for the \chpackage{xcolor} package can be specified as parameters of the \choption{xcolor}-option.
  Two or more option have to be embraced in curly brackets.
-}{
- Optionen für das \paket{xcolor}-Paket können als Parameter der \option{xcolor}-Option angegeben werden.
+\fi
+\ifGERMAN
+ Optionen für das \chpackage{xcolor}-Paket können als Parameter der \choption{xcolor}-Option angegeben werden.
  Zwei oder mehr Optionen müssen in geschweifte Klammern gesetzt werden.
 }
 %
-\befehl{usepackage[xcolor=dvipdf]\{changes\}}\\
-\befehl{usepackage[xcolor=\{dvipdf,gray\}]\{changes\}}
+\chcommand{usepackage[xcolor=dvipdf]\{changes\}}\\
+\chcommand{usepackage[xcolor=\{dvipdf,gray\}]\{changes\}}
 %
 %^^A -- Neue Befehle ----------------------------------------------------------
 %
-\iflanguage{english}{
+\ifENGLISH
  \subsection{New commands}
 %
- This section describes all new commands of the \paket{changes}-package.
-}{
+ This section describes all new commands of the \chpackage{changes}-package.
+\fi
+\ifGERMAN
  \subsection{Neue Befehle}
 %
  Dieser Abschnitt führt alle neuen Befehle auf und erläutert sie.
 }
 %
-\iflanguage{english}{
+\ifENGLISH
  \subsubsection{Change management}
-}{
+\fi
+\ifGERMAN
  \subsubsection{Änderungsmanagement}
 }
 %
 \DescribeMacro{\added}
-\iflanguage{english}{
- The command \befehl{added} marks new text.
+\ifENGLISH
+ The command \chcommand{added} marks new text.
  The new text is the mandatory argument for the command, thus it is written in curly braces.
  There are two optional arguments: author-id and remark.
- The author-id has to be defined using \befehl{definechangesauthor}.
+ The author-id has to be defined using \chcommand{definechangesauthor}.
  Use an empty author for an anonymous remark.
  \begin{einspiel}
-	\>\befehl{added[\meta{author-id}][\meta{remark}]\{\meta{new text}\}}
+	\>\chcommand{added[\meta{author-id}][\meta{remark}]\{\meta{new text}\}}
  \end{einspiel}
  \begin{einspiel}[true]
-	\>\texttt{This is \befehl{added}[EK]\{new\} text.}\\
+	\>\texttt{This is \chcommand{added}[EK]\{new\} text.}\\
 	\>This is \added[EK]{new} text.\\
-	\>\texttt{This is \befehl{added}[][anonymous]\{new\} text.}\\
+	\>\texttt{This is \chcommand{added}[][anonymous]\{new\} text.}\\
 	\>This is \added[][anonymous]{new} text.
  \end{einspiel}
-}{
- Der Befehl \befehl{added} markiert zugefügten Text.
+\fi
+\ifGERMAN
+ Der Befehl \chcommand{added} markiert zugefügten Text.
  Der neue Text wird als notwendiges Argument in geschweiften Klammern übergeben.
  Optional können eine Autoren-ID sowie eine Anmerkung übergeben werden.
- Die Autoren-ID muss mit einer mit dem \befehl{definechangesauthor}-Befehl definierten ID übereinstimmen.
+ Die Autoren-ID muss mit einer mit dem \chcommand{definechangesauthor}-Befehl definierten ID übereinstimmen.
  Soll nur eine Anmerkung (ohne Autor) eingegeben werden, so ist statt des Autors ein leeres Argument zu übergeben.
  \begin{einspiel}
-	\>\befehl{added[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{neuer Text}\}}
+	\>\chcommand{added[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{neuer Text}\}}
  \end{einspiel}
  \begin{einspiel}[true]
-	\>\texttt{Das ist \befehl{added}[EK]\{neuer\} Text.}\\
+	\>\texttt{Das ist \chcommand{added}[EK]\{neuer\} Text.}\\
 	\>Das ist \added[EK]{neuer} Text.\\
-	\>\texttt{Das ist \befehl{added}[][anonym]\{neuer\} Text.}\\
+	\>\texttt{Das ist \chcommand{added}[][anonym]\{neuer\} Text.}\\
 	\>Das ist \added[][anonym]{neuer} Text.
  \end{einspiel}
 }
 %
 \DescribeMacro{\deleted}
-\iflanguage{english}{
- The command \befehl{deleted} marks deleted text.
- For arguments see \befehl{added}.
+\ifENGLISH
+ The command \chcommand{deleted} marks deleted text.
+ For arguments see \chcommand{added}.
  \begin{einspiel}
-	\>\befehl{deleted[\meta{author-id}][\meta{remark}]\{\meta{deleted text}\}}
+	\>\chcommand{deleted[\meta{author-id}][\meta{remark}]\{\meta{deleted text}\}}
  \end{einspiel}
  \begin{einspiel}[true]
-	\>\texttt{This is \befehl{deleted}[][unnecessary]\{bad\} text.}\\
+	\>\texttt{This is \chcommand{deleted}[][unnecessary]\{bad\} text.}\\
 	\>This is \deleted[][obsolet]{bad} text.
  \end{einspiel}
-}{
- Der Befehl \befehl{deleted} markiert gelöschten Text.
- Argumente: siehe \befehl{added}.
+\fi
+\ifGERMAN
+ Der Befehl \chcommand{deleted} markiert gelöschten Text.
+ Argumente: siehe \chcommand{added}.
  \begin{einspiel}
-	\>\befehl{deleted[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{gelöschter Text}\}}
+	\>\chcommand{deleted[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{gelöschter Text}\}}
  \end{einspiel}
  \begin{einspiel}[true]
-	\>\texttt{Das ist \befehl{deleted}[][obsolet]\{schlechter\} Text.}\\
+	\>\texttt{Das ist \chcommand{deleted}[][obsolet]\{schlechter\} Text.}\\
 	\>Das ist \deleted[][obsolet]{schlechter} Text.
  \end{einspiel}
 }
 %
 \DescribeMacro{\replaced}
-\iflanguage{english}{
- The command \befehl{replaced} marks replaced text.
+\ifENGLISH
+ The command \chcommand{replaced} marks replaced text.
  Mandatory arguments are new and old text.
- For optional arguments see \befehl{added}.
+ For optional arguments see \chcommand{added}.
  \begin{einspiel}
-	\>\befehl{replaced[\meta{author-id}][\meta{remark}]\{\meta{new text}\}\{\meta{old text}\}}
+	\>\chcommand{replaced[\meta{author-id}][\meta{remark}]\{\meta{new text}\}\{\meta{old text}\}}
  \end{einspiel}
  \begin{einspiel}[true]
-	\>\texttt{This is \befehl{replaced}[EK]\{nice\}\{ugly\} text.}\\
-	\>This is \replaced[EK]{nice}{ugly} text.
+	\>\texttt{This is \chcommand{replaced}[EK]\{nice\}\{ugly\} text.}\\
+	\>This is \replaced[EK]{nice\fi
+\ifGERMANugly} text.
  \end{einspiel}
-}{
- Der Befehl \befehl{replaced} markiert geänderten Text.
+\fi
+\ifGERMAN
+ Der Befehl \chcommand{replaced} markiert geänderten Text.
  Notwendige Argumente sind der neue sowie der alte Text.
- Optionale Argumente: siehe \befehl{added}.
+ Optionale Argumente: siehe \chcommand{added}.
  \begin{einspiel}
-	\>\befehl{replaced[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{neuer Text}\}\{\meta{alter Text}\}}
+	\>\chcommand{replaced[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{neuer Text}\}\{\meta{alter Text}\}}
  \end{einspiel}
  \begin{einspiel}[true]
-	\>\texttt{Das ist \befehl{replaced}[EK]\{schöner\}\{schlechter\} Text.}\\
-	\>Das ist \replaced[EK]{schöner}{schlechter} Text.
+	\>\texttt{Das ist \chcommand{replaced}[EK]\{schöner\}\{schlechter\} Text.}\\
+	\>Das ist \replaced[EK]{schöner\fi
+\ifGERMANschlechter} Text.
  \end{einspiel}
 }
 %
 \DescribeMacro{\listofchanges}
-\iflanguage{english}{
- The command \befehl{listofchanges} outputs a list of changes.
+\ifENGLISH
+ The command \chcommand{listofchanges} outputs a list of changes.
  The first \LaTeX-run creates an auxiliary file, the second run uses the data of this file.
  Therefore you need two \LaTeX-runs for an actual list of changes.
-}{
- Der Befehl \befehl{listofchanges} gibt eine Liste der Änderungen aus.
+\fi
+\ifGERMAN
+ Der Befehl \chcommand{listofchanges} gibt eine Liste der Änderungen aus.
  Im ersten \LaTeX-Lauf wird eine Hilfsdatei angelegt, deren Daten im zweiten Durchlauf eingebunden werden.
  Für eine aktuelle Liste der Änderungen sind daher zwei \LaTeX-Läufe notwendig.
 }
 \begin{einspiel}
- \>\befehl{listofchanges}
+ \>\chcommand{listofchanges}
 \end{einspiel}
 %
 %^^A -- Nutzeranpassungen -----------------------------------------------------
 %
-\iflanguage{english}{
+\ifENGLISH
  \subsubsection{User specific adaptions}
-}{
+\fi
+\ifGERMAN
  \subsubsection{Nutzerdefinierte Anpassungen}
 }
 %
 \DescribeMacro{\definechangesauthor}
-\iflanguage{english}{
- The command \befehl{definechangesauthor} defines a new author for changes.
+\ifENGLISH
+ The command \chcommand{definechangesauthor} defines a new author for changes.
  You have to define a unique author-id and a corresponding colour.
  Special characters or spaces are not allowed in the author-id.
  The name of the author can optionally be defined, it is used in the list of changes.
  \begin{einspiel}
-	\>\befehl{definechangesauthor[\meta{author-name}]\{\meta{author-id}\}\{\meta{colour}\}}
+	\>\chcommand{definechangesauthor[\meta{author-name}]\{\meta{author-id}\}\{\meta{colour}\}}
  \end{einspiel}
-}{
- Der Befehl \befehl{definechangesauthor} definiert einen neuen Autor für Änderungen.
+\fi
+\ifGERMAN
+ Der Befehl \chcommand{definechangesauthor} definiert einen neuen Autor für Änderungen.
  Es muss eine eindeutige Autor-ID und dessen Farbe angegeben werden.
  Die Autor-ID darf keine Sonder- oder Leerzeichen enthalten.
  Ein Autorenname kann optional angegeben werden, er wird in der Änderungsliste benutzt.
  \begin{einspiel}
-	\>\befehl{definechangesauthor[\meta{Autor-Name}]\{\meta{Autor-ID}\}\{\meta{Farbe}\}}
+	\>\chcommand{definechangesauthor[\meta{Autor-Name}]\{\meta{Autor-ID}\}\{\meta{Farbe}\}}
  \end{einspiel}
 }
 \begin{einspiel}[true]
- \>\befehl{definechangesauthor\{EK\}\{orange\}}\\
- \>\befehl{definechangesauthor[Ekkart Kleinod]\{EK\}\{orange\}}
+ \>\chcommand{definechangesauthor\{EK\}\{orange\}}\\
+ \>\chcommand{definechangesauthor[Ekkart Kleinod]\{EK\}\{orange\}}
 \end{einspiel}
 %
 \DescribeMacro{\setlocextension}
-\iflanguage{english}{
- The command \befehl{setlocextension} sets the extension of the auxiliary file for the list of changes.
+\ifENGLISH
+ The command \chcommand{setlocextension} sets the extension of the auxiliary file for the list of changes.
  The default extension is "\texttt{loc}".
  In the example, the auxiliary file for "\texttt{foo.tex}" would be named named "\texttt{foo.changes}".
-}{
- Der Befehl \befehl{setlocextension} legt das Suffix der Hilfsdatei für die Änderungsliste fest.
+\fi
+\ifGERMAN
+ Der Befehl \chcommand{setlocextension} legt das Suffix der Hilfsdatei für die Änderungsliste fest.
  Ohne andere Definition gilt das Suffix "`\texttt{loc}"'.
  Das Beispiel würde für "`\texttt{foo.tex}"' Hilfsdateien erzeugen, die "`\texttt{foo.changes}"' heißen.
 }
 \begin{einspiel}
- \>\befehl{setlocextension\{\meta{extension}\}}
+ \>\chcommand{setlocextension\{\meta{extension}\}}
 \end{einspiel}
 \begin{einspiel}[true]
- \>\befehl{setlocextension\{changes\}}
+ \>\chcommand{setlocextension\{changes\}}
 \end{einspiel}
 %
 \DescribeMacro{\setauthormarkup}
-\iflanguage{english}{
- The command \befehl{setauthormarkup} sets the layout of the authormarkup in the text.
+\ifENGLISH
+ The command \chcommand{setauthormarkup} sets the layout of the authormarkup in the text.
  The default markup is a superscripted author-id on the right side of the changed text.
 %
  Values for position (optional): \emph{left} = left of the changes; all other values: right\\
  Values for definition: any \LaTeX-commands, author-id can be shown using "\#1".
-}{
- Der Befehl \befehl{setauthormarkup} legt fest, wie der Autor im Text angezeigt wird.
+\fi
+\ifGERMAN
+ Der Befehl \chcommand{setauthormarkup} legt fest, wie der Autor im Text angezeigt wird.
  Ohne andere Definition gilt, dass der Autor rechts von den Änderungen hochgestellt erscheint.
 %
  Werte für Position (optional): \emph{left} = links von den Änderungen; alles andere: rechts\\
  Werte für Definition: beliebige \LaTeX-Befehle, der Autorenname wird mit "`\#1"' gekennzeichnet.
 }
 \begin{einspiel}
- \>\befehl{setauthormarkup[\meta{position}]\{\meta{definition}\}}
+ \>\chcommand{setauthormarkup[\meta{position}]\{\meta{definition}\}}
 \end{einspiel}
 \begin{einspiel}[true]
- \>\befehl{setauthormarkup\{(\#1)\}}\\
- \>\befehl{setauthormarkup[left]\{(\#1)\textasciitilde{}-{}-\textasciitilde{}\}}\\
- \>\befehl{setauthormarkup\{}\befehl{marginpar\{\#1\}\}}\\
- \>\befehl{setauthormarkup[right]\{\}}
+ \>\chcommand{setauthormarkup\{(\#1)\}}\\
+ \>\chcommand{setauthormarkup[left]\{(\#1)\textasciitilde{}-{}-\textasciitilde{}\}}\\
+ \>\chcommand{setauthormarkup\{}\chcommand{marginpar\{\#1\}\}}\\
+ \>\chcommand{setauthormarkup[right]\{\}}
 \end{einspiel}
 %
 \DescribeMacro{\setremarkmarkup}
-\iflanguage{english}{
- The command \befehl{setremarkmarkup} sets the layout of the remarkmarkup in the text.
+\ifENGLISH
+ The command \chcommand{setremarkmarkup} sets the layout of the remarkmarkup in the text.
  The default markup sets the remark in a footnote.
 %
  Values for definition: any \LaTeX-commands, author-id can be used with "\#1", remark can be shown using "\#2".
  Using the author-id you can use the author's colour with \texttt{Changes@Color\#1}.
-}{
- Der Befehl \befehl{setremarkmarkup} legt fest, wie die Anmerkungen im Text angezeigt werden.
+\fi
+\ifGERMAN
+ Der Befehl \chcommand{setremarkmarkup} legt fest, wie die Anmerkungen im Text angezeigt werden.
  Ohne andere Definition gilt, dass die Anmerkungen als Fußnote mit farbigem Text gesetzt werden.
 %
  Werte für Definition: beliebige \LaTeX-Befehle, die Autor-ID wird mit "`\#1"' benutzt, der Anmerkungstext mit "`\#2"'.
  Über die Autor-ID kann mit \texttt{Changes@Color\#1} die Farbe des Autors benutzt werden.
 }
 \begin{einspiel}
- \>\befehl{setremarkmarkup\{\meta{definition}\}}
+ \>\chcommand{setremarkmarkup\{\meta{definition}\}}
 \end{einspiel}
 \begin{einspiel}[true]
- \>\befehl{setremarkmarkup\{(\#2:\#1)\}}\\
- \>\befehl{setremarkmarkup\{\befehl{footnote}\{\#1:\befehl{textcolor\{Changes@Color\#1\}}\{\#2\}\}\}}
+ \>\chcommand{setremarkmarkup\{(\#2:\#1)\}}\\
+ \>\chcommand{setremarkmarkup\{\chcommand{footnote}\{\#1:\chcommand{textcolor\{Changes@Color\#1\}}\{\#2\}\}\}}
 \end{einspiel}
 %
 %^^A -- Versionen -------------------------------------------------------------
 %
 \StopEventually{
 %
-\iflanguage{english}{
+\ifENGLISH
  \section{Authors}
-}{
+\fi
+\ifGERMAN
  \section{Autoren}
 }
 \label{sec:authors}
 %
-\iflanguage{english}{
- The \paket{changes} packages was written by several authors.
+\ifENGLISH
+ The \chpackage{changes} packages was written by several authors.
  The authors are (in alphabetical order):
-}{
- Am \paket{changes}-Paket haben mehrere Autoren mitgewirkt.
+\fi
+\ifGERMAN
+ Am \chpackage{changes}-Paket haben mehrere Autoren mitgewirkt.
  Dies sind in alphabetischer Reihenfolge:
 }
 \begin{itemize}
@@ -409,75 +430,80 @@
  \item Wolter, Steve
 \end{itemize}
 %
-\iflanguage{english}{
+\ifENGLISH
  \section{Versions}
-}{
+\fi
+\ifGERMAN
  \section{Versionen}
 }
 \label{sec:versions}
 %
 \subsection{Version 0.5.3}
 %
-\iflanguage{english}{
+\ifENGLISH
  Date: 2010/11/22
  \begin{itemize}
-	\item document options of \befehl{documentclass} are used as well (suggestion and code of Steve Wolter)
+	\item document options of \chcommand{documentclass} are used as well (suggestion and code of Steve Wolter)
  \end{itemize}
-}{
+\fi
+\ifGERMAN
  Datum: 22.\,11.~2010
  \begin{itemize}
-	\item Dokumentoptionen von \befehl{documentclass} werden ebenfalls genutzt (Vorschlag und Code von Steve Wolter)
+	\item Dokumentoptionen von \chcommand{documentclass} werden ebenfalls genutzt (Vorschlag und Code von Steve Wolter)
  \end{itemize}
 }
 %
 \subsection{Version 0.5.2}
 %
-\iflanguage{english}{
+\ifENGLISH
  Date: 2007/10/10
  \begin{itemize}
-	\item package options for \paket{pdfcolmk}, \paket{ulem}, and \paket{xcolor} are passed to the packages
+	\item package options for \chpackage{pdfcolmk}, \chpackage{ulem}, and \chpackage{xcolor} are passed to the packages
  \end{itemize}
-}{
+\fi
+\ifGERMAN
  Datum: 10.\,10.~2007
  \begin{itemize}
-	\item Paketoptionen der Pakete \paket{pdfcolmk}, \paket{ulem}, and \paket{xcolor} werden weitergeleitet
+	\item Paketoptionen der Pakete \chpackage{pdfcolmk}, \chpackage{ulem}, and \chpackage{xcolor} werden weitergeleitet
  \end{itemize}
 }
 %
 \subsection{Version 0.5.1}
 %
-\iflanguage{english}{
+\ifENGLISH
  Date: 2007/08/27
  \begin{itemize}
-	\item deleted text is striked out again using package \paket{ulem}, greying didn't work
+	\item deleted text is striked out again using package \chpackage{ulem}, greying didn't work
  \end{itemize}
-}{
+\fi
+\ifGERMAN
  Datum: 27.\,08.~2007
  \begin{itemize}
-	\item gelöschter Text wieder durchgestrichen, Paket \paket{ulem} funktioniert; ausgrauen hat nicht funktioniert
+	\item gelöschter Text wieder durchgestrichen, Paket \chpackage{ulem} funktioniert; ausgrauen hat nicht funktioniert
  \end{itemize}
 }
 %
 \subsection{Version 0.5}
 %
-\iflanguage{english}{
+\ifENGLISH
  Date: 2007/08/26
  \begin{itemize}
-	\item no usage of package \paket{arrayjob} anymore, thus no errors using package \paket{array}
+	\item no usage of package \chpackage{arrayjob} anymore, thus no errors using package \chpackage{array}
 	\item switch to UTF-8-encoding
-	\item no usage of package \paket{soul} anymore, thus no errors using UTF-8-encoding
+	\item no usage of package \chpackage{soul} anymore, thus no errors using UTF-8-encoding
 	\item markup for deleted text changed to gray background, because there's no possibility to conveniently strikeout UTF-8-text
 	\item new optional argument for author name
 	\item coloured list of changes
 	\item changed loc file format
 	\item improved English documentation
  \end{itemize}
-}{
+\fi
+\ifGERMAN
  Datum: 26.\,08.~2007
  \begin{itemize}
-	\item keine Nutzung des \paket{arrayjob}-Pakets mehr, dadurch Fehler im Zusammenspiel mit \paket{array} behoben
+	\item keine Nutzung des \chpackage{arrayjob}-Pakets mehr, dadurch Fehler im Zusammenspiel mit \chpackage{array} behoben
 	\item auf UTF-8-encoding umgestellt
-	\item keine Nutzung des \paket{soul}-Pakets mehr, dadurch Fehler im Zusammenspiel UTF-8-encoding behoben
+	\item keine Nutzung des \chpackage{soul}-Pakets mehr, dadurch Fehler im Zusammenspiel UTF-8-encoding behoben
 	\item gelöschter Text durch grauen Hintergrund visualisiert (es gibt bisher kein ordentliches Durchstreichen bei UTF-8-Nutzung)
 	\item neues optionales Argument für Autorenname
 	\item farbige Liste der Änderungen
@@ -488,19 +514,20 @@
 %
 \subsection{Version 0.4}
 %
-\iflanguage{english}{
+\ifENGLISH
  Date: 2007/01/24
  \begin{itemize}
-	\item included \paket{pdfcolmk} to solve problem with coloured text and page breaks
-	\item extended \befehl{setremarkmarkup} with author-id for using colour in remarks
+	\item included \chpackage{pdfcolmk} to solve problem with coloured text and page breaks
+	\item extended \chcommand{setremarkmarkup} with author-id for using colour in remarks
 	\item remarks are by default coloured now
 	\item first version uploaded to CTAN
  \end{itemize}
-}{
+\fi
+\ifGERMAN
  Datum: 24.\,01.~2007
  \begin{itemize}
-	\item \paket{pdfcolmk} eingebunden, um Problem mit farbigem Text bei Seitenumbrüchen zu lösen
-	\item \befehl{setremarkmarkup} um Autor-ID erweitert, um Anmerkung farbig setzen zu können
+	\item \chpackage{pdfcolmk} eingebunden, um Problem mit farbigem Text bei Seitenumbrüchen zu lösen
+	\item \chcommand{setremarkmarkup} um Autor-ID erweitert, um Anmerkung farbig setzen zu können
 	\item Anmerkungen werden in der Fußnote farbig gesetzt
 	\item erste Version für das CTAN
  \end{itemize}
@@ -508,74 +535,78 @@
 %
 \subsection{Version 0.3}
 %
-\iflanguage{english}{
+\ifENGLISH
  Date: 2007/01/22
  \begin{itemize}
 	\item english user-documentation
-	\item replaced \befehl{changed} with \befehl{replaced}
-	\item improved \option{final}-option: no additional space
+	\item replaced \chcommand{changed} with \chcommand{replaced}
+	\item improved \choption{final}-option: no additional space
  \end{itemize}
-}{
+\fi
+\ifGERMAN
  Datum: 22.\,01.~2007
  \begin{itemize}
 	\item englische Nutzerdokumentation
-	\item Befehl \befehl{changed} ersetzt durch \befehl{replaced}
-	\item verbesserte \option{final}-Option: kein zusätzlicher Leerraum
+	\item Befehl \chcommand{changed} ersetzt durch \chcommand{replaced}
+	\item verbesserte \choption{final}-Option: kein zusätzlicher Leerraum
  \end{itemize}
 }
 %
 \subsection{Version 0.2}
 %
-\iflanguage{english}{
+\ifENGLISH
  Date: 2007/01/17
  \begin{itemize}
-	\item defined loc-names when missing \paket{babel}-package
-	\item \befehl{setauthormarkup}, \befehl{setlocextension}, \befehl{setremarkmarkup} new
+	\item defined loc-names when missing \chpackage{babel}-package
+	\item \chcommand{setauthormarkup}, \chcommand{setlocextension}, \chcommand{setremarkmarkup} new
 	\item generated examples
 	\item inserted LPPL
  \end{itemize}
  Bugfixes
  \begin{itemize}
-	\item fixed wrong \paket{ifthen}-placement
+	\item fixed wrong \chpackage{ifthen}-placement
 	\item fixed error in loc, always showing "added"
-	\item fixed authormarkup (\befehl{if}-condition not bugfree)
+	\item fixed authormarkup (\chcommand{if}-condition not bugfree)
  \end{itemize}
-}{
+\fi
+\ifGERMAN
  Datum: 17.\,01.~2007
  \begin{itemize}
-	\item Bezeichnungen auch bei fehlendem \paket{babel}-Paket eingeführt
-	\item \befehl{setauthormarkup}, \befehl{setlocextension}, \befehl{setremarkmarkup} für Einstellungen
+	\item Bezeichnungen auch bei fehlendem \chpackage{babel}-Paket eingeführt
+	\item \chcommand{setauthormarkup}, \chcommand{setlocextension}, \chcommand{setremarkmarkup} für Einstellungen
 	\item Beispieldateien generiert
 	\item LPPL eingefügt
  \end{itemize}
  Bugfixes
  \begin{itemize}
-	\item Fehler mit \paket{ifthen}-Paketplazierung behoben
+	\item Fehler mit \chpackage{ifthen}-Paketplazierung behoben
 	\item bei Liste war immer "`Eingefügt"' eingestellt, behoben
-	\item Autorausgabe war buggy (\befehl{if}-Abfrage nicht einwandfrei)
+	\item Autorausgabe war buggy (\chcommand{if}-Abfrage nicht einwandfrei)
  \end{itemize}
 }
 %
 \subsection{Version 0.1}
 %
-\iflanguage{english}{
+\ifENGLISH
  Date: 2007/01/16
  \begin{itemize}
 	\item initial version
-	\item commands \befehl{added}, \befehl{deleted}, and \befehl{changed}
+	\item commands \chcommand{added}, \chcommand{deleted}, and \chcommand{changed}
  \end{itemize}
-}{
+\fi
+\ifGERMAN
  Datum: 16.\,01.~2007
  \begin{itemize}
 	\item initiale Version
-	\item Befehle \befehl{added}, \befehl{deleted} und \befehl{changed}
+	\item Befehle \chcommand{added}, \chcommand{deleted} und \chcommand{changed}
  \end{itemize}
 }
 %
-\iflanguage{english}{
+\ifENGLISH
  \section{Distribution, Copyright, License}
 %
- Copyright 2007-2010 Ekkart Kleinod (\href{mailto:ekkart@ekkart.de}{ekkart@ekkart.de})
+ Copyright 2007-2010 Ekkart Kleinod (\href{mailto:ekkart@ekkart.de\fi
+\ifGERMANekkart@ekkart.de})
 %
  This work may be distributed and/or modified under the
  conditions of the \LaTeX\ Project Public License, either version~1.3
@@ -605,10 +636,12 @@
 	\>\texttt{changes.example2.tex}\\
 	\>\texttt{changes.example3.tex}
  \end{tabbing}
-}{
+\fi
+\ifGERMAN
  \section{Weitergabe, Copyright, Lizenz}
 %
- Copyright 2007-2010 Ekkart Kleinod (\href{mailto:ekkart@ekkart.de}{ekkart@ekkart.de})
+ Copyright 2007-2010 Ekkart Kleinod (\href{mailto:ekkart@ekkart.de\fi
+\ifGERMANekkart@ekkart.de})
 %
  Dieses Paket darf unter der "`\LaTeX\ Project Public License"' Version~1.3 oder jeder späteren Version weitergegeben und/oder geändert werden.
  Die neueste Version dieser Lizenz steht auf\\
