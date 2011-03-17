@@ -57,19 +57,46 @@
 }
 \makeatother
 
+% language selection
+\selectlanguage{english}
 
-\title{\iflanguage{english}{The \chpackage{changes}-package}{Das \chpackage{changes}-Paket}}
-\subtitle{\iflanguage{english}{Manual change markup --- version}{Manuelle Änderungsmarkierung -- Version} 0.5.4} %$^\alpha$}
+% catchall - english
+\newif\ifENGLISH
+\ENGLISHtrue
+
+% german
+\newif\ifGERMAN
+\GERMANfalse
+\iflanguage{ngerman}{\GERMANtrue}{\ENGLISHfalse}
+\iflanguage{german}{\GERMANtrue}{\ENGLISHfalse}
+
+% new language example: french
+% \newif\ifFRENCH
+% \FRENCHfalse
+% \iflanguage{french}{\FRENCHtrue}{\ENGLISHfalse}
+
+
+
+	\title{%
+		\ifENGLISH
+			The \chpackage{changes}-package
+		\fi
+		tra
+	}
+	\subtitle{Manual change markup --- version 0.5.4}
+%	\ifGERMAN
+%		\title{Das \chpackage{changes}-Paket}
+%		\subtitle{Manuelle Änderungsmarkierung -- Version 0.5.4}
+%	\fi
 \author{Ekkart Kleinod}
 \email{ekkart@ekkart.de}
 
-% nur Beschreibungsteil ausgeben?
+% only description part?
 %\OnlyDescription
 
 % Eigentliches Dokument
 \begin{document}
 
-	\selectlanguage{ngerman}
 	\DocInput{changes.dtx}
 
 \end{document}
