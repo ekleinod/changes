@@ -67,27 +67,24 @@
 % german
 \newif\ifGERMAN
 \GERMANfalse
-\iflanguage{ngerman}{\GERMANtrue}{\ENGLISHfalse}
-\iflanguage{german}{\GERMANtrue}{\ENGLISHfalse}
+\iflanguage{ngerman}{\GERMANtrue\ENGLISHfalse}{}
+\iflanguage{german}{\GERMANtrue\ENGLISHfalse}{}
 
 % new language example: french
 % \newif\ifFRENCH
 % \FRENCHfalse
-% \iflanguage{french}{\FRENCHtrue}{\ENGLISHfalse}
+% \iflanguage{french}{\FRENCHtrue\ENGLISHfalse}{}
 
 
-
-	\title{%
-		\ifENGLISH
-			The \chpackage{changes}-package
-		\fi
-		tra
-	}
+\ifENGLISH
+	\title{The \chpackage{changes}-package}
 	\subtitle{Manual change markup --- version 0.5.4}
-%	\ifGERMAN
-%		\title{Das \chpackage{changes}-Paket}
-%		\subtitle{Manuelle Änderungsmarkierung -- Version 0.5.4}
-%	\fi
+\fi
+	\ifGERMAN
+		\title{Das \chpackage{changes}-Paket}
+		\subtitle{Manuelle Änderungsmarkierung -- Version 0.5.4}
+	\fi
+
 \author{Ekkart Kleinod}
 \email{ekkart@ekkart.de}
 
