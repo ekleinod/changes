@@ -8,8 +8,10 @@ Der geänderte Text wird farbig markiert und, bei gelöschtem Text, durchgestric
 Das Paket ermöglicht die freie Definition von Autoren und deren zugeordneten Farben.
 Es erlaubt zusätzlich die Definition des Autor- und Anmerkungsmarkups.
 
+Internet: http://changes.sourceforge.net/
+
 This material is subject to the LaTeX Project Public License (LPPL).
-For details see changes_eng.pdf
+For more please see the user documentation changes.english.short.pdf
 
 Dieses Paket steht unter der LaTeX Project Public License (LPPL).
-Details stehen in changes.pdf
+Für Details lesen Sie bitte die Nutzerdokumentation changes.ngerman.short.pdf
