@@ -240,6 +240,11 @@
 		<copy todir="${path:ctan}${file:targetname}/"
 			file="${file:targetname}.ins" />
 
+		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
+			file="user.tex" />
+		<copy todir="${path:ctan}${file:targetname}/"
+			file="user.tex" />
+
 		<copy todir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/"
 			file="README" />
 		<copy todir="${path:ctan}${file:targetname}/"
