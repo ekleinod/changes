@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project_export SYSTEM "http://sourceforge.net/export/sf_project_export_0.2.dtd"><document>
 <!-- Please excuse the fact that the referenced DTD is not yet available.  The data format of this feed may remain in flux until the full intended feature set has been implemented and retested.  Questions may be sent to moorman@sourceforge.net -->
 <!-- Support issues related to this feed should be directed to the SourceForge.net team per http://p.sf.net/sourceforge/support-->
@@ -33,7 +33,7 @@ Option for show_filereleases, show_forums, show_projectnews, show_docmanager, sh
 this way you can only export items changed since the last time found in your export details.
 
 --><export_details>
-<time>1299116408</time>
+<time>1303769976</time>
 <project_group_id>264241</project_group_id>
 <project_unix_name>changes</project_unix_name>
 <exporter>ekleinod</exporter>
@@ -43,7 +43,7 @@ this way you can only export items changed since the last time found in your exp
 <group_id>264241</group_id>
 <unix_name>changes</unix_name>
 <descriptive_name>changes</descriptive_name>
-<description>The changes LaTeX package provides manual change markup for LaTeX documents. The user enters change text passages with special markup that is transformed into text with a special layout. The package provides a table of changes as well.</description>
+<description>The changes LaTeX package provides manual change markup for LaTeX documents. The user enters changed text passages with special markup that is transformed into text with a special layout. The package provides a table of changes as well.</description>
 <license>gpl</license>
 <home_page_url>http://changes.sourceforge.net/</home_page_url>
 <registration_description>At the moment the package is provided via CTAN. The source code is hosted only on my computer, and on CTAN, but is no open source code yet, because of the missing possibilities on CTAN. That's why I watn to move the code on sourceforge.net, so other people can make changes without me being a bottleneck.</registration_description>
@@ -77,13 +77,13 @@ this way you can only export items changed since the last time found in your exp
 <forum>
 <forum_id>960824</forum_id>
 <forum_name>Help</forum_name>
-<description>This forum is momentarily out of use. Please use &#34;Open Discussion&#34;.</description>
+<description>This forum is momentarily out of use. Please use &amp;quot;Open Discussion&amp;quot;.</description>
 <is_public>No</is_public>
 </forum>
 <forum>
 <forum_id>960825</forum_id>
 <forum_name>Developers</forum_name>
-<description>This forum is momentarily out of use. Please use &#34;Open Discussion&#34;.</description>
+<description>This forum is momentarily out of use. Please use &amp;quot;Open Discussion&amp;quot;.</description>
 <is_public>No</is_public>
 </forum>
 </forums>
@@ -112,7 +112,7 @@ this way you can only export items changed since the last time found in your exp
 </project_admin_detail>
 <projectnews>
 <newsitem>
-<url>http://sourceforge.net/news/group_id=264241&#38;id=272108</url>
+<url>http://sourceforge.net/news/group_id=264241&amp;id=272108</url>
 <id>272108</id>
 <submitter>ekleinod</submitter>
 <date>1245612261</date>
@@ -120,7 +120,7 @@ this way you can only export items changed since the last time found in your exp
 <details>The initial code commit is done, please have patience for first release versions.</details>
 </newsitem>
 <newsitem>
-<url>http://sourceforge.net/news/group_id=264241&#38;id=283796</url>
+<url>http://sourceforge.net/news/group_id=264241&amp;id=283796</url>
 <id>283796</id>
 <submitter>ekleinod</submitter>
 <date>1268242419</date>
@@ -129,12 +129,35 @@ this way you can only export items changed since the last time found in your exp
 Furthermore I created an bug tracker for bug reports and feature requests. I too uploaded some screenshots.</details>
 </newsitem>
 <newsitem>
-<url>http://sourceforge.net/news/group_id=264241&#38;id=294273</url>
+<url>http://sourceforge.net/news/group_id=264241&amp;id=294273</url>
 <id>294273</id>
 <submitter>ekleinod</submitter>
 <date>1290446979</date>
 <summary>released version 0.5.3</summary>
-<details>Following the suggestion and code example of S.Wolter I integrated usage of document class options &#34;final&#34; and &#34;draft&#34; in the changes package.</details>
+<details>Following the suggestion and code example of S.Wolter I integrated usage of document class options &quot;final&quot; and &quot;draft&quot; in the changes package.</details>
+</newsitem>
+<newsitem>
+<url>http://sourceforge.net/news/group_id=264241&amp;id=298187</url>
+<id>298187</id>
+<submitter>ekleinod</submitter>
+<date>1299447705</date>
+<summary>Script for removing changes commands</summary>
+<details>I received a script for removing the changes code from Silvano Chiaradonna who allowed me to include the script in the package.
+
+Until the next release you can download the script directly from SVN:
+http://changes.svn.sourceforge.net/viewvc/changes/trunk/texmf/scripts/changes/delcmdchanges.bash</details>
+</newsitem>
+<newsitem>
+<url>http://sourceforge.net/news/group_id=264241&amp;id=299826</url>
+<id>299826</id>
+<submitter>ekleinod</submitter>
+<date>1303769073</date>
+<summary>released version 0.5.4</summary>
+<details>I just released v0.5.4 of the changes package, only visible change is the new script for removing changes commands from the TeX source code (thanks to Silvano Chiaradonna).
+
+I restructured the documentation code in order to ease further translation and code redesign. Thus the minimal amount of changes.
+
+The next planned version will contain new options for different markup selection.</details>
 </newsitem>
 </projectnews>
 <filereleases>
@@ -149,6 +172,58 @@ Furthermore I created an bug tracker for bug reports and feature requests. I too
 <send_posts_to>ekleinod@edgesoft.de</send_posts_to>
 <anonymous_posting>Yes</anonymous_posting>
 <forum_posts>
+<forum_post>
+<url>http://sourceforge.net/projects/changes/forums/forum/960823/topic/4391913?message=9539404</url>
+<msg_id>9539404</msg_id>
+<poster_user>ekleinod</poster_user>
+<poster_name>Ekkart Kleinod</poster_name>
+<subject>RE: Markup with author name instead of id</subject>
+<thread_id>4391913</thread_id>
+<is_followup_to>-1</is_followup_to>
+<has_followups>0</has_followups>
+<date>1299447591</date>
+<is_deleted>No</is_deleted>
+<body>I will include the code in the next changes release at least in the documentation, maybe as an option in the code.</body>
+</forum_post>
+<forum_post>
+<url>http://sourceforge.net/projects/changes/forums/forum/960823/topic/4399610?message=9539401</url>
+<msg_id>9539401</msg_id>
+<poster_user>ekleinod</poster_user>
+<poster_name>Ekkart Kleinod</poster_name>
+<subject>Underline new text</subject>
+<thread_id>4399610</thread_id>
+<is_followup_to>0</is_followup_to>
+<has_followups>0</has_followups>
+<date>1299447549</date>
+<is_deleted>No</is_deleted>
+<body>If you want new text to be underlined, please use the following code fragment from Silvano Chiaradonna:
+[code]% to underline new text
+\makeatletter % underline new text
+
+% new command \added[][]{}
+\let\OldChangesAdded\Changes@added
+\renewcommand{\added}[1][\@empty]{%
+ \renewcommand{\Changes@temp}{#1}%
+ \myChanges@added%
+}
+\newcommand{\myChanges@added}[2][\@empty]{%
+ \OldChangesAdded[#1]{\emph{#2}}%
+}
+
+% new command \replace[][]{}{}
+\let\OldChangesReplaced\Changes@replaced
+\renewcommand{\replaced}[1][\@empty]{%
+ \renewcommand{\Changes@temp}{#1}%
+ \myChanges@replaced%
+}
+\newcommand{\myChanges@replaced}[3][\@empty]{%
+ \OldChangesReplaced[#1]{\emph{#2}}{#3}%
+ }
+
+\makeatother % now new text is underlined [/code]
+
+I will include the code in the next changes release at least in the documentation, maybe as an option in the code.</body>
+</forum_post>
 <forum_post>
 <url>http://sourceforge.net/projects/changes/forums/forum/960823/topic/4391913?message=9495354</url>
 <msg_id>9495354</msg_id>
@@ -194,7 +269,7 @@ If there are questions, suggestions, or other commentars, please do not hesitate
 <forum_id>960824</forum_id>
 <forum_name>Help</forum_name>
 <is_public>No</is_public>
-<description>This forum is momentarily out of use. Please use &#34;Open Discussion&#34;.</description>
+<description>This forum is momentarily out of use. Please use &amp;quot;Open Discussion&amp;quot;.</description>
 <send_posts_to></send_posts_to>
 <anonymous_posting>No</anonymous_posting>
 <forum_posts>
@@ -205,7 +280,7 @@ If there are questions, suggestions, or other commentars, please do not hesitate
 <forum_id>960825</forum_id>
 <forum_name>Developers</forum_name>
 <is_public>No</is_public>
-<description>This forum is momentarily out of use. Please use &#34;Open Discussion&#34;.</description>
+<description>This forum is momentarily out of use. Please use &amp;quot;Open Discussion&amp;quot;.</description>
 <send_posts_to></send_posts_to>
 <anonymous_posting>No</anonymous_posting>
 <forum_posts>
@@ -214,7 +289,7 @@ If there are questions, suggestions, or other commentars, please do not hesitate
 </forums>
 <trackers>
 <tracker>
-<url>http://sourceforge.net/?group_id=264241&#38;atid=1304112</url>
+<url>http://sourceforge.net/?group_id=264241&amp;atid=1304112</url>
 <tracker_id>1304112</tracker_id>
 <name>Bugs and Features</name>
 <description>Tracker for bug reports and feature requests.</description>
@@ -391,20 +466,30 @@ Maybe this eases the code in the output section.</details>
 <tracker_item>
 <url>http://sourceforge.net/support/tracker.php?aid=3196724</url>
 <id>3196724</id>
-<status_id>1</status_id>
+<status_id>2</status_id>
 <category_id>1353962</category_id>
 <group_id>1078725</group_id>
-<resolution_id>100</resolution_id>
+<resolution_id>1</resolution_id>
 <submitter>ekleinod</submitter>
 <assignee>ekleinod</assignee>
-<closer>nobody</closer>
+<closer>ekleinod</closer>
 <submit_date>1299027343</submit_date>
-<close_date>0</close_date>
+<close_date>1299447172</close_date>
 <priority>5</priority>
 <summary>Cleanup commands</summary>
 <details>It would be nice if a program or ant-task would exist for deleting all changes-commands, so the source code is command-free concerning the changes package.</details>
 <is_private>0</is_private>
 <followups>
+<followup>
+<id>4645496</id>
+<submitter>ekleinod</submitter>
+<date>1299447172</date>
+<details>Silvano Chiaradonna provided a bash script for removing changes commands from a tex file.
+
+You can find the script in the texmf tree in the next version or directly in the svn:
+
+http://changes.svn.sourceforge.net/viewvc/changes/trunk/texmf/scripts/changes/delcmdchanges.bash</details>
+</followup>
 </followups>
 <attachments>
 </attachments>
@@ -414,6 +499,41 @@ Maybe this eases the code in the output section.</details>
 <field_name>IP</field_name>
 <old_value>Artifact Created: 94.222.24.111</old_value>
 <date>1299027343</date>
+<updator>ekleinod</updator>
+</history_entry>
+<history_entry>
+<id>10676647</id>
+<field_name>IP</field_name>
+<old_value>Comment Added: 188.102.97.158</old_value>
+<date>1299447172</date>
+<updator>ekleinod</updator>
+</history_entry>
+<history_entry>
+<id>10676648</id>
+<field_name>status_id</field_name>
+<old_value>1</old_value>
+<date>1299447172</date>
+<updator>ekleinod</updator>
+</history_entry>
+<history_entry>
+<id>10676649</id>
+<field_name>resolution_id</field_name>
+<old_value>100</old_value>
+<date>1299447172</date>
+<updator>ekleinod</updator>
+</history_entry>
+<history_entry>
+<id>10676650</id>
+<field_name>allow_comments</field_name>
+<old_value>1</old_value>
+<date>1299447172</date>
+<updator>ekleinod</updator>
+</history_entry>
+<history_entry>
+<id>10676651</id>
+<field_name>close_date</field_name>
+<old_value>0</old_value>
+<date>1299447172</date>
 <updator>ekleinod</updator>
 </history_entry>
 </history_entries>
@@ -660,6 +780,36 @@ Example: \added*{Added second level text.}</details>
 <field_name>IP</field_name>
 <old_value>Artifact Created: 94.222.24.111</old_value>
 <date>1299028640</date>
+<updator>ekleinod</updator>
+</history_entry>
+</history_entries>
+</tracker_item>
+<tracker_item>
+<url>http://sourceforge.net/support/tracker.php?aid=3292756</url>
+<id>3292756</id>
+<status_id>1</status_id>
+<category_id>1353962</category_id>
+<group_id>1078725</group_id>
+<resolution_id>100</resolution_id>
+<submitter>ekleinod</submitter>
+<assignee>ekleinod</assignee>
+<closer>nobody</closer>
+<submit_date>1303763117</submit_date>
+<close_date>0</close_date>
+<priority>5</priority>
+<summary>Automate ant call for examples</summary>
+<details>The example pdfs are created by hand, automate the call for all files that start with changes.example.*.tex.</details>
+<is_private>0</is_private>
+<followups>
+</followups>
+<attachments>
+</attachments>
+<history_entries>
+<history_entry>
+<id>11377224</id>
+<field_name>IP</field_name>
+<old_value>Artifact Created: 188.106.186.239</old_value>
+<date>1303763118</date>
 <updator>ekleinod</updator>
 </history_entry>
 </history_entries>
