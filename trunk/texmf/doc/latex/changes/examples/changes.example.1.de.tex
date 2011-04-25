@@ -1,0 +1,26 @@
+% changes example 1
+\documentclass{article}
+
+% draft = Ausgabe der Änderungen
+\usepackage[draft]{changes}
+
+\definechangesauthor{EK}{orange}
+
+\begin{document}
+
+	Dieses Beispiel zeigt die Grundfunktionen.
+
+	\listofchanges
+
+	Dieser Text ist nicht modifiziert.
+
+	Hier \added{f\"uge} ich Text anonym \added{ein}.
+	Hier \deleted{l\"osche} ich anonym Text.
+	Und an dieser Stelle \replaced{\"andere}{alt} ich anonym Text.
+	Anonyme \deleted[][Ja!]{L\"oschung} mit Anmerkung.
+
+	Hier \added[EK]{f\"uge} ich Text als Autor "EK" \added[EK]{ein}.
+	Hier f\"uge ich \added[EK][Weil ich es kann.]{Text}	als Autor "EK" mit Begr\"undung ein.
+
+\end{document}
+

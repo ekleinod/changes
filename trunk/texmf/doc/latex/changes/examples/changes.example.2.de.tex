@@ -1,0 +1,30 @@
+% changes example 2
+\documentclass[ngerman]{article}
+
+\usepackage{babel}
+\usepackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+
+% draft = Ausgabe der Änderungen
+\usepackage[draft]{changes}
+
+\definechangesauthor{EK}{orange}
+
+\begin{document}
+
+	Dieses Beispiel zeigt die Grundfunktionen	unter Einbeziehung des babel-Pakets.
+
+	\listofchanges
+
+	Dieser Text ist nicht modifiziert.
+
+	Hier \added{füge} ich Text anonym \added{ein}.
+	Hier \deleted{lösche} ich anonym Text.
+	Und an dieser Stelle \replaced{ändere}{alt} ich anonym Text.
+	Anonyme \deleted[][Ja!]{Löschung} mit Anmerkung.
+
+	Hier \added[EK]{füge} ich Text als Autor "`EK"' \added[EK]{ein}.
+	Hier füge ich \added[EK][Weil ich es kann.]{Text}	als Autor "`EK"' mit Begründung ein.
+
+\end{document}
+

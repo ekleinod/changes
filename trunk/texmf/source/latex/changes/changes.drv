@@ -58,7 +58,7 @@
 \makeatother
 
 % language selection
-\selectlanguage{english}
+\selectlanguage{ngerman}
 
 % catchall - english
 \newif\ifENGLISH
