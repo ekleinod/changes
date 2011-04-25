@@ -12,11 +12,12 @@
 	<property name="file:log" value="build.log" />                  <!-- Log-Datei -->
 	<property name="count:runs" value="1" />                        <!-- LaTeX-Durchlaufzähler -->
 
-	<property name="path:examples" value="examples/" /> <!-- LaTeX-doc-examples-Pfad -->
-	<property name="path:latex:base" value="../../../" /> <!-- LaTeX-base-Pfad -->
-	<property name="path:latex:doc" value="doc/latex/" /> <!-- LaTeX-doc-Pfad -->
-	<property name="path:latex:tex" value="tex/latex/" /> <!-- LaTeX-tex-Pfad -->
-	<property name="path:latex:source" value="source/latex/" /> <!-- LaTeX-source-Pfad -->
+	<property name="path:latex:base" value="../../../" />
+	<property name="path:latex:doc" value="doc/latex/" />
+	<property name="path:examples" value="examples/" />
+	<property name="path:latex:scripts" value="scripts/" />
+	<property name="path:latex:tex" value="tex/latex/" />
+	<property name="path:latex:source" value="source/latex/" />
 
 	<property name="path:ctan" value="ctan/" /> <!-- CTAN-Ausgabe-Pfad -->
 	<property name="path:texmf" value="texmf/" /> <!-- LaTeX-texmf-Pfad -->
@@ -49,9 +50,9 @@
 		<!-- remove temporary files -->
 		<antcall target="clear" />
 
-		<echo message="Dateien erzeugt: Verteilung mit 'ant deploy'."/>
+		<echo message="Created all files: deploy files with 'ant deploy'."/>
 
-		<echo message="Alle Dateien erzeugen: Stop."/>
+		<echo message="Create all files: stop."/>
 
 	</target>
 
@@ -141,7 +142,7 @@
 		<echo message="Remove temporary files." />
 		<defaultexcludes remove="**/*~" />
 		<delete>
-			<fileset dir="." includes="**/*.aux, **/*.bak.vthought, **/*.bak, **/*.bbl, **/*.blg, **/*.dvi, **/*.idx, **/*.ilg, **/*.ind, **/*.loc, **/*.lof, **/*.lot, **/*.lop, **/*.nav, **/*.out, **/*.ps, **/*.snm, **/*.toc, **/*.url, **/*.*~"/>
+			<fileset dir="." includes="**/*.aux, **/*.bak.vthought, **/*.bak, **/*.bbl, **/*.blg, **/*.changes, **/*.dvi, **/*.idx, **/*.ilg, **/*.ind, **/*.loc, **/*.lof, **/*.lot, **/*.lop, **/*.nav, **/*.out, **/*.ps, **/*.snm, **/*.toc, **/*.url, **/*.*~"/>
 		</delete>
 		<defaultexcludes default="true" />
 	</target>
@@ -149,6 +150,9 @@
 	<!-- clear log -->
 	<target name="clearLog">
 		<echo message="" file="${file:log}" />
+		<delete>
+			<fileset dir="." includes="**/*.log" />
+		</delete>
 	</target>
 
 	<!-- deploy generated files -->
@@ -160,35 +164,36 @@
 			todir="${path:latex:base}${path:latex:tex}${file:targetname}/"
 			failonerror="false" />
 
-		<move todir="${path:latex:base}${path:latex:doc}${file:targetname}/" failonerror="false">
-			<fileset dir=".">
-				<include name="${file:targetname}*.pdf" />
-			</fileset>
-		</move>
-
 		<move todir="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}" failonerror="false">
 			<fileset dir=".">
 				<include name="${file:targetname}.example.*.pdf" />
 			</fileset>
 		</move>
 
-		<echo message="Dateien verteilt: CTAN-Archiv mit 'ant ctan'."/>
+		<move todir="${path:latex:base}${path:latex:doc}${file:targetname}/" failonerror="false">
+			<fileset dir=".">
+				<include name="${file:targetname}*.pdf" />
+			</fileset>
+		</move>
+
+		<echo message="Deployed files: create CTAN archive with 'ant ctan'."/>
 
 	</target>
 
-	<!-- Dateien als CTAN-Archiv bündeln -->
+	<!-- bundle files in a CTAN archive -->
 	<target name="ctan">
-		<echo message="Generierung der CTAN-Dateien" />
+		<echo message="Generating the CTAN archive." />
 
-		<!-- Verzeichnisse -->
+		<!-- directories -->
 		<delete dir="${path:ctan}" failonerror="false" />
 
 		<mkdir dir="${path:ctan}${path:texmf}${path:latex:tex}${file:targetname}" />
 		<mkdir dir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}" />
 		<mkdir dir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/${path:examples}" />
+		<mkdir dir="${path:ctan}${path:texmf}${path:latex:scripts}${file:targetname}" />
 		<mkdir dir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}" />
 
-		<!-- Dateien -->
+		<!-- files -->
 		<copy file="${path:latex:base}${path:latex:tex}${file:targetname}/${file:targetname}.sty"
 			todir="${path:ctan}${path:texmf}${path:latex:tex}${file:targetname}/" />
 
@@ -204,9 +209,21 @@
 			</fileset>
 		</copy>
 
+		<copy todir="${path:ctan}${path:texmf}${path:latex:scripts}${file:targetname}">
+			<fileset dir="${path:latex:base}${path:latex:scripts}${file:targetname}">
+				<include name="*.bash" />
+			</fileset>
+		</copy>
+
 		<copy todir="${path:ctan}${file:targetname}/">
 			<fileset dir="${path:latex:base}${path:latex:doc}${file:targetname}/">
 				<include name="*.pdf" />
+			</fileset>
+		</copy>
+
+		<copy todir="${path:ctan}${file:targetname}">
+			<fileset dir="${path:latex:base}${path:latex:scripts}${file:targetname}">
+				<include name="*.bash" />
 			</fileset>
 		</copy>
 
