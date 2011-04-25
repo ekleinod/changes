@@ -45,7 +45,7 @@
 % \changes{v0.5.1}{2007/08/27}{deleted text is striked out again using package ulem, greying didn't work}
 % \changes{v0.5.2}{2007/10/10}{package options for pdfcolmk, ulem, and xcolor}
 % \changes{v0.5.3}{2010/11/22}{use class options (final, draft) as well}
-% \changes{v0.5.4}{2011/03/??}{extract user documentation; default language changed to English; script for removal of commands}
+% \changes{v0.5.4}{2011/04/25}{extract user documentation; default language changed to English; script for removal of commands}
 % \GetFileInfo{changes.dtx}
 %
 %^^A --------------------------------------------------------------------------
@@ -77,8 +77,8 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{changes}
-[2011/03/01 v0.5.4 changes-Paket]
-\typeout{*** changes-Paket 2011/03/01 v0.5.4 ***}
+[2011/04/25 v0.5.4 changes-Paket]
+\typeout{*** changes-Paket 2011/04/25 v0.5.4 ***}
 %    \end{macrocode}
 %
 % Package \chpackage{xkeyval} provides options with key-value-pairs.
@@ -500,144 +500,6 @@
 %
 %    \begin{macrocode}
 %</changes>
-%    \end{macrocode}
-%
-%^^A -- Beispieldateien -------------------------------------------------------
-%
-% \section{Example files}
-%
-% \subsection{Basic example without \chpackage{babel}}
-%
-%    \begin{macrocode}
-%<*example:1>
-\documentclass{article}
-
- % draft = Ausgabe der Änderungen
-\usepackage[draft]{changes}
-
-\definechangesauthor{EK}{orange}
-
-\begin{document}
-
- Dieses Beispiel zeigt die rudiment\"aren Funktionen.
-
- \listofchanges
-
- Dieser Text ist nicht modifiziert.
-
- Hier \added{f\"uge} ich Text anonym \added{ein}.
- Hier \deleted{l\"osche} ich anonym Text.
- Und an dieser Stelle \replaced{\"andere}{alt} ich anonym Text.
- Anonyme \deleted[][Ja!]{L\"oschung} mit Anmerkung.
-
- Hier \added[EK]{f\"uge} ich Text als Autor "EK" \added[EK]{ein}.
- Hier f\"uge ich \added[EK][Weil ich es kann.]{Text}
- als Autor "EK" mit Begr\"undung ein.
-
-\end{document}
-%</example:1>
-%    \end{macrocode}
-%
-%  \subsection{Basic example using \chpackage{babel}}
-%
-%    \begin{macrocode}
-%<*example:2>
-\documentclass[ngerman]{article}
-
-\usepackage{babel}
-\usepackage[utf8]{inputenc}
-\RequirePackage[T1]{fontenc}
-
- % draft = Ausgabe der Änderungen
-\usepackage[draft]{changes}
-
-\definechangesauthor{EK}{orange}
-
-\begin{document}
-
- Dieses Beispiel zeigt die rudimentären Funktionen
- unter Einbeziehung des babel-Pakets.
-
- \listofchanges
-
- Dieser Text ist nicht modifiziert.
-
- Hier \added{füge} ich Text anonym \added{ein}.
- Hier \deleted{lösche} ich anonym Text.
- Und an dieser Stelle \replaced{ändere}{alt} ich anonym Text.
- Anonyme \deleted[][Ja!]{Löschung} mit Anmerkung.
-
- Hier \added[EK]{füge} ich Text als Autor "`EK"' \added[EK]{ein}.
- Hier füge ich \added[EK][Weil ich es kann.]{Text}
- als Autor "`EK"' mit Begründung ein.
-
-\end{document}
-%</example:2>
-%    \end{macrocode}
-%
-% \subsection{Additional definitions}
-%
-%    \begin{macrocode}
-%<*example:3>
-\documentclass[ngerman]{article}
-
-\usepackage{babel}
-\usepackage[utf8]{inputenc}
-\RequirePackage[T1]{fontenc}
-
- % draft = Ausgabe der Änderungen
-\usepackage[draft]{changes}
-
-\definechangesauthor[Ekkart Kleinod]{EK}{orange}
-\definechangesauthor{Test}{green}
-
-\setlocextension{changes}
-\setauthormarkup[left]{(#1)~--~}
-\setremarkmarkup{(#2:#1)}
-
-\begin{document}
-
- Dieses Beispiel zeigt die erweiterten Funktionen.
- Es setzt die Erweiterung der Hilfsdatei auf \texttt{changes}.
- Ein Autorname wird angegeben.
- Die Autorenmarkierung wird links gesetzt.
- Sie besteht aus dem eingeklammerten Autorennamen,
- der durch Leerzeichen und einen Gedankenstrich
- von der Änderung abgesetzt ist.
- Die Anmerkung wird in Klammern gesetzt, der Autorname dahinter.
-
- \listofchanges
-
- Dieser Text ist nicht modifiziert.
-
- Hier \added{füge} ich Text anonym \added{ein}.
- Hier \deleted{lösche} ich anonym Text.
- Und an dieser Stelle \replaced{ändere}{alt} ich anonym Text.
- Anonyme \deleted[][Ja!]{Löschung} mit Anmerkung.
-
- Hier \added[EK]{füge} ich Text als Autor "`EK"' \added[EK]{ein}.
- Hier füge ich \added[EK][Weil ich es kann.]{Text}
- als Autor "`EK"' mit Begründung ein.
-
- Hier \deleted[Test][Weil ich es will.]{lösche} ich Text
- als Autor "`Text"'.
-
- Test von Zeilenumbrüchen.
- \added{eingefügt eingefügt eingefügt eingefügt eingefügt
- eingefügt eingefügt eingefügt eingefügt eingefügt eingefügt
- eingefügt eingefügt eingefügt eingefügt eingefügt.}
- \deleted{gelöscht gelöscht gelöscht gelöscht gelöscht gelöscht
- gelöscht gelöscht gelöscht gelöscht gelöscht gelöscht gelöscht
- gelöscht gelöscht gelöscht gelöscht gelöscht gelöscht.}
- \replaced{eingefügt eingefügt eingefügt eingefügt eingefügt
- eingefügt eingefügt eingefügt eingefügt eingefügt eingefügt
- eingefügt eingefügt eingefügt eingefügt eingefügt.}
- {gelöscht gelöscht gelöscht gelöscht gelöscht gelöscht
- gelöscht gelöscht gelöscht gelöscht gelöscht gelöscht gelöscht
- gelöscht gelöscht gelöscht gelöscht gelöscht gelöscht.}
-
-\end{document}
-%</example:3>
 %    \end{macrocode}
 %
 %\Finale

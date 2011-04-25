@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!--
-	Dieses Script erzeugt alle Dateien, die fuer eine neue Version des Pakets notwendig sind.
+	This script creates all files for a new version.
 
-	Ziele: all (default), docstrip, pdf, deploy, ctan
+	Targets: all (default), docstrip, pdf, deploy, ctan
 -->
 
-<!-- hier aktuellen Projektnamen eintragen -->
 <project name="changes" default="all" basedir=".">
 
 	<property name="file:targetname" value="${ant.project.name}" /> <!-- zu generierender Dateiname -->
@@ -28,15 +27,15 @@
 	<property name="lang:de" value="ngerman" /> <!-- language: german -->
 	<property name="lang:en" value="english" /> <!-- language: english -->
 
-	<!-- alle Dateien erstellen -->
+	<!-- create all files -->
 	<target name="all" depends="clearLog">
 
-		<echo message="Alle Dateien erzeugen: Start."/>
+		<echo message="Create all files: start."/>
 
-		<!-- Stildatei strippen -->
+		<!-- create stripped files -->
 		<antcall target="docstrip" />
 
-		<!-- alle Dokus erzeugen -->
+		<!-- create all documentation files -->
 		<antcall target="doku">
 			<param name="language" value="${lang:de}" />
 		</antcall>
@@ -44,7 +43,10 @@
 			<param name="language" value="${lang:en}" />
 		</antcall>
 
-		<!-- Temporäre Dateien weg -->
+		<!-- create all example pdfs -->
+		<antcall target="examples" />
+
+		<!-- remove temporary files -->
 		<antcall target="clear" />
 
 		<echo message="Dateien erzeugt: Verteilung mit 'ant deploy'."/>
@@ -53,10 +55,10 @@
 
 	</target>
 
-	<!-- Erzeugung gestrippte Dateien -->
+	<!-- create stripped files -->
 	<target name="docstrip">
-		<echo message="docstrip-Lauf -> Stildateien"/>
-		<exec executable="latex" output="build.log" append="true" resultproperty="vts.result">
+		<echo message="docstrip-run"/>
+		<exec executable="latex" output="build.log" append="true" resultproperty="changes.result">
 			<arg line="-interaction=nonstopmode ${file:targetname}.ins" />
 		</exec>
 		<antcall target="checkResult" />
@@ -79,51 +81,64 @@
 
 		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${doku:full}.drv" />
 		<antcall target="pdf_complete">
-			<param name="file:targetname" value="${file:targetname}.${doku:full}" />
+			<param name="file:targetname" value="${file:targetname}.${doku:full}.drv" />
 		</antcall>
 		<delete file="${file:targetname}.${doku:full}.drv" />
 
 		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${doku:short}.drv" />
 		<replace file="${file:targetname}.${doku:short}.drv" token="%\OnlyDescription" value="\OnlyDescription" />
 		<antcall target="pdf_complete">
-			<param name="file:targetname" value="${file:targetname}.${doku:short}" />
+			<param name="file:targetname" value="${file:targetname}.${doku:short}.drv" />
 		</antcall>
 		<delete file="${file:targetname}.${doku:short}.drv" />
 
 	</target>
 
-	<!-- einzelne pdf-Datei -->
+	<!-- single pdf file -->
 	<target name="pdf">
-		<echo message="${count:runs}. PDF-LaTeX-Lauf -> ${file:targetname}.pdf"/>
-		<exec executable="pdflatex" output="${file:log}" append="true" resultproperty="vts.result">
-			<arg line="-interaction=nonstopmode ${file:targetname}.drv" />
+		<echo message="pdflatex run #${count:runs} -> ${file:targetname}"/>
+		<exec executable="pdflatex" output="${file:log}" append="true" resultproperty="changes.result">
+			<arg line="-interaction=nonstopmode ${file:targetname}" />
 		</exec>
 		<antcall target="checkResult" />
 	</target>
 
-	<!-- Ziel: alle pdf-Dateien -->
+	<!-- all pdf files -->
 	<target name="pdf_complete">
 		<antcall target="pdf"><param name="count:runs" value="1" /></antcall>
 		<antcall target="pdf"><param name="count:runs" value="2" /></antcall>
 		<antcall target="pdf"><param name="count:runs" value="3" /></antcall>
 	</target>
 
-	<!-- Ziel: Check, ob Resultat != 0 ist (Fehler) -->
-	<target name="checkResult" description="Check, ob Resultat != 0 ist (Fehler)">
-		<condition property="vts.error">
+	<!-- create example pdfs -->
+	<target name="examples">
+		<antcall target="pdf_complete">
+			<param name="file:targetname" value="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}changes.example.1.de.tex" />
+		</antcall>
+		<antcall target="pdf_complete">
+			<param name="file:targetname" value="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}changes.example.2.de.tex" />
+		</antcall>
+		<antcall target="pdf_complete">
+			<param name="file:targetname" value="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}changes.example.3.de.tex" />
+		</antcall>
+	</target>
+
+	<!-- check if result != 0 (error) -->
+	<target name="checkResult" description="check if result != 0 (error)">
+		<condition property="changes.error">
 			<and>
-				<isset property="vts.result" />
+				<isset property="changes.result" />
 				<not>
-					<equals arg1="${vts.result}" arg2="0" />
+					<equals arg1="${changes.result}" arg2="0" />
 				</not>
 			</and>
 		</condition>
-		<fail message="Abbruch wegen Fehler bei Programmausführung. Fehlerlog: '${file:log}'" if="vts.error" />
+		<fail message="Canceled execution. Log file: '${file:log}'" if="changes.error" />
 	</target>
 
-	<!-- Ziel: temporäre Dateien löschen -->
+	<!-- remove temporary files -->
 	<target name="clear">
-		<echo message="Löschen temporärer Dateien" />
+		<echo message="Remove temporary files." />
 		<defaultexcludes remove="**/*~" />
 		<delete>
 			<fileset dir="." includes="**/*.aux, **/*.bak.vthought, **/*.bak, **/*.bbl, **/*.blg, **/*.dvi, **/*.idx, **/*.ilg, **/*.ind, **/*.loc, **/*.lof, **/*.lot, **/*.lop, **/*.nav, **/*.out, **/*.ps, **/*.snm, **/*.toc, **/*.url, **/*.*~"/>
@@ -131,14 +146,14 @@
 		<defaultexcludes default="true" />
 	</target>
 
-	<!-- Ziel: log Löschen -->
+	<!-- clear log -->
 	<target name="clearLog">
 		<echo message="" file="${file:log}" />
 	</target>
 
-	<!-- Dateien verteilen -->
+	<!-- deploy generated files -->
 	<target name="deploy">
-		<echo message="Verteilung der generierten Dateien" />
+		<echo message="Deploy generated files." />
 
 		<move
 			file="${file:targetname}.sty"
@@ -148,12 +163,6 @@
 		<move todir="${path:latex:base}${path:latex:doc}${file:targetname}/" failonerror="false">
 			<fileset dir=".">
 				<include name="${file:targetname}*.pdf" />
-			</fileset>
-		</move>
-
-		<move todir="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}" failonerror="false">
-			<fileset dir=".">
-				<include name="${file:targetname}.example*.tex" />
 			</fileset>
 		</move>
 
@@ -185,6 +194,7 @@
 		<copy todir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/${path:examples}">
 			<fileset dir="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}">
 				<include name="*.tex" />
+				<include name="*.pdf" />
 			</fileset>
 		</copy>
 

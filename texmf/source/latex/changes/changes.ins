@@ -1,6 +1,6 @@
-%% Diese Datei erzeugt die benötigten Dateien aus changes.dtx
+%% This file creates the needed files from changes.dtx
 %%
-\def\filedate{2011/02/27}
+\def\filedate{2011/04/25}
 \def\batchfile{changes.ins}
 \input docstrip
 
@@ -24,16 +24,27 @@ This work has the LPPL maintenance status `maintained'.
 The current maintainer of this work is Ekkart Kleinod.
 
 This work consists of the files
- changes.drv
- changes.dtx
- changes.ins
- README
+	doc/latex/changes/examples/changes.example.1.de.tex
+	doc/latex/changes/examples/changes.example.2.de.tex
+	doc/latex/changes/examples/changes.example.3.de.tex
+	doc/latex/changes/examples/changes.example.1.de.pdf
+	doc/latex/changes/examples/changes.example.2.de.pdf
+	doc/latex/changes/examples/changes.example.3.de.pdf
+
+	source/latex/changes/changes.drv
+	source/latex/changes/changes.dtx
+	source/latex/changes/changes.ins
+	source/latex/changes/README
+
+	scripts/changes/delcmdchanges.bash
 and the derived files
- changes.sty
- changes.pdf
- changes.example1.tex
- changes.example2.tex
- changes.example3.tex
+	doc/latex/changes/changes.english.full.pdf
+	doc/latex/changes/changes.english.short.pdf
+	doc/latex/changes/changes.ngerman.full.pdf
+	doc/latex/changes/changes.ngerman.short.pdf
+
+	tex/latex/changes/changes.sty
+
 
 \endpreamble
 
@@ -43,9 +54,6 @@ Copyright 2007-2011 Ekkart Kleinod
 
 \generate{
 	\file{changes.sty}{\from{changes.dtx}{changes}}
-	\file{changes.example1.tex}{\from{changes.dtx}{example:1}}
-	\file{changes.example2.tex}{\from{changes.dtx}{example:2}}
-	\file{changes.example3.tex}{\from{changes.dtx}{example:3}}
 }
 
 \endinput
