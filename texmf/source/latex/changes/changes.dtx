@@ -79,8 +79,8 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{changes}
-[2011/04/25 v0.5.4 changes-Paket]
-\typeout{*** changes-Paket 2011/04/25 v0.5.4 ***}
+[2011/04/25 v0.6.0 changes-Paket]
+\typeout{*** changes-Paket 2011/04/25 v0.6.0 ***}
 %    \end{macrocode}
 %
 % Package \chpackage{xkeyval} provides options with key-value-pairs.
@@ -99,39 +99,39 @@
 \newboolean{Changes@optiondraft}
 \setboolean{Changes@optiondraft}{true}
 \DeclareOptionX{draft}{
- \setboolean{Changes@optiondraft}{true}
- \typeout{changes-option '\CurrentOption'}
+	\setboolean{Changes@optiondraft}{true}
+	\typeout{changes-option '\CurrentOption'}
 }
 %    \end{macrocode}
 %
 % Option \choption{final}, sets \choption{draft} to \texttt{false}.
 %    \begin{macrocode}
 \DeclareOptionX{final}{
- \setboolean{Changes@optiondraft}{false}
- \typeout{changes-option '\CurrentOption'}
+	\setboolean{Changes@optiondraft}{false}
+	\typeout{changes-option '\CurrentOption'}
 }
 %    \end{macrocode}
 %
 % Options for package \chpackage{ulem} are directly passed to the package.
 %    \begin{macrocode}
 \DeclareOptionX{ulem}{
- \typeout{ulem-option '#1', passed to package ulem}
- \PassOptionsToPackage{#1}{ulem}
+	\typeout{ulem-option '#1', passed to package ulem}
+	\PassOptionsToPackage{#1}{ulem}
 }
 %    \end{macrocode}
 %
 % Options for package \chpackage{xcolor} are directly passed to the package.
 %    \begin{macrocode}
 \DeclareOptionX{xcolor}{
- \typeout{xcolor-option '#1', passed to package xcolor}
- \PassOptionsToPackage{#1}{xcolor}
+	\typeout{xcolor-option '#1', passed to package xcolor}
+	\PassOptionsToPackage{#1}{xcolor}
 }
 %    \end{macrocode}
 %
 % Unknown options generate package warning.
 %    \begin{macrocode}
 \DeclareOptionX*{
- \PackageWarning{Unknown changes-option '\CurrentOption'}
+	\PackageWarning{Unknown changes-option '\CurrentOption'}
 }
 %    \end{macrocode}
 %
@@ -162,43 +162,47 @@
 % If the babel package is not loaded, the default language is English, in order to use an own language, the user has to redefine the variables.
 %    \begin{macrocode}
 \ifthenelse{\isundefined{\addto}}
- {
-	\def\listchangesname{Changes}
-	\def\changesaddname{Added}
-	\def\changesdeletename{Deleted}
-	\def\changesreplacename{Replaced}
-	\def\changesauthorname{Author}
-	\def\changesanonymousname{anonymous}
-	\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}
- }{
-	\addto\captionsngerman{\def\listchangesname{\"Anderungen}}
-	\addto\captionsgerman{\def\listchangesname{\"Anderungen}}
-	\addto\captionsenglish{\def\listchangesname{Changes}}
+	{
+		\def\listchangesname{Changes}
+		\def\changesaddname{Added}
+		\def\changesdeletename{Deleted}
+		\def\changesreplacename{Replaced}
+		\def\changesauthorname{Author}
+		\def\changesanonymousname{anonymous}
+		\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}
+	}{
+		\addto\captionsngerman{\def\listchangesname{\"Anderungen}}
+		\addto\captionsngerman{\def\changesaddname{Eingef\"ugt}}
+		\addto\captionsngerman{\def\changesdeletename{Gel\"oscht}}
+		\addto\captionsngerman{\def\changesreplacename{Ersetzt}}
+		\addto\captionsngerman{\def\changesauthorname{Autor}}
+		\addto\captionsngerman{\def\changesanonymousname{Anonym}}
+		\addto\captionsngerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
 
-	\addto\captionsngerman{\def\changesaddname{Eingef\"ugt}}
-	\addto\captionsgerman{\def\changesaddname{Eingef\"ugt}}
-	\addto\captionsenglish{\def\changesaddname{Added}}
+		\addto\captionsgerman{\def\listchangesname{\"Anderungen}}
+		\addto\captionsgerman{\def\changesaddname{Eingef\"ugt}}
+		\addto\captionsgerman{\def\changesdeletename{Gel\"oscht}}
+		\addto\captionsgerman{\def\changesreplacename{Ersetzt}}
+		\addto\captionsgerman{\def\changesauthorname{Autor}}
+		\addto\captionsgerman{\def\changesanonymousname{Anonym}}
+		\addto\captionsgerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten Durchlauf verf\"ugbar.}}
 
-	\addto\captionsngerman{\def\changesdeletename{Gel\"oscht}}
-	\addto\captionsgerman{\def\changesdeletename{Gel\"oscht}}
-	\addto\captionsenglish{\def\changesdeletename{Deleted}}
+		\addto\captionsenglish{\def\listchangesname{Changes}}
+		\addto\captionsenglish{\def\changesaddname{Added}}
+		\addto\captionsenglish{\def\changesdeletename{Deleted}}
+		\addto\captionsenglish{\def\changesreplacename{Replaced}}
+		\addto\captionsenglish{\def\changesauthorname{Author}}
+		\addto\captionsenglish{\def\changesanonymousname{anonymous}}
+		\addto\captionsenglish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
 
-	\addto\captionsngerman{\def\changesreplacename{Ersetzt}}
-	\addto\captionsgerman{\def\changesreplacename{Ersetzt}}
-	\addto\captionsenglish{\def\changesreplacename{Replaced}}
-
-	\addto\captionsngerman{\def\changesauthorname{Autor}}
-	\addto\captionsgerman{\def\changesauthorname{Autor}}
-	\addto\captionsenglish{\def\changesauthorname{Author}}
-
-	\addto\captionsngerman{\def\changesanonymousname{Anonym}}
-	\addto\captionsgerman{\def\changesanonymousname{Anonym}}
-	\addto\captionsenglish{\def\changesanonymousname{anonymous}}
-
-	\addto\captionsngerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
-	\addto\captionsgerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten Durchlauf verf\"ugbar.}}
-	\addto\captionsenglish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
- }
+		\addto\captionsitalian{\def\listchangesname{Modifiche}}
+		\addto\captionsitalian{\def\changesaddname{Aggiunte}}
+		\addto\captionsitalian{\def\changesdeletename{Cancellazioni}}
+		\addto\captionsitalian{\def\changesreplacename{Sostituzioni}}
+		\addto\captionsitalian{\def\changesauthorname{Autore}}
+		\addto\captionsitalian{\def\changesanonymousname{anonimo}}
+		\addto\captionsitalian{\def\changesnoloc{La lista delle modifiche sar\`a disponibile alla prossima esecuzione di \LaTeX.}}
+	}
 %    \end{macrocode}
 %
 % File extension.
@@ -211,7 +215,7 @@
 %  Argument: new extension.
 %    \begin{macrocode}
 \newcommand{\setlocextension}[1]{
- \renewcommand{\Changes@extension}{#1}
+	\renewcommand{\Changes@extension}{#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -234,14 +238,14 @@
 %  Define counter and colour per author.
 %    \begin{macrocode}
 \newcommand{\definechangesauthor}[3][\@empty]{
- \stepcounter{Changes@AuthorCount}
- \@namedef{Changes@Author\theChanges@AuthorCount}{#2}
- \@namedef{Changes@AuthorName#2}{#1}
- \@namedef{Changes@AuthorColor#2}{#3}
- \newcounter{Changes@AddCount#2}
- \newcounter{Changes@DeleteCount#2}
- \newcounter{Changes@ReplaceCount#2}
- \colorlet{Changes@Color#2}{#3}
+	\stepcounter{Changes@AuthorCount}
+	\@namedef{Changes@Author\theChanges@AuthorCount}{#2}
+	\@namedef{Changes@AuthorName#2}{#1}
+	\@namedef{Changes@AuthorColor#2}{#3}
+	\newcounter{Changes@AddCount#2}
+	\newcounter{Changes@DeleteCount#2}
+	\newcounter{Changes@ReplaceCount#2}
+	\colorlet{Changes@Color#2}{#3}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -263,7 +267,7 @@
 %  Default: superscripted.
 %    \begin{macrocode}
 \newcommand{\Changes@AuthorMark}[1]{%
- \textsuperscript{#1}%
+	\textsuperscript{#1}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -274,10 +278,10 @@
 %  Optional argument: markup position (default = left).
 %    \begin{macrocode}
 \newcommand{\setauthormarkup}[2][left]{%
- \ifthenelse{\equal{#1}{left}}
+	\ifthenelse{\equal{#1}{left}}
 	{\setboolean{Changes@AuthorPositionLeft}{true}}
 	{\setboolean{Changes@AuthorPositionLeft}{false}}
- \renewcommand{\Changes@AuthorMark}[1]{#2}
+	\renewcommand{\Changes@AuthorMark}[1]{#2}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -287,7 +291,7 @@
 %  Default: in a footnote.
 %    \begin{macrocode}
 \newcommand{\Changes@Remark}[2]{%
- \footnote{\textcolor{Changes@Color#1}{#2}}%
+	\footnote{\textcolor{Changes@Color#1}{#2}}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -297,7 +301,7 @@
 %  Mandatory argument: markup definition.
 %    \begin{macrocode}
 \newcommand{\setremarkmarkup}[1]{%
- \renewcommand{\Changes@Remark}[2]{#1}%
+	\renewcommand{\Changes@Remark}[2]{#1}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -317,26 +321,26 @@
 %  Optional arguments: author's id, remark
 %    \begin{macrocode}
 \newcommand{\added}[1][\@empty]{%
- \renewcommand{\Changes@temp}{#1}%
- \Changes@added%
+	\renewcommand{\Changes@temp}{#1}%
+	\Changes@added%
 }
 \newcommand{\Changes@added}[2][\@empty]{%
- \ifthenelse{\boolean{Changes@optiondraft}}%
+	\ifthenelse{\boolean{Changes@optiondraft}}%
 	{%
-	 \textcolor{Changes@Color\Changes@temp}{%
+		\textcolor{Changes@Color\Changes@temp}{%
 		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
-		 {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
+			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
-		 }{}%
+			}{}%
 		#2%
 		\ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
-		 {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
+			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
-		 }{}%
+			}{}%
 		\ifthenelse{\equal{\@empty}{#1}}%
-		 {}{\Changes@Remark{\Changes@temp}{#1}}%
-	 }%
-	 \stepcounter{Changes@AddCount\Changes@temp}%
+			{}{\Changes@Remark{\Changes@temp}{#1}}%
+		}%
+		\stepcounter{Changes@AddCount\Changes@temp}%
 	}{#2}%
 }
 %    \end{macrocode}
@@ -353,26 +357,26 @@
 %  Optional arguments: author's id, remark
 %    \begin{macrocode}
 \newcommand{\deleted}[1][\@empty]{%
- \renewcommand{\Changes@temp}{#1}%
- \Changes@deleted%
+	\renewcommand{\Changes@temp}{#1}%
+	\Changes@deleted%
 }
 \newcommand{\Changes@deleted}[2][\@empty]{%
- \ifthenelse{\boolean{Changes@optiondraft}}%
+	\ifthenelse{\boolean{Changes@optiondraft}}%
 	{%
-	 \textcolor{Changes@Color\Changes@temp}{%
+		\textcolor{Changes@Color\Changes@temp}{%
 		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
-		 {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
+			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
-		 }{}%
+			}{}%
 		\sout{#2}%
 		\ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
-		 {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
+			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
-		 }{}%
+			}{}%
 		\ifthenelse{\equal{\@empty}{#1}}%
-		 {}{\Changes@Remark{\Changes@temp}{#1}}%
-	 }%
-	 \stepcounter{Changes@DeleteCount\Changes@temp}%
+			{}{\Changes@Remark{\Changes@temp}{#1}}%
+		}%
+		\stepcounter{Changes@DeleteCount\Changes@temp}%
 	}{\@bsphack \expandafter \@esphack}%
 }
 %    \end{macrocode}
@@ -386,27 +390,27 @@
 %  Optional arguments: author's id, remark
 %    \begin{macrocode}
 \newcommand{\replaced}[1][\@empty]{%
- \renewcommand{\Changes@temp}{#1}%
- \Changes@replaced%
+	\renewcommand{\Changes@temp}{#1}%
+	\Changes@replaced%
 }
 \newcommand{\Changes@replaced}[3][\@empty]{%
- \ifthenelse{\boolean{Changes@optiondraft}}%
+	\ifthenelse{\boolean{Changes@optiondraft}}%
 	{%
-	 \textcolor{Changes@Color\Changes@temp}{%
+		\textcolor{Changes@Color\Changes@temp}{%
 		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
-		 {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
+			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
-		 }{}%
+			}{}%
 		#2%
 		\sout{#3}%
 		\ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
-		 {\ifthenelse{\equal{\@empty}{\Changes@temp}}%
+			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
-		 }{}%
+			}{}%
 		\ifthenelse{\equal{\@empty}{#1}}%
-		 {}{\Changes@Remark{\Changes@temp}{#1}}%
-	 }%
-	 \stepcounter{Changes@ReplaceCount\Changes@temp}%
+			{}{\Changes@Remark{\Changes@temp}{#1}}%
+		}%
+		\stepcounter{Changes@ReplaceCount\Changes@temp}%
 	}{#2}%
 }
 %    \end{macrocode}
@@ -421,12 +425,12 @@
 %  The contents have to be separated by a semicolon.
 %    \begin{macrocode}
 \def\changes@chopline#1;#2;#3;#4;#5;#6 \\{
- \def\Changes@InID{#1}
- \def\Changes@InColor{#2}
- \def\Changes@InName{#3}
- \def\Changes@InAdded{#4}
- \def\Changes@InDeleted{#5}
- \def\Changes@InReplaced{#6}
+	\def\Changes@InID{#1}
+	\def\Changes@InColor{#2}
+	\def\Changes@InName{#3}
+	\def\Changes@InAdded{#4}
+	\def\Changes@InDeleted{#5}
+	\def\Changes@InReplaced{#6}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -437,39 +441,39 @@
 %  If no loc-file exists, an according message is generated.
 %    \begin{macrocode}
 \newcommand{\listofchanges}{%
- \ifthenelse{\boolean{Changes@optiondraft}}
+	\ifthenelse{\boolean{Changes@optiondraft}}
 	{
-	 \section*{\listchangesname}
-	 \IfFileExists{\jobname.\Changes@extension}
+		\section*{\listchangesname}
+		\IfFileExists{\jobname.\Changes@extension}
 		{
-		 \newboolean{Changes@MoreLines}
-		 \setboolean{Changes@MoreLines}{true}
-		 \newread\Changes@InFile
-		 \openin\Changes@InFile = \jobname.\Changes@extension
+			\newboolean{Changes@MoreLines}
+			\setboolean{Changes@MoreLines}{true}
+			\newread\Changes@InFile
+			\openin\Changes@InFile = \jobname.\Changes@extension
 			\whiledo{\boolean{Changes@MoreLines}}{
 			\read\Changes@InFile to \Changes@Line
-			 \ifeof\Changes@InFile
+				\ifeof\Changes@InFile
 				\setboolean{Changes@MoreLines}{false}
-			 \else
+				\else
 				\expandafter\changes@chopline\Changes@Line\\
 				\begin{tabbing}
-				 mm\=mmmmmm\=\kill
-				 \ifthenelse{\equal{\Changes@InID}{}}
+					mm\=mmmmmm\=\kill
+					\ifthenelse{\equal{\Changes@InID}{}}
 					{\textcolor{\Changes@InColor}{\changesauthorname: \changesanonymousname}\\}
 					{\textcolor{\Changes@InColor}{\changesauthorname: \Changes@InID}
-					 \ifthenelse{\equal{\Changes@InName}{}}{}
-					 { \textcolor{\Changes@InColor}{(\Changes@InName)}}
-					 \\
+						\ifthenelse{\equal{\Changes@InName}{}}{}
+						{ \textcolor{\Changes@InColor}{(\Changes@InName)}}
+						\\
 					}
-				 \>\changesaddname:\>\Changes@InAdded\\
-				 \>\changesdeletename:\>\Changes@InDeleted\\
-				 \>\changesreplacename:\>\Changes@InReplaced\\
+					\>\changesaddname:\>\Changes@InAdded\\
+					\>\changesdeletename:\>\Changes@InDeleted\\
+					\>\changesreplacename:\>\Changes@InReplaced\\
 				\end{tabbing}
-			 \fi
+				\fi
 			}
-		 \closein\Changes@InFile
+			\closein\Changes@InFile
 		}{
-		 \emph{\changesnoloc}
+			\emph{\changesnoloc}
 		}
 	}{}
 }
@@ -483,20 +487,20 @@
 %  The contents have to be separated by a semicolon.
 %    \begin{macrocode}
 \AtEndDocument{
- \newwrite\Changes@OutFile
- \immediate\openout\Changes@OutFile = \jobname.\Changes@extension
- \setcounter{Changes@iAuthor}{0}
- \whiledo{\value{Changes@iAuthor} < \value{Changes@AuthorCount}}{
+	\newwrite\Changes@OutFile
+	\immediate\openout\Changes@OutFile = \jobname.\Changes@extension
+	\setcounter{Changes@iAuthor}{0}
+	\whiledo{\value{Changes@iAuthor} < \value{Changes@AuthorCount}}{
 	\stepcounter{Changes@iAuthor}
 	\def\Changes@ID{\@nameuse{Changes@Author\theChanges@iAuthor}}
 	\immediate\write\Changes@OutFile{\Changes@ID;%
-	 \@nameuse{Changes@AuthorColor\Changes@ID};%
-	 \@nameuse{Changes@AuthorName\Changes@ID};%
-	 \the\value{Changes@AddCount\Changes@ID};%
-	 \the\value{Changes@DeleteCount\Changes@ID};%
-	 \the\value{Changes@ReplaceCount\Changes@ID}}
- }
- \closeout\Changes@OutFile
+		\@nameuse{Changes@AuthorColor\Changes@ID};%
+		\@nameuse{Changes@AuthorName\Changes@ID};%
+		\the\value{Changes@AddCount\Changes@ID};%
+		\the\value{Changes@DeleteCount\Changes@ID};%
+		\the\value{Changes@ReplaceCount\Changes@ID}}
+	}
+	\closeout\Changes@OutFile
 }
 %    \end{macrocode}
 %

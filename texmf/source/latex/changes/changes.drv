@@ -78,11 +78,11 @@
 
 \ifENGLISH
 	\title{The \chpackage{changes}-package}
-	\subtitle{Manual change markup --- version 0.5.4}
+	\subtitle{Manual change markup --- version 0.6.0}
 \fi
 	\ifGERMAN
 		\title{Das \chpackage{changes}-Paket}
-		\subtitle{Manuelle Änderungsmarkierung -- Version 0.5.4}
+		\subtitle{Manuelle Änderungsmarkierung -- Version 0.6.0}
 	\fi
 
 \author{Ekkart Kleinod}
