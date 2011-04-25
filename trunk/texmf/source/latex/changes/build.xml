@@ -113,13 +113,13 @@
 	<!-- create example pdfs -->
 	<target name="examples">
 		<antcall target="pdf_complete">
-			<param name="file:targetname" value="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}changes.example.1.de.tex" />
+			<param name="file:targetname" value="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}${file:targetname}.example.1.de.tex" />
 		</antcall>
 		<antcall target="pdf_complete">
-			<param name="file:targetname" value="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}changes.example.2.de.tex" />
+			<param name="file:targetname" value="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}${file:targetname}.example.2.de.tex" />
 		</antcall>
 		<antcall target="pdf_complete">
-			<param name="file:targetname" value="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}changes.example.3.de.tex" />
+			<param name="file:targetname" value="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}${file:targetname}.example.3.de.tex" />
 		</antcall>
 	</target>
 
@@ -163,6 +163,12 @@
 		<move todir="${path:latex:base}${path:latex:doc}${file:targetname}/" failonerror="false">
 			<fileset dir=".">
 				<include name="${file:targetname}*.pdf" />
+			</fileset>
+		</move>
+
+		<move todir="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}" failonerror="false">
+			<fileset dir=".">
+				<include name="${file:targetname}.example.*.pdf" />
 			</fileset>
 		</move>
 
