@@ -1,0 +1,100 @@
+%%%
+%
+% Treiberdatei für changes-Paket
+%
+%
+
+\documentclass[twoside, titlepage, parskip=half, toc=flat, cleardoublepage=empty, captions=nooneline, origlongtable, english, ngerman]{scrartcl}
+
+% Doc-Paket
+\usepackage{doc}
+
+% im Basis-Layout setzen
+% http://www.dr-kleinod.de/schreiben/latex.html
+\usepackage[font=charter]{basis}
+
+% Änderungsmarkierungen ermöglichen ;)
+\usepackage{changes}
+\definechangesauthor{EK}{orange}
+
+% voller Index
+\EnableCrossrefs
+
+% Angabe nach Zeilennummern
+\CodelineIndex
+
+% Umgebung für Einsatz
+\newenvironment{einspiel}[1][false]{%
+ \small
+ \begin{tabbing}
+	Definitionm\=\kill
+	\textsl{%
+	 \ifthenelse{\equal{#1}{false}}%
+		{Definition}%
+		{\iflanguage{english}{Example}{Beispiel}}%
+	}
+}{%
+ \end{tabbing}
+}
+
+% Formatierungsbefehle
+\newcommand{\chpackage}[1]{\textsl{#1}}
+\newcommand{\choption}[1]{\texttt{#1}}
+\newcommand{\chfile}[1]{\texttt{#1}}
+\newcommand{\chcommand}[1]{\texttt{\textbackslash{}#1}}
+
+% Makroüberschriften
+\makeatletter
+\def\Describe@Macro#1{%
+ \endgroup%
+ \fbox{\PrintDescribeMacro{#1}}\par%
+ \SpecialUsageIndex{#1}\@esphack\ignorespaces%
+}
+\def\Describe@Env#1{%
+ \endgroup%
+ \fbox{\PrintDescribeEnv{#1}}\par%
+ \SpecialEnvIndex{#1}\@esphack\ignorespaces
+}
+\makeatother
+
+% language selection
+\selectlanguage{ngerman}
+
+% catchall - english
+\newif\ifENGLISH
+\ENGLISHtrue
+
+% german
+\newif\ifGERMAN
+\GERMANfalse
+\iflanguage{ngerman}{\GERMANtrue\ENGLISHfalse}{}
+\iflanguage{german}{\GERMANtrue\ENGLISHfalse}{}
+
+% new language example: french
+% \newif\ifFRENCH
+% \FRENCHfalse
+% \iflanguage{french}{\FRENCHtrue\ENGLISHfalse}{}
+
+
+\ifENGLISH
+	\title{The \chpackage{changes}-package}
+	\subtitle{Manual change markup --- version 0.5.4}
+\fi
+	\ifGERMAN
+		\title{Das \chpackage{changes}-Paket}
+		\subtitle{Manuelle Änderungsmarkierung -- Version 0.5.4}
+	\fi
+
+\author{Ekkart Kleinod}
+\email{ekkart@ekkart.de}
+
+% only description part?
+%\OnlyDescription
+
+% Eigentliches Dokument
+\begin{document}
+
+	\DocInput{changes.dtx}
+
+\end{document}
+
