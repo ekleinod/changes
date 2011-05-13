@@ -61,61 +61,43 @@
 	For activating manual change management, address the \chpackage{changes}-package as follows:
 
 	\chcommand{usepackage\{changes\}}
-
-	Options for the package are described in \autoref{sec:user:options}.
+	
+	resp.
+	
+	\chcommand{usepackage[<options>]\{changes\}}
 \fi
 	\ifGERMAN
 		Um die Änderungsverfolgung zu aktivieren, ist das \chpackage{changes}-Paket wie folgt einzubinden:
 
 		\chcommand{usepackage\{changes\}}
 
-		Die Paketoptionen werden in \autoref{sec:user:options} erläutert.
-	\fi
-
-%^^A -- packages
-\ifENGLISH
-	\subsection{Used packages}
-\fi
-	\ifGERMAN
-		\subsection{Benötigte Pakete}
-	\fi
-\label{sec:user:packages}
-
-\ifENGLISH
-	The \chpackage{changes}-package uses already existing packages.
-	The following packages have to be installed for the \chpackage{changes}-package; otherwise errors may occur.
-
-	You will find detailed description of the packages in their distributions.
-	\begin{description}
-	\item [ifthen] provides an enhanced \chcommand{if}-command as well as a \texttt{while}-loop
-	\item [pdfcolmk] solves the problem of coloured text and page breaks (with pdflatex)
-	\item [ulem] striking out texts
-	\item [xcolor] provides colourised markup of texts
-	\item [xkeyval] provides options with key-value-pairs
-	\end{description}
-\fi
-	\ifGERMAN
-		Das \chpackage{changes}-Paket bindet bereits Pakete ein, die für das Paket notwendig sind.
-		Die Pakete werden im folgenden kurz vorgestellt und müssen für die Nutzung des \chpackage{changes}-Pakets zur Verfügung stehen, sonst gibt es Fehlermeldungen.
-
-		Eine genauere Beschreibung der einzelnen Pakete ist in der Dokumentation der Pakete selbst zu finden.
-		\begin{description}
-		\item [ifthen] stellt eine verbesserte \texttt{if}-Abfrage sowie eine \texttt{while}-Schleife zur Verfügung
-		\item [pdfcolmk] löst das Problem farbigen Texts über Seitenumbrüche hinweg (bei pdflatex)
-		\item [ulem] Durchstreichen von Texten
-		\item [xcolor] farbige Markierung von Texten
-		\item [xkeyval] Eingabe von Optionen mit Werteübergabe
-		\end{description}
+		bzw.
+	
+		\chcommand{usepackage[<optionen>]\{changes\}}
 	\fi
 
 %^^A -- options
 \ifENGLISH
-	\subsection{Options}
+	\subsection{Package Options}
 \fi
 	\ifGERMAN
-		\subsection{Optionen}
+		\subsection{Paketoptionen}
 	\fi
 \label{sec:user:options}
+	
+\chcommand{usepackage[addedmarkup=none]\{changes\}}\\
+\chcommand{usepackage[addedmarkup=underlined]\{changes\}}
+
+\chcommand{usepackage[deletedmarkup=striked]\{changes\}}\\
+\chcommand{usepackage[deletedmarkup=exed]\{changes\}}
+
+\chcommand{usepackage[changemarkup=striked]\{changes\}}\\
+\chcommand{usepackage[changemarkup=lined]\{changes\}}
+
+\chcommand{usepackage[authormarkup=superscript]\{changes\}}\\
+\chcommand{usepackage[authormarkup=subscript]\{changes\}}\\
+\chcommand{usepackage[authormarkup=brackets]\{changes\}}\\
+\chcommand{usepackage[authormarkup=footnote]\{changes\}}
 
 \minisec{draft}
 \ifENGLISH
@@ -397,6 +379,42 @@
 	\>\chcommand{setremarkmarkup\{(\#2:\#1)\}}\\
 	\>\chcommand{setremarkmarkup\{\chcommand{footnote}\{\#1:\chcommand{textcolor\{Changes@Color\#1\}}\{\#2\}\}\}}
 \end{einspiel}
+
+%^^A -- packages
+\ifENGLISH
+	\subsection{Used packages}
+\fi
+	\ifGERMAN
+		\subsection{Benötigte Pakete}
+	\fi
+\label{sec:user:packages}
+
+\ifENGLISH
+	The \chpackage{changes}-package uses already existing packages.
+	The following packages have to be installed for the \chpackage{changes}-package; otherwise errors may occur.
+
+	You will find detailed description of the packages in their distributions.
+	\begin{description}
+	\item [ifthen] provides an enhanced \chcommand{if}-command as well as a \texttt{while}-loop
+	\item [pdfcolmk] solves the problem of coloured text and page breaks (with pdflatex)
+	\item [ulem] striking out texts
+	\item [xcolor] provides colourised markup of texts
+	\item [xkeyval] provides options with key-value-pairs
+	\end{description}
+\fi
+	\ifGERMAN
+		Das \chpackage{changes}-Paket bindet bereits Pakete ein, die für das Paket notwendig sind.
+		Die Pakete werden im folgenden kurz vorgestellt und müssen für die Nutzung des \chpackage{changes}-Pakets zur Verfügung stehen, sonst gibt es Fehlermeldungen.
+
+		Eine genauere Beschreibung der einzelnen Pakete ist in der Dokumentation der Pakete selbst zu finden.
+		\begin{description}
+		\item [ifthen] stellt eine verbesserte \texttt{if}-Abfrage sowie eine \texttt{while}-Schleife zur Verfügung
+		\item [pdfcolmk] löst das Problem farbigen Texts über Seitenumbrüche hinweg (bei pdflatex)
+		\item [ulem] Durchstreichen von Texten
+		\item [xcolor] farbige Markierung von Texten
+		\item [xkeyval] Eingabe von Optionen mit Werteübergabe
+		\end{description}
+	\fi
 
 %^^A -- Versionen -------------------------------------------------------------
 \ifENGLISH
