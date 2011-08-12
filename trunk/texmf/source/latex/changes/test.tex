@@ -17,12 +17,17 @@
 
 \makeatletter
 \setauthormarkup{%
-  \textsuperscript{%
-    \ifthenelse{\equal{\@nameuse{Changes@AuthorName#1}}{}}%
-      {#1}%
-      {\@nameuse{Changes@AuthorName#1}}%
-  }%
+	\textsuperscript{%
+		\ifthenelse{\equal{\@nameuse{Changes@AuthorName#1}}{}}%
+			{#1}%
+			{\@nameuse{Changes@AuthorName#1}}%
+	}%
 }
+\makeatother
+
+\makeatletter
+\@namedef{Changes@AuthorColor}{magenta}
+\colorlet{Changes@Color}{magenta}
 \makeatother
 
 %\setremarkmarkup{\footnote{#1:\textcolor{Changes@Color#1}{#2}}}
@@ -30,37 +35,37 @@
  % ab hier beginnt der Inhalt
 \begin{document}
 
-  %\maketitle
+	%\maketitle
 
-  Hallo
+	Hallo
 
-  \listofchanges
+	\listofchanges
 
-  \minisec{Autor EK}
+	\minisec{Autor EK}
 
-  Hier sehen wir \added[EK][klingt besser]{eingefügten} Text.
+	Hier sehen wir \added[EK][klingt besser]{eingefügten} Text.
 
-  Hier sehen wir \deleted[EK]{gelöschten} Text.
+	Hier sehen wir \deleted[EK]{gelöschten} Text.
 
 %  Hier sehen wir \deleted[EK][notwendig]{gelöschten} Text.
 
-  Hier sehen wir \replaced[EK]{geänderten}{alten} Text.
+	Hier sehen wir \replaced[EK]{geänderten}{alten} Text.
 
-  \minisec{Autor leer}
+	\minisec{Autor leer}
 
-  Hier sehen wir \added[][unwichtig]{eingefügten} Text.
+	Hier sehen wir \added[][unwichtig]{eingefügten} Text.
 
 %  Hier sehen wir \deleted{gelöschten} Text.
 
-  Hier sehen wir \replaced[][musste sein]{geänderten}{alten} Text.
+	Hier sehen wir \replaced[][musste sein]{geänderten}{alten} Text.
 
-  \minisec{Autor Test}
+	\minisec{Autor Test}
 
-  Hier sehen wir \added[Test][ja]{eingefügten} Text.
+	Hier sehen wir \added[Test][ja]{eingefügten} Text.
 
-  Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch.
-  \added{Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch.
-  Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch.}
-  Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch.
+	Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch.
+	\added{Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch.
+	Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch.}
+	Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch.
 
 \end{document}
