@@ -491,14 +491,14 @@
 	\immediate\openout\Changes@OutFile = \jobname.\Changes@extension
 	\setcounter{Changes@iAuthor}{0}
 	\whiledo{\value{Changes@iAuthor} < \value{Changes@AuthorCount}}{
-	\stepcounter{Changes@iAuthor}
-	\def\Changes@ID{\@nameuse{Changes@Author\theChanges@iAuthor}}
-	\immediate\write\Changes@OutFile{\Changes@ID;%
-		\@nameuse{Changes@AuthorColor\Changes@ID};%
-		\@nameuse{Changes@AuthorName\Changes@ID};%
-		\the\value{Changes@AddCount\Changes@ID};%
-		\the\value{Changes@DeleteCount\Changes@ID};%
-		\the\value{Changes@ReplaceCount\Changes@ID}}
+		\stepcounter{Changes@iAuthor}
+		\def\Changes@ID{\@nameuse{Changes@Author\theChanges@iAuthor}}
+		\immediate\write\Changes@OutFile{\Changes@ID;%
+			\@nameuse{Changes@AuthorColor\Changes@ID};%
+			\@nameuse{Changes@AuthorName\Changes@ID};%
+			\the\value{Changes@AddCount\Changes@ID};%
+			\the\value{Changes@DeleteCount\Changes@ID};%
+			\the\value{Changes@ReplaceCount\Changes@ID}}
 	}
 	\closeout\Changes@OutFile
 }
