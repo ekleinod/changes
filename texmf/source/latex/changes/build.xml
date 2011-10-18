@@ -113,15 +113,10 @@
 
 	<!-- create example pdfs -->
 	<target name="examples">
-		<antcall target="pdf_complete">
-			<param name="file:targetname" value="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}${file:targetname}.example.1.de.tex" />
-		</antcall>
-		<antcall target="pdf_complete">
-			<param name="file:targetname" value="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}${file:targetname}.example.2.de.tex" />
-		</antcall>
-		<antcall target="pdf_complete">
-			<param name="file:targetname" value="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}${file:targetname}.example.3.de.tex" />
-		</antcall>
+		<apply executable="pdflatex" output="${file:log}" append="true" resultproperty="changes.result" parallel="false">
+			<srcfile/>
+			<fileset dir="." includes="changes.example.*.tex"/>
+		</apply>
 	</target>
 
 	<!-- check if result != 0 (error) -->

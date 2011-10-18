@@ -37,8 +37,8 @@ and the derived files
 	doc/latex/changes/changes.ngerman.full.pdf
 	doc/latex/changes/changes.ngerman.short.pdf
 
-	doc/latex/changes/examples/changes.example.simple.tex
-	doc/latex/changes/examples/changes.example.simple.pdf
+	doc/latex/changes/examples/changes.example.*.tex
+	doc/latex/changes/examples/changes.example.*.pdf
 
 	tex/latex/changes/changes.sty
 
@@ -52,6 +52,16 @@ Copyright 2007-2011 Ekkart Kleinod
 \generate{
 	\file{changes.sty}{\from{changes.dtx}{changes}}
 	\file{changes.example.simple.tex}{\from{examples.dtx}{example:simple}}
+	\file{changes.example.draft.tex}{\from{examples.dtx}{example:draft}}
+	\file{changes.example.final.tex}{\from{examples.dtx}{example:final}}
+	\file{changes.example.markup.default.tex}{\from{examples.dtx}{example:markup:default}}
+	\file{changes.example.markup.underlined.tex}{\from{examples.dtx}{example:markup:underlined}}
+	\file{changes.example.markup.nocolor.tex}{\from{examples.dtx}{example:markup:nocolor}}
+	\file{changes.example.addedmarkup.none.tex}{\from{examples.dtx}{example:addedmarkup:none}}
+	\file{changes.example.addedmarkup.underlined.tex}{\from{examples.dtx}{example:addedmarkup:underlined}}
+	\file{changes.example.deletedmarkup.striked.tex}{\from{examples.dtx}{example:deletedmarkup:striked}}
+	\file{changes.example.deletedmarkup.exed.tex}{\from{examples.dtx}{example:deletedmarkup:exed}}
+	\file{changes.example.deletedmarkup.underlined.tex}{\from{examples.dtx}{example:deletedmarkup:underlined}}
 }
 
 \endinput

@@ -46,6 +46,7 @@
 % \changes{v0.5.2}{2007/10/10}{package options for pdfcolmk, ulem, and xcolor}
 % \changes{v0.5.3}{2010/11/22}{use class options (final, draft) as well}
 % \changes{v0.5.4}{2011/04/25}{extract user documentation; default language changed to English; script for removal of commands}
+% \changes{v0.6.0}{2011/10/19}{redefined user interface for setting options, markup, authors}
 % \GetFileInfo{changes.dtx}
 % \RecordChanges
 %
@@ -69,19 +70,19 @@
 %  This is intended, please do not provide translations for the text below, just corrections or improvements.
 % }
 %
-% \subsection{Package information and options}
-%
 %    \begin{macrocode}
 %<*changes>
 %    \end{macrocode}
+%
+% \subsection{Package information and options}
 %
 % Set needed \LaTeX-format to \LaTeXe{}, provide name, date, version.
 % Type some information to the console.
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{changes}
-[2011/04/25 v0.6.0 changes-Paket]
-\typeout{*** changes-Paket 2011/04/25 v0.6.0 ***}
+[2011/10/19 v0.6.0 changes-Paket]
+\typeout{*** changes-Paket 2011/10/19 v0.6.0 ***}
 %    \end{macrocode}
 %
 % Package \chpackage{xkeyval} provides options with key-value-pairs.
@@ -113,6 +114,90 @@
 }
 %    \end{macrocode}
 %
+% Declare storage for markup options, they are set by the markup option but can be changed with the mor special options, therefore they have to be declared at this place.
+%    \begin{macrocode}
+\newcommand{\Changes@optionaddedmarkup}{none}
+\newcommand{\Changes@optiondeletedmarkup}{striked}
+%    \end{macrocode}
+%
+% Option \choption{markup}, sets markup options accordingly.
+%    \begin{macrocode}
+\newcommand{\Changes@optionmarkup}{default}
+\DeclareOptionX{markup}{
+	\ifthenelse{\equal{\@empty}{#1}}
+		{}
+		{
+			\ifthenelse{
+				\equal{#1}{default}\or
+				\equal{#1}{underlined}\or
+				\equal{#1}{nocolor}
+			}
+				{\renewcommand{\Changes@optionmarkup}{#1}}
+				{\PackageWarning{changes}{markup '#1' unknown, using 'default'}}
+		}
+	\ifthenelse{\equal{\Changes@optionmarkup}{default}}
+		{
+			\renewcommand{\Changes@optionaddedmarkup}{none}
+			\renewcommand{\Changes@optiondeletedmarkup}{striked}
+		}
+		{}
+	\ifthenelse{\equal{\Changes@optionmarkup}{underlined}}
+		{
+			\renewcommand{\Changes@optionaddedmarkup}{underlined}
+			\renewcommand{\Changes@optiondeletedmarkup}{exed}
+		}
+		{}
+	\ifthenelse{\equal{\Changes@optionmarkup}{nocolor}}
+		{
+			\renewcommand{\Changes@optionaddedmarkup}{underlined}
+			\renewcommand{\Changes@optiondeletedmarkup}{striked}
+		}
+		{}
+	\typeout{changes-option 'markup=\Changes@optionmarkup'}
+}
+%    \end{macrocode}
+%
+% Option \choption{addedmarkup}, stored or set to default value \texttt{none}.
+%    \begin{macrocode}
+\DeclareOptionX{addedmarkup}{
+	\ifthenelse{\equal{\@empty}{#1}}
+		{}
+		{
+			\ifthenelse{
+				\equal{#1}{none}\or
+				\equal{#1}{underlined}
+			}
+				{\renewcommand{\Changes@optionaddedmarkup}{#1}}
+				{\PackageWarning{changes}{addedmarkup '#1' unknown, using 'none'}}
+		}
+	\typeout{changes-option 'addedmarkup=\Changes@optionaddedmarkup'}
+}
+%    \end{macrocode}
+%
+% Option \choption{deletedmarkup}, stored or set to default value \texttt{striked}.
+%    \begin{macrocode}
+\DeclareOptionX{deletedmarkup}{
+	\ifthenelse{\equal{\@empty}{#1}}
+		{}
+		{
+			\ifthenelse{
+				\equal{#1}{striked}\or
+				\equal{#1}{exed}\or
+				\equal{#1}{underlined}
+			}
+				{\renewcommand{\Changes@optiondeletedmarkup}{#1}}
+				{\PackageWarning{changes}{deletedmarkup '#1' unknown, using 'striked'}}
+		}
+	\typeout{changes-option 'deletedmarkup=\Changes@optiondeletedmarkup'}
+}
+%    \end{macrocode}
+%
+
+
+
+
+
+%
 % Options for package \chpackage{ulem} are directly passed to the package.
 %    \begin{macrocode}
 \DeclareOptionX{ulem}{
@@ -141,19 +226,27 @@
 \ProcessOptionsX*\relax
 %    \end{macrocode}
 %
-% Package \chpackage{xcolor} provides coloured text.
-%    \begin{macrocode}
-\RequirePackage{xcolor}
-%    \end{macrocode}
+% \subsection{Packages}
 %
-%  Package \chpackage{pdfcolmk} solves the problem of coloured text and page breaks (has to be loaded after \chpackage{xcolor}).
+% Package \chpackage{xcolor} provides coloured text.
+% Package \chpackage{pdfcolmk} solves the problem of coloured text and page breaks (has to be loaded after \chpackage{xcolor}).
 %    \begin{macrocode}
-\RequirePackage{pdfcolmk}
+\ifthenelse{\equal{\Changes@optionmarkup}{nocolor}}
+	{}
+	{
+		\RequirePackage{xcolor}
+		\RequirePackage{pdfcolmk}
+	}
 %    \end{macrocode}
 %
 % Package \chpackage{ulem} provides commands for striking out text.
 %    \begin{macrocode}
-\RequirePackage{ulem}
+\ifthenelse{
+	\equal{\Changes@optiondeletedmarkup}{striked}\or
+	\equal{\Changes@optiondeletedmarkup}{exed}
+}
+	{\RequirePackage{ulem}}
+	{}
 %    \end{macrocode}
 %
 % \subsection{Definitions}
