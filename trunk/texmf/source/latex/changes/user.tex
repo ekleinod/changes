@@ -58,12 +58,25 @@
 \label{sec:user}
 
 \ifENGLISH
+	This section describes the user interface of the \chpackage{changes}-package, i.e. all options and commands of the package.
+	Every option resp. new command is described.
+	If you want to see the options and commands in action, please refer to the examples in \texttt{<texpath>/doc/latex/changes/examples/}.
+	The example files are named with the used option resp. command.
+\fi
+	\ifGERMAN
+		In diesem Kapitel wird die Nutzerschnittstelle des \chpackage{changes}-Pakets vorgestellt, d.\,h.\ alle Optionen und Kommandos.
+		Jede Option bzw. jedes neue Kommando werden beschrieben.
+		Wenn Sie die Optionen und Kommandos im Beispiel sehen wollen, sehen Sie bitte in das Beispielverzeichnis unter \texttt{<texpfad>/doc/latex/changes/examples/}.
+		Die Beispieldateien sind mit der benutzten Option bzw. dem benutzten Kommando benannt.
+	\fi
+
+\ifENGLISH
 	For activating manual change management, address the \chpackage{changes}-package as follows:
 
 	\chcommand{usepackage\{changes\}}
-	
+
 	resp.
-	
+
 	\chcommand{usepackage[<options>]\{changes\}}
 \fi
 	\ifGERMAN
@@ -72,8 +85,19 @@
 		\chcommand{usepackage\{changes\}}
 
 		bzw.
-	
+
 		\chcommand{usepackage[<optionen>]\{changes\}}
+	\fi
+
+\ifENGLISH
+	After activating manual change management, you write your text and use the change management commands provided by the package.
+	After that, you process your text with \emph{pdflatex} or the \LaTeX\ interpreter of your choice.
+	If you want to show an up-to-date list of changes, you have to process your text twice: the first run collects the number of changes, the second run updates the list of changes.
+\fi
+	\ifGERMAN
+		Nach der Aktivierung der Änderungsverfolgung schreiben Sie Ihren text und fügen die Befehle für das Änderungsmanagement ein.
+		Danach übersetzen Sie Ihr Dokument wie gehabt mit \emph{pdflatex} oder dem \LaTeX-Interpreter Ihrer Wahl.
+		Wenn Sie eine aktuelle Liste der Änderungen ausgeben wollen, müssen Sie das Dokument zweimal übersetzen: im ersten Lauf wird die Anzahl der Änderungen gesammelt, im zweiten Lauf wird damit die Liste der Änderungen aktualisiert.
 	\fi
 
 %^^A -- options
@@ -84,20 +108,6 @@
 		\subsection{Paketoptionen}
 	\fi
 \label{sec:user:options}
-	
-\chcommand{usepackage[addedmarkup=none]\{changes\}}\\
-\chcommand{usepackage[addedmarkup=underlined]\{changes\}}
-
-\chcommand{usepackage[deletedmarkup=striked]\{changes\}}\\
-\chcommand{usepackage[deletedmarkup=exed]\{changes\}}
-
-\chcommand{usepackage[changemarkup=striked]\{changes\}}\\
-\chcommand{usepackage[changemarkup=lined]\{changes\}}
-
-\chcommand{usepackage[authormarkup=superscript]\{changes\}}\\
-\chcommand{usepackage[authormarkup=subscript]\{changes\}}\\
-\chcommand{usepackage[authormarkup=brackets]\{changes\}}\\
-\chcommand{usepackage[authormarkup=footnote]\{changes\}}
 
 \minisec{draft}
 \ifENGLISH
@@ -136,6 +146,79 @@
 	\fi
 
 \chcommand{usepackage[final]\{changes\}}
+
+\minisec{markup}
+\ifENGLISH
+	The \choption{markup} option chooses the visual markup of changed text.
+	The following values are allowed:
+	\begin{itemize}
+		\item \choption{default} default markup: no markup for added text, striked out for deleted text; this markup is chosen if no markup option is given
+		\item \choption{underlined} alternative markup: underlined for added text, x-ed out for deleted text
+		\item \choption{nocolor} alternative markup: no colored markup, underlined for added text, striked out for deleted text
+	\end{itemize}
+\fi
+	\ifGERMAN
+	Die \choption{markup}-Option wählt ein vordefiniertes visuelles Markup für geänderten Text.
+	Die folgenden Werte sind erlaubt:
+	\begin{itemize}
+		\item \choption{default} default Markup: keine Auszeichnung für zugefügten Text, gelöschter Text wird durchgestrichen; diese Auszeichnung wird gewählt, wenn die Option nicht gesetzt wird
+		\item \choption{underlined} alternatives Markup: zugefügter Text wird unterstrichen, gelöschter Text wird ausge-x-t
+		\item \choption{nocolor} alternatives Markup: es werden keine Farben verwendet, zugefügter Text wird unterstrichen, gelöschter Text wird durchgestrichen
+	\end{itemize}
+	\fi
+
+\chcommand{usepackage[markup=default]\{changes\}}\\
+\chcommand{usepackage[markup=underlined]\{changes\}}\\
+\chcommand{usepackage[markup=nocolor]\{changes\}}
+
+\minisec{markup}
+\ifENGLISH
+	The \choption{addedmarkup} option chooses the visual markup of added text.
+	The following values are allowed:
+	\begin{itemize}
+		\item \choption{none} default markup: no markup for added text; this markup is chosen if no markup option is given
+		\item \choption{underlined} alternative markup: underlined for added text
+	\end{itemize}
+\fi
+	\ifGERMAN
+	Die \choption{addedmarkup}-Option wählt ein vordefiniertes visuelles Markup für zugefügten Text.
+	Die folgenden Werte sind erlaubt:
+	\begin{itemize}
+		\item \choption{none} default Markup: keine Auszeichnung für zugefügten Text; diese Auszeichnung wird gewählt, wenn die Option nicht gesetzt wird
+		\item \choption{underlined} alternatives Markup: zugefügter Text wird unterstrichen
+	\end{itemize}
+	\fi
+
+\chcommand{usepackage[addedmarkup=none]\{changes\}}\\
+\chcommand{usepackage[addedmarkup=underlined]\{changes\}}
+
+\minisec{deletedmarkup}
+\ifENGLISH
+	The \choption{deletedmarkup} option chooses the visual markup of deleted text.
+	The following values are allowed:
+	\begin{itemize}
+		\item \choption{striked} default markup: striked out for deleted text; this markup is chosen if no markup option is given
+		\item \choption{exed} alternative markup: x-ed out for deleted text
+	\end{itemize}
+\fi
+	\ifGERMAN
+	Die \choption{deletedmarkup}-Option wählt ein vordefiniertes visuelles Markup für gelöschten Text.
+	Die folgenden Werte sind erlaubt:
+	\begin{itemize}
+		\item \choption{striked} default Markup: gelöschter Text wird durchgestrichen; diese Auszeichnung wird gewählt, wenn die Option nicht gesetzt wird
+		\item \choption{exed} alternatives Markup: gelöschter Text wird ausge-x-t
+		\item \choption{underlined} alternatives Markup: gelöschter Text wird unterstrichen
+	\end{itemize}
+	\fi
+
+\chcommand{usepackage[deletedmarkup=striked]\{changes\}}\\
+\chcommand{usepackage[deletedmarkup=exed]\{changes\}}\\
+\chcommand{usepackage[deletedmarkup=underlined]\{changes\}}
+
+\chcommand{usepackage[authormarkup=superscript]\{changes\}}\\
+\chcommand{usepackage[authormarkup=subscript]\{changes\}}\\
+\chcommand{usepackage[authormarkup=brackets]\{changes\}}\\
+\chcommand{usepackage[authormarkup=footnote]\{changes\}}
 
 \minisec{ulem}
 \ifENGLISH
@@ -391,28 +474,36 @@
 
 \ifENGLISH
 	The \chpackage{changes}-package uses already existing packages.
-	The following packages have to be installed for the \chpackage{changes}-package; otherwise errors may occur.
-
 	You will find detailed description of the packages in their distributions.
+
+	The following packages are required and have to be installed for the \chpackage{changes}-package:
 	\begin{description}
-	\item [ifthen] provides an enhanced \chcommand{if}-command as well as a \texttt{while}-loop
-	\item [pdfcolmk] solves the problem of coloured text and page breaks (with pdflatex)
-	\item [ulem] striking out texts
-	\item [xcolor] provides colourised markup of texts
-	\item [xkeyval] provides options with key-value-pairs
+		\item [ifthen] provides an enhanced \chcommand{if}-command as well as a \texttt{while}-loop
+		\item [xkeyval] provides options with key-value-pairs
+	\end{description}
+
+	The following packages are sometimes required and have to be installed if used:
+	\begin{description}
+		\item [pdfcolmk] loaded if colored text is used for markup (default markup); solves the problem of coloured text and page breaks (with pdflatex)
+		\item [ulem] loaded if text has to be striked or exed out (default markup); striking out texts
+		\item [xcolor] loaded if colored text is used for markup (default markup); provides colourised markup of texts
 	\end{description}
 \fi
 	\ifGERMAN
 		Das \chpackage{changes}-Paket bindet bereits Pakete ein, die für das Paket notwendig sind.
-		Die Pakete werden im folgenden kurz vorgestellt und müssen für die Nutzung des \chpackage{changes}-Pakets zur Verfügung stehen, sonst gibt es Fehlermeldungen.
-
 		Eine genauere Beschreibung der einzelnen Pakete ist in der Dokumentation der Pakete selbst zu finden.
+
+		Die folgenden Pakete sind zwingend notwendig müssen für die Nutzung des \chpackage{changes}-Pakets installiert sein:
 		\begin{description}
-		\item [ifthen] stellt eine verbesserte \texttt{if}-Abfrage sowie eine \texttt{while}-Schleife zur Verfügung
-		\item [pdfcolmk] löst das Problem farbigen Texts über Seitenumbrüche hinweg (bei pdflatex)
-		\item [ulem] Durchstreichen von Texten
-		\item [xcolor] farbige Markierung von Texten
-		\item [xkeyval] Eingabe von Optionen mit Werteübergabe
+			\item [ifthen] stellt eine verbesserte \texttt{if}-Abfrage sowie eine \texttt{while}-Schleife zur Verfügung
+			\item [xkeyval] Eingabe von Optionen mit Werteübergabe
+		\end{description}
+
+		Die folgenden Pakete sind manchmal notwendig und müssen installiert sein, wenn sie genutzt werden:
+		\begin{description}
+			\item [pdfcolmk] wird geladen, wenn farbiger Text genutzt wird (default Markup); löst das Problem farbigen Texts über Seitenumbrüche hinweg (bei pdflatex)
+			\item [ulem] wird geladen, wenn Text durchgestrichen oder ausge-x-t wird (default Markup); Durchstreichen von Texten
+			\item [xcolor] wird geladen, wenn farbiger Text genutzt wird (default Markup); farbige Markierung von Texten
 		\end{description}
 	\fi
 
@@ -454,12 +545,14 @@
 	Date: 2011/0?/??
 	\begin{itemize}
 		\item Italian translations of captions by Daniele Giovannini
+		\item redefined user interface for setting options, markup, authors
 	\end{itemize}
 \fi
 	\ifGERMAN
 		Datum: ??.\,0?.~2011
 		\begin{itemize}
 			\item Italienische Übersetzungen der captions von Daniele Giovannini
+			\item neues Nutzerinterface für das Setzen von Optionen sowie die Definition von Markup und Autoren
 		\end{itemize}
 	\fi
 
@@ -683,17 +776,11 @@ Copyright 2007-2011 Ekkart Kleinod (\href{mailto:ekleinod@edgesoft.de}{ekleinod@
 
 \begin{tabbing}
 	mm\=\kill
-	\>\texttt{doc/latex/changes/examples/changes.example.1.de.tex}\\
-	\>\texttt{doc/latex/changes/examples/changes.example.2.de.tex}\\
-	\>\texttt{doc/latex/changes/examples/changes.example.3.de.tex}\\
-	\>\texttt{doc/latex/changes/examples/changes.example.1.de.pdf}\\
-	\>\texttt{doc/latex/changes/examples/changes.example.2.de.pdf}\\
-	\>\texttt{doc/latex/changes/examples/changes.example.3.de.pdf}\\
-
 	\>\texttt{source/latex/changes/changes.drv}\\
 	\>\texttt{source/latex/changes/changes.dtx}\\
 	\>\texttt{source/latex/changes/changes.ins}\\
 	\>\texttt{source/latex/changes/README}\\
+	\>\texttt{source/latex/changes/examples.dtx}\\
 
 	\>\texttt{scripts/changes/delcmdchanges.bash}
 \end{tabbing}
@@ -711,6 +798,9 @@ Copyright 2007-2011 Ekkart Kleinod (\href{mailto:ekleinod@edgesoft.de}{ekleinod@
 	\>\texttt{doc/latex/changes/changes.english.short.pdf}\\
 	\>\texttt{doc/latex/changes/changes.ngerman.full.pdf}\\
 	\>\texttt{doc/latex/changes/changes.ngerman.short.pdf}\\
+
+	\>\texttt{doc/latex/changes/examples/changes.example.*.tex}\\
+	\>\texttt{doc/latex/changes/examples/changes.example.*.pdf}\\
 
 	\>\texttt{tex/latex/changes/changes.sty}
 \end{tabbing}
