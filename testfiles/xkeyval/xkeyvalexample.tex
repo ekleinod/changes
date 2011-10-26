@@ -1,0 +1,31 @@
+    \documentclass{article}
+    \usepackage{xcolor}
+    \usepackage{xkeyval}
+
+    % Declaration of options
+    \DeclareOptionX<fooexample>{fcolor}{\def\FrameColor{#1}}
+    \DeclareOptionX<fooexample>{bgcolor}{\def\BGColor{#1}}
+
+    % Setting default values
+    \ExecuteOptionsX<fooexample>{%
+      fcolor=red,%
+      bgcolor=blue!20
+    }
+
+    % Definition of the command
+    \newcommand*\foo[2][]{%
+      \begingroup
+      \setkeys{fooexample}{#1}
+      \fcolorbox{\FrameColor}{\BGColor}{#2}
+      \endgroup
+    }
+
+    \begin{document}
+
+    \foo{Text}
+
+    \foo[fcolor=olive!90,bgcolor=red!30]{Some text}
+
+    \foo[bgcolor=yellow]{Some test text}
+
+    \end{document}
