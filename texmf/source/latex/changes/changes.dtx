@@ -385,7 +385,7 @@
 %  Default: in a footnote.
 %    \begin{macrocode}
 \newcommand{\Changes@Remark}[2]{%
-	\footnote{\textcolor{Changes@Color#1}{#2}}%
+	\footnote{\color{Changes@Color#1}{#2}}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -421,7 +421,7 @@
 \newcommand{\Changes@added}[2][\@empty]{%
 	\ifthenelse{\boolean{Changes@optiondraft}}%
 	{%
-		\textcolor{Changes@Color\Changes@temp}{%
+		\color{Changes@Color\Changes@temp}{%
 		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
 			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
@@ -457,7 +457,7 @@
 \newcommand{\Changes@deleted}[2][\@empty]{%
 	\ifthenelse{\boolean{Changes@optiondraft}}%
 	{%
-		\textcolor{Changes@Color\Changes@temp}{%
+		\color{Changes@Color\Changes@temp}{%
 		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
 			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
@@ -490,7 +490,7 @@
 \newcommand{\Changes@replaced}[3][\@empty]{%
 	\ifthenelse{\boolean{Changes@optiondraft}}%
 	{%
-		\textcolor{Changes@Color\Changes@temp}{%
+		\color{Changes@Color\Changes@temp}{%
 		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
 			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
@@ -553,10 +553,10 @@
 				\begin{tabbing}
 					mm\=mmmmmm\=\kill
 					\ifthenelse{\equal{\Changes@InID}{}}
-					{\textcolor{\Changes@InColor}{\changesauthorname: \changesanonymousname}\\}
-					{\textcolor{\Changes@InColor}{\changesauthorname: \Changes@InID}
+					{\color{\Changes@InColor}{\changesauthorname: \changesanonymousname}\\}
+					{\color{\Changes@InColor}{\changesauthorname: \Changes@InID}
 						\ifthenelse{\equal{\Changes@InName}{}}{}
-						{ \textcolor{\Changes@InColor}{(\Changes@InName)}}
+						{ \color{\Changes@InColor}{(\Changes@InName)}}
 						\\
 					}
 					\>\changesaddname:\>\Changes@InAdded\\
@@ -568,6 +568,7 @@
 			\closein\Changes@InFile
 		}{
 			\emph{\changesnoloc}
+			\PackageWarning{changes}{LaTeX rerun needed for list of changes.}
 		}
 	}{}
 }
