@@ -60,13 +60,19 @@
 \ifENGLISH
 	This section describes the user interface of the \chpackage{changes}-package, i.e. all options and commands of the package.
 	Every option resp. new command is described.
-	If you want to see the options and commands in action, please refer to the examples in \texttt{<texpath>/doc/latex/changes/examples/}.
+	If you want to see the options and commands in action, please refer to the examples in
+
+	\texttt{<texpath>/doc/latex/changes/examples/}
+
 	The example files are named with the used option resp. command.
 \fi
 	\ifGERMAN
 		In diesem Kapitel wird die Nutzerschnittstelle des \chpackage{changes}-Pakets vorgestellt, d.\,h.\ alle Optionen und Kommandos.
 		Jede Option bzw. jedes neue Kommando werden beschrieben.
-		Wenn Sie die Optionen und Kommandos im Beispiel sehen wollen, sehen Sie bitte in das Beispielverzeichnis unter \texttt{<texpfad>/doc/latex/changes/examples/}.
+		Wenn Sie die Optionen und Kommandos im Beispiel sehen wollen, sehen Sie bitte in das Beispielverzeichnis unter
+
+		\texttt{<texpfad>/doc/latex/changes/examples/}
+
 		Die Beispieldateien sind mit der benutzten Option bzw. dem benutzten Kommando benannt.
 	\fi
 
@@ -95,7 +101,7 @@
 	If you want to show an up-to-date list of changes, you have to process your text twice: the first run collects the number of changes, the second run updates the list of changes.
 \fi
 	\ifGERMAN
-		Nach der Aktivierung der Änderungsverfolgung schreiben Sie Ihren text und fügen die Befehle für das Änderungsmanagement ein.
+		Nach der Aktivierung der Änderungsverfolgung schreiben Sie Ihren Text und fügen die Befehle für das Änderungsmanagement ein.
 		Danach übersetzen Sie Ihr Dokument wie gehabt mit \emph{pdflatex} oder dem \LaTeX-Interpreter Ihrer Wahl.
 		Wenn Sie eine aktuelle Liste der Änderungen ausgeben wollen, müssen Sie das Dokument zweimal übersetzen: im ersten Lauf wird die Anzahl der Änderungen gesammelt, im zweiten Lauf wird damit die Liste der Änderungen aktualisiert.
 	\fi
@@ -150,70 +156,97 @@
 \minisec{markup}
 \ifENGLISH
 	The \choption{markup} option chooses the visual markup of changed text.
+	The default markup is chosen if no explicit markup is given.
+	The markup chosen with \choption{markup} can be overwritten with the special markup options \choption{addedmarkup} and/or \choption{deletedmarkup}.
+
 	The following values are allowed:
-	\begin{itemize}
-		\item \choption{default} default markup: no markup for added text, striked out for deleted text; this markup is chosen if no markup option is given
-		\item \choption{underlined} alternative markup: underlined for added text, x-ed out for deleted text
-		\item \choption{nocolor} alternative markup: no colored markup, underlined for added text, striked out for deleted text
-	\end{itemize}
+	\begin{description}
+		\item [\choption{default}] colored markup of added text, striked out for deleted text (default markup)
+		\item [\choption{underlined}] underlined for added text, striked out for deleted text
+		\item [\choption{bfit}] bold added text, italic deleted text
+		\item [\choption{nocolor}] no colored markup, underlined for added text, striked out for deleted text
+	\end{description}
+
+	Examples:
 \fi
 	\ifGERMAN
-	Die \choption{markup}-Option wählt ein vordefiniertes visuelles Markup für geänderten Text.
-	Die folgenden Werte sind erlaubt:
-	\begin{itemize}
-		\item \choption{default} default Markup: keine Auszeichnung für zugefügten Text, gelöschter Text wird durchgestrichen; diese Auszeichnung wird gewählt, wenn die Option nicht gesetzt wird
-		\item \choption{underlined} alternatives Markup: zugefügter Text wird unterstrichen, gelöschter Text wird ausge-x-t
-		\item \choption{nocolor} alternatives Markup: es werden keine Farben verwendet, zugefügter Text wird unterstrichen, gelöschter Text wird durchgestrichen
-	\end{itemize}
+		Die \choption{markup}-Option wählt ein vordefiniertes visuelles Markup für geänderten Text.
+		Das default Markup wird gewählt, wenn die Option nicht gesetzt wird.
+		Das mit \choption{markup} gewählte Markup kann mit den spezielleren Optionen \choption{addedmarkup} und/oder \choption{deletedmarkup} geändert werden.
+
+		Die folgenden Werte sind erlaubt:
+		\begin{description}
+			\item [\choption{default}] farbige Markierung von zugefügtem Text, gelöschter Text wird durchgestrichen (default Markup)
+			\item [\choption{underlined}] zugefügter Text wird unterstrichen, gelöschter Text wird durchgestrichen
+			\item [\choption{bfit}] fetter zugefügter Text, schräger gelöschter Text
+			\item [\choption{nocolor}] es werden keine Farben verwendet, zugefügter Text wird unterstrichen, gelöschter Text wird durchgestrichen
+		\end{description}
+
+		Beispiele:
 	\fi
 
 \chcommand{usepackage[markup=default]\{changes\}}\\
 \chcommand{usepackage[markup=underlined]\{changes\}}\\
+\chcommand{usepackage[markup=bfit]\{changes\}}\\
 \chcommand{usepackage[markup=nocolor]\{changes\}}
 
-\minisec{markup}
+\minisec{addedmarkup, deletedmarkup}
 \ifENGLISH
 	The \choption{addedmarkup} option chooses the visual markup of added text.
+	The \choption{deletedmarkup} option chooses the visual markup of deleted text respectively.
+	The default markup is chosen if no explicit markup is given.
+	The options \choption{addedmarkup} and \choption{deletedmarkup} overwrite the markup chosen with \choption{markup}.
+
 	The following values are allowed:
-	\begin{itemize}
-		\item \choption{none} default markup: no markup for added text; this markup is chosen if no markup option is given
-		\item \choption{underlined} alternative markup: underlined for added text
-	\end{itemize}
+	\begin{description}
+		\item [\choption{none}] no markup -- example (default markup for added text)
+		\item [\choption{uline}] underlined text -- \uline{example}
+		\item [\choption{uuline}] double underlined text -- \uuline{example}
+		\item [\choption{uwave}] wavy underlined text -- \uwave{example}
+		\item [\choption{dashuline}] dashed underlined text -- \dashuline{example}
+		\item [\choption{dotuline}] dotted underlined text -- \dotuline{example}
+		\item [\choption{sout}] striked out text -- \sout{example} (default markup for deleted text)
+		\item [\choption{xout}] crossed out text -- \xout{example}
+		\item [\choption{bf}] bold text -- \textbf{example}
+		\item [\choption{it}] italic text -- \textit{example}
+		\item [\choption{sl}] slanted text -- \textsl{example}
+		\item [\choption{em}] emphasized text -- \emph{example}
+	\end{description}
+
+	Examples:
 \fi
 	\ifGERMAN
-	Die \choption{addedmarkup}-Option wählt ein vordefiniertes visuelles Markup für zugefügten Text.
-	Die folgenden Werte sind erlaubt:
-	\begin{itemize}
-		\item \choption{none} default Markup: keine Auszeichnung für zugefügten Text; diese Auszeichnung wird gewählt, wenn die Option nicht gesetzt wird
-		\item \choption{underlined} alternatives Markup: zugefügter Text wird unterstrichen
-	\end{itemize}
+		Die \choption{addedmarkup}-Option wählt ein visuelles Markup für zugefügten Text.
+		Die \choption{deletedmarkup}-Option wählt analog ein visuelles Markup für gelöschten Text.
+		Das default Markup wird gewählt, wenn die Option nicht gesetzt wird.
+		Die Optionen \choption{addedmarkup} und \choption{deletedmarkup} überschreiben das mit \choption{markup} gewählte Markup.
+
+		Die folgenden Werte sind erlaubt:
+		\begin{description}
+			\item [\choption{none}] kein Markup -- Beispiel (default Markup für zugefügten Text)
+			\item [\choption{uline}] unterstrichener Text -- \uline{Beispiel}
+			\item [\choption{uuline}] doppelt unterstrichener Text -- \uuline{Beispiel}
+			\item [\choption{uwave}] gewellt unterstrichener Text -- \uwave{Beispiel}
+			\item [\choption{dashuline}] gestrichelt unterstrichener Text -- \dashuline{Beispiel}
+			\item [\choption{dotuline}] gepunktet unterstrichener Text -- \dotuline{Beispiel}
+			\item [\choption{sout}] durchgestrichener Text -- \sout{Beispiel} (default Markup für gelöschten Text)
+			\item [\choption{xout}] schräg durchgestrichener Text -- \xout{Beispiel}
+			\item [\choption{bf}] fetter Text -- \textbf{Beispiel}
+			\item [\choption{it}] italic Text -- \textit{Beispiel}
+			\item [\choption{sl}] schräger Text -- \textsl{Beispiel}
+			\item [\choption{em}] hervorgehobener Text -- \emph{Beispiel}
+		\end{description}
+
+		Beispiele:
 	\fi
 
 \chcommand{usepackage[addedmarkup=none]\{changes\}}\\
-\chcommand{usepackage[addedmarkup=underlined]\{changes\}}
+\chcommand{usepackage[addedmarkup=uline]\{changes\}}\\
+\chcommand{usepackage[deletedmarkup=sout]\{changes\}}\\
+\chcommand{usepackage[deletedmarkup=xout]\{changes\}}\\
+\chcommand{usepackage[deletedmarkup=uwave]\{changes\}}
 
-\minisec{deletedmarkup}
-\ifENGLISH
-	The \choption{deletedmarkup} option chooses the visual markup of deleted text.
-	The following values are allowed:
-	\begin{itemize}
-		\item \choption{striked} default markup: striked out for deleted text; this markup is chosen if no markup option is given
-		\item \choption{exed} alternative markup: x-ed out for deleted text
-	\end{itemize}
-\fi
-	\ifGERMAN
-	Die \choption{deletedmarkup}-Option wählt ein vordefiniertes visuelles Markup für gelöschten Text.
-	Die folgenden Werte sind erlaubt:
-	\begin{itemize}
-		\item \choption{striked} default Markup: gelöschter Text wird durchgestrichen; diese Auszeichnung wird gewählt, wenn die Option nicht gesetzt wird
-		\item \choption{exed} alternatives Markup: gelöschter Text wird ausge-x-t
-		\item \choption{underlined} alternatives Markup: gelöschter Text wird unterstrichen
-	\end{itemize}
-	\fi
 
-\chcommand{usepackage[deletedmarkup=striked]\{changes\}}\\
-\chcommand{usepackage[deletedmarkup=exed]\{changes\}}\\
-\chcommand{usepackage[deletedmarkup=underlined]\{changes\}}
 
 \chcommand{usepackage[authormarkup=superscript]\{changes\}}\\
 \chcommand{usepackage[authormarkup=subscript]\{changes\}}\\
@@ -379,25 +412,29 @@
 \DescribeMacro{\definechangesauthor}
 \ifENGLISH
 	The command \chcommand{definechangesauthor} defines a new author for changes.
-	You have to define a unique author-id and a corresponding colour.
-	Special characters or spaces are not allowed in the author-id.
-	The name of the author can optionally be defined, it is used in the list of changes.
+	You have to define a unique author-id, special characters or spaces are not allowed in the author-id.
+	You may define a corresponding color and the author's name.
+	If you do not define a color, black is used.
+	The author's name is used in the list of changes and in the markup, if you set the corresponding option.
 	\begin{einspiel}
-	\>\chcommand{definechangesauthor[\meta{author-name}]\{\meta{author-id}\}\{\meta{colour}\}}
+		\>\chcommand{definechangesauthor[name=\{author's name\}, color=\{color\}]\{\meta{author-id}\}}
 	\end{einspiel}
 \fi
 	\ifGERMAN
 		Der Befehl \chcommand{definechangesauthor} definiert einen neuen Autor für Änderungen.
-		Es muss eine eindeutige Autor-ID und dessen Farbe angegeben werden.
-		Die Autor-ID darf keine Sonder- oder Leerzeichen enthalten.
-		Ein Autorenname kann optional angegeben werden, er wird in der Änderungsliste benutzt.
+		Es muss eine eindeutige Autor-ID angegeben werden, die keine Sonder- oder Leerzeichen enthalten darf.
+		Optional kann eine Farbe und ein Name angegeben werden.
+		Wird keine Farbe angegeben, wird schwarz genutzt.
+		Der Autorenname wird in der Änderungsliste benutzt und im Markup, wenn die entsprechende Option gesetzt ist.
 		\begin{einspiel}
-		\>\chcommand{definechangesauthor[\meta{Autor-Name}]\{\meta{Autor-ID}\}\{\meta{Farbe}\}}
+			\>\chcommand{definechangesauthor[name=\{Autor-Name\}, color=\{Farbe\}]\{\meta{Autor-ID}\}}
 		\end{einspiel}
 	\fi
 \begin{einspiel}[true]
-	\>\chcommand{definechangesauthor\{EK\}\{orange\}}\\
-	\>\chcommand{definechangesauthor[Ekkart Kleinod]\{EK\}\{orange\}}
+	\>\chcommand{definechangesauthor\{EK\}\\
+	\>\chcommand{definechangesauthor[color=orange]\{EK\}}\\
+	\>\chcommand{definechangesauthor[name={Ekkart Kleinod}]\{EK\}}\\
+	\>\chcommand{definechangesauthor[name={Ekkart Kleinod}, color=orange]\{EK\}}
 \end{einspiel}
 
 \DescribeMacro{\setlocextension}
@@ -481,7 +518,7 @@
 
 	The following packages are required and have to be installed for the \chpackage{changes}-package:
 	\begin{description}
-		\item [ifthen] provides an enhanced \chcommand{if}-command as well as a \texttt{while}-loop
+		\item [xifthen] provides an enhanced \chcommand{if}-command as well as a \texttt{while}-loop
 		\item [xkeyval] provides options with key-value-pairs
 	\end{description}
 

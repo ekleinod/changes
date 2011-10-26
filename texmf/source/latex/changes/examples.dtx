@@ -64,33 +64,107 @@
 %<*example:markup:underlined>
 \usepackage[markup=underlined]{changes}
 %</example:markup:underlined>
+%<*example:markup:bfit>
+\usepackage[markup=bfit]{changes}
+%</example:markup:bfit>
 %<*example:markup:nocolor>
 \usepackage[markup=nocolor]{changes}
 %</example:markup:nocolor>
+%<*example:markup:wrong>
+\usepackage[markup=wrong]{changes}
+%</example:markup:wrong>
 %
 %<*example:addedmarkup:none>
 \usepackage[addedmarkup=none]{changes}
 %</example:addedmarkup:none>
-%<*example:addedmarkup:underlined>
-\usepackage[addedmarkup=underlined]{changes}
-%</example:addedmarkup:underlined>
+%<*example:addedmarkup:uline>
+\usepackage[addedmarkup=uline]{changes}
+%</example:addedmarkup:uline>
+%<*example:addedmarkup:uuline>
+\usepackage[addedmarkup=uuline]{changes}
+%</example:addedmarkup:uuline>
+%<*example:addedmarkup:uwave>
+\usepackage[addedmarkup=uwave]{changes}
+%</example:addedmarkup:uwave>
+%<*example:addedmarkup:dashuline>
+\usepackage[addedmarkup=dashuline]{changes}
+%</example:addedmarkup:dashuline>
+%<*example:addedmarkup:dotuline>
+\usepackage[addedmarkup=dotuline]{changes}
+%</example:addedmarkup:dotuline>
+%<*example:addedmarkup:sout>
+\usepackage[addedmarkup=sout]{changes}
+%</example:addedmarkup:sout>
+%<*example:addedmarkup:xout>
+\usepackage[addedmarkup=xout]{changes}
+%</example:addedmarkup:xout>
+%<*example:addedmarkup:bf>
+\usepackage[addedmarkup=bf]{changes}
+%</example:addedmarkup:bf>
+%<*example:addedmarkup:it>
+\usepackage[addedmarkup=it]{changes}
+%</example:addedmarkup:it>
+%<*example:addedmarkup:sl>
+\usepackage[addedmarkup=sl]{changes}
+%</example:addedmarkup:sl>
+%<*example:addedmarkup:em>
+\usepackage[addedmarkup=em]{changes}
+%</example:addedmarkup:em>
+%<*example:addedmarkup:wrong>
+\usepackage[addedmarkup=wrong]{changes}
+%</example:addedmarkup:wrong>
 %
-%<*example:deletedmarkup:striked>
-\usepackage[deletedmarkup=striked]{changes}
-%</example:deletedmarkup:striked>
-%<*example:deletedmarkup:exed>
-\usepackage[deletedmarkup=exed]{changes}
-%</example:deletedmarkup:exed>
-%<*example:deletedmarkup:underlined>
-\usepackage[deletedmarkup=underlined]{changes}
-%</example:deletedmarkup:underlined>
+%<*example:deletedmarkup:none>
+\usepackage[deletedmarkup=none]{changes}
+%</example:deletedmarkup:none>
+%<*example:deletedmarkup:uline>
+\usepackage[deletedmarkup=uline]{changes}
+%</example:deletedmarkup:uline>
+%<*example:deletedmarkup:uuline>
+\usepackage[deletedmarkup=uuline]{changes}
+%</example:deletedmarkup:uuline>
+%<*example:deletedmarkup:uwave>
+\usepackage[deletedmarkup=uwave]{changes}
+%</example:deletedmarkup:uwave>
+%<*example:deletedmarkup:dashuline>
+\usepackage[deletedmarkup=dashuline]{changes}
+%</example:deletedmarkup:dashuline>
+%<*example:deletedmarkup:dotuline>
+\usepackage[deletedmarkup=dotuline]{changes}
+%</example:deletedmarkup:dotuline>
+%<*example:deletedmarkup:sout>
+\usepackage[deletedmarkup=sout]{changes}
+%</example:deletedmarkup:sout>
+%<*example:deletedmarkup:xout>
+\usepackage[deletedmarkup=xout]{changes}
+%</example:deletedmarkup:xout>
+%<*example:deletedmarkup:bf>
+\usepackage[deletedmarkup=bf]{changes}
+%</example:deletedmarkup:bf>
+%<*example:deletedmarkup:it>
+\usepackage[deletedmarkup=it]{changes}
+%</example:deletedmarkup:it>
+%<*example:deletedmarkup:sl>
+\usepackage[deletedmarkup=sl]{changes}
+%</example:deletedmarkup:sl>
+%<*example:deletedmarkup:em>
+\usepackage[deletedmarkup=em]{changes}
+%</example:deletedmarkup:em>
+%<*example:deletedmarkup:wrong>
+\usepackage[deletedmarkup=wrong]{changes}
+%</example:deletedmarkup:wrong>
+%
+%<*example:setlocextension>
+\usepackage{changes}
+\setlocextension{listofchanges}
+%</example:setlocextension>
 %    \end{macrocode}
 %
 % Define some authors.
 %
 %    \begin{macrocode}
-\definechangesauthor{Green}{green}
-\definechangesauthor[Mister Orange]{OA}{orange}
+\definechangesauthor[color=green]{Green}
+\definechangesauthor[name={Mister Orange}, color=orange]{OA}
 %    \end{macrocode}
 %
 % This ist the document we use, some paragraphs from \texttt{http://slipsum.com/}.
@@ -135,13 +209,13 @@ They called me Mr Glass.
 \subsection*{No changes}
 
 Your bones don't break, mine do.
-That's clear.
+\textbf{That's clear.}
 Your cells react to bacteria and viruses differently than mine.
-You don't get sick, I do.
+\textsl{You don't get sick, I do.}
 That's also clear.
-But for some reason, you and I react the exact same way to water.
+\textit{But for some reason, you and I react the exact same way to water.}
 We swallow it too fast, we choke.
-We get some in our lungs, we drown.
+\emph{We get some in our lungs, we drown.}
 However unreal it may seem, we are connected, you and I.
 We're on the same curve, just on opposite ends.
 

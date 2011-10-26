@@ -1,4 +1,4 @@
-% \CheckSum{442}
+% \CheckSum{601}
 %
 % \iffalse meta-comment
 %
@@ -90,9 +90,9 @@
 \RequirePackage{xkeyval}
 %    \end{macrocode}
 %
-% Package \chpackage{ifthen} provides improved \texttt{if} as well as a \texttt{while}-loop.
+% Package \chpackage{xifthen} provides improved \texttt{if} as well as a \texttt{while}-loop.
 %    \begin{macrocode}
-\RequirePackage{ifthen}
+\RequirePackage{xifthen}
 %    \end{macrocode}
 %
 % \minisec{Options}
@@ -117,7 +117,7 @@
 % Declare storage for markup options, they are set by the markup option but can be changed with the mor special options, therefore they have to be declared at this place.
 %    \begin{macrocode}
 \newcommand{\Changes@optionaddedmarkup}{none}
-\newcommand{\Changes@optiondeletedmarkup}{striked}
+\newcommand{\Changes@optiondeletedmarkup}{sout}
 %    \end{macrocode}
 %
 % Option \choption{markup}, sets markup options accordingly.
@@ -130,27 +130,34 @@
 			\ifthenelse{
 				\equal{#1}{default}\or
 				\equal{#1}{underlined}\or
+				\equal{#1}{bfit}\or
 				\equal{#1}{nocolor}
 			}
 				{\renewcommand{\Changes@optionmarkup}{#1}}
-				{\PackageWarning{changes}{markup '#1' unknown, using 'default'}}
+				{\PackageWarning{changes}{markup '#1' unknown, using '\Changes@optionmarkup'}}
 		}
 	\ifthenelse{\equal{\Changes@optionmarkup}{default}}
 		{
 			\renewcommand{\Changes@optionaddedmarkup}{none}
-			\renewcommand{\Changes@optiondeletedmarkup}{striked}
+			\renewcommand{\Changes@optiondeletedmarkup}{sout}
 		}
 		{}
 	\ifthenelse{\equal{\Changes@optionmarkup}{underlined}}
 		{
-			\renewcommand{\Changes@optionaddedmarkup}{underlined}
-			\renewcommand{\Changes@optiondeletedmarkup}{exed}
+			\renewcommand{\Changes@optionaddedmarkup}{uline}
+			\renewcommand{\Changes@optiondeletedmarkup}{sout}
+		}
+		{}
+	\ifthenelse{\equal{\Changes@optionmarkup}{bfit}}
+		{
+			\renewcommand{\Changes@optionaddedmarkup}{bf}
+			\renewcommand{\Changes@optiondeletedmarkup}{it}
 		}
 		{}
 	\ifthenelse{\equal{\Changes@optionmarkup}{nocolor}}
 		{
-			\renewcommand{\Changes@optionaddedmarkup}{underlined}
-			\renewcommand{\Changes@optiondeletedmarkup}{striked}
+			\renewcommand{\Changes@optionaddedmarkup}{uline}
+			\renewcommand{\Changes@optiondeletedmarkup}{sout}
 		}
 		{}
 	\typeout{changes-option 'markup=\Changes@optionmarkup'}
@@ -165,10 +172,20 @@
 		{
 			\ifthenelse{
 				\equal{#1}{none}\or
-				\equal{#1}{underlined}
+				\equal{#1}{uline}\or
+				\equal{#1}{uuline}\or
+				\equal{#1}{uwave}\or
+				\equal{#1}{dashuline}\or
+				\equal{#1}{dotuline}\or
+				\equal{#1}{sout}\or
+				\equal{#1}{xout}\or
+				\equal{#1}{bf}\or
+				\equal{#1}{it}\or
+				\equal{#1}{sl}\or
+				\equal{#1}{em}
 			}
 				{\renewcommand{\Changes@optionaddedmarkup}{#1}}
-				{\PackageWarning{changes}{addedmarkup '#1' unknown, using 'none'}}
+				{\PackageWarning{changes}{addedmarkup '#1' unknown, using '\Changes@optionaddedmarkup'}}
 		}
 	\typeout{changes-option 'addedmarkup=\Changes@optionaddedmarkup'}
 }
@@ -181,12 +198,21 @@
 		{}
 		{
 			\ifthenelse{
-				\equal{#1}{striked}\or
-				\equal{#1}{exed}\or
-				\equal{#1}{underlined}
+				\equal{#1}{none}\or
+				\equal{#1}{uline}\or
+				\equal{#1}{uuline}\or
+				\equal{#1}{uwave}\or
+				\equal{#1}{dashuline}\or
+				\equal{#1}{dotuline}\or
+				\equal{#1}{sout}\or
+				\equal{#1}{xout}\or
+				\equal{#1}{bf}\or
+				\equal{#1}{it}\or
+				\equal{#1}{sl}\or
+				\equal{#1}{em}
 			}
 				{\renewcommand{\Changes@optiondeletedmarkup}{#1}}
-				{\PackageWarning{changes}{deletedmarkup '#1' unknown, using 'striked'}}
+				{\PackageWarning{changes}{deletedmarkup '#1' unknown, using '\Changes@optiondeletedmarkup'}}
 		}
 	\typeout{changes-option 'deletedmarkup=\Changes@optiondeletedmarkup'}
 }
@@ -228,24 +254,41 @@
 %
 % \subsection{Packages}
 %
-% Package \chpackage{xcolor} provides coloured text.
-% Package \chpackage{pdfcolmk} solves the problem of coloured text and page breaks (has to be loaded after \chpackage{xcolor}).
+% Package \chpackage{xcolor} provides colored text.
+% Package \chpackage{pdfcolmk} solves the problem of colored text and page breaks (has to be loaded after \chpackage{xcolor}).
 %    \begin{macrocode}
+\newboolean{Changes@colored}
+\setboolean{Changes@colored}{true}
 \ifthenelse{\equal{\Changes@optionmarkup}{nocolor}}
+	{\setboolean{Changes@colored}{false}}
 	{}
+\ifthenelse{\boolean{Changes@colored}}
 	{
 		\RequirePackage{xcolor}
 		\RequirePackage{pdfcolmk}
 	}
+	{}
 %    \end{macrocode}
 %
 % Package \chpackage{ulem} provides commands for striking out text.
 %    \begin{macrocode}
 \ifthenelse{
-	\equal{\Changes@optiondeletedmarkup}{striked}\or
-	\equal{\Changes@optiondeletedmarkup}{exed}
+	\equal{\Changes@optionaddedmarkup}{uline}\or
+	\equal{\Changes@optionaddedmarkup}{uuline}\or
+	\equal{\Changes@optionaddedmarkup}{uwave}\or
+	\equal{\Changes@optionaddedmarkup}{dashuline}\or
+	\equal{\Changes@optionaddedmarkup}{dotuline}\or
+	\equal{\Changes@optionaddedmarkup}{sout}\or
+	\equal{\Changes@optionaddedmarkup}{xout}\or
+	\equal{\Changes@optiondeletedmarkup}{uline}\or
+	\equal{\Changes@optiondeletedmarkup}{uuline}\or
+	\equal{\Changes@optiondeletedmarkup}{uwave}\or
+	\equal{\Changes@optiondeletedmarkup}{dashuline}\or
+	\equal{\Changes@optiondeletedmarkup}{dotuline}\or
+	\equal{\Changes@optiondeletedmarkup}{sout}\or
+	\equal{\Changes@optiondeletedmarkup}{xout}
 }
-	{\RequirePackage{ulem}}
+	{\RequirePackage[normalem,normalbf]{ulem}}
 	{}
 %    \end{macrocode}
 %
@@ -325,11 +368,11 @@
 %
 % \begin{macro}{\definechangesauthor}
 %  Define a new author.
-%  Mandatory arguments: author's id and author's colour.
+%  Mandatory arguments: author's id and author's color.
 %  Optional argument: author's name.
 %
-%  Store id, name and colour using named variables.
-%  Define counter and colour per author.
+%  Store id, name and color using named variables.
+%  Define counter and color per author.
 %    \begin{macrocode}
 \newcommand{\definechangesauthor}[3][\@empty]{
 	\stepcounter{Changes@AuthorCount}
@@ -339,7 +382,9 @@
 	\newcounter{Changes@AddCount#2}
 	\newcounter{Changes@DeleteCount#2}
 	\newcounter{Changes@ReplaceCount#2}
-	\colorlet{Changes@Color#2}{#3}
+	\ifthenelse{\boolean{Changes@colored}}
+		{\colorlet{Changes@Color#2}{#3}}
+		{}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -385,7 +430,7 @@
 %  Default: in a footnote.
 %    \begin{macrocode}
 \newcommand{\Changes@Remark}[2]{%
-	\footnote{\color{Changes@Color#1}{#2}}%
+	\footnote{{\color{Changes@Color#1}{#2}}}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -421,7 +466,7 @@
 \newcommand{\Changes@added}[2][\@empty]{%
 	\ifthenelse{\boolean{Changes@optiondraft}}%
 	{%
-		\color{Changes@Color\Changes@temp}{%
+		{\color{Changes@Color\Changes@temp}{%
 		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
 			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
@@ -434,7 +479,7 @@
 		\ifthenelse{\equal{\@empty}{#1}}%
 			{}{\Changes@Remark{\Changes@temp}{#1}}%
 		}%
-		\stepcounter{Changes@AddCount\Changes@temp}%
+		\stepcounter{Changes@AddCount\Changes@temp}}%
 	}{#2}%
 }
 %    \end{macrocode}
@@ -457,7 +502,7 @@
 \newcommand{\Changes@deleted}[2][\@empty]{%
 	\ifthenelse{\boolean{Changes@optiondraft}}%
 	{%
-		\color{Changes@Color\Changes@temp}{%
+		{\color{Changes@Color\Changes@temp}{%
 		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
 			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
@@ -470,7 +515,7 @@
 		\ifthenelse{\equal{\@empty}{#1}}%
 			{}{\Changes@Remark{\Changes@temp}{#1}}%
 		}%
-		\stepcounter{Changes@DeleteCount\Changes@temp}%
+		\stepcounter{Changes@DeleteCount\Changes@temp}}%
 	}{\@bsphack \expandafter \@esphack}%
 }
 %    \end{macrocode}
@@ -490,7 +535,7 @@
 \newcommand{\Changes@replaced}[3][\@empty]{%
 	\ifthenelse{\boolean{Changes@optiondraft}}%
 	{%
-		\color{Changes@Color\Changes@temp}{%
+		{\color{Changes@Color\Changes@temp}{%
 		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
 			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
@@ -504,7 +549,7 @@
 		\ifthenelse{\equal{\@empty}{#1}}%
 			{}{\Changes@Remark{\Changes@temp}{#1}}%
 		}%
-		\stepcounter{Changes@ReplaceCount\Changes@temp}%
+		\stepcounter{Changes@ReplaceCount\Changes@temp}}%
 	}{#2}%
 }
 %    \end{macrocode}
@@ -545,7 +590,7 @@
 			\newread\Changes@InFile
 			\openin\Changes@InFile = \jobname.\Changes@extension
 			\whiledo{\boolean{Changes@MoreLines}}{
-			\read\Changes@InFile to \Changes@Line
+				\read\Changes@InFile to \Changes@Line
 				\ifeof\Changes@InFile
 				\setboolean{Changes@MoreLines}{false}
 				\else
@@ -553,12 +598,13 @@
 				\begin{tabbing}
 					mm\=mmmmmm\=\kill
 					\ifthenelse{\equal{\Changes@InID}{}}
-					{\color{\Changes@InColor}{\changesauthorname: \changesanonymousname}\\}
-					{\color{\Changes@InColor}{\changesauthorname: \Changes@InID}
-						\ifthenelse{\equal{\Changes@InName}{}}{}
-						{ \color{\Changes@InColor}{(\Changes@InName)}}
-						\\
-					}
+						{{\color{\Changes@InColor}{\changesauthorname: \changesanonymousname}}\\}
+						{{\color{\Changes@InColor}{\changesauthorname: \Changes@InID}}
+							\ifthenelse{\equal{\Changes@InName}{}}
+								{}
+								{{ \color{\Changes@InColor}{(\Changes@InName)}}}
+							\\
+						}
 					\>\changesaddname:\>\Changes@InAdded\\
 					\>\changesdeletename:\>\Changes@InDeleted\\
 					\>\changesreplacename:\>\Changes@InReplaced\\
