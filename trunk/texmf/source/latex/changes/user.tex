@@ -417,7 +417,7 @@
 	If you do not define a color, black is used.
 	The author's name is used in the list of changes and in the markup, if you set the corresponding option.
 	\begin{einspiel}
-		\>\chcommand{definechangesauthor[name=\{author's name\}, color=\{color\}]\{\meta{author-id}\}}
+		\>\chcommand{definechangesauthor[name=\{\meta{author's name}\}, color=\{\meta{color}\}]\{\meta{author-id}\}}
 	\end{einspiel}
 \fi
 	\ifGERMAN
@@ -427,14 +427,14 @@
 		Wird keine Farbe angegeben, wird schwarz genutzt.
 		Der Autorenname wird in der Änderungsliste benutzt und im Markup, wenn die entsprechende Option gesetzt ist.
 		\begin{einspiel}
-			\>\chcommand{definechangesauthor[name=\{Autor-Name\}, color=\{Farbe\}]\{\meta{Autor-ID}\}}
+			\>\chcommand{definechangesauthor[name=\{\meta{Autor-Name}\}, color=\{\meta{Farbe}\}]\{\meta{Autor-ID}\}}
 		\end{einspiel}
 	\fi
 \begin{einspiel}[true]
-	\>\chcommand{definechangesauthor\{EK\}\\
+	\>\chcommand{definechangesauthor\{EK\}}\\
 	\>\chcommand{definechangesauthor[color=orange]\{EK\}}\\
-	\>\chcommand{definechangesauthor[name={Ekkart Kleinod}]\{EK\}}\\
-	\>\chcommand{definechangesauthor[name={Ekkart Kleinod}, color=orange]\{EK\}}
+	\>\chcommand{definechangesauthor[name=\{Ekkart Kleinod\}]\{EK\}}\\
+	\>\chcommand{definechangesauthor[name=\{Ekkart Kleinod\}, color=orange]\{EK\}}
 \end{einspiel}
 
 \DescribeMacro{\setlocextension}

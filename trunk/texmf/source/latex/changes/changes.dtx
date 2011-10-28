@@ -1,4 +1,4 @@
-% \CheckSum{601}
+% \CheckSum{656}
 %
 % \iffalse meta-comment
 %
@@ -95,7 +95,8 @@
 \RequirePackage{xifthen}
 %    \end{macrocode}
 %
-% \minisec{Options}
+% \subsubsection{Package options}
+%
 % Option \choption{draft}, \emph{default} is \texttt{true}.
 %    \begin{macrocode}
 \newboolean{Changes@optiondraft}
@@ -247,6 +248,28 @@
 }
 %    \end{macrocode}
 %
+% \subsubsection{Command options}
+%
+% All options for commands (e.g. \chcommand{definechangesauthor}) have to be declared before option processing.
+%
+% \minisec{\chcommand{definechangesauthor}}
+%
+% Declare available options of the command, define value containers.
+%    \begin{macrocode}
+\DeclareOptionX<Changes@definechangesauthor>{name}{\def\Changes@definechangesauthor@name{#1}}
+\DeclareOptionX<Changes@definechangesauthor>{color}{\def\Changes@definechangesauthor@color{#1}}
+%    \end{macrocode}
+%
+% Set the default values of the options.
+%    \begin{macrocode}
+\ExecuteOptionsX<Changes@definechangesauthor>{%
+	name=\@empty,%
+	color=black
+}
+%    \end{macrocode}
+%
+% \subsubsection{Option processing}
+%
 % Process the options.
 %    \begin{macrocode}
 \ProcessOptionsX*\relax
@@ -368,22 +391,42 @@
 %
 % \begin{macro}{\definechangesauthor}
 %  Define a new author.
-%  Mandatory arguments: author's id and author's color.
-%  Optional argument: author's name.
+%  Mandatory argument: author's id.
+%  Optional arguments (key-value): author's name (default: empty) and author's color (default: black).
 %
 %  Store id, name and color using named variables.
 %  Define counter and color per author.
 %    \begin{macrocode}
-\newcommand{\definechangesauthor}[3][\@empty]{
+\newcommand*\definechangesauthor[2][]{%
+%    \end{macrocode}
+%
+% Call \emph{setkeys} in order to evaluate the key-value-options and fill the value containers.
+%    \begin{macrocode}
+	\setkeys{Changes@definechangesauthor}{#1}
+%    \end{macrocode}
+%
+% Increment author counter, later needed for \emph{while} loop of authors.
+%    \begin{macrocode}
 	\stepcounter{Changes@AuthorCount}
-	\@namedef{Changes@Author\theChanges@AuthorCount}{#2}
-	\@namedef{Changes@AuthorName#2}{#1}
-	\@namedef{Changes@AuthorColor#2}{#3}
+%    \end{macrocode}
+%
+% Store the id in a name with the given counter/index.
+% All other storages refer to the id.
+%    \begin{macrocode}
+	\@namedef{Changes@AuthorID\theChanges@AuthorCount}{#2}
+%    \end{macrocode}
+%
+% Store the author's definition in according variables/colors, create change counters.
+%    \begin{macrocode}
+	\@namedef{Changes@AuthorName#2}{\Changes@definechangesauthor@name}
 	\newcounter{Changes@AddCount#2}
 	\newcounter{Changes@DeleteCount#2}
 	\newcounter{Changes@ReplaceCount#2}
 	\ifthenelse{\boolean{Changes@colored}}
-		{\colorlet{Changes@Color#2}{#3}}
+		{
+			\@namedef{Changes@AuthorColor#2}{\Changes@definechangesauthor@color}
+			\colorlet{Changes@Color#2}{\@nameuse{Changes@AuthorColor#2}}
+		}
 		{}
 }
 %    \end{macrocode}
@@ -391,7 +434,7 @@
 %
 % Define default-author (anonymous) with empty id and blue color.
 %    \begin{macrocode}
-\definechangesauthor{\@empty}{blue}
+\definechangesauthor[color=blue]{\@empty}
 %    \end{macrocode}
 %
 %  Position of the authors markup relative to the text.
@@ -602,7 +645,7 @@
 						{{\color{\Changes@InColor}{\changesauthorname: \Changes@InID}}
 							\ifthenelse{\equal{\Changes@InName}{}}
 								{}
-								{{ \color{\Changes@InColor}{(\Changes@InName)}}}
+								{{\color{\Changes@InColor}{(\Changes@InName)}}}
 							\\
 						}
 					\>\changesaddname:\>\Changes@InAdded\\
@@ -633,7 +676,7 @@
 	\setcounter{Changes@iAuthor}{0}
 	\whiledo{\value{Changes@iAuthor} < \value{Changes@AuthorCount}}{
 		\stepcounter{Changes@iAuthor}
-		\def\Changes@ID{\@nameuse{Changes@Author\theChanges@iAuthor}}
+		\def\Changes@ID{\@nameuse{Changes@AuthorID\theChanges@iAuthor}}
 		\immediate\write\Changes@OutFile{\Changes@ID;%
 			\@nameuse{Changes@AuthorColor\Changes@ID};%
 			\@nameuse{Changes@AuthorName\Changes@ID};%

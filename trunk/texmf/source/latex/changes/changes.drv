@@ -15,7 +15,7 @@
 
 % Änderungsmarkierungen ermöglichen ;)
 \usepackage{changes}
-\definechangesauthor{EK}{orange}
+\definechangesauthor[color=orange]{EK}
 
 % voller Index
 \EnableCrossrefs
