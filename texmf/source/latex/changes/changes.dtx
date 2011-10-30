@@ -219,11 +219,6 @@
 }
 %    \end{macrocode}
 %
-
-
-
-
-
 %
 % Options for package \chpackage{ulem} are directly passed to the package.
 %    \begin{macrocode}
@@ -241,10 +236,10 @@
 }
 %    \end{macrocode}
 %
-% Unknown options generate package warning.
+% Unknown options generate a package warning.
 %    \begin{macrocode}
 \DeclareOptionX*{
-	\PackageWarning{Unknown changes-option '\CurrentOption'}
+	\PackageWarning{changes}{Unknown option '\CurrentOption'}
 }
 %    \end{macrocode}
 %
@@ -345,7 +340,7 @@
 		\addto\captionsgerman{\def\changesreplacename{Ersetzt}}
 		\addto\captionsgerman{\def\changesauthorname{Autor}}
 		\addto\captionsgerman{\def\changesanonymousname{Anonym}}
-		\addto\captionsgerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten Durchlauf verf\"ugbar.}}
+		\addto\captionsgerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
 
 		\addto\captionsenglish{\def\listchangesname{Changes}}
 		\addto\captionsenglish{\def\changesaddname{Added}}
@@ -371,7 +366,7 @@
 %    \end{macrocode}
 %
 % \begin{macro}{\setlocextension}
-%  Set a new file extension.
+%  Sets a new file extension.
 %  Argument: new extension.
 %    \begin{macrocode}
 \newcommand{\setlocextension}[1]{
@@ -438,7 +433,7 @@
 %    \end{macrocode}
 %
 %  Position of the authors markup relative to the text.
-%  \emph{true} = left, \emph{false} = right (default).
+%  \emph{true} == left, \emph{false} == right (default).
 %    \begin{macrocode}
 \newboolean{Changes@AuthorPositionLeft}
 \setboolean{Changes@AuthorPositionLeft}{false}
@@ -461,8 +456,8 @@
 %    \begin{macrocode}
 \newcommand{\setauthormarkup}[2][left]{%
 	\ifthenelse{\equal{#1}{left}}
-	{\setboolean{Changes@AuthorPositionLeft}{true}}
-	{\setboolean{Changes@AuthorPositionLeft}{false}}
+		{\setboolean{Changes@AuthorPositionLeft}{true}}
+		{\setboolean{Changes@AuthorPositionLeft}{false}}
 	\renewcommand{\Changes@AuthorMark}[1]{#2}
 }
 %    \end{macrocode}
@@ -657,7 +652,7 @@
 			\closein\Changes@InFile
 		}{
 			\emph{\changesnoloc}
-			\PackageWarning{changes}{LaTeX rerun needed for list of changes.}
+			\PackageWarning{changes}{LaTeX rerun needed for list of changes}
 		}
 	}{}
 }
