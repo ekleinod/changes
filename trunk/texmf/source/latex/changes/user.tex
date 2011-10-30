@@ -292,7 +292,7 @@
 	\ifGERMAN
 		\subsection{Neue Befehle}
 
-		Dieser Abschnitt führt alle neuen Befehle auf und erläutert sie.
+		Dieser Abschnitt führt alle neuen Befehle des \chpackage{changes}-Pakets auf und erläutert sie.
 	\fi
 
 \ifENGLISH
@@ -412,7 +412,7 @@
 \DescribeMacro{\definechangesauthor}
 \ifENGLISH
 	The command \chcommand{definechangesauthor} defines a new author for changes.
-	You have to define a unique author-id, special characters or spaces are not allowed in the author-id.
+	You have to define a unique author-id, special characters or spaces are not allowed within the author-id.
 	You may define a corresponding color and the author's name.
 	If you do not define a color, black is used.
 	The author's name is used in the list of changes and in the markup, if you set the corresponding option.
@@ -439,14 +439,16 @@
 
 \DescribeMacro{\setlocextension}
 \ifENGLISH
-	The command \chcommand{setlocextension} sets the extension of the auxiliary file for the list of changes.
+	The command \chcommand{setlocextension} sets the extension of the auxiliary file for the list of changes (loc-file).
 	The default extension is "\texttt{loc}".
-	In the example, the auxiliary file for "\texttt{foo.tex}" would be named named "\texttt{foo.changes}".
+	In the example, the loc-file for "\texttt{foo.tex}" would be named "\texttt{foo.changes}" instead of the default name "\texttt{foo.loc}".
 \fi
 	\ifGERMAN
-		Der Befehl \chcommand{setlocextension} legt das Suffix der Hilfsdatei für die Änderungsliste fest.
+		Der Befehl \chcommand{setlocextension} legt das Suffix der Hilfsdatei für die Änderungsliste (loc-Datei\footnote{%
+			"`loc"' steht dabei für "`list of changes"'.
+		}) fest.
 		Ohne andere Definition gilt das Suffix "`\texttt{loc}"'.
-		Das Beispiel würde für "`\texttt{foo.tex}"' Hilfsdateien erzeugen, die "`\texttt{foo.changes}"' heißen.
+		Das Beispiel würde für "`\texttt{foo.tex}"' Hilfsdateien erzeugen, die "`\texttt{foo.changes}"' statt des Standardnamens "`\texttt{foo.loc}"' heißen.
 	\fi
 \begin{einspiel}
 	\>\chcommand{setlocextension\{\meta{extension}\}}
@@ -460,14 +462,14 @@
 	The command \chcommand{setauthormarkup} sets the layout of the authormarkup in the text.
 	The default markup is a superscripted author-id on the right side of the changed text.
 
-	Values for position (optional): \emph{left} = left of the changes; all other values: right\\
+	Values for position (optional): \emph{left} == left of the changes; all other values: right\\
 	Values for definition: any \LaTeX-commands, author-id can be shown using "\#1".
 \fi
 	\ifGERMAN
 		Der Befehl \chcommand{setauthormarkup} legt fest, wie der Autor im Text angezeigt wird.
 		Ohne andere Definition gilt, dass der Autor rechts von den Änderungen hochgestellt erscheint.
 
-		Werte für Position (optional): \emph{left} = links von den Änderungen; alles andere: rechts\\
+		Werte für Position (optional): \emph{left} == links von den Änderungen; alles andere: rechts\\
 		Werte für Definition: beliebige \LaTeX-Befehle, der Autorenname wird mit "`\#1"' gekennzeichnet.
 	\fi
 \begin{einspiel}
