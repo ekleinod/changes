@@ -47,9 +47,9 @@
 % Different package options.
 %
 %    \begin{macrocode}
-%<*example:simple>
+%<*example:simple|example:setlocextension|example:setaddedmarkup|example:setdeletedmarkup>
 \usepackage{changes}
-%</example:simple>
+%</example:simple|example:setlocextension|example:setaddedmarkup|example:setdeletedmarkup>
 %
 %<*example:draft>
 \usepackage[draft]{changes}
@@ -154,8 +154,14 @@
 \usepackage[deletedmarkup=wrong]{changes}
 %</example:deletedmarkup:wrong>
 %
+%<*example:setaddedmarkup>
+\setaddedmarkup{\xout{#1}}
+%</example:setaddedmarkup>
+%<*example:setdeletedmarkup>
+\setdeletedmarkup{\xout{#1}}
+%</example:setdeletedmarkup>
+%
 %<*example:setlocextension>
-\usepackage{changes}
 \setlocextension{changes}
 %</example:setlocextension>
 %    \end{macrocode}
