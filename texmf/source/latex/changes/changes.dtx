@@ -1,4 +1,4 @@
-% \CheckSum{656}
+% \CheckSum{657}
 %
 % \iffalse meta-comment
 %
@@ -310,7 +310,7 @@
 	{}
 %    \end{macrocode}
 %
-% \subsection{Definitions}
+% \subsection{Language dependent texts}
 %
 % Declaration of language dependent names and identifiers.
 % The check for \chcommand{addto} is a check for the \chpackage{babel} package.
@@ -360,10 +360,14 @@
 	}
 %    \end{macrocode}
 %
-% File extension.
+% \subsection{File extension}
+%
+% \begin{macro}{\Changes@extension}
+% Store file extension in variable, set default to \texttt{loc}.
 %    \begin{macrocode}
 \newcommand{\Changes@extension}{loc}
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\setlocextension}
 %  Sets a new file extension.
@@ -375,7 +379,8 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{management of authors}
+%
+% \subsection{Author management}
 %
 % Author counter.
 %    \begin{macrocode}
@@ -449,6 +454,8 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{Author markup}
+%
 % \begin{macro}{\setauthormarkup}
 %  Redefine the author markup.
 %  Mandatory argument: markup definition.
@@ -483,7 +490,70 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{Change commands}
+% \subsection{Markup definition}
+%
+% \subsubsection{Text markup}
+%
+% \begin{macro}{\Changes@Markup@Added}
+% Store markup for added text.
+%    \begin{macrocode}
+\newcommand{\Changes@Markup@Added}[1]{%
+	\ifthenelse{\equal{\Changes@optionaddedmarkup}{none}}{#1}{}%
+	\ifthenelse{\equal{\Changes@optionaddedmarkup}{uline}}{\uline{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionaddedmarkup}{uuline}}{\uuline{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionaddedmarkup}{uwave}}{\uwave{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionaddedmarkup}{dashuline}}{\dashuline{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionaddedmarkup}{dotuline}}{\dotuline{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionaddedmarkup}{sout}}{\sout{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionaddedmarkup}{xout}}{\xout{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionaddedmarkup}{bf}}{\textbf{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionaddedmarkup}{it}}{\textit{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionaddedmarkup}{sl}}{\textsl{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionaddedmarkup}{em}}{\emph{#1}}{}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\setaddedmarkup}
+% Set markup for added text.
+%    \begin{macrocode}
+\newcommand{\setaddedmarkup}[1]{
+	\renewcommand{\Changes@Markup@Added}[1]{##1}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Changes@Markup@Deleted}
+% Store markup for deleted text.
+%    \begin{macrocode}
+\newcommand{\Changes@Markup@Deleted}[1]{%
+	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{none}}{#1}{}%
+	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{uline}}{\uline{#1}}{}%
+	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{uuline}}{\uuline{#1}}{}%
+	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{uwave}}{\uwave{#1}}{}%
+	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{dashuline}}{\dashuline{#1}}{}%
+	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{dotuline}}{\dotuline{#1}}{}%
+	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{sout}}{\sout{#1}}{}%
+	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{xout}}{\xout{#1}}{}%
+	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{bf}}{\textbf{#1}}{}%
+	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{it}}{\textit{#1}}{}%
+	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{sl}}{\textsl{#1}}{}%
+	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{em}}{\emph{#1}}{}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\setdeletedmarkup}
+% Set markup for added text.
+%    \begin{macrocode}
+\newcommand{\setdeletedmarkup}[1]{
+	\renewcommand{\Changes@Markup@Deleted}[1]{##1}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsubsection{Change commands}
 %
 % Temporary variable for exchange of optional parameters between interlocked commands.
 %    \begin{macrocode}
@@ -509,7 +579,7 @@
 			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
 			}{}%
-		#2%
+		{\Changes@Markup@Added{#2}}%
 		\ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
 			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
@@ -545,7 +615,7 @@
 			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
 			}{}%
-		\sout{#2}%
+		{\Changes@Markup@Deleted{#2}}%
 		\ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
 			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
@@ -578,8 +648,8 @@
 			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
 			}{}%
-		#2%
-		\sout{#3}%
+		{\Changes@Markup@Added{#2}}%
+		{\Changes@Markup@Deleted{#3}}%
 		\ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
 			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
 			{}{\Changes@AuthorMark{\Changes@temp}}%
