@@ -542,6 +542,15 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\setauthormarkuptext}
+% Set author markup text to be displayed.
+%    \begin{macrocode}
+\newcommand{\setauthormarkuptext}[1]{
+	\renewcommand{\Changes@optionauthormarkuptext}{#1}
+}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\Changes@Remark}
 %  Markup of remarks.
 %  Default: in a footnote.
@@ -643,6 +652,15 @@
 %    \begin{macrocode}
 	\ifthenelse{\boolean{Changes@optiondraft}}%
 		{%
+%    \end{macrocode}
+%	Save author text for output.
+%    \begin{macrocode}
+			\ifthenelse{\equal{\Changes@optionauthormarkuptext}{id}}%
+				{\@namedef{Changes@AuthorText}{#3}}%
+				{}%
+			\ifthenelse{\equal{\Changes@optionauthormarkuptext}{name}}%
+				{\@namedef{Changes@AuthorText}{\@nameuse{Changes@AuthorName#3}}}%
+				{}%
 			{%
 %    \end{macrocode}
 %	Change color, if colored text is used.
@@ -654,7 +672,7 @@
 %	Output author text if author's id is given and text should appear left of changes.
 %    \begin{macrocode}
 				\ifthenelse{\equal{\Changes@optionauthormarkupposition}{left} \and \not\equal{#3}{\@empty}}%
-					{\Changes@Markup@Author{#3}}%
+					{\Changes@Markup@Author{\@nameuse{Changes@AuthorText}}}%
 					{}%
 %    \end{macrocode}
 %	Output changed text.
@@ -664,7 +682,7 @@
 %	Output author text if author's id is given and text should appear right of changes.
 %    \begin{macrocode}
 				\ifthenelse{\equal{\Changes@optionauthormarkupposition}{right} \and \not\equal{#3}{\@empty}}%
-					{\Changes@Markup@Author{#3}}%
+					{\Changes@Markup@Author{\@nameuse{Changes@AuthorText}}}%
 					{}%
 %    \end{macrocode}
 %	Output remark if a remark is given.
