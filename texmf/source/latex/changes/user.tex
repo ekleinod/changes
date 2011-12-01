@@ -115,7 +115,7 @@
 	\fi
 \label{sec:user:options}
 
-\minisec{draft}
+\subsubsection{draft}
 \ifENGLISH
 	The \choption{draft}-option enables markup of changes.
 	The list of changes is available via \chcommand{listofchanges}.
@@ -135,7 +135,7 @@
 
 \chcommand{usepackage[draft]\{changes\}}
 
-\minisec{final}
+\subsubsection{final}
 \ifENGLISH
 	The \choption{final}-option disables markup of changes, only the correct text will be shown.
 	The list of changes is disabled, too.
@@ -153,7 +153,7 @@
 
 \chcommand{usepackage[final]\{changes\}}
 
-\minisec{markup}
+\subsubsection{markup}
 \ifENGLISH
 	The \choption{markup} option chooses the visual markup of changed text.
 	The default markup is chosen if no explicit markup is given.
@@ -171,12 +171,12 @@
 \fi
 	\ifGERMAN
 		Die \choption{markup}-Option wählt ein vordefiniertes visuelles Markup für geänderten Text.
-		Das default Markup wird gewählt, wenn die Option nicht gesetzt wird.
+		Das default-Markup wird gewählt, wenn die Option nicht gesetzt wird.
 		Das mit \choption{markup} gewählte Markup kann mit den spezielleren Optionen \choption{addedmarkup} und/oder \choption{deletedmarkup} geändert werden.
 
 		Die folgenden Werte sind erlaubt:
 		\begin{description}
-			\item [\choption{default}] farbige Markierung von zugefügtem Text, gelöschter Text wird durchgestrichen (default Markup)
+			\item [\choption{default}] farbige Markierung von zugefügtem Text, gelöschter Text wird durchgestrichen (default-Markup)
 			\item [\choption{underlined}] zugefügter Text wird unterstrichen, gelöschter Text wird durchgestrichen
 			\item [\choption{bfit}] fetter zugefügter Text, schräger gelöschter Text
 			\item [\choption{nocolor}] es werden keine Farben verwendet, zugefügter Text wird unterstrichen, gelöschter Text wird durchgestrichen
@@ -190,7 +190,7 @@
 \chcommand{usepackage[markup=bfit]\{changes\}}\\
 \chcommand{usepackage[markup=nocolor]\{changes\}}
 
-\minisec{addedmarkup, deletedmarkup}
+\subsubsection{addedmarkup, deletedmarkup}
 \ifENGLISH
 	The \choption{addedmarkup} option chooses the visual markup of added text.
 	The \choption{deletedmarkup} option chooses the visual markup of deleted text respectively.
@@ -218,18 +218,18 @@
 	\ifGERMAN
 		Die \choption{addedmarkup}-Option wählt ein visuelles Markup für zugefügten Text.
 		Die \choption{deletedmarkup}-Option wählt analog ein visuelles Markup für gelöschten Text.
-		Das default Markup wird gewählt, wenn die Option nicht gesetzt wird.
+		Das default-Markup wird gewählt, wenn die Option nicht gesetzt wird.
 		Die Optionen \choption{addedmarkup} und \choption{deletedmarkup} überschreiben das mit \choption{markup} gewählte Markup.
 
 		Die folgenden Werte sind erlaubt:
 		\begin{description}
-			\item [\choption{none}] kein Markup -- Beispiel (default Markup für zugefügten Text)
+			\item [\choption{none}] kein Markup -- Beispiel (default-Markup für zugefügten Text)
 			\item [\choption{uline}] unterstrichener Text -- \uline{Beispiel}
 			\item [\choption{uuline}] doppelt unterstrichener Text -- \uuline{Beispiel}
 			\item [\choption{uwave}] gewellt unterstrichener Text -- \uwave{Beispiel}
 			\item [\choption{dashuline}] gestrichelt unterstrichener Text -- \dashuline{Beispiel}
 			\item [\choption{dotuline}] gepunktet unterstrichener Text -- \dotuline{Beispiel}
-			\item [\choption{sout}] durchgestrichener Text -- \sout{Beispiel} (default Markup für gelöschten Text)
+			\item [\choption{sout}] durchgestrichener Text -- \sout{Beispiel} (default-Markup für gelöschten Text)
 			\item [\choption{xout}] schräg durchgestrichener Text -- \xout{Beispiel}
 			\item [\choption{bf}] fetter Text -- \textbf{Beispiel}
 			\item [\choption{it}] italic Text -- \textit{Beispiel}
@@ -248,15 +248,100 @@
 
 
 
+\subsubsection{authormarkup}
+\ifENGLISH
+	The \choption{authormarkup} option chooses the visual markup of the author's identification.
+	The default markup is chosen if no explicit markup is given.
+
+	The following values are allowed:
+	\begin{description}
+		\item [\choption{superscript}] superscripted text -- text\textsuperscript{author} (default markup)
+		\item [\choption{subscript}] subscripted text -- text\textsubscript{author}
+		\item [\choption{brackets}] text in brackets -- text(author)
+		\item [\choption{footnote}] text in footnote -- text\footnote{author}
+	\end{description}
+
+	Examples:
+\fi
+	\ifGERMAN
+		Die \choption{authormarkup}-Option wählt ein visuelles Markup für die Autor-Identifizierung.
+		Das default-Markup wird gewählt, wenn die Option nicht gesetzt wird.
+
+		Die folgenden Werte sind erlaubt:
+		\begin{description}
+			\item [\choption{superscript}] hochgestellter Text -- Text\textsuperscript{Beispiel} (default-Markup)
+			\item [\choption{subscript}] tiefgestellter Text -- Text\textsubscript{Beispiel}
+			\item [\choption{brackets}] Text in Klammern -- Text(Beispiel)
+			\item [\choption{footnote}] Text in einer Fußnote -- Text\footnote{Beispiel}
+		\end{description}
+
+		Beispiele:
+	\fi
+
 \chcommand{usepackage[authormarkup=superscript]\{changes\}}\\
 \chcommand{usepackage[authormarkup=subscript]\{changes\}}\\
 \chcommand{usepackage[authormarkup=brackets]\{changes\}}\\
 \chcommand{usepackage[authormarkup=footnote]\{changes\}}
 
-\chcommand{usepackage[authormarkupid=id]\{changes\}}
-\chcommand{usepackage[authormarkupid=name]\{changes\}}
+\subsubsection{authormarkupposition}
+\ifENGLISH
+	The \choption{authormarkupposition} option chooses the position of the author's identification.
+	The default value is chosen if no explicit markup is given.
 
-\minisec{ulem}
+	The following values are allowed:
+	\begin{description}
+		\item [\choption{right}] right of the text -- text\textsuperscript{example} (default value)
+		\item [\choption{left}] left of the text -- \textsuperscript{example}text
+	\end{description}
+
+	Examples:
+\fi
+	\ifGERMAN
+		Die \choption{authormarkupposition}-Option gibt an, wo die Autor-Identifizierung gesetzt wird.
+		Der default-Wert wird gewählt, wenn die Option nicht gesetzt wird.
+
+		Die folgenden Werte sind erlaubt:
+		\begin{description}
+			\item [\choption{right}] rechts vom Text -- Text\textsuperscript{Beispiel} (default value)
+			\item [\choption{left}] links vom Text -- \textsuperscript{Beispiel}Text
+		\end{description}
+
+		Beispiele:
+	\fi
+
+\chcommand{usepackage[authormarkupposition=right]\{changes\}}
+\chcommand{usepackage[authormarkupposition=left]\{changes\}}
+
+\subsubsection{authormarkuptext}
+\ifENGLISH
+	The \choption{authormarkuptext} option chooses the text that is used for the author's identification.
+	The default value is chosen if no explicit markup is given.
+
+	The following values are allowed:
+	\begin{description}
+		\item [\choption{id}] author's id -- text\textsuperscript{id} (default value)
+		\item [\choption{name}] author's name -- text\textsuperscript{authorname}
+	\end{description}
+
+	Examples:
+\fi
+	\ifGERMAN
+		Die \choption{authormarkuptext}-Option gibt an, was für die Autor-Identifizierung genutzt wird.
+		Der default-Wert wird gewählt, wenn die Option nicht gesetzt wird.
+
+		Die folgenden Werte sind erlaubt:
+		\begin{description}
+			\item [\choption{id}] Autoren-ID -- Text\textsuperscript{ID} (default-Wert)
+			\item [\choption{name}] Autorenname -- Text\textsuperscript{Autorenname}
+		\end{description}
+
+		Beispiele:
+	\fi
+
+\chcommand{usepackage[authormarkuptext=id]\{changes\}}
+\chcommand{usepackage[authormarkuptext=name]\{changes\}}
+
+\subsubsection{ulem}
 \ifENGLISH
 	All options for the \chpackage{ulem} package can be specified as parameters of the \choption{ulem}-option.
 	Two or more options have to be embraced in curly brackets.
@@ -269,7 +354,7 @@
 \chcommand{usepackage[ulem=normalem]\{changes\}}\\
 \chcommand{usepackage[ulem=\{normalem,normalbf\}]\{changes\}}
 
-\minisec{xcolor}
+\subsubsection{xcolor}
 
 \ifENGLISH
 	All options for the \chpackage{xcolor} package can be specified as parameters of the \choption{xcolor}-option.
