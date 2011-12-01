@@ -1,4 +1,4 @@
-% \CheckSum{657}
+% \CheckSum{765}
 %
 % \iffalse meta-comment
 %
@@ -219,6 +219,63 @@
 }
 %    \end{macrocode}
 %
+% Declare storage for authormarkup option and store option value or set to default value \texttt{superscript}.
+%    \begin{macrocode}
+\newcommand{\Changes@optionauthormarkup}{superscript}
+\DeclareOptionX{authormarkup}{
+	\ifthenelse{\equal{\@empty}{#1}}
+		{}
+		{
+			\ifthenelse{
+				\equal{#1}{superscript}\or
+				\equal{#1}{subscript}\or
+				\equal{#1}{brackets}\or
+				\equal{#1}{footnote}
+			}
+				{\renewcommand{\Changes@optionauthormarkup}{#1}}
+				{\PackageWarning{changes}{authormarkup '#1' unknown, using '\Changes@optionauthormarkup'}}
+		}
+	\typeout{changes-option 'authormarkup=\Changes@optionauthormarkup'}
+}
+%    \end{macrocode}
+%
+% Declare storage for authormarkupposition option and store option value or set to default value \texttt{right}.
+%    \begin{macrocode}
+\newcommand{\Changes@optionauthormarkupposition}{right}
+\DeclareOptionX{authormarkupposition}{
+	\ifthenelse{\equal{\@empty}{#1}}
+		{}
+		{
+			\ifthenelse{
+				\equal{#1}{right}\or
+				\equal{#1}{left}
+			}
+				{\renewcommand{\Changes@optionauthormarkupposition}{#1}}
+				{\PackageWarning{changes}{authormarkupposition '#1' unknown, using '\Changes@optionauthormarkupposition'}}
+		}
+	\typeout{changes-option 'authormarkupposition=\Changes@optionauthormarkupposition'}
+}
+%    \end{macrocode}
+%
+% Declare storage for authormarkuptext option and store option value or set to default value \texttt{id}.
+%    \begin{macrocode}
+\newcommand{\Changes@optionauthormarkuptext}{id}
+\DeclareOptionX{authormarkuptext}{
+	\ifthenelse{\equal{\@empty}{#1}}
+		{}
+		{
+			\ifthenelse{
+				\equal{#1}{id}\or
+				\equal{#1}{name}
+			}
+				{\renewcommand{\Changes@optionauthormarkuptext}{#1}}
+				{\PackageWarning{changes}{authormarkuptext '#1' unknown, using '\Changes@optionauthormarkuptext'}}
+		}
+	\typeout{changes-option 'authormarkuptext=\Changes@optionauthormarkuptext'}
+}
+%    \end{macrocode}
+%
+%
 %
 % Options for package \chpackage{ulem} are directly passed to the package.
 %    \begin{macrocode}
@@ -437,18 +494,18 @@
 \definechangesauthor[color=blue]{\@empty}
 %    \end{macrocode}
 %
-%  Position of the authors markup relative to the text.
-%  \emph{true} == left, \emph{false} == right (default).
+% \begin{macro}{\Changes@Markup@Author@Position}
+%  Position of the authors markup relative to the text (\emph{left} or \emph{right} == default).
 %    \begin{macrocode}
-\newboolean{Changes@AuthorPositionLeft}
-\setboolean{Changes@AuthorPositionLeft}{false}
+\newcommand{\Changes@Markup@Author@Position}{right}
 %    \end{macrocode}
+% \end{macro}
 %
-% \begin{macro}{\Changes@AuthorMark}
+% \begin{macro}{\Changes@Markup@Author}
 %  Markup of the author.
 %  Default: superscripted.
 %    \begin{macrocode}
-\newcommand{\Changes@AuthorMark}[1]{%
+\newcommand{\Changes@Markup@Author}[1]{%
 	\textsuperscript{#1}%
 }
 %    \end{macrocode}
