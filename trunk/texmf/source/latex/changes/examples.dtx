@@ -47,9 +47,9 @@
 % Different package options.
 %
 %    \begin{macrocode}
-%<*example:simple|example:setlocextension|example:setaddedmarkup|example:setdeletedmarkup|example:setauthormarkup|example:setauthormarkupposition|example:setauthormarkuptext>
+%<*example:simple|example:setlocextension|example:setaddedmarkup|example:setdeletedmarkup|example:setauthormarkup|example:setauthormarkupposition|example:setauthormarkuptext|example:setremarkmarkup>
 \usepackage{changes}
-%</example:simple|example:setlocextension|example:setaddedmarkup|example:setdeletedmarkup|example:setauthormarkup|example:setauthormarkupposition|example:setauthormarkuptext>
+%</example:simple|example:setlocextension|example:setaddedmarkup|example:setdeletedmarkup|example:setauthormarkup|example:setauthormarkupposition|example:setauthormarkuptext|example:setremarkmarkup>
 %
 %<*example:draft>
 \usepackage[draft]{changes}
@@ -207,6 +207,10 @@
 \setauthormarkuptext{name}
 %</example:setauthormarkuptext>
 %
+%<*example:setremarkmarkup>
+\setremarkmarkup{\footnote{#2 as was written by #1}}
+%</example:setremarkmarkup>
+%
 %<*example:setlocextension>
 \setlocextension{changes}
 %</example:setlocextension>
@@ -246,16 +250,16 @@ The lysine contingency - it's intended to prevent the spread of the animals is c
 The animals can't manufacture the amino acid lysine.
 Unless \replaced[Green]{they're}{continually} supplied with lysine by us, they'll slip into a coma and die.
 
-\subsection*{Changes by orange author}
+\subsection*{Changes by orange author with some remarks}
 
 Now that we know who you are, I know who I am.
-\added[OA]{I'm not a mistake!}
+\added[OA][Yeah, I like animals better than people sometimes\dots]{I'm not a mistake!}
 It all makes sense!
 In a comic, you know how you can tell who the arch-villain's going to be?
-\deleted[OA]{He's the exact opposite of the hero.}
+\deleted[OA][Especially dogs. Dogs are the best.]{He's the exact opposite of the hero.}
 \deleted[OA]{And most times they're friends, like you and me!}
 I should've known way back when...
-\replaced[OA]{You know why, David?}{Because of the kids.}
+\replaced[OA][Every time you come home, they act like they haven't seen you in a year.]{You know why, David?}{Because of the kids.}
 They called me Mr Glass.
 
 \subsection*{No changes}
