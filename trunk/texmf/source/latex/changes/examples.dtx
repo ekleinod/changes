@@ -47,9 +47,9 @@
 % Different package options.
 %
 %    \begin{macrocode}
-%<*example:simple|example:setlocextension|example:setaddedmarkup|example:setdeletedmarkup>
+%<*example:simple|example:setlocextension|example:setaddedmarkup|example:setdeletedmarkup|example:setauthormarkup|example:setauthormarkupposition|example:setauthormarkuptext>
 \usepackage{changes}
-%</example:simple|example:setlocextension|example:setaddedmarkup|example:setdeletedmarkup>
+%</example:simple|example:setlocextension|example:setaddedmarkup|example:setdeletedmarkup|example:setauthormarkup|example:setauthormarkupposition|example:setauthormarkuptext>
 %
 %<*example:draft>
 \usepackage[draft]{changes}
@@ -196,6 +196,16 @@
 %<*example:setdeletedmarkup>
 \setdeletedmarkup{\xout{#1}}
 %</example:setdeletedmarkup>
+%
+%<*example:setauthormarkup>
+\setauthormarkup{\xout{#1}}
+%</example:setauthormarkup>
+%<*example:setauthormarkupposition>
+\setauthormarkupposition{left}
+%</example:setauthormarkupposition>
+%<*example:setauthormarkuptext>
+\setauthormarkuptext{name}
+%</example:setauthormarkuptext>
 %
 %<*example:setlocextension>
 \setlocextension{changes}
