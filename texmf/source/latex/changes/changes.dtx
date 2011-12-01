@@ -437,7 +437,9 @@
 % \end{macro}
 %
 %
-% \subsection{Author management}
+% \subsection{Authors}
+%
+% \subsubsection{Author management}
 %
 % Author counter.
 %    \begin{macrocode}
@@ -494,12 +496,8 @@
 \definechangesauthor[color=blue]{\@empty}
 %    \end{macrocode}
 %
-% \begin{macro}{\Changes@Markup@Author@Position}
-%  Position of the authors markup relative to the text (\emph{left} or \emph{right} == default).
-%    \begin{macrocode}
-\newcommand{\Changes@Markup@Author@Position}{right}
-%    \end{macrocode}
-% \end{macro}
+%
+% \subsubsection{Author markup}
 %
 % \begin{macro}{\Changes@Markup@Author}
 %  Markup of the author.
@@ -513,16 +511,32 @@
 %
 % \subsection{Author markup}
 %
-% \begin{macro}{\setauthormarkup}
-%  Redefine the author markup.
-%  Mandatory argument: markup definition.
-%  Optional argument: markup position (default = left).
+% \begin{macro}{\Changes@Markup@Author}
+% Store markup for authors.
 %    \begin{macrocode}
-\newcommand{\setauthormarkup}[2][left]{%
-	\ifthenelse{\equal{#1}{left}}
-		{\setboolean{Changes@AuthorPositionLeft}{true}}
-		{\setboolean{Changes@AuthorPositionLeft}{false}}
-	\renewcommand{\Changes@AuthorMark}[1]{#2}
+\newcommand{\Changes@Markup@Author}[1]{%
+	\ifthenelse{\equal{\Changes@optionauthormarkup}{superscript}}{\textsuperscript{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionauthormarkup}{subscript}}{\textsubscript{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionauthormarkup}{brackets}}{(#1)}{}%
+	\ifthenelse{\equal{\Changes@optionauthormarkup}{footnote}}{\footnote{#1}}{}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\setauthormarkup}
+% Set markup for authors.
+%    \begin{macrocode}
+\newcommand{\setauthormarkup}[1]{
+	\renewcommand{\Changes@Markup@Author}[1]{#1}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\setauthormarkupposition}
+% Set position for author markup text.
+%    \begin{macrocode}
+\newcommand{\setauthormarkupposition}[1]{
+	\renewcommand{\Changes@optionauthormarkupposition}{#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -547,9 +561,9 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{Markup definition}
+% \subsection{Change management commands}
 %
-% \subsubsection{Text markup}
+% \subsubsection{Text markup definition}
 %
 % \begin{macro}{\Changes@Markup@Added}
 % Store markup for added text.
@@ -575,7 +589,7 @@
 % Set markup for added text.
 %    \begin{macrocode}
 \newcommand{\setaddedmarkup}[1]{
-	\renewcommand{\Changes@Markup@Added}[1]{##1}
+	\renewcommand{\Changes@Markup@Added}[1]{#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -604,13 +618,13 @@
 % Set markup for added text.
 %    \begin{macrocode}
 \newcommand{\setdeletedmarkup}[1]{
-	\renewcommand{\Changes@Markup@Deleted}[1]{##1}
+	\renewcommand{\Changes@Markup@Deleted}[1]{#1}
 }
 %    \end{macrocode}
 % \end{macro}
 %
 %
-% \subsubsection{Change commands}
+% \subsubsection{Change management command definition}
 %
 % Temporary variable for exchange of optional parameters between interlocked commands.
 %    \begin{macrocode}
