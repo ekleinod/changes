@@ -1,4 +1,4 @@
-% \CheckSum{765}
+% \CheckSum{789}
 %
 % \iffalse meta-comment
 %
@@ -500,18 +500,6 @@
 % \subsubsection{Author markup}
 %
 % \begin{macro}{\Changes@Markup@Author}
-%  Markup of the author.
-%  Default: superscripted.
-%    \begin{macrocode}
-\newcommand{\Changes@Markup@Author}[1]{%
-	\textsuperscript{#1}%
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \subsection{Author markup}
-%
-% \begin{macro}{\Changes@Markup@Author}
 % Store markup for authors.
 %    \begin{macrocode}
 \newcommand{\Changes@Markup@Author}[1]{%
@@ -529,6 +517,19 @@
 \newcommand{\setauthormarkup}[1]{
 	\renewcommand{\Changes@Markup@Author}[1]{#1}
 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\textsubscript}
+% Define the command \chcommand{textsubscript} in case the author markup \choption{subscript} is used and the command \chcommand{textsubscript} is not defined yet.
+% \chcommand{textsubscript} is the antagonist of \chcommand{textsuperscript} which is predefined in \LaTeX.
+% The code is taken from \LaTeX-FAQ 8.5.17.
+%    \begin{macrocode}
+\ifthenelse{\isundefined{\textsubscript}}
+ {
+	\DeclareRobustCommand*\textsubscript[1]{\@textsubscript{\selectfont#1}}
+	\newcommand{\@textsubscript}[1]{{\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
+ }{}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -626,10 +627,67 @@
 %
 % \subsubsection{Change management command definition}
 %
+% \begin{macro}{\Changes@output}
+% Output command for the changed text.
+% This command has the following arguments:
+% \begin{enumerate}
+%		\item changed text (including markup)
+%		\item unchanged text
+%		\item author's id
+%		\item remark
+% \end{enumerate}
+%    \begin{macrocode}
+\newcommand{\Changes@output}[4]{%
+%    \end{macrocode}
+%	Output changed text if option \choption{draft} is set, otherwise output unchanged text.
+%    \begin{macrocode}
+	\ifthenelse{\boolean{Changes@optiondraft}}%
+		{%
+			{%
+%    \end{macrocode}
+%	Change color, if colored text is used.
+%    \begin{macrocode}
+				\ifthenelse{\boolean{Changes@colored}}%
+					{\color{Changes@Color#3}}%
+					{}%
+%    \end{macrocode}
+%	Output author text if author's id is given and text should appear left of changes.
+%    \begin{macrocode}
+				\ifthenelse{\equal{\Changes@optionauthormarkupposition}{left} \and \not\equal{#3}{\@empty}}%
+					{\Changes@Markup@Author{#3}}%
+					{}%
+%    \end{macrocode}
+%	Output changed text.
+%    \begin{macrocode}
+				{#1}%
+%    \end{macrocode}
+%	Output author text if author's id is given and text should appear right of changes.
+%    \begin{macrocode}
+				\ifthenelse{\equal{\Changes@optionauthormarkupposition}{right} \and \not\equal{#3}{\@empty}}%
+					{\Changes@Markup@Author{#3}}%
+					{}%
+%    \end{macrocode}
+%	Output remark if a remark is given.
+%    \begin{macrocode}
+				\ifthenelse{\not\equal{#4}{\@empty} \and \not\equal{#3}{\@empty}}%
+					{\Changes@Remark{#3}{#4}}%
+					{}%
+			}%
+		}%
+%    \end{macrocode}
+%	Output unchanged text (option \choption{final} was set).
+%    \begin{macrocode}
+		{#2}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Changes@temp}
 % Temporary variable for exchange of optional parameters between interlocked commands.
 %    \begin{macrocode}
 \newcommand{\Changes@temp}{\@empty}
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\added}
 %  The command formats text as new text.
@@ -643,23 +701,12 @@
 	\Changes@added%
 }
 \newcommand{\Changes@added}[2][\@empty]{%
-	\ifthenelse{\boolean{Changes@optiondraft}}%
-	{%
-		{\color{Changes@Color\Changes@temp}{%
-		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
-			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
-			{}{\Changes@AuthorMark{\Changes@temp}}%
-			}{}%
-		{\Changes@Markup@Added{#2}}%
-		\ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
-			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
-			{}{\Changes@AuthorMark{\Changes@temp}}%
-			}{}%
-		\ifthenelse{\equal{\@empty}{#1}}%
-			{}{\Changes@Remark{\Changes@temp}{#1}}%
-		}%
-		\stepcounter{Changes@AddCount\Changes@temp}}%
-	}{#2}%
+	\Changes@output
+		{\Changes@Markup@Added{#2}}
+		{#2}
+		{\Changes@temp}
+		{#1}%
+	\stepcounter{Changes@AddCount\Changes@temp}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -679,23 +726,12 @@
 	\Changes@deleted%
 }
 \newcommand{\Changes@deleted}[2][\@empty]{%
-	\ifthenelse{\boolean{Changes@optiondraft}}%
-	{%
-		{\color{Changes@Color\Changes@temp}{%
-		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
-			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
-			{}{\Changes@AuthorMark{\Changes@temp}}%
-			}{}%
-		{\Changes@Markup@Deleted{#2}}%
-		\ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
-			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
-			{}{\Changes@AuthorMark{\Changes@temp}}%
-			}{}%
-		\ifthenelse{\equal{\@empty}{#1}}%
-			{}{\Changes@Remark{\Changes@temp}{#1}}%
-		}%
-		\stepcounter{Changes@DeleteCount\Changes@temp}}%
-	}{\@bsphack \expandafter \@esphack}%
+	\Changes@output
+		{\Changes@Markup@Deleted{#2}}
+		{\@bsphack \expandafter \@esphack}
+		{\Changes@temp}
+		{#1}%
+	\stepcounter{Changes@DeleteCount\Changes@temp}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -712,24 +748,12 @@
 	\Changes@replaced%
 }
 \newcommand{\Changes@replaced}[3][\@empty]{%
-	\ifthenelse{\boolean{Changes@optiondraft}}%
-	{%
-		{\color{Changes@Color\Changes@temp}{%
-		\ifthenelse{\boolean{Changes@AuthorPositionLeft}}%
-			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
-			{}{\Changes@AuthorMark{\Changes@temp}}%
-			}{}%
-		{\Changes@Markup@Added{#2}}%
-		{\Changes@Markup@Deleted{#3}}%
-		\ifthenelse{\not\boolean{Changes@AuthorPositionLeft}}%
-			{\ifthenelse{\equal{\@empty}{\Changes@temp}}%
-			{}{\Changes@AuthorMark{\Changes@temp}}%
-			}{}%
-		\ifthenelse{\equal{\@empty}{#1}}%
-			{}{\Changes@Remark{\Changes@temp}{#1}}%
-		}%
-		\stepcounter{Changes@ReplaceCount\Changes@temp}}%
-	}{#2}%
+	\Changes@output
+		{{\Changes@Markup@Added{#2}}{\Changes@Markup@Deleted{#3}}}
+		{#2}
+		{\Changes@temp}
+		{#1}%
+	\stepcounter{Changes@ReplaceCount\Changes@temp}%
 }
 %    \end{macrocode}
 % \end{macro}
