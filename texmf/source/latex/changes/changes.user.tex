@@ -368,25 +368,15 @@
 \chcommand{usepackage[xcolor=dvipdf]\{changes\}}\\
 \chcommand{usepackage[xcolor=\{dvipdf,gray\}]\{changes\}}
 
-%^^A -- Neue Befehle ----------------------------------------------------------
+%^^A -- Change management ----------------------------------------------------------
 \ifENGLISH
-	\subsection{New commands}
-
-	This section describes all new commands of the \chpackage{changes}-package.
+	\subsection{Change management}
 \fi
 	\ifGERMAN
-		\subsection{Neue Befehle}
-
-		Dieser Abschnitt führt alle neuen Befehle des \chpackage{changes}-Pakets auf und erläutert sie.
+		\subsection{Änderungsmanagement}
 	\fi
 
-\ifENGLISH
-	\subsubsection{Change management}
-\fi
-	\ifGERMAN
-		\subsubsection{Änderungsmanagement}
-	\fi
-
+\subsubsection{\chcommand{added}}
 \DescribeMacro{\added}
 \ifENGLISH
 	The command \chcommand{added} marks new text.
@@ -421,6 +411,7 @@
 		\end{einspiel}
 	\fi
 
+\subsubsection{\chcommand{deleted}}
 \DescribeMacro{\deleted}
 \ifENGLISH
 	The command \chcommand{deleted} marks deleted text.
@@ -445,6 +436,7 @@
 		\end{einspiel}
 	\fi
 
+\subsubsection{\chcommand{replaced}}
 \DescribeMacro{\replaced}
 \ifENGLISH
 	The command \chcommand{replaced} marks replaced text.
@@ -471,6 +463,7 @@
 		\end{einspiel}
 	\fi
 
+\subsubsection{\chcommand{listofchanges}}
 \DescribeMacro{\listofchanges}
 \ifENGLISH
 	The command \chcommand{listofchanges} outputs a list of changes.
@@ -486,14 +479,15 @@
 	\>\chcommand{listofchanges}
 \end{einspiel}
 
-%^^A -- Nutzeranpassungen -----------------------------------------------------
+%^^A -- Author management -----------------------------------------------------
 \ifENGLISH
-	\subsubsection{User specific adaptions}
+	\subsection{Author management}
 \fi
 	\ifGERMAN
-		\subsubsection{Nutzerdefinierte Anpassungen}
+		\subsection{Autorenverwaltung}
 	\fi
 
+\subsubsection{\chcommand{definechangesauthor}}
 \DescribeMacro{\definechangesauthor}
 \ifENGLISH
 	The command \chcommand{definechangesauthor} defines a new author for changes.
@@ -522,26 +516,15 @@
 	\>\chcommand{definechangesauthor[name=\{Ekkart Kleinod\}, color=orange]\{EK\}}
 \end{einspiel}
 
-\DescribeMacro{\setlocextension}
+%^^A -- Adaption of the output -----------------------------------------------------
 \ifENGLISH
-	The command \chcommand{setlocextension} sets the extension of the auxiliary file for the list of changes (loc-file).
-	The default extension is "\texttt{loc}".
-	In the example, the loc-file for "\texttt{foo.tex}" would be named "\texttt{foo.changes}" instead of the default name "\texttt{foo.loc}".
+	\subsection{Adaption of the output}
 \fi
 	\ifGERMAN
-		Der Befehl \chcommand{setlocextension} legt das Suffix der Hilfsdatei für die Änderungsliste (loc-Datei\footnote{%
-			"`loc"' steht dabei für "`list of changes"'.
-		}) fest.
-		Ohne andere Definition gilt das Suffix "`\texttt{loc}"'.
-		Das Beispiel würde für "`\texttt{foo.tex}"' Hilfsdateien erzeugen, die "`\texttt{foo.changes}"' statt des Standardnamens "`\texttt{foo.loc}"' heißen.
+		\subsection{Anpassung der Ausgabe}
 	\fi
-\begin{einspiel}
-	\>\chcommand{setlocextension\{\meta{extension}\}}
-\end{einspiel}
-\begin{einspiel}[true]
-	\>\chcommand{setlocextension\{changes\}}
-\end{einspiel}
 
+\subsubsection{\chcommand{setauthormarkup}}
 \DescribeMacro{\setauthormarkup}
 \ifENGLISH
 	The command \chcommand{setauthormarkup} sets the layout of the authormarkup in the text.
@@ -567,6 +550,7 @@
 	\>\chcommand{setauthormarkup[right]\{\}}
 \end{einspiel}
 
+\subsubsection{\chcommand{setremarkmarkup}}
 \DescribeMacro{\setremarkmarkup}
 \ifENGLISH
 	The command \chcommand{setremarkmarkup} sets the layout of the remarkmarkup in the text.
@@ -588,6 +572,27 @@
 \begin{einspiel}[true]
 	\>\chcommand{setremarkmarkup\{(\#2:\#1)\}}\\
 	\>\chcommand{setremarkmarkup\{\chcommand{footnote}\{\#1:\chcommand{textcolor\{Changes@Color\#1\}}\{\#2\}\}\}}
+\end{einspiel}
+
+\subsubsection{\chcommand{setlocextension}}
+\DescribeMacro{\setlocextension}
+\ifENGLISH
+	The command \chcommand{setlocextension} sets the extension of the auxiliary file for the list of changes (loc-file).
+	The default extension is "\texttt{loc}".
+	In the example, the loc-file for "\texttt{foo.tex}" would be named "\texttt{foo.changes}" instead of the default name "\texttt{foo.loc}".
+\fi
+	\ifGERMAN
+		Der Befehl \chcommand{setlocextension} legt das Suffix der Hilfsdatei für die Änderungsliste (loc-Datei\footnote{%
+			"`loc"' steht dabei für "`list of changes"'.
+		}) fest.
+		Ohne andere Definition gilt das Suffix "`\texttt{loc}"'.
+		Das Beispiel würde für "`\texttt{foo.tex}"' Hilfsdateien erzeugen, die "`\texttt{foo.changes}"' statt des Standardnamens "`\texttt{foo.loc}"' heißen.
+	\fi
+\begin{einspiel}
+	\>\chcommand{setlocextension\{\meta{extension}\}}
+\end{einspiel}
+\begin{einspiel}[true]
+	\>\chcommand{setlocextension\{changes\}}
 \end{einspiel}
 
 %^^A -- packages
