@@ -482,13 +482,17 @@
 %
 % Store the author's definition in according variables/colors, create change counters.
 %    \begin{macrocode}
-	\@namedef{Changes@AuthorName#2}{\Changes@definechangesauthor@name}
+	%\@namedef{Changes@AuthorName#2}{\Changes@definechangesauthor@name}
+	\expandafter
+	\let\csname Changes@AuthorName#2\endcsname=\Changes@definechangesauthor@name
 	\newcounter{Changes@AddCount#2}
 	\newcounter{Changes@DeleteCount#2}
 	\newcounter{Changes@ReplaceCount#2}
 	\ifthenelse{\boolean{Changes@colored}}
 		{
-			\@namedef{Changes@AuthorColor#2}{\Changes@definechangesauthor@color}
+			%\@namedef{Changes@AuthorColor#2}{\Changes@definechangesauthor@color}
+			\expandafter
+			\let\csname Changes@AuthorColor#2\endcsname=\Changes@definechangesauthor@color
 			\colorlet{Changes@Color#2}{\@nameuse{Changes@AuthorColor#2}}
 		}
 		{}
@@ -807,42 +811,47 @@
 %    \begin{macrocode}
 \newcommand{\listofchanges}{%
 	\ifthenelse{\boolean{Changes@optiondraft}}
-	{
-		\section*{\listchangesname}
-		\IfFileExists{\jobname.\Changes@extension}
 		{
-			\newboolean{Changes@MoreLines}
-			\setboolean{Changes@MoreLines}{true}
-			\newread\Changes@InFile
-			\openin\Changes@InFile = \jobname.\Changes@extension
-			\whiledo{\boolean{Changes@MoreLines}}{
-				\read\Changes@InFile to \Changes@Line
-				\ifeof\Changes@InFile
-				\setboolean{Changes@MoreLines}{false}
-				\else
-				\expandafter\changes@chopline\Changes@Line\\
-				\begin{tabbing}
-					mm\=mmmmmm\=\kill
-					\ifthenelse{\equal{\Changes@InID}{}}
-						{{\color{\Changes@InColor}{\changesauthorname: \changesanonymousname}}\\}
-						{{\color{\Changes@InColor}{\changesauthorname: \Changes@InID}}
-							\ifthenelse{\equal{\Changes@InName}{}}
-								{}
-								{{\color{\Changes@InColor}{(\Changes@InName)}}}
-							\\
-						}
-					\>\changesaddname:\>\Changes@InAdded\\
-					\>\changesdeletename:\>\Changes@InDeleted\\
-					\>\changesreplacename:\>\Changes@InReplaced\\
-				\end{tabbing}
-				\fi
-			}
-			\closein\Changes@InFile
-		}{
-			\emph{\changesnoloc}
-			\PackageWarning{changes}{LaTeX rerun needed for list of changes}
-		}
-	}{}
+			\section*{\listchangesname}
+			\IfFileExists{\jobname.\Changes@extension}
+				{
+					\newboolean{Changes@MoreLines}
+					\setboolean{Changes@MoreLines}{true}
+					\newread\Changes@InFile
+					\openin\Changes@InFile = \jobname.\Changes@extension
+					\whiledo{\boolean{Changes@MoreLines}}{
+						\read\Changes@InFile to \Changes@Line
+						\ifeof\Changes@InFile
+							\setboolean{Changes@MoreLines}{false}
+						\else
+							\expandafter\changes@chopline\Changes@Line\\
+							\begin{tabbing}
+								mm\=mmmmmm\=\kill
+								{
+									\ifthenelse{\boolean{Changes@colored}}
+										{\color{\Changes@InColor}}
+										{}
+									\ifthenelse{\equal{\Changes@InID}{\@empty}}
+										{\changesauthorname: \changesanonymousname}
+										{
+											\changesauthorname: \Changes@InID
+											\ifthenelse{\equal{\Changes@InName}{\@empty}}
+												{}
+												{(\Changes@InName)}
+										}
+								}\\
+								\>\changesaddname:\>\Changes@InAdded\\
+								\>\changesdeletename:\>\Changes@InDeleted\\
+								\>\changesreplacename:\>\Changes@InReplaced\\
+							\end{tabbing}
+						\fi
+					}
+					\closein\Changes@InFile
+				}{
+					\emph{\changesnoloc}
+					\PackageWarning{changes}{LaTeX rerun needed for list of changes}
+				}
+		}{}
 }
 %    \end{macrocode}
 % \end{macro}
