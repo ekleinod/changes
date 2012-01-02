@@ -27,6 +27,129 @@ In diesem Kapitel wird die typische Nutzung des \chpackage{changes}-Pakets besch
 Dabei wird ein typischer Anwendungsfall geschildert.
 Die ausführliche Beschreibung der Paketoptionen und neuen Befehle finden Sie nicht hier, sondern in \autoref{sec:user}.
 
+Ausgangslage ist ein Text, an dem Änderungen vorgenommen werden sollen.
+Diese Änderungen sollen markiert werden, und zwar für jeden Autor einzeln.
+Eine solche Änderungsmarkierung ist z.\,B.\ von WYSIWYG-Textprogrammen wie \emph{LibreOffice}, \emph{OpenOffice} oder \emph{Word} bekannt.
+
+Zu diesem Zweck wurde das \chpackage{changes}-Paket entwickelt.
+Das Paket stellt Befehle zur Verfügung, um verschiedene Autoren zu definieren und Text als zugefügt, gelöscht oder geändert zu markieren.
+Um das Paket zu nutzen, müssen Sie folgende Schritte ausführen:
+\begin{enumerate}
+	\item \chpackage{changes}-Paket einbinden
+	\item Autoren definieren
+	\item Textänderungen markieren
+	\item Dokument mit \LaTeX\ setzen
+	\item für die Liste von Änderungen Dokument zweimal mit \LaTeX\ setzen
+	\item Markierungen entfernen
+\end{enumerate}
+
+\minisec{\chpackage{changes}-Paket einbinden}
+
+Um die Änderungsverfolgung zu aktivieren, ist das \chpackage{changes}-Paket wie folgt einzubinden:
+
+\chcommand{usepackage\{changes\}}
+
+bzw.
+
+\chcommand{usepackage[<optionen>]\{changes\}}
+
+Mit den verfügbaren Optionen bestimmen Sie das Aussehen der Änderungsmarkierungen.
+Sie können das Aussehen der Änderungsmarkierungen auch nach Einbinden des \chpackage{changes}-Paket verändern.
+
+Für Details lesen Sie bitte \autoref{sec:user:options} und \autoref{sec:user:customizingoutput}.
+
+\minisec{Autoren definieren}
+
+Das \chpackage{changes}-Paket stellt einen vordefinierten anonymen Autor zur Verfügung.
+Wenn Sie jedoch die Änderungen per AutorIn verfolgen wollen, müssen Sie die entsprechenden Autoren definieren.
+Dies geht wie folgt:
+
+\chcommand{definechangesauthor[<optionen>]\{ID\}}
+
+Über die ID werden der/die AutorIn und die zugehörigen Textänderungen eindeutig identifiziert.
+Optional können Sie einen Namen angeben und dem/der AutorIn eine eigene Farbe zuweisen.
+
+Für Details lesen Sie bitte \autoref{sec:user:authormanagement}.
+
+\minisec{Textänderungen markieren}
+
+Jetzt ist alles vorbereitet, um den geänderten Text zu markieren.
+Benutzen Sie bitte je nach Änderung die folgenden Befehle:
+
+für neu zugefügten Text:\\
+\chcommand{added[<ID>][<Anmerkung>]\{Text\}}
+
+für gelöschten Text:\\
+\chcommand{deleted[<ID>][<Anmerkung>]\{Text\}}
+
+für geänderten Text:\\
+\chcommand{replaced[<ID>][<Anmerkung>]\{neuer Text\}\{alter Text\}}
+
+Die Angabe von Autoren-ID und einer Anmerkung ist optional.
+
+Für Details lesen Sie bitte \autoref{sec:user:changemanagement}.
+
+\minisec{Dokument mit \LaTeX\ setzen}
+
+Nachdem Sie die Änderungen im \LaTeX-Text markiert haben, können Sie sie im erzeugten Dokument sichtbar machen, indem Sie das Dokument ganz normal übersetzen.
+Durch die Übersetzung wird der geänderte Text so markiert, wie Sie das mittels der Optiuonen bzw.\ speziellen Befehle eingestellt haben.
+
+\minisec{für die Liste von Änderungen Dokument zweimal mit \LaTeX\ setzen}
+
+Sie können sich eine Liste der Änderungen ausgeben lassen.
+Dies erfolgt mit dem Kommando:
+
+\chcommand{listofchanges}
+
+Die Ausgabe ist gedacht als Analogon zur Liste von Tabellen oder Abbildungen.
+Sie dient dazu, einen schnellen Überblick über Art und Anzahl der Änderungen abhängig von dem/der AutorIn zu bekommen.
+
+Bei jedem \LaTeX-Lauf werden die Daten für diese Liste in eine Hilfsdatei geschrieben.
+Beim nächsten \LaTeX-Lauf wewrden dann diese Daten genutzt, um die Änderungsliste anzuzeigen.
+Daher sind nach jeder Änderung zwei \LaTeX-Läufe notwendig, um eine aktuelle Änderungsliste anzuzeigen.
+
+\minisec{Markierungen entfernen}
+
+Oft ist es der Fall, dass die Änderungen eines Dokuments angenommen oder abgelehnt werden und nach diesem Prozess die Änderungsmarkierungen entfernt werden sollen.
+Sie können die Ausgabe der Änderungsmarkierungen per Option beim Einbinden des \chpackage{changes}-Pakets unterdrücken:
+
+\chcommand{usepackage[final]\{changes\}}
+
+Für die Entfernung der Markierungen aus dem Quelltext steht ein Script von Silvano Chiaradonna zur Verfügung.
+Das Script liegt im Verzeichnis:
+
+\texttt{<texpfad>/scripts/changes/}
+
+Das Script entfernt alle Markierungen, es ist nicht möglich, die zu entfernenden Markierungen zu selektieren.
+
+%^^A ---- limitations
+\section{Einschränkungen und Erweiterungsmöglichkeiten}
+\label{sec:limitations}
+
+Das \chpackage{changes}-Paket ist sorgfältig programmiert und getestet worden.
+Dennoch kann es vorkommen, dass Fehler im Paket sind, dass die Benutzung problematisch ist oder dass eine Funktion fehlt, die Sie gerne hätten.
+In diesem Fall gehen Sie bitte zu
+
+\url{http://changes.sourceforge.net/}
+
+Dort können Sie Fehler melden, im Forum um Hilfe fragen oder Tips einstellen.
+Sie können dort auch den Quellcode ansehen und nach Ihren Wünschen ändern bzw.\ erweitern.
+Ich werde mich dann bemühen, Ihre Änderungen einzuarbeiten.
+Sie können auch als Co-Autor am Paket mitarbeiten, wenn Sie bei \emph{sourceforge} angemeldet sind.
+
+Sie können mir auch eine Mail schreiben an \href{mailto:ekleinod@edgesoft.de}{ekleinod@edgesoft.de}, in diesem Fall starten Sie bitte Ihr Mail-Subject mit \texttt{[changes]}.
+
+Die Änderungsmarkierung von Text funktioniert recht gut, es können auch ganze Absätze markiert werden.
+Die Markierung von mehreren Absätzen gleichzeitig, von Bildern und Tabellen ist nicht möglich.
+
+Folgende Erweiterungen fallen mir spontan ein, die ich jedoch nicht selbst programmieren werde (weil mir Zeit und oft auch die Fähigkeit fehlt):
+\begin{itemize}
+	\item Auswahl der anzunehmenden/abzulehnenden Änderungen mit entsprechendem Löschen des Textes
+	\item Markierung von mehreren Absätzen
+	\item Markierung von Bildern und Tabellen
+	\item automatische Markierung anhand von diff-Informationen (unter Berücksichtigung der Einschränkungen bzgl.\ Absätzen, Bildern, etc.)
+\end{itemize}
+
 %^^A ---- user interface
 \section{Die Benutzerschnittstelle des \chpackage{changes}-Pakets}
 \label{sec:user}
@@ -38,18 +161,6 @@ Wenn Sie die Optionen und Kommandos im Beispiel sehen wollen, sehen Sie bitte in
 \texttt{<texpfad>/doc/latex/changes/examples/}
 
 Die Beispieldateien sind mit der benutzten Option bzw. dem benutzten Kommando benannt.
-
-Um die Änderungsverfolgung zu aktivieren, ist das \chpackage{changes}-Paket wie folgt einzubinden:
-
-\chcommand{usepackage\{changes\}}
-
-bzw.
-
-\chcommand{usepackage[<optionen>]\{changes\}}
-
-Nach der Aktivierung der Änderungsverfolgung schreiben Sie Ihren Text und fügen die Befehle für das Änderungsmanagement ein.
-Danach übersetzen Sie Ihr Dokument wie gehabt mit \emph{pdflatex} oder dem \LaTeX-Interpreter Ihrer Wahl.
-Wenn Sie eine aktuelle Liste der Änderungen ausgeben wollen, müssen Sie das Dokument zweimal übersetzen: im ersten Lauf wird die Anzahl der Änderungen gesammelt, im zweiten Lauf wird damit die Liste der Änderungen aktualisiert.
 
 %^^A -- options
 \subsection{Paketoptionen}
@@ -199,6 +310,7 @@ Zwei oder mehr Optionen müssen in geschweifte Klammern gesetzt werden.
 %^^A ---- change management
 
 \subsection{Änderungsmanagement}
+\label{sec:user:changemanagement}
 
 \subsubsection{\chcommand{added}}
 \DescribeMacro{\added}
@@ -258,6 +370,7 @@ Für eine aktuelle Liste der Änderungen sind daher zwei \LaTeX-Läufe notwendig
 %^^A ---- Author management
 
 \subsection{Autorenverwaltung}
+\label{sec:user:authormanagement}
 
 \subsubsection{\chcommand{definechangesauthor}}
 \DescribeMacro{\definechangesauthor}
@@ -280,6 +393,7 @@ Der Autorenname wird in der Änderungsliste benutzt und im Markup, wenn die ents
 
 %^^A ---- Adaptation of the output
 \subsection{Anpassung der Ausgabe}
+\label{sec:user:customizingoutput}
 
 \subsubsection{\chcommand{setauthormarkup}}
 \DescribeMacro{\setauthormarkup}
