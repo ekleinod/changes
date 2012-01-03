@@ -1,7 +1,7 @@
 %^^A ---- introduction
 \section{Einleitung}
 
-Dieses Paket dient dazu, manuelle Änderungsmarkierung anzubieten.
+Dieses Paket dient dazu, manuelle Änderungsmarkierung zu ermöglichen.
 
 Verbesserungsvorschläge, Gedanken oder Kritik sind willkommen.
 Das Paket wird auf sourceforge gehalten, bitte gehen Sie zu
@@ -16,14 +16,14 @@ Wenn Sie mich direkt kontaktieren wollen, mailen Sie bitte an \href{mailto:eklei
 	Das changes-Paket dient zur manuellen Markierung von geändertem Text, insbesondere Einfügungen, Löschungen und Ersetzungen.
 	Der geänderte Text wird farbig markiert und, bei gelöschtem Text, durchgestrichen.
 	Das Paket ermöglicht die freie Definition von Autoren und deren zugeordneten Farben.
-	Es erlaubt zusätzlich die Definition des Autor- und Anmerkungsmarkups.
+	Es erlaubt zusätzlich die Änderung des Änderungs-, Autor- und Anmerkungsmarkups.
 \end{quote}
 
 %^^A ---- usage
 \section{Benutzung des \chpackage{changes}-Pakets}
 \label{sec:usage}
 
-In diesem Kapitel wird die typische Nutzung des \chpackage{changes}-Pakets beschrieben.
+In diesem Kapitel wird die Nutzung des \chpackage{changes}-Pakets beschrieben.
 Dabei wird ein typischer Anwendungsfall geschildert.
 Die ausführliche Beschreibung der Paketoptionen und neuen Befehle finden Sie nicht hier, sondern in \autoref{sec:user}.
 
@@ -39,7 +39,7 @@ Um das Paket zu nutzen, müssen Sie folgende Schritte ausführen:
 	\item Autoren definieren
 	\item Textänderungen markieren
 	\item Dokument mit \LaTeX\ setzen
-	\item für die Liste von Änderungen Dokument zweimal mit \LaTeX\ setzen
+	\item Liste von Änderungen anzeigen lassen
 	\item Markierungen entfernen
 \end{enumerate}
 
@@ -53,7 +53,7 @@ bzw.
 
 \chcommand{usepackage[<optionen>]\{changes\}}
 
-Mit den verfügbaren Optionen bestimmen Sie das Aussehen der Änderungsmarkierungen.
+Mit den verfügbaren Optionen bestimmen Sie hauptsächlich das Aussehen der Änderungsmarkierungen.
 Sie können das Aussehen der Änderungsmarkierungen auch nach Einbinden des \chpackage{changes}-Paket verändern.
 
 Für Details lesen Sie bitte \autoref{sec:user:options} und \autoref{sec:user:customizingoutput}.
@@ -61,7 +61,7 @@ Für Details lesen Sie bitte \autoref{sec:user:options} und \autoref{sec:user:cu
 \minisec{Autoren definieren}
 
 Das \chpackage{changes}-Paket stellt einen vordefinierten anonymen Autor zur Verfügung.
-Wenn Sie jedoch die Änderungen per AutorIn verfolgen wollen, müssen Sie die entsprechenden Autoren definieren.
+Wenn Sie jedoch die Änderungen per AutorIn verfolgen wollen, müssen Sie die entsprechenden AutorInnen definieren.
 Dies geht wie folgt:
 
 \chcommand{definechangesauthor[<optionen>]\{ID\}}
@@ -92,9 +92,9 @@ Für Details lesen Sie bitte \autoref{sec:user:changemanagement}.
 \minisec{Dokument mit \LaTeX\ setzen}
 
 Nachdem Sie die Änderungen im \LaTeX-Text markiert haben, können Sie sie im erzeugten Dokument sichtbar machen, indem Sie das Dokument ganz normal übersetzen.
-Durch die Übersetzung wird der geänderte Text so markiert, wie Sie das mittels der Optiuonen bzw.\ speziellen Befehle eingestellt haben.
+Durch die Übersetzung wird der geänderte Text so markiert, wie Sie das mittels der Optionen bzw.\ speziellen Befehle eingestellt haben.
 
-\minisec{für die Liste von Änderungen Dokument zweimal mit \LaTeX\ setzen}
+\minisec{Liste von Änderungen anzeigen lassen}
 
 Sie können sich eine Liste der Änderungen ausgeben lassen.
 Dies erfolgt mit dem Kommando:
@@ -105,7 +105,7 @@ Die Ausgabe ist gedacht als Analogon zur Liste von Tabellen oder Abbildungen.
 Sie dient dazu, einen schnellen Überblick über Art und Anzahl der Änderungen abhängig von dem/der AutorIn zu bekommen.
 
 Bei jedem \LaTeX-Lauf werden die Daten für diese Liste in eine Hilfsdatei geschrieben.
-Beim nächsten \LaTeX-Lauf wewrden dann diese Daten genutzt, um die Änderungsliste anzuzeigen.
+Beim nächsten \LaTeX-Lauf werden dann diese Daten genutzt, um die Änderungsliste anzuzeigen.
 Daher sind nach jeder Änderung zwei \LaTeX-Läufe notwendig, um eine aktuelle Änderungsliste anzuzeigen.
 
 \minisec{Markierungen entfernen}
@@ -133,14 +133,17 @@ In diesem Fall gehen Sie bitte zu
 \url{http://changes.sourceforge.net/}
 
 Dort können Sie Fehler melden, im Forum um Hilfe fragen oder Tips einstellen.
-Sie können dort auch den Quellcode ansehen und nach Ihren Wünschen ändern bzw.\ erweitern.
+Sie können dort den Quellcode ansehen und nach Ihren Wünschen ändern bzw.\ erweitern.
 Ich werde mich dann bemühen, Ihre Änderungen einzuarbeiten.
-Sie können auch als Co-Autor am Paket mitarbeiten, wenn Sie bei \emph{sourceforge} angemeldet sind.
+Sie können als Co-Autor am Paket mitarbeiten, wenn Sie bei \emph{sourceforge} angemeldet sind.
 
 Sie können mir auch eine Mail schreiben an \href{mailto:ekleinod@edgesoft.de}{ekleinod@edgesoft.de}, in diesem Fall starten Sie bitte Ihr Mail-Subject mit \texttt{[changes]}.
 
 Die Änderungsmarkierung von Text funktioniert recht gut, es können auch ganze Absätze markiert werden.
 Die Markierung von mehreren Absätzen gleichzeitig, von Bildern und Tabellen ist nicht möglich.
+
+Fußnoten (die standardmäßige Auszeichnung von Anmerkungen) werden in bestimmten Umgebungen, z.\,B.\ Tabellen oder der \emph{tabbing}-Umgebung, nicht korrekt gesetzt, dort erscheinen also Anmerkungen nicht.
+Das kann gelöst werden, indem eine andere Annotation von Anmerkungen definiert wird.
 
 Folgende Erweiterungen fallen mir spontan ein, die ich jedoch nicht selbst programmieren werde (weil mir Zeit und oft auch die Fähigkeit fehlt):
 \begin{itemize}
@@ -162,6 +165,9 @@ Wenn Sie die Optionen und Kommandos im Beispiel sehen wollen, sehen Sie bitte in
 
 Die Beispieldateien sind mit der benutzten Option bzw. dem benutzten Kommando benannt.
 
+Eine Vorbemerkung zum Setzen von ersetztem Text: ersetzter Text wird immer wie folgt gesetzt: \meta{neuer Text}\meta{alter Text}.
+Daher gibt es keine Möglichkeit, die Ausgabe ersetzten Texts direkt zu beeinflussen, sondern nur über die Änderung der Ausgabe neuen bzw.\ gelöschten Texts.
+
 %^^A -- options
 \subsection{Paketoptionen}
 \label{sec:user:options}
@@ -170,12 +176,12 @@ Die Beispieldateien sind mit der benutzten Option bzw. dem benutzten Kommando be
 
 Die \choption{draft}-Option bewirkt, dass alle Änderungen markiert werden.
 Die Änderungsliste kann durch \chcommand{listofchanges} ausgegeben werden.
-Ohne Optionsangabe wird \choption{draft} automatisch eingestellt.
+Diese Option ist automatisch voreingestellt.
 
 Die Angabe von \choption{draft} in \chcommand{documentclass} wird vom \chpackage{changes}-Paket mitgenutzt.
 Die lokale Angabe von \choption{final} überstimmt die Angabe von \choption{draft} in \chcommand{documentclass}.
 
-\chcommand{usepackage[draft]\{changes\}}
+\chcommand{usepackage[draft]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}
 
 \subsubsection{final}
 
@@ -201,12 +207,14 @@ Die folgenden Werte sind erlaubt:
 	\item [\choption{nocolor}] es werden keine Farben verwendet, zugefügter Text wird unterstrichen, gelöschter Text wird durchgestrichen
 \end{description}
 
-Beispiele:
-
-\chcommand{usepackage[markup=default]\{changes\}}\\
-\chcommand{usepackage[markup=underlined]\{changes\}}\\
-\chcommand{usepackage[markup=bfit]\{changes\}}\\
-\chcommand{usepackage[markup=nocolor]\{changes\}}
+\begin{chusage}
+		\>\chcommand{usepackage[markup=\meta{markup}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[markup=default]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}\\
+		\>\chcommand{usepackage[markup=underlined]\{changes\}}\\
+		\>\chcommand{usepackage[markup=bfit]\{changes\}}\\
+		\>\chcommand{usepackage[markup=nocolor]\{changes\}}
+\end{chusage}
 
 \subsubsection{addedmarkup, deletedmarkup}
 
@@ -231,13 +239,15 @@ Die folgenden Werte sind erlaubt:
 	\item [\choption{em}] hervorgehobener Text -- \emph{Beispiel}
 \end{description}
 
-Beispiele:
-
-\chcommand{usepackage[addedmarkup=none]\{changes\}}\\
-\chcommand{usepackage[addedmarkup=uline]\{changes\}}\\
-\chcommand{usepackage[deletedmarkup=sout]\{changes\}}\\
-\chcommand{usepackage[deletedmarkup=xout]\{changes\}}\\
-\chcommand{usepackage[deletedmarkup=uwave]\{changes\}}
+\begin{chusage}
+		\>\chcommand{usepackage[addedmarkup=\meta{markup}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[addedmarkup=none]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}\\
+		\>\chcommand{usepackage[addedmarkup=uline]\{changes\}}\\
+		\>\chcommand{usepackage[deletedmarkup=sout]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}\\
+		\>\chcommand{usepackage[deletedmarkup=xout]\{changes\}}\\
+		\>\chcommand{usepackage[deletedmarkup=uwave]\{changes\}}
+\end{chusage}
 
 \subsubsection{authormarkup}
 
@@ -252,12 +262,14 @@ Die folgenden Werte sind erlaubt:
 	\item [\choption{footnote}] Text in einer Fußnote -- Text\footnote{Beispiel}
 \end{description}
 
-Beispiele:
-
-\chcommand{usepackage[authormarkup=superscript]\{changes\}}\\
-\chcommand{usepackage[authormarkup=subscript]\{changes\}}\\
-\chcommand{usepackage[authormarkup=brackets]\{changes\}}\\
-\chcommand{usepackage[authormarkup=footnote]\{changes\}}
+\begin{chusage}
+		\>\chcommand{usepackage[authormarkup=\meta{markup}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[authormarkup=superscript]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}\\
+		\>\chcommand{usepackage[authormarkup=subscript]\{changes\}}\\
+		\>\chcommand{usepackage[authormarkup=brackets]\{changes\}}\\
+		\>\chcommand{usepackage[authormarkup=footnote]\{changes\}}
+\end{chusage}
 
 \subsubsection{authormarkupposition}
 
@@ -270,10 +282,12 @@ Die folgenden Werte sind erlaubt:
 	\item [\choption{left}] links vom Text -- \textsuperscript{Beispiel}Text
 \end{description}
 
-Beispiele:
-
-\chcommand{usepackage[authormarkupposition=right]\{changes\}}\\
-\chcommand{usepackage[authormarkupposition=left]\{changes\}}
+\begin{chusage}
+		\>\chcommand{usepackage[authormarkupposition=\meta{markup}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[authormarkupposition=right]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}\\
+		\>\chcommand{usepackage[authormarkupposition=left]\{changes\}}
+\end{chusage}
 
 \subsubsection{authormarkuptext}
 
@@ -288,24 +302,36 @@ Die folgenden Werte sind erlaubt:
 
 Beispiele:
 
-\chcommand{usepackage[authormarkuptext=id]\{changes\}}\\
-\chcommand{usepackage[authormarkuptext=name]\{changes\}}
+\begin{chusage}
+		\>\chcommand{usepackage[authormarkuptext=\meta{markup}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[authormarkuptext=id]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}\\
+		\>\chcommand{usepackage[authormarkuptext=name]\{changes\}}
+\end{chusage}
 
 \subsubsection{ulem}
 
 Optionen für das \chpackage{ulem}-Paket können als Parameter der \choption{ulem}-Option angegeben werden.
 Zwei oder mehr Optionen müssen in geschweifte Klammern gesetzt werden.
 
-\chcommand{usepackage[ulem=normalem]\{changes\}}\\
-\chcommand{usepackage[ulem=\{normalem,normalbf\}]\{changes\}}
+\begin{chusage}
+		\>\chcommand{usepackage[ulem=\meta{options}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[ulem=normalem]\{changes\}}\\
+		\>\chcommand{usepackage[ulem=\{normalem,normalbf\}]\{changes\}}
+\end{chusage}
 
 \subsubsection{xcolor}
 
 Optionen für das \chpackage{xcolor}-Paket können als Parameter der \choption{xcolor}-Option angegeben werden.
 Zwei oder mehr Optionen müssen in geschweifte Klammern gesetzt werden.
 
-\chcommand{usepackage[xcolor=dvipdf]\{changes\}}\\
-\chcommand{usepackage[xcolor=\{dvipdf,gray\}]\{changes\}}
+\begin{chusage}
+		\>\chcommand{usepackage[xcolor=\meta{options}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[xcolor=dvipdf]\{changes\}}\\
+		\>\chcommand{usepackage[xcolor=\{dvipdf,gray\}]\{changes\}}
+\end{chusage}
 
 %^^A ---- change management
 
@@ -317,31 +343,31 @@ Zwei oder mehr Optionen müssen in geschweifte Klammern gesetzt werden.
 
 Der Befehl \chcommand{added} markiert zugefügten Text.
 Der neue Text wird als notwendiges Argument in geschweiften Klammern übergeben.
-Optional können eine Autoren-ID sowie eine Anmerkung übergeben werden.
-Die Autoren-ID muss mit einer mit dem \chcommand{definechangesauthor}-Befehl definierten ID übereinstimmen.
+Optional können eine Autor-ID sowie eine Anmerkung übergeben werden.
+Die Autor-ID muss mit einer mit dem \chcommand{definechangesauthor}-Befehl definierten ID übereinstimmen.
 Soll nur eine Anmerkung (ohne Autor) eingegeben werden, so ist statt des Autors ein leeres Argument zu übergeben.
-\begin{einspiel}
-\>\chcommand{added[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{neuer Text}\}}
-\end{einspiel}
-\begin{einspiel}[true]
-\>\texttt{Das ist \chcommand{added}[EK]\{neuer\} Text.}\\
-\>Das ist \added[EK]{neuer} Text.\\
-\>\texttt{Das ist \chcommand{added}[][anonym]\{neuer\} Text.}\\
-\>Das ist \added[][anonym]{neuer} Text.
-\end{einspiel}
+\begin{chusage}
+		\>\chcommand{added[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{neuer Text}\}}\\
+	\usageexample
+		\>\texttt{Das ist \chcommand{added}[EK]\{neuer\} Text.}\\
+		\>Das ist \added[EK]{neuer} Text.\\
+		\>\texttt{Das ist \chcommand{added}[EK][muss rein]\{neuer\} Text.}\\
+		\>Das ist \added[EK][muss rein]{neuer} Text.\\
+		\>\texttt{Das ist \chcommand{added}[][anonym]\{neuer\} Text.}\\
+		\>Das ist \added[][anonym]{neuer} Text.
+\end{chusage}
 
 \subsubsection{\chcommand{deleted}}
 \DescribeMacro{\deleted}
 
 Der Befehl \chcommand{deleted} markiert gelöschten Text.
 Argumente: siehe \chcommand{added}.
-\begin{einspiel}
-\>\chcommand{deleted[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{gelöschter Text}\}}
-\end{einspiel}
-\begin{einspiel}[true]
-\>\texttt{Das ist \chcommand{deleted}[][obsolet]\{schlechter\} Text.}\\
-\>Das ist \deleted[][obsolet]{schlechter} Text.
-\end{einspiel}
+\begin{chusage}
+		\>\chcommand{deleted[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{gelöschter Text}\}}\\
+	\usageexample
+		\>\texttt{Das ist \chcommand{deleted}[][obsolet]\{schlechter\} Text.}\\
+		\>Das ist \deleted[][obsolet]{schlechter} Text.
+\end{chusage}
 
 \subsubsection{\chcommand{replaced}}
 \DescribeMacro{\replaced}
@@ -349,13 +375,12 @@ Argumente: siehe \chcommand{added}.
 Der Befehl \chcommand{replaced} markiert geänderten Text.
 Notwendige Argumente sind der neue sowie der alte Text.
 Optionale Argumente: siehe \chcommand{added}.
-\begin{einspiel}
-\>\chcommand{replaced[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{neuer Text}\}\{\meta{alter Text}\}}
-\end{einspiel}
-\begin{einspiel}[true]
-\>\texttt{Das ist \chcommand{replaced}[EK]\{schöner\}\{schlechter\} Text.}\\
-\>Das ist \replaced[EK]{schöner}{schlechter} Text.
-\end{einspiel}
+\begin{chusage}
+		\>\chcommand{replaced[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{neuer Text}\}\{\meta{alter Text}\}}\\
+	\usageexample
+		\>\texttt{Das ist \chcommand{replaced}[EK]\{schöner\}\{schlechter\} Text.}\\
+		\>Das ist \replaced[EK]{schöner}{schlechter} Text.
+\end{chusage}
 
 \subsubsection{\chcommand{listofchanges}}
 \DescribeMacro{\listofchanges}
@@ -363,9 +388,9 @@ Optionale Argumente: siehe \chcommand{added}.
 Der Befehl \chcommand{listofchanges} gibt eine Liste der Änderungen aus.
 Im ersten \LaTeX-Lauf wird eine Hilfsdatei angelegt, deren Daten im zweiten Durchlauf eingebunden werden.
 Für eine aktuelle Liste der Änderungen sind daher zwei \LaTeX-Läufe notwendig.
-\begin{einspiel}
-	\>\chcommand{listofchanges}
-\end{einspiel}
+\begin{chusage}
+		\>\chcommand{listofchanges}
+\end{chusage}
 
 %^^A ---- Author management
 
@@ -375,59 +400,107 @@ Für eine aktuelle Liste der Änderungen sind daher zwei \LaTeX-Läufe notwendig
 \subsubsection{\chcommand{definechangesauthor}}
 \DescribeMacro{\definechangesauthor}
 
-Der Befehl \chcommand{definechangesauthor} definiert einen neuen Autor für Änderungen.
+Der Befehl \chcommand{definechangesauthor} definiert einen neuen Autor/eine neue Autorin für Änderungen.
 Es muss eine eindeutige Autor-ID angegeben werden, die keine Sonder- oder Leerzeichen enthalten darf.
 Optional kann eine Farbe und ein Name angegeben werden.
 Wird keine Farbe angegeben, wird schwarz genutzt.
-Der Autorenname wird in der Änderungsliste benutzt und im Markup, wenn die entsprechende Option gesetzt ist.
-\begin{einspiel}
-	\>\chcommand{definechangesauthor[name=\{\meta{Autor-Name}\}, color=\{\meta{Farbe}\}]\{\meta{Autor-ID}\}}
-\end{einspiel}
-
-\begin{einspiel}[true]
-	\>\chcommand{definechangesauthor\{EK\}}\\
-	\>\chcommand{definechangesauthor[color=orange]\{EK\}}\\
-	\>\chcommand{definechangesauthor[name=\{Ekkart Kleinod\}]\{EK\}}\\
-	\>\chcommand{definechangesauthor[name=\{Ekkart Kleinod\}, color=orange]\{EK\}}
-\end{einspiel}
+Der AutorInnenname wird in der Änderungsliste sowie im Markup benutzt, im Markup jedoch nur, wenn die entsprechende Option gesetzt ist.
+\begin{chusage}
+		\>\chcommand{definechangesauthor[name=\{\meta{Autor-Name}\}, color=\{\meta{Farbe}\}]\{\meta{Autor-ID}\}}\\
+	\usageexample
+		\>\chcommand{definechangesauthor\{EK\}}\\
+		\>\chcommand{definechangesauthor[color=orange]\{EK\}}\\
+		\>\chcommand{definechangesauthor[name=\{Ekkart Kleinod\}]\{EK\}}\\
+		\>\chcommand{definechangesauthor[name=\{Ekkart Kleinod\}, color=orange]\{EK\}}
+\end{chusage}
 
 %^^A ---- Adaptation of the output
 \subsection{Anpassung der Ausgabe}
 \label{sec:user:customizingoutput}
 
+\subsubsection{\chcommand{setaddedmarkup}}
+\DescribeMacro{\setaddedmarkup}
+
+Der Befehl \chcommand{setaddedmarkup} legt fest, wie neuer Text ausgezeichnet wird.
+Ohne andere Definition gilt, dass der Text farbig oder je nach Option \choption{markup} bzw.\ \choption{addedmarkup} erscheint.
+
+Werte für Definition: beliebige \LaTeX-Befehle, der neue Text wird mit "`\#1"' eingesetzt.
+\begin{chusage}
+		\>\chcommand{setaddedmarkup\{\meta{definition}\}}\\
+	\usageexample
+		\>\chcommand{setaddedmarkup\{}\chcommand{emph\{\#1\}}\}\\
+		\>\chcommand{setaddedmarkup\{neu: \#1\}}
+\end{chusage}
+
+\subsubsection{\chcommand{setdeletedmarkup}}
+\DescribeMacro{\setdeletedmarkup}
+
+Der Befehl \chcommand{setdeletedmarkup} legt fest, wie gelöschter Text ausgezeichnet wird.
+Ohne andere Definition gilt, dass der Text durchgestrichen oder je nach Option \choption{markup} bzw.\ \choption{deletedmarkup} erscheint.
+
+Werte für Definition: beliebige \LaTeX-Befehle, der gelöschte Text wird mit "`\#1"' eingesetzt.
+\begin{chusage}
+		\>\chcommand{setdeletedmarkup\{\meta{definition}\}}\\
+	\usageexample
+		\>\chcommand{setdeletedmarkup\{}\chcommand{emph\{\#1\}}\}\\
+		\>\chcommand{setdeletedmarkup\{gelöscht: \#1\}}
+\end{chusage}
+
 \subsubsection{\chcommand{setauthormarkup}}
 \DescribeMacro{\setauthormarkup}
 
 Der Befehl \chcommand{setauthormarkup} legt fest, wie der Autor im Text angezeigt wird.
-Ohne andere Definition gilt, dass der Autor rechts von den Änderungen hochgestellt erscheint.
+Ohne andere Definition gilt, dass der Autor hochgestellt erscheint.
 
-Werte für Position (optional): \emph{left} == links von den Änderungen; alles andere: rechts\\
-Werte für Definition: beliebige \LaTeX-Befehle, der Autorenname wird mit "`\#1"' gekennzeichnet.
-\begin{einspiel}
-	\>\chcommand{setauthormarkup[\meta{position}]\{\meta{definition}\}}
-\end{einspiel}
-\begin{einspiel}[true]
-	\>\chcommand{setauthormarkup\{(\#1)\}}\\
-	\>\chcommand{setauthormarkup[left]\{(\#1)\textasciitilde{}-{}-\textasciitilde{}\}}\\
-	\>\chcommand{setauthormarkup\{}\chcommand{marginpar\{\#1\}\}}\\
-	\>\chcommand{setauthormarkup[right]\{\}}
-\end{einspiel}
+Werte für Definition: beliebige \LaTeX-Befehle, der Autorenname wird mit "`\#1"' eingesetzt.
+\begin{chusage}
+		\>\chcommand{setauthormarkup\{\meta{definition}\}}\\
+	\usageexample
+		\>\chcommand{setauthormarkup\{(\#1)\}}\\
+		\>\chcommand{setauthormarkup\{(\#1)\textasciitilde{}-{}-\textasciitilde{}\}}\\
+		\>\chcommand{setauthormarkup\{}\chcommand{marginpar\{\#1\}\}}
+\end{chusage}
+
+\subsubsection{\chcommand{setauthormarkupposition}}
+\DescribeMacro{\setauthormarkupposition}
+
+Der Befehl \chcommand{setauthormarkupposition} legt fest, auf welcher Seite der Autor im Text angezeigt wird.
+Ohne andere Definition gilt, dass der Autor rechts von den Änderungen erscheint.
+
+Mögliche Werte: \emph{left} == links von den Änderungen; alles andere: rechts\\
+\begin{chusage}
+		\>\chcommand{setauthormarkupposition\{\meta{position}\}}\\
+	\usageexample
+		\>\chcommand{setauthormarkupposition\{left\}}
+\end{chusage}
+
+\subsubsection{\chcommand{setauthormarkuptext}}
+\DescribeMacro{\setauthormarkuptext}
+
+Der Befehl \chcommand{setauthormarkuptext} legt fest, welche Information des Autors im Text angezeigt wird.
+Ohne andere Definition gilt, dass die Autor-ID genutzt wird.
+
+Mögliche Werte: \emph{name} == Autorenname; alles andere: Autor-ID\\
+\begin{chusage}
+		\>\chcommand{setauthormarkuptext\{\meta{text}\}}\\
+	\usageexample
+		\>\chcommand{setauthormarkuptext\{name\}}
+\end{chusage}
 
 \subsubsection{\chcommand{setremarkmarkup}}
 \DescribeMacro{\setremarkmarkup}
 
 Der Befehl \chcommand{setremarkmarkup} legt fest, wie die Anmerkungen im Text angezeigt werden.
-Ohne andere Definition gilt, dass die Anmerkungen als Fußnote mit farbigem Text gesetzt werden.
+Ohne andere Definition gilt, dass die Anmerkungen als Fußnote gesetzt werden.
 
 Werte für Definition: beliebige \LaTeX-Befehle, die Autor-ID wird mit "`\#1"' benutzt, der Anmerkungstext mit "`\#2"'.
 Über die Autor-ID kann mit \texttt{Changes@Color\#1} die Farbe des Autors benutzt werden.
-\begin{einspiel}
-	\>\chcommand{setremarkmarkup\{\meta{definition}\}}
-\end{einspiel}
-\begin{einspiel}[true]
-	\>\chcommand{setremarkmarkup\{(\#2:\#1)\}}\\
-	\>\chcommand{setremarkmarkup\{\chcommand{footnote}\{\#1:\chcommand{textcolor\{Changes@Color\#1\}}\{\#2\}\}\}}
-\end{einspiel}
+\begin{chusage}
+		\>\chcommand{setremarkmarkup\{\meta{definition}\}}\\
+	\usageexample
+		\>\chcommand{setremarkmarkup\{(\#2:\#1)\}}\\
+		\>\chcommand{setremarkmarkup\{\chcommand{footnote}\{\#1:\chcommand{textcolor\{Changes@Color\#1\}}\{\#2\}\}\}}
+\end{chusage}
 
 \subsubsection{\chcommand{setlocextension}}
 \DescribeMacro{\setlocextension}
@@ -436,32 +509,49 @@ Der Befehl \chcommand{setlocextension} legt das Suffix der Hilfsdatei für die �
 	"`loc"' steht dabei für "`list of changes"'.
 }) fest.
 Ohne andere Definition gilt das Suffix "`\texttt{loc}"'.
-Das Beispiel würde für "`\texttt{foo.tex}"' Hilfsdateien erzeugen, die "`\texttt{foo.changes}"' statt des Standardnamens "`\texttt{foo.loc}"' heißen.
-\begin{einspiel}
-	\>\chcommand{setlocextension\{\meta{extension}\}}
-\end{einspiel}
-\begin{einspiel}[true]
-	\>\chcommand{setlocextension\{changes\}}
-\end{einspiel}
+Im unten angegebenen Beispiel würde für "`\texttt{foo.tex}"' eine Hilfsdatei erzeugt werden, die "`\texttt{foo.changes}"' statt des Standardnamens "`\texttt{foo.loc}"' hieße.
+\begin{chusage}
+		\>\chcommand{setlocextension\{\meta{extension}\}}\\
+	\usageexample
+		\>\chcommand{setlocextension\{changes\}}
+\end{chusage}
+
+%^^A ---- other
+\subsection{Sonstige neue Befehle}
+\label{sec:user:other}
+
+\subsubsection{\chcommand{textsubscript}}
+\DescribeMacro{\textsubscript}
+
+\LaTeX\ stellt den Befehl \chcommand{textsuperscript} zur Verfügung, nicht jedoch dessen Gegenstück \chcommand{textsubscript}.
+Falls der Befehl nicht bereits definiert ist, wird er durch das \chpackage{changes}-Paket zur Verfügung gestellt.
+Ist er bereits definiert, wird er nicht geändert.
+\begin{chusage}
+		\>\chcommand{textsubscript\{\meta{Text}\}}\\
+	\usageexample
+		\>\texttt{Jetzt kommt ein \chcommand{textsubscript\{tiefgestellter\}} Text.}\\
+		\>Jetzt kommt ein \textsubscript{tiefgestellter} Text.
+\end{chusage}
+
 
 %^^A ---- packages
 \subsection{Benötigte Pakete}
 \label{sec:user:packages}
 
-Das \chpackage{changes}-Paket bindet bereits Pakete ein, die für das Paket notwendig sind.
+Das \chpackage{changes}-Paket bindet bereits Pakete ein, die für die Funktion des Pakets notwendig sind.
 Eine genauere Beschreibung der einzelnen Pakete ist in der Dokumentation der Pakete selbst zu finden.
 
-Die folgenden Pakete sind zwingend notwendig müssen für die Nutzung des \chpackage{changes}-Pakets installiert sein:
+Die folgenden Pakete sind zwingend notwendig und müssen für die Nutzung des \chpackage{changes}-Pakets installiert sein:
 \begin{description}
-	\item [ifthen] stellt eine verbesserte \texttt{if}-Abfrage sowie eine \texttt{while}-Schleife zur Verfügung
+	\item [xifthen] stellt eine verbesserte \texttt{if}-Abfrage sowie eine \texttt{while}-Schleife zur Verfügung
 	\item [xkeyval] Eingabe von Optionen mit Werteübergabe
 \end{description}
 
-Die folgenden Pakete sind manchmal notwendig und müssen installiert sein, wenn sie genutzt werden:
+Die folgenden Pakete sind manchmal notwendig und müssen installiert sein, wenn sie über die entsprechende Option genutzt werden:
 \begin{description}
 	\item [pdfcolmk] wird geladen, wenn farbiger Text genutzt wird (default Markup); löst das Problem farbigen Texts über Seitenumbrüche hinweg (bei pdflatex)
-	\item [ulem] wird geladen, wenn Text durchgestrichen oder ausge-x-t wird (default Markup); Durchstreichen von Texten
-	\item [xcolor] wird geladen, wenn farbiger Text genutzt wird (default Markup); farbige Markierung von Texten
+	\item [ulem] wird geladen, wenn Text durchgestrichen oder ausge-x-t wird (default Markup)
+	\item [xcolor] wird geladen, wenn farbiger Text genutzt wird (default Markup)
 \end{description}
 
 
@@ -487,10 +577,13 @@ Dies sind in alphabetischer Reihenfolge:
 
 \minisec{Version 0.6.0}
 
-Datum: ??.\,0?.~2011
+Datum: ??.\,0?.~2012
 \begin{itemize}
 	\item Italienische Übersetzungen der captions von Daniele Giovannini
 	\item neues Nutzerinterface für das Setzen von Optionen sowie die Definition von Markup und Autoren
+	\item Restrukturierung und Codeverbesserung
+	\item verbesserte Dokumentation mit typischem Anwendungsfall
+	\item Beispieldateien für alle Optionen und Befehle
 \end{itemize}
 
 \minisec{Version 0.5.4}
@@ -582,7 +675,7 @@ Datum: 16.\,01.~2007
 
 \section{Weitergabe, Copyright, Lizenz}
 
-Copyright 2007-2011 Ekkart Kleinod (\href{mailto:ekleinod@edgesoft.de}{ekleinod@edgesoft.de})
+Copyright 2007-2012 Ekkart Kleinod (\href{mailto:ekleinod@edgesoft.de}{ekleinod@edgesoft.de})
 
 Dieses Paket darf unter der "`\LaTeX\ Project Public License"' Version~1.3 oder jeder späteren Version weitergegeben und/oder geändert werden.
 Die neueste Version dieser Lizenz steht auf\\

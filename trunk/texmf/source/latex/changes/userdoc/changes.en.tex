@@ -7,7 +7,7 @@
 	\fi
 
 \ifENGLISH
-	This package provides manual change markup.
+	This package provides means for manual change markup.
 
 	Any comments, thoughts or improvements are welcome.
 	The package is maintained with sourceforge, please see
@@ -19,10 +19,10 @@
 
 	\begin{quote}
 		\small\textsc{README:}
-		The changes-package allows users to manually markup changes of text such as additions, deletions, or replacements.
+		The changes-package allows the user to manually markup changes of text, such as additions, deletions, or replacements.
 		Changed text is shown in a different colour; deleted text is striked out.
 		The package allows free defining of additional authors and their associated colour.
-		It also allows you to define a markup for authors or annotations.
+		It also allows you to change the markup of changes, authors, or annotations.
 	\end{quote}
 \fi
 	\ifGERMAN
@@ -401,15 +401,15 @@
 	There are two optional arguments: author-id and remark.
 	The author-id has to be defined using \chcommand{definechangesauthor}.
 	Use an empty author for an anonymous remark.
-	\begin{einspiel}
+	\begin{chusage}
 	\>\chcommand{added[\meta{author-id}][\meta{remark}]\{\meta{new text}\}}
-	\end{einspiel}
-	\begin{einspiel}[true]
+	\end{chusage}
+	\begin{chusage}[true]
 	\>\texttt{This is \chcommand{added}[EK]\{new\} text.}\\
 	\>This is \added[EK]{new} text.\\
 	\>\texttt{This is \chcommand{added}[][anonymous]\{new\} text.}\\
 	\>This is \added[][anonymous]{new} text.
-	\end{einspiel}
+	\end{chusage}
 \fi
 	\ifGERMAN
 		Der Befehl \chcommand{added} markiert zugefügten Text.
@@ -417,15 +417,15 @@
 		Optional können eine Autoren-ID sowie eine Anmerkung übergeben werden.
 		Die Autoren-ID muss mit einer mit dem \chcommand{definechangesauthor}-Befehl definierten ID übereinstimmen.
 		Soll nur eine Anmerkung (ohne Autor) eingegeben werden, so ist statt des Autors ein leeres Argument zu übergeben.
-		\begin{einspiel}
+		\begin{chusage}
 		\>\chcommand{added[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{neuer Text}\}}
-		\end{einspiel}
-		\begin{einspiel}[true]
+		\end{chusage}
+		\begin{chusage}[true]
 		\>\texttt{Das ist \chcommand{added}[EK]\{neuer\} Text.}\\
 		\>Das ist \added[EK]{neuer} Text.\\
 		\>\texttt{Das ist \chcommand{added}[][anonym]\{neuer\} Text.}\\
 		\>Das ist \added[][anonym]{neuer} Text.
-		\end{einspiel}
+		\end{chusage}
 	\fi
 
 \subsubsection{\chcommand{deleted}}
@@ -433,24 +433,24 @@
 \ifENGLISH
 	The command \chcommand{deleted} marks deleted text.
 	For arguments see \chcommand{added}.
-	\begin{einspiel}
+	\begin{chusage}
 	\>\chcommand{deleted[\meta{author-id}][\meta{remark}]\{\meta{deleted text}\}}
-	\end{einspiel}
-	\begin{einspiel}[true]
+	\end{chusage}
+	\begin{chusage}[true]
 	\>\texttt{This is \chcommand{deleted}[][unnecessary]\{bad\} text.}\\
 	\>This is \deleted[][obsolet]{bad} text.
-	\end{einspiel}
+	\end{chusage}
 \fi
 	\ifGERMAN
 		Der Befehl \chcommand{deleted} markiert gelöschten Text.
 		Argumente: siehe \chcommand{added}.
-		\begin{einspiel}
+		\begin{chusage}
 		\>\chcommand{deleted[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{gelöschter Text}\}}
-		\end{einspiel}
-		\begin{einspiel}[true]
+		\end{chusage}
+		\begin{chusage}[true]
 		\>\texttt{Das ist \chcommand{deleted}[][obsolet]\{schlechter\} Text.}\\
 		\>Das ist \deleted[][obsolet]{schlechter} Text.
-		\end{einspiel}
+		\end{chusage}
 	\fi
 
 \subsubsection{\chcommand{replaced}}
@@ -459,25 +459,25 @@
 	The command \chcommand{replaced} marks replaced text.
 	Mandatory arguments are new and old text.
 	For optional arguments see \chcommand{added}.
-	\begin{einspiel}
+	\begin{chusage}
 	\>\chcommand{replaced[\meta{author-id}][\meta{remark}]\{\meta{new text}\}\{\meta{old text}\}}
-	\end{einspiel}
-	\begin{einspiel}[true]
+	\end{chusage}
+	\begin{chusage}[true]
 	\>\texttt{This is \chcommand{replaced}[EK]\{nice\}\{ugly\} text.}\\
 	\>This is \replaced[EK]{nice}{ugly} text.
-	\end{einspiel}
+	\end{chusage}
 \fi
 	\ifGERMAN
 		Der Befehl \chcommand{replaced} markiert geänderten Text.
 		Notwendige Argumente sind der neue sowie der alte Text.
 		Optionale Argumente: siehe \chcommand{added}.
-		\begin{einspiel}
+		\begin{chusage}
 		\>\chcommand{replaced[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{neuer Text}\}\{\meta{alter Text}\}}
-		\end{einspiel}
-		\begin{einspiel}[true]
+		\end{chusage}
+		\begin{chusage}[true]
 		\>\texttt{Das ist \chcommand{replaced}[EK]\{schöner\}\{schlechter\} Text.}\\
 		\>Das ist \replaced[EK]{schöner}{schlechter} Text.
-		\end{einspiel}
+		\end{chusage}
 	\fi
 
 \subsubsection{\chcommand{listofchanges}}
@@ -492,9 +492,9 @@
 		Im ersten \LaTeX-Lauf wird eine Hilfsdatei angelegt, deren Daten im zweiten Durchlauf eingebunden werden.
 		Für eine aktuelle Liste der Änderungen sind daher zwei \LaTeX-Läufe notwendig.
 	\fi
-\begin{einspiel}
+\begin{chusage}
 	\>\chcommand{listofchanges}
-\end{einspiel}
+\end{chusage}
 
 %^^A -- Author management -----------------------------------------------------
 \ifENGLISH
@@ -512,9 +512,9 @@
 	You may define a corresponding color and the author's name.
 	If you do not define a color, black is used.
 	The author's name is used in the list of changes and in the markup, if you set the corresponding option.
-	\begin{einspiel}
+	\begin{chusage}
 		\>\chcommand{definechangesauthor[name=\{\meta{author's name}\}, color=\{\meta{color}\}]\{\meta{author-id}\}}
-	\end{einspiel}
+	\end{chusage}
 \fi
 	\ifGERMAN
 		Der Befehl \chcommand{definechangesauthor} definiert einen neuen Autor für Änderungen.
@@ -522,16 +522,16 @@
 		Optional kann eine Farbe und ein Name angegeben werden.
 		Wird keine Farbe angegeben, wird schwarz genutzt.
 		Der Autorenname wird in der Änderungsliste benutzt und im Markup, wenn die entsprechende Option gesetzt ist.
-		\begin{einspiel}
+		\begin{chusage}
 			\>\chcommand{definechangesauthor[name=\{\meta{Autor-Name}\}, color=\{\meta{Farbe}\}]\{\meta{Autor-ID}\}}
-		\end{einspiel}
+		\end{chusage}
 	\fi
-\begin{einspiel}[true]
+\begin{chusage}[true]
 	\>\chcommand{definechangesauthor\{EK\}}\\
 	\>\chcommand{definechangesauthor[color=orange]\{EK\}}\\
 	\>\chcommand{definechangesauthor[name=\{Ekkart Kleinod\}]\{EK\}}\\
 	\>\chcommand{definechangesauthor[name=\{Ekkart Kleinod\}, color=orange]\{EK\}}
-\end{einspiel}
+\end{chusage}
 
 %^^A -- Adaption of the output -----------------------------------------------------
 \ifENGLISH
@@ -557,15 +557,15 @@
 		Werte für Position (optional): \emph{left} == links von den Änderungen; alles andere: rechts\\
 		Werte für Definition: beliebige \LaTeX-Befehle, der Autorenname wird mit "`\#1"' gekennzeichnet.
 	\fi
-\begin{einspiel}
+\begin{chusage}
 	\>\chcommand{setauthormarkup[\meta{position}]\{\meta{definition}\}}
-\end{einspiel}
-\begin{einspiel}[true]
+\end{chusage}
+\begin{chusage}[true]
 	\>\chcommand{setauthormarkup\{(\#1)\}}\\
 	\>\chcommand{setauthormarkup[left]\{(\#1)\textasciitilde{}-{}-\textasciitilde{}\}}\\
 	\>\chcommand{setauthormarkup\{}\chcommand{marginpar\{\#1\}\}}\\
 	\>\chcommand{setauthormarkup[right]\{\}}
-\end{einspiel}
+\end{chusage}
 
 \subsubsection{\chcommand{setremarkmarkup}}
 \DescribeMacro{\setremarkmarkup}
@@ -583,13 +583,13 @@
 		Werte für Definition: beliebige \LaTeX-Befehle, die Autor-ID wird mit "`\#1"' benutzt, der Anmerkungstext mit "`\#2"'.
 		Über die Autor-ID kann mit \texttt{Changes@Color\#1} die Farbe des Autors benutzt werden.
 	\fi
-\begin{einspiel}
+\begin{chusage}
 	\>\chcommand{setremarkmarkup\{\meta{definition}\}}
-\end{einspiel}
-\begin{einspiel}[true]
+\end{chusage}
+\begin{chusage}[true]
 	\>\chcommand{setremarkmarkup\{(\#2:\#1)\}}\\
 	\>\chcommand{setremarkmarkup\{\chcommand{footnote}\{\#1:\chcommand{textcolor\{Changes@Color\#1\}}\{\#2\}\}\}}
-\end{einspiel}
+\end{chusage}
 
 \subsubsection{\chcommand{setlocextension}}
 \DescribeMacro{\setlocextension}
@@ -605,12 +605,12 @@
 		Ohne andere Definition gilt das Suffix "`\texttt{loc}"'.
 		Das Beispiel würde für "`\texttt{foo.tex}"' Hilfsdateien erzeugen, die "`\texttt{foo.changes}"' statt des Standardnamens "`\texttt{foo.loc}"' heißen.
 	\fi
-\begin{einspiel}
+\begin{chusage}
 	\>\chcommand{setlocextension\{\meta{extension}\}}
-\end{einspiel}
-\begin{einspiel}[true]
+\end{chusage}
+\begin{chusage}[true]
 	\>\chcommand{setlocextension\{changes\}}
-\end{einspiel}
+\end{chusage}
 
 %^^A -- packages
 \ifENGLISH
@@ -900,7 +900,7 @@
 		\section{Weitergabe, Copyright, Lizenz}
 	\fi
 
-Copyright 2007-2011 Ekkart Kleinod (\href{mailto:ekleinod@edgesoft.de}{ekleinod@edgesoft.de})
+Copyright 2007-2012 Ekkart Kleinod (\href{mailto:ekleinod@edgesoft.de}{ekleinod@edgesoft.de})
 
 \ifENGLISH
 	This work may be distributed and/or modified under the
