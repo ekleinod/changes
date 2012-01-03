@@ -1,4 +1,4 @@
-% \CheckSum{826}
+% \CheckSum{822}
 %
 % \iffalse meta-comment
 %
@@ -68,12 +68,12 @@
 %
 % \StopEventually
 %
+% \selectlanguage{english}
+%
 % \section{The documented sourcecode}
 %
-% \iflanguage{english}{}{
-%  The sourcecode is documented in English only.
-%  This is intended, please do not provide translations for the text below, just corrections or improvements.
-% }
+% The sourcecode is documented in English only.
+% This is intended, please do not provide translations for the text below, just corrections or improvements.
 %
 %    \begin{macrocode}
 %<*changes>
@@ -120,7 +120,7 @@
 }
 %    \end{macrocode}
 %
-% Declare storage for markup options, they are set by the markup option but can be changed with the mor special options, therefore they have to be declared at this place.
+% Declare storage for markup options, they are set by the markup option but can be changed with the more special options, therefore they have to be declared at this place.
 %    \begin{macrocode}
 \newcommand{\Changes@optionaddedmarkup}{none}
 \newcommand{\Changes@optiondeletedmarkup}{sout}
@@ -170,7 +170,7 @@
 }
 %    \end{macrocode}
 %
-% Option \choption{addedmarkup}, stored or set to default value \texttt{none}.
+% Option \choption{addedmarkup}, stored or set to default value ``\texttt{none}''.
 %    \begin{macrocode}
 \DeclareOptionX{addedmarkup}{
 	\ifthenelse{\equal{\@empty}{#1}}
@@ -197,7 +197,7 @@
 }
 %    \end{macrocode}
 %
-% Option \choption{deletedmarkup}, stored or set to default value \texttt{striked}.
+% Option \choption{deletedmarkup}, stored or set to default value ``\texttt{striked}''.
 %    \begin{macrocode}
 \DeclareOptionX{deletedmarkup}{
 	\ifthenelse{\equal{\@empty}{#1}}
@@ -224,7 +224,7 @@
 }
 %    \end{macrocode}
 %
-% Declare storage for authormarkup option and store option value or set to default value \texttt{superscript}.
+% Declare storage for authormarkup option and store option value or set to default value ``\texttt{superscript}''.
 %    \begin{macrocode}
 \newcommand{\Changes@optionauthormarkup}{superscript}
 \DeclareOptionX{authormarkup}{
@@ -244,7 +244,7 @@
 }
 %    \end{macrocode}
 %
-% Declare storage for authormarkupposition option and store option value or set to default value \texttt{right}.
+% Declare storage for authormarkupposition option and store option value or set to default value ``\texttt{right}''.
 %    \begin{macrocode}
 \newcommand{\Changes@optionauthormarkupposition}{right}
 \DeclareOptionX{authormarkupposition}{
@@ -262,7 +262,7 @@
 }
 %    \end{macrocode}
 %
-% Declare storage for authormarkuptext option and store option value or set to default value \texttt{id}.
+% Declare storage for authormarkuptext option and store option value or set to default value ``\texttt{id}''.
 %    \begin{macrocode}
 \newcommand{\Changes@optionauthormarkuptext}{id}
 \DeclareOptionX{authormarkuptext}{
@@ -309,9 +309,7 @@
 %
 % All options for commands (e.g. \chcommand{definechangesauthor}) have to be declared before option processing.
 %
-% \minisec{\chcommand{definechangesauthor}}
-%
-% Declare available options of the command, define value containers.
+% Declare available options of the command, define value storage.
 %    \begin{macrocode}
 \DeclareOptionX<Changes@definechangesauthor>{name}{\def\Changes@definechangesauthor@name{#1}}
 \DeclareOptionX<Changes@definechangesauthor>{color}{\def\Changes@definechangesauthor@color{#1}}
@@ -432,7 +430,7 @@
 % \end{macro}
 %
 % \begin{macro}{\setlocextension}
-%  Sets a new file extension.
+%  Set a new file extension.
 %  Argument: new extension.
 %    \begin{macrocode}
 \newcommand{\setlocextension}[1]{
@@ -464,7 +462,7 @@
 \newcommand*\definechangesauthor[2][]{%
 %    \end{macrocode}
 %
-% Call \emph{setkeys} in order to evaluate the key-value-options and fill the value containers.
+% Call \emph{setkeys} in order to evaluate the key-value-options and fill the value storage.
 %    \begin{macrocode}
 	\setkeys{Changes@definechangesauthor}{#1}
 %    \end{macrocode}
@@ -475,14 +473,13 @@
 %    \end{macrocode}
 %
 % Store the id in a name with the given counter/index.
-% All other storages refer to the id.
+% All other storage refers to the id.
 %    \begin{macrocode}
 	\@namedef{Changes@AuthorID\theChanges@AuthorCount}{#2}
 %    \end{macrocode}
 %
 % Store the author's definition in according variables/colors, create change counters.
 %    \begin{macrocode}
-	%\@namedef{Changes@AuthorName#2}{\Changes@definechangesauthor@name}
 	\expandafter
 	\let\csname Changes@AuthorName#2\endcsname=\Changes@definechangesauthor@name
 	\newcounter{Changes@AddCount#2}
@@ -490,7 +487,6 @@
 	\newcounter{Changes@ReplaceCount#2}
 	\ifthenelse{\boolean{Changes@colored}}
 		{
-			%\@namedef{Changes@AuthorColor#2}{\Changes@definechangesauthor@color}
 			\expandafter
 			\let\csname Changes@AuthorColor#2\endcsname=\Changes@definechangesauthor@color
 			\colorlet{Changes@Color#2}{\@nameuse{Changes@AuthorColor#2}}
@@ -535,10 +531,10 @@
 % The code is taken from \LaTeX-FAQ 8.5.17.
 %    \begin{macrocode}
 \ifthenelse{\isundefined{\textsubscript}}
- {
-	\DeclareRobustCommand*\textsubscript[1]{\@textsubscript{\selectfont#1}}
-	\newcommand{\@textsubscript}[1]{{\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
- }{}
+	{
+		\DeclareRobustCommand*\textsubscript[1]{\@textsubscript{\selectfont#1}}
+		\newcommand{\@textsubscript}[1]{{\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
+	}{}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -583,6 +579,9 @@
 % \subsection{Change management commands}
 %
 % \subsubsection{Text markup definition}
+%
+% Replaced text is always typeset as follows: \meta{added text}\meta{deleted text}.
+% Therefor no extra command for markup of replaced text is given.
 %
 % \begin{macro}{\Changes@Markup@Added}
 % Store markup for added text.
@@ -634,7 +633,7 @@
 % \end{macro}
 %
 % \begin{macro}{\setdeletedmarkup}
-% Set markup for added text.
+% Set markup for deleted text.
 %    \begin{macrocode}
 \newcommand{\setdeletedmarkup}[1]{
 	\renewcommand{\Changes@Markup@Deleted}[1]{#1}
@@ -718,7 +717,7 @@
 %
 % \begin{macro}{\added}
 %  The command formats text as new text.
-%  It's rather complicated for defining a command with two optional parameters.
+%  Defining a command with two optional parameters is rather complicated.
 %
 %  Mandatory argument: added text.
 %  Optional arguments: author's id, remark
@@ -740,9 +739,8 @@
 %
 % \begin{macro}{\deleted}
 %  The command formats text as deleted text.
-%  It's rather complicated for defining a command with two optional parameters.
 %
-%  The \choption{final}-part is taken from a tip from \texttt{de.comp.text.tex}.
+%  The definition of the empty text for unchanged text is taken from a tip from \texttt{de.comp.text.tex}.
 %  It solves the problem of additional space caused by an empty command.
 %
 %  Mandatory argument: deleted text.
@@ -765,7 +763,6 @@
 %
 % \begin{macro}{\replaced}
 %  The command formats text as replaced text.
-%  It's rather complicated for defining a command with two optional parameters.
 %
 %  Mandatory arguments: new text and old text.
 %  Optional arguments: author's id, remark
@@ -805,7 +802,7 @@
 % \end{macro}
 %
 % \begin{macro}{\listofchanges}
-%  This command outputs a list of changes, sorted by authors.
+%  This command outputs the list of changes, separated by authors.
 %  The values are read from the loc-file, if it exists.
 %  If no loc-file exists, an according message is generated.
 %    \begin{macrocode}
