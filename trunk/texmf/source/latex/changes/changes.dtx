@@ -561,7 +561,12 @@
 %  Default: in a footnote.
 %    \begin{macrocode}
 \newcommand{\Changes@Remark}[2]{%
-	\footnote{#1: #2}%
+	\footnote{%
+		\ifthenelse{\not\equal{#1}{\@empty}}%
+			{#1: }%
+			{}%
+		#2%
+	}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -695,7 +700,7 @@
 %    \end{macrocode}
 %	Output remark if a remark is given.
 %    \begin{macrocode}
-				\ifthenelse{\not\equal{#4}{\@empty} \and \not\equal{#3}{\@empty}}%
+				\ifthenelse{\not\equal{#4}{\@empty}}%
 					{\Changes@Remark{#3}{#4}}%
 					{}%
 			}%
