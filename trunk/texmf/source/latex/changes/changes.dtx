@@ -374,7 +374,7 @@
 %
 % Declaration of language dependent names and identifiers.
 % The check for \chcommand{addto} is a check for the \chpackage{babel} package.
-% If the babel package is not loaded, the default language is English, in order to use an own language, the user has to redefine the variables.
+% If the babel package is not loaded, the default language is English, in order to use another language, the user has to redefine the variables.
 %    \begin{macrocode}
 \ifthenelse{\isundefined{\addto}}
 	{
@@ -586,7 +586,7 @@
 % \subsubsection{Text markup definition}
 %
 % Replaced text is always typeset as follows: \meta{added text}\meta{deleted text}.
-% Therefor no extra command for markup of replaced text is given.
+% Therefore no extra command for markup of replaced text is given.
 %
 % \begin{macro}{\Changes@Markup@Added}
 % Store markup for added text.
