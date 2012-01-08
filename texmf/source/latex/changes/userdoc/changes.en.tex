@@ -6,10 +6,10 @@ This package provides means for manual change markup.
 Any comments, thoughts or improvements are welcome.
 The package is maintained at \emph{sourceforge}, please see
 
-\input{url}
+\input{userdoc/url}
 
 for source code access, bug and feature tracker, forum etc.
-If you want to contact me directly, please send an email to \input{email}.
+If you want to contact me directly, please send an email to \input{userdoc/email}.
 Please start your mail subject with \texttt{[changes]}.
 
 \begin{quote}
@@ -31,6 +31,47 @@ You can find the detailed description of the package options and new commands in
 We start with an text you want to change.
 You want to markup the changes for each author individually.
 Such a change markup is well-known in WYSIWYG text processors such as \emph{LibreOffice}, \emph{OpenOffice}, or \emph{Word}.
+
+The \chpackage{changes}-package was developed in order to support such change markup.
+The package provides commands for defining authors, and for marking text as added, deleted, or replaced.
+In order to use the package, you have to follow these steps:
+
+\begin{enumerate}
+	\item use \chpackage{changes}-package
+	\item define authors
+	\item markup text changes
+	\item typeset the document with \LaTeX
+	\item output list of changes
+	\item remove markup
+\end{enumerate}
+
+
+\minisec{use \chpackage{changes}-package}
+
+In order to activate change management, use the \chpackage{changes}-package as follows:
+
+\chcommand{usepackage\{changes\}}
+
+resp.
+
+\chcommand{usepackage[<options>]\{changes\}}
+
+You can use the options for defining the layout of the change markup.
+You can change the layout after using the \chpackage{changes}-package as well.
+
+For detailed information please refer to \autoref{sec:user:options} and \autoref{sec:user:customizingoutput}.
+
+
+\minisec{define authors}
+
+\minisec{markup text changes}
+
+\minisec{typeset the document with \LaTeX}
+
+\minisec{output list of changes}
+
+\minisec{remove markup}
+
 
 
 
