@@ -22,8 +22,8 @@
 	<property name="path:ctan" value="ctan/" /> <!-- CTAN-Ausgabe-Pfad -->
 	<property name="path:texmf" value="texmf/" /> <!-- LaTeX-texmf-Pfad -->
 
-	<property name="doku:full" value="full" /> <!-- full documentation -->
-	<property name="doku:short" value="short" /> <!-- short documentation -->
+	<property name="documentation:full" value="full" /> <!-- full documentation -->
+	<property name="documentation:short" value="short" /> <!-- short documentation -->
 
 	<property name="lang:de" value="ngerman" /> <!-- language: german -->
 	<property name="lang:en" value="english" /> <!-- language: english -->
@@ -37,11 +37,11 @@
 		<antcall target="docstrip" />
 
 		<!-- create all documentation files -->
-		<antcall target="doku">
-			<param name="language" value="${lang:de}" />
-		</antcall>
-		<antcall target="doku">
+		<antcall target="documentation">
 			<param name="language" value="${lang:en}" />
+		</antcall>
+		<antcall target="documentation">
+			<param name="language" value="${lang:de}" />
 		</antcall>
 
 		<!-- create all example pdfs -->
@@ -66,11 +66,11 @@
 	</target>
 
 	<!-- create documentation for all languages -->
-	<target name="doku">
+	<target name="documentation">
 
 		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${language}.drv" />
-		<replace file="${file:targetname}.${language}.drv" token="\selectlanguage{ngerman}" value="\selectlanguage{${language}}" />
-		<antcall target="doku_fs">
+		<replace file="${file:targetname}.${language}.drv" token="\selectlanguage{english}" value="\selectlanguage{${language}}" />
+		<antcall target="documentation_full_short">
 			<param name="file:targetname" value="${file:targetname}.${language}" />
 		</antcall>
 		<delete file="${file:targetname}.${language}.drv" />
@@ -78,21 +78,28 @@
 	</target>
 
 	<!-- create full and short documentation -->
-	<target name="doku_fs">
+	<target name="documentation_full_short">
 
-		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${doku:full}.drv" />
+		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${documentation:full}.drv" />
 		<antcall target="pdf_complete">
-			<param name="file:targetname" value="${file:targetname}.${doku:full}.drv" />
+			<param name="file:targetname" value="${file:targetname}.${documentation:full}.drv" />
 		</antcall>
-		<delete file="${file:targetname}.${doku:full}.drv" />
+		<delete file="${file:targetname}.${documentation:full}.drv" />
 
-		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${doku:short}.drv" />
-		<replace file="${file:targetname}.${doku:short}.drv" token="%\OnlyDescription" value="\OnlyDescription" />
+		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${documentation:short}.drv" />
+		<replace file="${file:targetname}.${documentation:short}.drv" token="%\OnlyDescription" value="\OnlyDescription" />
 		<antcall target="pdf_complete">
-			<param name="file:targetname" value="${file:targetname}.${doku:short}.drv" />
+			<param name="file:targetname" value="${file:targetname}.${documentation:short}.drv" />
 		</antcall>
-		<delete file="${file:targetname}.${doku:short}.drv" />
+		<delete file="${file:targetname}.${documentation:short}.drv" />
 
+	</target>
+
+	<!-- all pdf files -->
+	<target name="pdf_complete">
+		<antcall target="pdf"><param name="count:runs" value="1" /></antcall>
+		<antcall target="pdf"><param name="count:runs" value="2" /></antcall>
+		<antcall target="pdf"><param name="count:runs" value="3" /></antcall>
 	</target>
 
 	<!-- single pdf file -->
@@ -102,13 +109,6 @@
 			<arg line="-interaction=nonstopmode ${file:targetname}" />
 		</exec>
 		<antcall target="checkResult" />
-	</target>
-
-	<!-- all pdf files -->
-	<target name="pdf_complete">
-		<antcall target="pdf"><param name="count:runs" value="1" /></antcall>
-		<antcall target="pdf"><param name="count:runs" value="2" /></antcall>
-		<antcall target="pdf"><param name="count:runs" value="3" /></antcall>
 	</target>
 
 	<!-- create example pdfs -->
@@ -161,6 +161,7 @@
 
 		<move todir="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}" failonerror="false">
 			<fileset dir=".">
+				<include name="${file:targetname}.example.*.tex" />
 				<include name="${file:targetname}.example.*.pdf" />
 			</fileset>
 		</move>
@@ -189,10 +190,20 @@
 		<mkdir dir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}" />
 
 		<!-- files -->
-		<copy file="${path:latex:base}${path:latex:tex}${file:targetname}/${file:targetname}.sty"
-			todir="${path:ctan}${path:texmf}${path:latex:tex}${file:targetname}/" />
+		<!-- files:styles -->
+		<copy todir="${path:ctan}${path:texmf}${path:latex:tex}${file:targetname}/">
+			<fileset dir="${path:latex:base}${path:latex:tex}${file:targetname}/">
+				<include name="*.sty" />
+			</fileset>
+		</copy>
 
+		<!-- files:documentation -->
 		<copy todir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/">
+			<fileset dir="${path:latex:base}${path:latex:doc}${file:targetname}/">
+				<include name="*.pdf" />
+			</fileset>
+		</copy>
+		<copy todir="${path:ctan}${file:targetname}/">
 			<fileset dir="${path:latex:base}${path:latex:doc}${file:targetname}/">
 				<include name="*.pdf" />
 			</fileset>
@@ -204,42 +215,35 @@
 			</fileset>
 		</copy>
 
+		<!-- files:scripts -->
 		<copy todir="${path:ctan}${path:texmf}${path:latex:scripts}${file:targetname}">
 			<fileset dir="${path:latex:base}${path:latex:scripts}${file:targetname}">
 				<include name="*.bash" />
 			</fileset>
 		</copy>
-
-		<copy todir="${path:ctan}${file:targetname}/">
-			<fileset dir="${path:latex:base}${path:latex:doc}${file:targetname}/">
-				<include name="*.pdf" />
-			</fileset>
-		</copy>
-
 		<copy todir="${path:ctan}${file:targetname}">
 			<fileset dir="${path:latex:base}${path:latex:scripts}${file:targetname}">
 				<include name="*.bash" />
 			</fileset>
 		</copy>
 
+		<!-- files:drv -->
 		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
 			file="${file:targetname}.drv" />
 
+		<!-- files:dtx -->
 		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
 			file="${file:targetname}.dtx" />
 		<copy todir="${path:ctan}${file:targetname}/"
 			file="${file:targetname}.dtx" />
 
+		<!-- files:ins -->
 		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
 			file="${file:targetname}.ins" />
 		<copy todir="${path:ctan}${file:targetname}/"
 			file="${file:targetname}.ins" />
 
-		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
-			file="user.tex" />
-		<copy todir="${path:ctan}${file:targetname}/"
-			file="user.tex" />
-
+		<!-- files:README -->
 		<copy todir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/"
 			file="README" />
 		<copy todir="${path:ctan}${file:targetname}/"
