@@ -1,7 +1,7 @@
 %%%
 % driver file of changes package
 
-\documentclass[twoside, titlepage, parskip=half, toc=flat, cleardoublepage=empty, captions=nooneline, origlongtable, english, ngerman]{scrartcl}
+\documentclass[twoside, titlepage, parskip=half, toc=flat, cleardoublepage=empty, captions=nooneline, origlongtable, ngerman, english]{scrartcl}
 
 % code definition and documentation
 \usepackage{doc}
@@ -81,10 +81,10 @@
 }
 \newcommand{\usageexample}{
 	\ifENGLISH
-		\textsl{Example}\\
+		\textsl{Examples}\\
 	\fi
 	\ifGERMAN
-		\textsl{Beispiel}\\
+		\textsl{Beispiele}\\
 	\fi
 }
 
