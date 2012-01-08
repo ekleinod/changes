@@ -9,6 +9,9 @@
 % basis layout
 \usepackage[font=charter]{basis}
 
+% language selection
+\selectlanguage{english}
+
 % use change management ;)
 \usepackage{changes}
 \definechangesauthor[name={Ekkart Kleinod}, color=orange]{EK}
@@ -43,9 +46,6 @@
  \SpecialEnvIndex{#1}\@esphack\ignorespaces
 }
 \makeatother
-
-% language selection
-\selectlanguage{ngerman}
 
 % catchall - english
 \newif\ifENGLISH
