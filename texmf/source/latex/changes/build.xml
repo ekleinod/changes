@@ -46,6 +46,7 @@
 
 		<!-- create all example pdfs -->
 		<antcall target="examples" />
+		<antcall target="examples" />
 
 		<!-- remove temporary files -->
 		<antcall target="clear" />
@@ -137,7 +138,7 @@
 		<echo message="Remove temporary files." />
 		<defaultexcludes remove="**/*~" />
 		<delete>
-			<fileset dir="." includes="**/*.aux, **/*.bak.vthought, **/*.bak, **/*.bbl, **/*.blg, **/*.changes, **/*.dvi, **/*.idx, **/*.ilg, **/*.ind, **/*.loc, **/*.lof, **/*.lot, **/*.lop, **/*.nav, **/*.out, **/*.ps, **/*.snm, **/*.toc, **/*.url, **/*.*~"/>
+			<fileset dir="." includes="**/*.aux, **/*.bak.vthought, **/*.bak, **/*.bbl, **/*.blg, **/*.changes, **/*.dvi, **/*.glo, **/*.idx, **/*.ilg, **/*.ind, **/*.loc, **/*.lof, **/*.lot, **/*.lop, **/*.nav, **/*.out, **/*.ps, **/*.snm, **/*.toc, **/*.url, **/*.*~"/>
 		</delete>
 		<defaultexcludes default="true" />
 	</target>
