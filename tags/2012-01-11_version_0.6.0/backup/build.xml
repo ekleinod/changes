@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project name="backup" default="all" basedir=".">
+
+  <target name="all">
+
+    <antcall target="fixlineendings" />
+
+  </target>
+
+  <target name="fixlineendings">
+    <echo>
+      Fix line endings in order to avoid problems with SVN.
+    </echo>
+
+    <fixcrlf srcDir="." includes="**/*.*" />
+  </target>
+
+</project>

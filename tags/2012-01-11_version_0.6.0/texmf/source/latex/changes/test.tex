@@ -1,0 +1,71 @@
+\documentclass[11pt, a4paper, notitlepage, halfparskip, ngerman]{scrartcl}
+%\documentclass[11pt, a4paper, notitlepage, halfparskip, english]{scrartcl}
+
+\usepackage[nojura, nohyper]{basis}
+
+
+%\usepackage{changes}
+\usepackage[draft, ulem={normalem, normalbf}]{changes}
+%\usepackage[draft, ulem={normalem, normalbf}, xcolor={gray}]{changes}
+
+% Metainformationen über das Dokument
+\title{Test}
+\author{Ekkart Kleinod} % Autor ist Pflicht für die Titelseite
+
+\definechangesauthor{Test}{green}
+\definechangesauthor[Ekkart Kleinod]{EK}{orange}
+
+\makeatletter
+\setauthormarkup{%
+	\textsuperscript{%
+		\ifthenelse{\equal{\@nameuse{Changes@AuthorName#1}}{}}%
+			{#1}%
+			{\@nameuse{Changes@AuthorName#1}}%
+	}%
+}
+\makeatother
+
+\makeatletter
+\@namedef{Changes@AuthorColor}{magenta}
+\colorlet{Changes@Color}{magenta}
+\makeatother
+
+%\setremarkmarkup{\footnote{#1:\textcolor{Changes@Color#1}{#2}}}
+
+ % ab hier beginnt der Inhalt
+\begin{document}
+
+	%\maketitle
+
+	Hallo
+
+	\listofchanges
+
+	\minisec{Autor EK}
+
+	Hier sehen wir \added[EK][klingt besser]{eingefügten} Text.
+
+	Hier sehen wir \deleted[EK]{gelöschten} Text.
+
+%  Hier sehen wir \deleted[EK][notwendig]{gelöschten} Text.
+
+	Hier sehen wir \replaced[EK]{geänderten}{alten} Text.
+
+	\minisec{Autor leer}
+
+	Hier sehen wir \added[][unwichtig]{eingefügten} Text.
+
+%  Hier sehen wir \deleted{gelöschten} Text.
+
+	Hier sehen wir \replaced[][musste sein]{geänderten}{alten} Text.
+
+	\minisec{Autor Test}
+
+	Hier sehen wir \added[Test][ja]{eingefügten} Text.
+
+	Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch.
+	\added{Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch.
+	Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch.}
+	Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch. Wir provozieren einen Seitenumbruch.
+
+\end{document}
