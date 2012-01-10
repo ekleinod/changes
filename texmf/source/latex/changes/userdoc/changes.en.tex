@@ -52,7 +52,7 @@ In order to activate change management, use the \chpackage{changes}-package as f
 
 \chcommand{usepackage\{changes\}}
 
-resp.
+respectively
 
 \chcommand{usepackage[<options>]\{changes\}}
 
@@ -64,20 +64,20 @@ For detailed information please refer to \autoref{sec:user:options} and \autoref
 
 \minisec{define authors}
 
-The \chpackage{changes}-package provides a defualt anonymous author.
-If you want to track your changes per author,you have to define the needed authors as follows:
+The \chpackage{changes}-package provides a default anonymous author.
+If you want to track your changes depending on the author, you have to define the needed authors as follows:
 
 \chcommand{definechangesauthor[<options>]\{id\}}
 
-Every author is uniquely identified through it's his or her id.
-You can give evry author an optional name and/or color.
+Every author is uniquely identified through his or her id.
+You can give every author an optional name and/or color.
 
 For detailed information please refer to \autoref{sec:user:authormanagement}.
 
 
 \minisec{markup text changes}
 
-Noew everything is set to markup the changed text.
+Now everything is set to markup the changed text.
 Please use the following commands according to your change:
 
 for newly added text:\\
@@ -126,14 +126,14 @@ You find the script in the directory:
 \input{userdoc/path_scripts}
 
 The script removes all markups.
-It is not possible to select the markup to remove.
+It is not possible to partially select the markup.
 
 %^^A ---- limitations
 \section{Limitations and possible enhancements}
 \label{sec:limitations}
 
 The \chpackage{changes}-package was carefully programmed and tested.
-Yet the exists the possibility of errors in the package, problems in the usage, or missing functions you would like to have.
+Yet the possibility of errors in the package exists, you might encounter problem during use, or you might miss functionionality.
 In that case, please go to
 
 \input{userdoc/url.tex}
@@ -155,7 +155,7 @@ Since footnotes are the default markup of remarks, this would be a problem.
 You can solve this problem by defining another annotation of remarks.
 
 There are several possibilities of enhancing the \chpackage{changes}-package.
-I will describe but a few here, I will not implement them due to time and/or skill lacks.
+I will describe but a few here, I will not implement them due to lack of time and/or skill.
 You can have a look at the more complete list of enhancements on the \emph{sourceforge} page.
 
 \begin{itemize}
@@ -172,15 +172,15 @@ You can have a look at the more complete list of enhancements on the \emph{sourc
 \label{sec:user}
 
 This section describes the user interface of the \chpackage{changes}-package, i.e. all options and commands of the package.
-Every option resp. new command is described.
+Every option respectively new command is described.
 If you want to see the options and commands in action, please refer to the examples in
 
 \input{userdoc/path_examples}
 
-The example files are named with the used option resp. command.
+The example files are named with the used option respectively command.
 
 A preliminary remark regarding typesetting of replaced text: replaced text is always typeset as follows: \meta{new text}\meta{old text}.
-Thus, there is no possiblity to influence the output of replaced text directly, but via changing the output of added resp. deleted text.
+Thus, there is no possiblity to influence the output of replaced text directly, but via changing the output of added respectively deleted text.
 
 
 %^^A -- options
@@ -298,7 +298,7 @@ The following values are allowed:
 \subsubsection{ulem}
 
 All options for the \chpackage{ulem} package can be specified as parameters of the \choption{ulem}-option.
-Two or more options have to be embraced in curly brackets.
+Two or more options have to be put in curly brackets.
 
 \input{userdoc/option_ulem}
 
@@ -401,9 +401,9 @@ The author's name is used in the list of changes and in the markup, if you set t
 \DescribeMacro{\setaddedmarkup}
 
 The command \chcommand{setaddedmarkup} defines the layout of added text.
-The default markup is colored text, or the markup set with the option \choption{markup} resp.\ \choption{addedmarkup}.
+The default markup is colored text, or the markup set with the option \choption{markup} respectively \choption{addedmarkup}.
 
-Values for definition: any \LaTeX-commands, added text can be used with "\#1".
+Values for definition: any \LaTeX-commands, added text can be used with ``\#1''.
 
 \input{userdoc/command_setaddedmarkup}
 
@@ -412,9 +412,9 @@ Values for definition: any \LaTeX-commands, added text can be used with "\#1".
 \DescribeMacro{\setdeletedmarkup}
 
 The command \chcommand{setdeletedmarkup} defines the layout of deleted text.
-The default markup is striked-out, or the markup set with the option \choption{markup} resp.\ \choption{deletedmarkup}.
+The default markup is striked-out, or the markup set with the option \choption{markup} respectively \choption{deletedmarkup}.
 
-Values for definition: any \LaTeX-commands, deleted0 text can be used with "\#1".
+Values for definition: any \LaTeX-commands, deleted0 text can be used with ``\#1''.
 
 \input{userdoc/command_setdeletedmarkup}
 
@@ -425,7 +425,7 @@ Values for definition: any \LaTeX-commands, deleted0 text can be used with "\#1"
 The command \chcommand{setauthormarkup} defines the layout of the author's markup in the text.
 The default markup is a superscripted author's text.
 
-Values for definition: any \LaTeX-commands, author's text can be used with "\#1".
+Values for definition: any \LaTeX-commands, author's text can be used with ``\#1''.
 
 \input{userdoc/command_setauthormarkup}
 
@@ -458,7 +458,7 @@ Possible values: \emph{name} == author's name; all other values: author's id
 The command \chcommand{setremarkmarkup} defines the layout of remarks in the text.
 The default markup typesets the remark in a footnote.
 
-Values for definition: any \LaTeX-commands, author's id can be used with "\#1", the remark can be shown using "\#2".
+Values for definition: any \LaTeX-commands, author's id can be used with ``\#1'', the remark can be shown using ``\#2''.
 Using the author's id you can use the author's color with \texttt{Changes@Color\#1}.
 
 \input{userdoc/command_setremarkmarkup}
@@ -501,13 +501,13 @@ If the command is defined yet, it will not be changed.
 The \chpackage{changes}-package uses already existing packages for it's functions.
 You will find detailed description of the packages in their distributions.
 
-The following packages are required always and have to be installed for the \chpackage{changes}-package:
+The following packages are always required and have to be installed for the \chpackage{changes}-package:
 \begin{description}
 	\item [xifthen] provides an enhanced \chcommand{if}-command as well as a \texttt{while}-loop
 	\item [xkeyval] provides options with key-value-pairs
 \end{description}
 
-The following packages are required sometimes and have to be installed if used by the corresponding option:
+The following packages are sometimes required and have to be installed if used by the corresponding option:
 \begin{description}
 	\item [pdfcolmk] loaded if colored text is used for markup (default markup); solves the problem of colored text and page breaks (with pdflatex)
 	\item [ulem] loaded if text has to be striked or exed out (default markup)
@@ -519,7 +519,7 @@ The following packages are required sometimes and have to be installed if used b
 \section{Authors}
 \label{sec:authors}
 
-Several authors contributed to the \chpackage{changes}.
+Several authors contributed to the \chpackage{changes}-package.
 The authors are (in alphabetical order):
 \input{userdoc/authors}
 
@@ -530,14 +530,14 @@ The authors are (in alphabetical order):
 
 \minisec{Version 0.6.0}
 
-Date: 2011/0?/??
+Date: 2012/01/11
 \begin{itemize}
 	\item Italian translations of captions by Daniele Giovannini
 	\item redefined user interface for setting options and definitions of markup and authors
 	\item restructuring and code improvement
 	\item improved documentation including typical use case
 	\item example files for all options and commands
-	\item remarks are by default not colored anymore
+	\item by default remarks are not colored anymore
 \end{itemize}
 
 \minisec{Version 0.5.4}
@@ -577,7 +577,7 @@ Date: 2007/08/26
 	\item no usage of package \chpackage{arrayjob} anymore, thus no errors using package \chpackage{array}
 	\item switch to UTF-8-encoding
 	\item no usage of package \chpackage{soul} anymore, thus no errors using UTF-8-encoding
-	\item markup for deleted text changed to gray background, because there's no possibility to conveniently strikeout UTF-8-text
+	\item markup for deleted text changed to gray background, because there's no possibility to conveniently strike out UTF-8-text
 	\item new optional argument for author's name
 	\item colored list of changes
 	\item changed loc file format
@@ -590,7 +590,7 @@ Date: 2007/01/24
 \begin{itemize}
 	\item included \chpackage{pdfcolmk} to solve problem with colored text and page breaks
 	\item extended \chcommand{setremarkmarkup} with author's id for using color in remarks
-	\item remarks are by default colored now
+	\item by default remarks are colored now
 	\item first version uploaded to CTAN
 \end{itemize}
 
