@@ -18,12 +18,12 @@
 	<property name="path:latex:scripts" value="scripts/" />
 	<property name="path:latex:tex" value="tex/latex/" />
 	<property name="path:latex:source" value="source/latex/" />
+	<property name="path:latex:userdoc" value="userdoc/" />
 
 	<property name="path:ctan" value="ctan/" /> <!-- CTAN-Ausgabe-Pfad -->
 	<property name="path:texmf" value="texmf/" /> <!-- LaTeX-texmf-Pfad -->
 
-	<property name="documentation:full" value="full" /> <!-- full documentation -->
-	<property name="documentation:short" value="short" /> <!-- short documentation -->
+	<property name="documentation:full" value="withcode" /> <!-- full documentation -->
 
 	<property name="lang:de" value="ngerman" /> <!-- language: german -->
 	<property name="lang:en" value="english" /> <!-- language: english -->
@@ -38,6 +38,9 @@
 
 		<!-- create all documentation files -->
 		<antcall target="documentation">
+			<param name="language" value="${lang:en}" />
+		</antcall>
+		<antcall target="documentation_full">
 			<param name="language" value="${lang:en}" />
 		</antcall>
 		<antcall target="documentation">
@@ -66,33 +69,34 @@
 		<antcall target="checkResult" />
 	</target>
 
-	<!-- create documentation for all languages -->
+	<!-- create normal documentation -->
 	<target name="documentation">
 
 		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${language}.drv" />
+
 		<replace file="${file:targetname}.${language}.drv" token="\selectlanguage{english}" value="\selectlanguage{${language}}" />
-		<antcall target="documentation_full_short">
-			<param name="file:targetname" value="${file:targetname}.${language}" />
+		<replace file="${file:targetname}.${language}.drv" token="%\OnlyDescription" value="\OnlyDescription" />
+
+		<antcall target="pdf_complete">
+			<param name="file:targetname" value="${file:targetname}.${language}.drv" />
 		</antcall>
+
 		<delete file="${file:targetname}.${language}.drv" />
 
 	</target>
 
-	<!-- create full and short documentation -->
-	<target name="documentation_full_short">
+	<!-- create documentation with code -->
+	<target name="documentation_full">
 
-		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${documentation:full}.drv" />
-		<antcall target="pdf_complete">
-			<param name="file:targetname" value="${file:targetname}.${documentation:full}.drv" />
-		</antcall>
-		<delete file="${file:targetname}.${documentation:full}.drv" />
+		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${language}.${documentation:full}.drv" />
 
-		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${documentation:short}.drv" />
-		<replace file="${file:targetname}.${documentation:short}.drv" token="%\OnlyDescription" value="\OnlyDescription" />
+		<replace file="${file:targetname}.${language}.${documentation:full}.drv" token="\selectlanguage{english}" value="\selectlanguage{${language}}" />
+
 		<antcall target="pdf_complete">
-			<param name="file:targetname" value="${file:targetname}.${documentation:short}.drv" />
+			<param name="file:targetname" value="${file:targetname}.${language}.${documentation:full}.drv" />
 		</antcall>
-		<delete file="${file:targetname}.${documentation:short}.drv" />
+
+		<delete file="${file:targetname}.${language}.${documentation:full}.drv" />
 
 	</target>
 
@@ -189,6 +193,7 @@
 		<mkdir dir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/${path:examples}" />
 		<mkdir dir="${path:ctan}${path:texmf}${path:latex:scripts}${file:targetname}" />
 		<mkdir dir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}" />
+		<mkdir dir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/${path:latex:userdoc}" />
 
 		<!-- files -->
 		<!-- files:styles -->
@@ -237,6 +242,8 @@
 			file="${file:targetname}.dtx" />
 		<copy todir="${path:ctan}${file:targetname}/"
 			file="${file:targetname}.dtx" />
+		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
+			file="examples.dtx" />
 
 		<!-- files:ins -->
 		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
@@ -249,6 +256,13 @@
 			file="README" />
 		<copy todir="${path:ctan}${file:targetname}/"
 			file="README" />
+
+		<!-- files:user documentation -->
+		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/${path:latex:userdoc}">
+			<fileset dir="${path:latex:base}${path:latex:source}${file:targetname}/${path:latex:userdoc}">
+				<include name="*.tex" />
+			</fileset>
+		</copy>
 
 		<!-- Archive -->
 		<zip
