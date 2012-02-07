@@ -47,6 +47,7 @@
 % \changes{v0.5.3}{2010/11/22}{use class options (final, draft) as well}
 % \changes{v0.5.4}{2011/04/25}{extract user documentation; default language changed to English; script for removal of commands}
 % \changes{v0.6.0}{2012/01/11}{redefined user interface for setting options, markup, authors; newly structured documentation}
+% \changes{v0.7.0}{2012/02/07}{key-value-interface for change commands}
 % \GetFileInfo{changes.dtx}
 % \RecordChanges
 %
@@ -86,8 +87,8 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{changes}
-[2012/01/11 v0.6.0 changes-Paket]
-\typeout{*** changes-Paket 2012/01/11 v0.6.0 ***}
+[2012/02/07 v0.7.0 changes-Paket]
+\typeout{*** changes-Paket 2012/02/07 v0.7.0 ***}
 %    \end{macrocode}
 %
 % Package \chpackage{xkeyval} provides options with key-value-pairs.
@@ -107,16 +108,16 @@
 \newboolean{Changes@optiondraft}
 \setboolean{Changes@optiondraft}{true}
 \DeclareOptionX{draft}{
-	\setboolean{Changes@optiondraft}{true}
-	\typeout{changes-option '\CurrentOption'}
+  \setboolean{Changes@optiondraft}{true}
+  \typeout{changes-option '\CurrentOption'}
 }
 %    \end{macrocode}
 %
 % Option \choption{final}, sets \choption{draft} to \texttt{false}.
 %    \begin{macrocode}
 \DeclareOptionX{final}{
-	\setboolean{Changes@optiondraft}{false}
-	\typeout{changes-option '\CurrentOption'}
+  \setboolean{Changes@optiondraft}{false}
+  \typeout{changes-option '\CurrentOption'}
 }
 %    \end{macrocode}
 %
@@ -130,97 +131,97 @@
 %    \begin{macrocode}
 \newcommand{\Changes@optionmarkup}{default}
 \DeclareOptionX{markup}{
-	\ifthenelse{\equal{\@empty}{#1}}
-		{}
-		{
-			\ifthenelse{
-				\equal{#1}{default}\or
-				\equal{#1}{underlined}\or
-				\equal{#1}{bfit}\or
-				\equal{#1}{nocolor}
-			}
-				{\renewcommand{\Changes@optionmarkup}{#1}}
-				{\PackageWarning{changes}{markup '#1' unknown, using '\Changes@optionmarkup'}}
-		}
-	\ifthenelse{\equal{\Changes@optionmarkup}{default}}
-		{
-			\renewcommand{\Changes@optionaddedmarkup}{none}
-			\renewcommand{\Changes@optiondeletedmarkup}{sout}
-		}
-		{}
-	\ifthenelse{\equal{\Changes@optionmarkup}{underlined}}
-		{
-			\renewcommand{\Changes@optionaddedmarkup}{uline}
-			\renewcommand{\Changes@optiondeletedmarkup}{sout}
-		}
-		{}
-	\ifthenelse{\equal{\Changes@optionmarkup}{bfit}}
-		{
-			\renewcommand{\Changes@optionaddedmarkup}{bf}
-			\renewcommand{\Changes@optiondeletedmarkup}{it}
-		}
-		{}
-	\ifthenelse{\equal{\Changes@optionmarkup}{nocolor}}
-		{
-			\renewcommand{\Changes@optionaddedmarkup}{uline}
-			\renewcommand{\Changes@optiondeletedmarkup}{sout}
-		}
-		{}
-	\typeout{changes-option 'markup=\Changes@optionmarkup'}
+  \ifthenelse{\equal{\@empty}{#1}}
+    {}
+    {
+      \ifthenelse{
+        \equal{#1}{default}\or
+        \equal{#1}{underlined}\or
+        \equal{#1}{bfit}\or
+        \equal{#1}{nocolor}
+      }
+        {\renewcommand{\Changes@optionmarkup}{#1}}
+        {\PackageWarning{changes}{markup '#1' unknown, using '\Changes@optionmarkup'}}
+    }
+  \ifthenelse{\equal{\Changes@optionmarkup}{default}}
+    {
+      \renewcommand{\Changes@optionaddedmarkup}{none}
+      \renewcommand{\Changes@optiondeletedmarkup}{sout}
+    }
+    {}
+  \ifthenelse{\equal{\Changes@optionmarkup}{underlined}}
+    {
+      \renewcommand{\Changes@optionaddedmarkup}{uline}
+      \renewcommand{\Changes@optiondeletedmarkup}{sout}
+    }
+    {}
+  \ifthenelse{\equal{\Changes@optionmarkup}{bfit}}
+    {
+      \renewcommand{\Changes@optionaddedmarkup}{bf}
+      \renewcommand{\Changes@optiondeletedmarkup}{it}
+    }
+    {}
+  \ifthenelse{\equal{\Changes@optionmarkup}{nocolor}}
+    {
+      \renewcommand{\Changes@optionaddedmarkup}{uline}
+      \renewcommand{\Changes@optiondeletedmarkup}{sout}
+    }
+    {}
+  \typeout{changes-option 'markup=\Changes@optionmarkup'}
 }
 %    \end{macrocode}
 %
 % Option \choption{addedmarkup}, stored or set to default value ``\texttt{none}''.
 %    \begin{macrocode}
 \DeclareOptionX{addedmarkup}{
-	\ifthenelse{\equal{\@empty}{#1}}
-		{}
-		{
-			\ifthenelse{
-				\equal{#1}{none}\or
-				\equal{#1}{uline}\or
-				\equal{#1}{uuline}\or
-				\equal{#1}{uwave}\or
-				\equal{#1}{dashuline}\or
-				\equal{#1}{dotuline}\or
-				\equal{#1}{sout}\or
-				\equal{#1}{xout}\or
-				\equal{#1}{bf}\or
-				\equal{#1}{it}\or
-				\equal{#1}{sl}\or
-				\equal{#1}{em}
-			}
-				{\renewcommand{\Changes@optionaddedmarkup}{#1}}
-				{\PackageWarning{changes}{addedmarkup '#1' unknown, using '\Changes@optionaddedmarkup'}}
-		}
-	\typeout{changes-option 'addedmarkup=\Changes@optionaddedmarkup'}
+  \ifthenelse{\equal{\@empty}{#1}}
+    {}
+    {
+      \ifthenelse{
+        \equal{#1}{none}\or
+        \equal{#1}{uline}\or
+        \equal{#1}{uuline}\or
+        \equal{#1}{uwave}\or
+        \equal{#1}{dashuline}\or
+        \equal{#1}{dotuline}\or
+        \equal{#1}{sout}\or
+        \equal{#1}{xout}\or
+        \equal{#1}{bf}\or
+        \equal{#1}{it}\or
+        \equal{#1}{sl}\or
+        \equal{#1}{em}
+      }
+        {\renewcommand{\Changes@optionaddedmarkup}{#1}}
+        {\PackageWarning{changes}{addedmarkup '#1' unknown, using '\Changes@optionaddedmarkup'}}
+    }
+  \typeout{changes-option 'addedmarkup=\Changes@optionaddedmarkup'}
 }
 %    \end{macrocode}
 %
 % Option \choption{deletedmarkup}, stored or set to default value ``\texttt{striked}''.
 %    \begin{macrocode}
 \DeclareOptionX{deletedmarkup}{
-	\ifthenelse{\equal{\@empty}{#1}}
-		{}
-		{
-			\ifthenelse{
-				\equal{#1}{none}\or
-				\equal{#1}{uline}\or
-				\equal{#1}{uuline}\or
-				\equal{#1}{uwave}\or
-				\equal{#1}{dashuline}\or
-				\equal{#1}{dotuline}\or
-				\equal{#1}{sout}\or
-				\equal{#1}{xout}\or
-				\equal{#1}{bf}\or
-				\equal{#1}{it}\or
-				\equal{#1}{sl}\or
-				\equal{#1}{em}
-			}
-				{\renewcommand{\Changes@optiondeletedmarkup}{#1}}
-				{\PackageWarning{changes}{deletedmarkup '#1' unknown, using '\Changes@optiondeletedmarkup'}}
-		}
-	\typeout{changes-option 'deletedmarkup=\Changes@optiondeletedmarkup'}
+  \ifthenelse{\equal{\@empty}{#1}}
+    {}
+    {
+      \ifthenelse{
+        \equal{#1}{none}\or
+        \equal{#1}{uline}\or
+        \equal{#1}{uuline}\or
+        \equal{#1}{uwave}\or
+        \equal{#1}{dashuline}\or
+        \equal{#1}{dotuline}\or
+        \equal{#1}{sout}\or
+        \equal{#1}{xout}\or
+        \equal{#1}{bf}\or
+        \equal{#1}{it}\or
+        \equal{#1}{sl}\or
+        \equal{#1}{em}
+      }
+        {\renewcommand{\Changes@optiondeletedmarkup}{#1}}
+        {\PackageWarning{changes}{deletedmarkup '#1' unknown, using '\Changes@optiondeletedmarkup'}}
+    }
+  \typeout{changes-option 'deletedmarkup=\Changes@optiondeletedmarkup'}
 }
 %    \end{macrocode}
 %
@@ -228,19 +229,19 @@
 %    \begin{macrocode}
 \newcommand{\Changes@optionauthormarkup}{superscript}
 \DeclareOptionX{authormarkup}{
-	\ifthenelse{\equal{\@empty}{#1}}
-		{}
-		{
-			\ifthenelse{
-				\equal{#1}{superscript}\or
-				\equal{#1}{subscript}\or
-				\equal{#1}{brackets}\or
-				\equal{#1}{footnote}
-			}
-				{\renewcommand{\Changes@optionauthormarkup}{#1}}
-				{\PackageWarning{changes}{authormarkup '#1' unknown, using '\Changes@optionauthormarkup'}}
-		}
-	\typeout{changes-option 'authormarkup=\Changes@optionauthormarkup'}
+  \ifthenelse{\equal{\@empty}{#1}}
+    {}
+    {
+      \ifthenelse{
+        \equal{#1}{superscript}\or
+        \equal{#1}{subscript}\or
+        \equal{#1}{brackets}\or
+        \equal{#1}{footnote}
+      }
+        {\renewcommand{\Changes@optionauthormarkup}{#1}}
+        {\PackageWarning{changes}{authormarkup '#1' unknown, using '\Changes@optionauthormarkup'}}
+    }
+  \typeout{changes-option 'authormarkup=\Changes@optionauthormarkup'}
 }
 %    \end{macrocode}
 %
@@ -248,17 +249,17 @@
 %    \begin{macrocode}
 \newcommand{\Changes@optionauthormarkupposition}{right}
 \DeclareOptionX{authormarkupposition}{
-	\ifthenelse{\equal{\@empty}{#1}}
-		{}
-		{
-			\ifthenelse{
-				\equal{#1}{right}\or
-				\equal{#1}{left}
-			}
-				{\renewcommand{\Changes@optionauthormarkupposition}{#1}}
-				{\PackageWarning{changes}{authormarkupposition '#1' unknown, using '\Changes@optionauthormarkupposition'}}
-		}
-	\typeout{changes-option 'authormarkupposition=\Changes@optionauthormarkupposition'}
+  \ifthenelse{\equal{\@empty}{#1}}
+    {}
+    {
+      \ifthenelse{
+        \equal{#1}{right}\or
+        \equal{#1}{left}
+      }
+        {\renewcommand{\Changes@optionauthormarkupposition}{#1}}
+        {\PackageWarning{changes}{authormarkupposition '#1' unknown, using '\Changes@optionauthormarkupposition'}}
+    }
+  \typeout{changes-option 'authormarkupposition=\Changes@optionauthormarkupposition'}
 }
 %    \end{macrocode}
 %
@@ -266,17 +267,17 @@
 %    \begin{macrocode}
 \newcommand{\Changes@optionauthormarkuptext}{id}
 \DeclareOptionX{authormarkuptext}{
-	\ifthenelse{\equal{\@empty}{#1}}
-		{}
-		{
-			\ifthenelse{
-				\equal{#1}{id}\or
-				\equal{#1}{name}
-			}
-				{\renewcommand{\Changes@optionauthormarkuptext}{#1}}
-				{\PackageWarning{changes}{authormarkuptext '#1' unknown, using '\Changes@optionauthormarkuptext'}}
-		}
-	\typeout{changes-option 'authormarkuptext=\Changes@optionauthormarkuptext'}
+  \ifthenelse{\equal{\@empty}{#1}}
+    {}
+    {
+      \ifthenelse{
+        \equal{#1}{id}\or
+        \equal{#1}{name}
+      }
+        {\renewcommand{\Changes@optionauthormarkuptext}{#1}}
+        {\PackageWarning{changes}{authormarkuptext '#1' unknown, using '\Changes@optionauthormarkuptext'}}
+    }
+  \typeout{changes-option 'authormarkuptext=\Changes@optionauthormarkuptext'}
 }
 %    \end{macrocode}
 %
@@ -285,29 +286,31 @@
 % Options for package \chpackage{ulem} are directly passed to the package.
 %    \begin{macrocode}
 \DeclareOptionX{ulem}{
-	\typeout{ulem-option '#1', passed to package ulem}
-	\PassOptionsToPackage{#1}{ulem}
+  \typeout{ulem-option '#1', passed to package ulem}
+  \PassOptionsToPackage{#1}{ulem}
 }
 %    \end{macrocode}
 %
 % Options for package \chpackage{xcolor} are directly passed to the package.
 %    \begin{macrocode}
 \DeclareOptionX{xcolor}{
-	\typeout{xcolor-option '#1', passed to package xcolor}
-	\PassOptionsToPackage{#1}{xcolor}
+  \typeout{xcolor-option '#1', passed to package xcolor}
+  \PassOptionsToPackage{#1}{xcolor}
 }
 %    \end{macrocode}
 %
 % Unknown options generate a package warning.
 %    \begin{macrocode}
 \DeclareOptionX*{
-	\PackageWarning{changes}{Unknown option '\CurrentOption'}
+  \PackageWarning{changes}{Unknown option '\CurrentOption'}
 }
 %    \end{macrocode}
 %
 % \subsubsection{Command options}
 %
 % All options for commands (e.g. \chcommand{definechangesauthor}) have to be declared before option processing.
+%
+% \minisec{\chcommand{definechangesauthor}}
 %
 % Declare available options of the command, define value storage.
 %    \begin{macrocode}
@@ -318,8 +321,56 @@
 % Set the default values of the options.
 %    \begin{macrocode}
 \presetkeys{Changes@definechangesauthor}{
-	name=\@empty,
-	color=black
+  name=\@empty,
+  color=black
+}{}
+%    \end{macrocode}
+%
+% \minisec{\chcommand{added}}
+%
+% Declare available options of the command, define value storage.
+%    \begin{macrocode}
+\DeclareOptionX<Changes@added>{id}{\def\Changes@added@id{#1}}
+\DeclareOptionX<Changes@added>{remark}{\def\Changes@added@remark{#1}}
+%    \end{macrocode}
+%
+% Set the default values of the options.
+%    \begin{macrocode}
+\presetkeys{Changes@added}{
+  id=\@empty,
+  remark=\@empty
+}{}
+%    \end{macrocode}
+%
+% \minisec{\chcommand{deleted}}
+%
+% Declare available options of the command, define value storage.
+%    \begin{macrocode}
+\DeclareOptionX<Changes@deleted>{id}{\def\Changes@deleted@id{#1}}
+\DeclareOptionX<Changes@deleted>{remark}{\def\Changes@deleted@remark{#1}}
+%    \end{macrocode}
+%
+% Set the default values of the options.
+%    \begin{macrocode}
+\presetkeys{Changes@deleted}{
+  id=\@empty,
+  remark=\@empty
+}{}
+%    \end{macrocode}
+%
+% \minisec{\chcommand{replaced}}
+%
+% Declare available options of the command, define value storage.
+%    \begin{macrocode}
+\DeclareOptionX<Changes@replaced>{id}{\def\Changes@replaced@id{#1}}
+\DeclareOptionX<Changes@replaced>{remark}{\def\Changes@replaced@remark{#1}}
+%    \end{macrocode}
+%
+% Set the default values of the options.
+%    \begin{macrocode}
+\presetkeys{Changes@replaced}{
+  id=\@empty,
+  remark=\@empty
 }{}
 %    \end{macrocode}
 %
@@ -338,36 +389,36 @@
 \newboolean{Changes@colored}
 \setboolean{Changes@colored}{true}
 \ifthenelse{\equal{\Changes@optionmarkup}{nocolor}}
-	{\setboolean{Changes@colored}{false}}
-	{}
+  {\setboolean{Changes@colored}{false}}
+  {}
 \ifthenelse{\boolean{Changes@colored}}
-	{
-		\RequirePackage{xcolor}
-		\RequirePackage{pdfcolmk}
-	}
-	{}
+  {
+    \RequirePackage{xcolor}
+    \RequirePackage{pdfcolmk}
+  }
+  {}
 %    \end{macrocode}
 %
 % Package \chpackage{ulem} provides commands for striking out text.
 %    \begin{macrocode}
 \ifthenelse{
-	\equal{\Changes@optionaddedmarkup}{uline}\or
-	\equal{\Changes@optionaddedmarkup}{uuline}\or
-	\equal{\Changes@optionaddedmarkup}{uwave}\or
-	\equal{\Changes@optionaddedmarkup}{dashuline}\or
-	\equal{\Changes@optionaddedmarkup}{dotuline}\or
-	\equal{\Changes@optionaddedmarkup}{sout}\or
-	\equal{\Changes@optionaddedmarkup}{xout}\or
-	\equal{\Changes@optiondeletedmarkup}{uline}\or
-	\equal{\Changes@optiondeletedmarkup}{uuline}\or
-	\equal{\Changes@optiondeletedmarkup}{uwave}\or
-	\equal{\Changes@optiondeletedmarkup}{dashuline}\or
-	\equal{\Changes@optiondeletedmarkup}{dotuline}\or
-	\equal{\Changes@optiondeletedmarkup}{sout}\or
-	\equal{\Changes@optiondeletedmarkup}{xout}
+  \equal{\Changes@optionaddedmarkup}{uline}\or
+  \equal{\Changes@optionaddedmarkup}{uuline}\or
+  \equal{\Changes@optionaddedmarkup}{uwave}\or
+  \equal{\Changes@optionaddedmarkup}{dashuline}\or
+  \equal{\Changes@optionaddedmarkup}{dotuline}\or
+  \equal{\Changes@optionaddedmarkup}{sout}\or
+  \equal{\Changes@optionaddedmarkup}{xout}\or
+  \equal{\Changes@optiondeletedmarkup}{uline}\or
+  \equal{\Changes@optiondeletedmarkup}{uuline}\or
+  \equal{\Changes@optiondeletedmarkup}{uwave}\or
+  \equal{\Changes@optiondeletedmarkup}{dashuline}\or
+  \equal{\Changes@optiondeletedmarkup}{dotuline}\or
+  \equal{\Changes@optiondeletedmarkup}{sout}\or
+  \equal{\Changes@optiondeletedmarkup}{xout}
 }
-	{\RequirePackage[normalem,normalbf]{ulem}}
-	{}
+  {\RequirePackage[normalem,normalbf]{ulem}}
+  {}
 %    \end{macrocode}
 %
 % \subsection{Language dependent texts}
@@ -377,47 +428,47 @@
 % If the babel package is not loaded, the default language is English, in order to use another language, the user has to redefine the variables.
 %    \begin{macrocode}
 \ifthenelse{\isundefined{\addto}}
-	{
-		\def\listchangesname{Changes}
-		\def\changesaddname{Added}
-		\def\changesdeletename{Deleted}
-		\def\changesreplacename{Replaced}
-		\def\changesauthorname{Author}
-		\def\changesanonymousname{anonymous}
-		\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}
-	}{
-		\addto\captionsngerman{\def\listchangesname{\"Anderungen}}
-		\addto\captionsngerman{\def\changesaddname{Eingef\"ugt}}
-		\addto\captionsngerman{\def\changesdeletename{Gel\"oscht}}
-		\addto\captionsngerman{\def\changesreplacename{Ersetzt}}
-		\addto\captionsngerman{\def\changesauthorname{Autor}}
-		\addto\captionsngerman{\def\changesanonymousname{Anonym}}
-		\addto\captionsngerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
+  {
+    \def\listchangesname{Changes}
+    \def\changesaddname{Added}
+    \def\changesdeletename{Deleted}
+    \def\changesreplacename{Replaced}
+    \def\changesauthorname{Author}
+    \def\changesanonymousname{anonymous}
+    \def\changesnoloc{List of changes is available after the next \LaTeX\ run.}
+  }{
+    \addto\captionsngerman{\def\listchangesname{\"Anderungen}}
+    \addto\captionsngerman{\def\changesaddname{Eingef\"ugt}}
+    \addto\captionsngerman{\def\changesdeletename{Gel\"oscht}}
+    \addto\captionsngerman{\def\changesreplacename{Ersetzt}}
+    \addto\captionsngerman{\def\changesauthorname{Autor}}
+    \addto\captionsngerman{\def\changesanonymousname{Anonym}}
+    \addto\captionsngerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
 
-		\addto\captionsgerman{\def\listchangesname{\"Anderungen}}
-		\addto\captionsgerman{\def\changesaddname{Eingef\"ugt}}
-		\addto\captionsgerman{\def\changesdeletename{Gel\"oscht}}
-		\addto\captionsgerman{\def\changesreplacename{Ersetzt}}
-		\addto\captionsgerman{\def\changesauthorname{Autor}}
-		\addto\captionsgerman{\def\changesanonymousname{Anonym}}
-		\addto\captionsgerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
+    \addto\captionsgerman{\def\listchangesname{\"Anderungen}}
+    \addto\captionsgerman{\def\changesaddname{Eingef\"ugt}}
+    \addto\captionsgerman{\def\changesdeletename{Gel\"oscht}}
+    \addto\captionsgerman{\def\changesreplacename{Ersetzt}}
+    \addto\captionsgerman{\def\changesauthorname{Autor}}
+    \addto\captionsgerman{\def\changesanonymousname{Anonym}}
+    \addto\captionsgerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
 
-		\addto\captionsenglish{\def\listchangesname{Changes}}
-		\addto\captionsenglish{\def\changesaddname{Added}}
-		\addto\captionsenglish{\def\changesdeletename{Deleted}}
-		\addto\captionsenglish{\def\changesreplacename{Replaced}}
-		\addto\captionsenglish{\def\changesauthorname{Author}}
-		\addto\captionsenglish{\def\changesanonymousname{anonymous}}
-		\addto\captionsenglish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
+    \addto\captionsenglish{\def\listchangesname{Changes}}
+    \addto\captionsenglish{\def\changesaddname{Added}}
+    \addto\captionsenglish{\def\changesdeletename{Deleted}}
+    \addto\captionsenglish{\def\changesreplacename{Replaced}}
+    \addto\captionsenglish{\def\changesauthorname{Author}}
+    \addto\captionsenglish{\def\changesanonymousname{anonymous}}
+    \addto\captionsenglish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
 
-		\addto\captionsitalian{\def\listchangesname{Modifiche}}
-		\addto\captionsitalian{\def\changesaddname{Aggiunte}}
-		\addto\captionsitalian{\def\changesdeletename{Cancellazioni}}
-		\addto\captionsitalian{\def\changesreplacename{Sostituzioni}}
-		\addto\captionsitalian{\def\changesauthorname{Autore}}
-		\addto\captionsitalian{\def\changesanonymousname{anonimo}}
-		\addto\captionsitalian{\def\changesnoloc{La lista delle modifiche sar\`a disponibile alla prossima esecuzione di \LaTeX.}}
-	}
+    \addto\captionsitalian{\def\listchangesname{Modifiche}}
+    \addto\captionsitalian{\def\changesaddname{Aggiunte}}
+    \addto\captionsitalian{\def\changesdeletename{Cancellazioni}}
+    \addto\captionsitalian{\def\changesreplacename{Sostituzioni}}
+    \addto\captionsitalian{\def\changesauthorname{Autore}}
+    \addto\captionsitalian{\def\changesanonymousname{anonimo}}
+    \addto\captionsitalian{\def\changesnoloc{La lista delle modifiche sar\`a disponibile alla prossima esecuzione di \LaTeX.}}
+  }
 %    \end{macrocode}
 %
 % \subsection{File extension}
@@ -434,7 +485,7 @@
 %  Argument: new extension.
 %    \begin{macrocode}
 \newcommand{\setlocextension}[1]{
-	\renewcommand{\Changes@extension}{#1}
+  \renewcommand{\Changes@extension}{#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -448,7 +499,7 @@
 %    \begin{macrocode}
 \newcounter{Changes@AuthorCount}
 \setcounter{Changes@AuthorCount}{0}
-\newcounter{Changes@iAuthor}
+\newcounter{Changes@Author}
 %    \end{macrocode}
 %
 % \begin{macro}{\definechangesauthor}
@@ -464,34 +515,34 @@
 %
 % Call \emph{setkeys} in order to evaluate the key-value-options and fill the value storage.
 %    \begin{macrocode}
-	\setkeys{Changes@definechangesauthor}{#1}
+  \setkeys{Changes@definechangesauthor}{#1}
 %    \end{macrocode}
 %
 % Increment author counter, later needed for \emph{while} loop of authors.
 %    \begin{macrocode}
-	\stepcounter{Changes@AuthorCount}
+  \stepcounter{Changes@AuthorCount}
 %    \end{macrocode}
 %
 % Store the id in a name with the given counter/index.
 % All other storage refers to the id.
 %    \begin{macrocode}
-	\@namedef{Changes@AuthorID\theChanges@AuthorCount}{#2}
+  \@namedef{Changes@AuthorID\theChanges@AuthorCount}{#2}
 %    \end{macrocode}
 %
 % Store the author's definition in according variables/colors, create change counters.
 %    \begin{macrocode}
-	\expandafter
-	\let\csname Changes@AuthorName#2\endcsname=\Changes@definechangesauthor@name
-	\newcounter{Changes@AddCount#2}
-	\newcounter{Changes@DeleteCount#2}
-	\newcounter{Changes@ReplaceCount#2}
-	\ifthenelse{\boolean{Changes@colored}}
-		{
-			\expandafter
-			\let\csname Changes@AuthorColor#2\endcsname=\Changes@definechangesauthor@color
-			\colorlet{Changes@Color#2}{\@nameuse{Changes@AuthorColor#2}}
-		}
-		{}
+  \expandafter
+  \let\csname Changes@AuthorName#2\endcsname=\Changes@definechangesauthor@name
+  \newcounter{Changes@AddCount#2}
+  \newcounter{Changes@DeleteCount#2}
+  \newcounter{Changes@ReplaceCount#2}
+  \ifthenelse{\boolean{Changes@colored}}
+    {
+      \expandafter
+      \let\csname Changes@AuthorColor#2\endcsname=\Changes@definechangesauthor@color
+      \colorlet{Changes@Color#2}{\@nameuse{Changes@AuthorColor#2}}
+    }
+    {}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -508,10 +559,10 @@
 % Store markup for authors.
 %    \begin{macrocode}
 \newcommand{\Changes@Markup@Author}[1]{%
-	\ifthenelse{\equal{\Changes@optionauthormarkup}{superscript}}{\textsuperscript{#1}}{}%
-	\ifthenelse{\equal{\Changes@optionauthormarkup}{subscript}}{\textsubscript{#1}}{}%
-	\ifthenelse{\equal{\Changes@optionauthormarkup}{brackets}}{(#1)}{}%
-	\ifthenelse{\equal{\Changes@optionauthormarkup}{footnote}}{\footnote{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionauthormarkup}{superscript}}{\textsuperscript{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionauthormarkup}{subscript}}{\textsubscript{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionauthormarkup}{brackets}}{(#1)}{}%
+  \ifthenelse{\equal{\Changes@optionauthormarkup}{footnote}}{\footnote{#1}}{}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -520,7 +571,7 @@
 % Set markup for authors.
 %    \begin{macrocode}
 \newcommand{\setauthormarkup}[1]{
-	\renewcommand{\Changes@Markup@Author}[1]{#1}
+  \renewcommand{\Changes@Markup@Author}[1]{#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -531,10 +582,10 @@
 % The code is taken from \LaTeX-FAQ 8.5.17.
 %    \begin{macrocode}
 \ifthenelse{\isundefined{\textsubscript}}
-	{
-		\DeclareRobustCommand*\textsubscript[1]{\@textsubscript{\selectfont#1}}
-		\newcommand{\@textsubscript}[1]{{\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
-	}{}
+  {
+    \DeclareRobustCommand*\textsubscript[1]{\@textsubscript{\selectfont#1}}
+    \newcommand{\@textsubscript}[1]{{\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
+  }{}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -542,7 +593,7 @@
 % Set position for author markup text.
 %    \begin{macrocode}
 \newcommand{\setauthormarkupposition}[1]{
-	\renewcommand{\Changes@optionauthormarkupposition}{#1}
+  \renewcommand{\Changes@optionauthormarkupposition}{#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -551,7 +602,7 @@
 % Set author markup text to be displayed.
 %    \begin{macrocode}
 \newcommand{\setauthormarkuptext}[1]{
-	\renewcommand{\Changes@optionauthormarkuptext}{#1}
+  \renewcommand{\Changes@optionauthormarkuptext}{#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -561,12 +612,12 @@
 %  Default: in a footnote.
 %    \begin{macrocode}
 \newcommand{\Changes@Remark}[2]{%
-	\footnote{%
-		\ifthenelse{\not\equal{#1}{\@empty}}%
-			{#1: }%
-			{}%
-		#2%
-	}%
+  \footnote{%
+    \ifthenelse{\not\equal{#1}{\@empty}}%
+      {#1: }%
+      {}%
+    #2%
+  }%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -576,7 +627,7 @@
 %  Mandatory argument: markup definition.
 %    \begin{macrocode}
 \newcommand{\setremarkmarkup}[1]{%
-	\renewcommand{\Changes@Remark}[2]{#1}%
+  \renewcommand{\Changes@Remark}[2]{#1}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -592,18 +643,18 @@
 % Store markup for added text.
 %    \begin{macrocode}
 \newcommand{\Changes@Markup@Added}[1]{%
-	\ifthenelse{\equal{\Changes@optionaddedmarkup}{none}}{#1}{}%
-	\ifthenelse{\equal{\Changes@optionaddedmarkup}{uline}}{\uline{#1}}{}%
-	\ifthenelse{\equal{\Changes@optionaddedmarkup}{uuline}}{\uuline{#1}}{}%
-	\ifthenelse{\equal{\Changes@optionaddedmarkup}{uwave}}{\uwave{#1}}{}%
-	\ifthenelse{\equal{\Changes@optionaddedmarkup}{dashuline}}{\dashuline{#1}}{}%
-	\ifthenelse{\equal{\Changes@optionaddedmarkup}{dotuline}}{\dotuline{#1}}{}%
-	\ifthenelse{\equal{\Changes@optionaddedmarkup}{sout}}{\sout{#1}}{}%
-	\ifthenelse{\equal{\Changes@optionaddedmarkup}{xout}}{\xout{#1}}{}%
-	\ifthenelse{\equal{\Changes@optionaddedmarkup}{bf}}{\textbf{#1}}{}%
-	\ifthenelse{\equal{\Changes@optionaddedmarkup}{it}}{\textit{#1}}{}%
-	\ifthenelse{\equal{\Changes@optionaddedmarkup}{sl}}{\textsl{#1}}{}%
-	\ifthenelse{\equal{\Changes@optionaddedmarkup}{em}}{\emph{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionaddedmarkup}{none}}{#1}{}%
+  \ifthenelse{\equal{\Changes@optionaddedmarkup}{uline}}{\uline{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionaddedmarkup}{uuline}}{\uuline{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionaddedmarkup}{uwave}}{\uwave{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionaddedmarkup}{dashuline}}{\dashuline{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionaddedmarkup}{dotuline}}{\dotuline{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionaddedmarkup}{sout}}{\sout{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionaddedmarkup}{xout}}{\xout{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionaddedmarkup}{bf}}{\textbf{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionaddedmarkup}{it}}{\textit{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionaddedmarkup}{sl}}{\textsl{#1}}{}%
+  \ifthenelse{\equal{\Changes@optionaddedmarkup}{em}}{\emph{#1}}{}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -612,7 +663,7 @@
 % Set markup for added text.
 %    \begin{macrocode}
 \newcommand{\setaddedmarkup}[1]{
-	\renewcommand{\Changes@Markup@Added}[1]{#1}
+  \renewcommand{\Changes@Markup@Added}[1]{#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -621,18 +672,18 @@
 % Store markup for deleted text.
 %    \begin{macrocode}
 \newcommand{\Changes@Markup@Deleted}[1]{%
-	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{none}}{#1}{}%
-	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{uline}}{\uline{#1}}{}%
-	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{uuline}}{\uuline{#1}}{}%
-	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{uwave}}{\uwave{#1}}{}%
-	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{dashuline}}{\dashuline{#1}}{}%
-	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{dotuline}}{\dotuline{#1}}{}%
-	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{sout}}{\sout{#1}}{}%
-	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{xout}}{\xout{#1}}{}%
-	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{bf}}{\textbf{#1}}{}%
-	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{it}}{\textit{#1}}{}%
-	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{sl}}{\textsl{#1}}{}%
-	\ifthenelse{\equal{\Changes@optiondeletedmarkup}{em}}{\emph{#1}}{}%
+  \ifthenelse{\equal{\Changes@optiondeletedmarkup}{none}}{#1}{}%
+  \ifthenelse{\equal{\Changes@optiondeletedmarkup}{uline}}{\uline{#1}}{}%
+  \ifthenelse{\equal{\Changes@optiondeletedmarkup}{uuline}}{\uuline{#1}}{}%
+  \ifthenelse{\equal{\Changes@optiondeletedmarkup}{uwave}}{\uwave{#1}}{}%
+  \ifthenelse{\equal{\Changes@optiondeletedmarkup}{dashuline}}{\dashuline{#1}}{}%
+  \ifthenelse{\equal{\Changes@optiondeletedmarkup}{dotuline}}{\dotuline{#1}}{}%
+  \ifthenelse{\equal{\Changes@optiondeletedmarkup}{sout}}{\sout{#1}}{}%
+  \ifthenelse{\equal{\Changes@optiondeletedmarkup}{xout}}{\xout{#1}}{}%
+  \ifthenelse{\equal{\Changes@optiondeletedmarkup}{bf}}{\textbf{#1}}{}%
+  \ifthenelse{\equal{\Changes@optiondeletedmarkup}{it}}{\textit{#1}}{}%
+  \ifthenelse{\equal{\Changes@optiondeletedmarkup}{sl}}{\textsl{#1}}{}%
+  \ifthenelse{\equal{\Changes@optiondeletedmarkup}{em}}{\emph{#1}}{}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -641,7 +692,7 @@
 % Set markup for deleted text.
 %    \begin{macrocode}
 \newcommand{\setdeletedmarkup}[1]{
-	\renewcommand{\Changes@Markup@Deleted}[1]{#1}
+  \renewcommand{\Changes@Markup@Deleted}[1]{#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -663,81 +714,74 @@
 %    \end{macrocode}
 %	Output changed text if option \choption{draft} is set, otherwise output unchanged text.
 %    \begin{macrocode}
-	\ifthenelse{\boolean{Changes@optiondraft}}%
-		{%
+  \ifthenelse{\boolean{Changes@optiondraft}}%
+    {%
 %    \end{macrocode}
 %	Save author text for output.
 %    \begin{macrocode}
-			\ifthenelse{\equal{\Changes@optionauthormarkuptext}{id}}%
-				{\@namedef{Changes@AuthorText}{#3}}%
-				{}%
-			\ifthenelse{\equal{\Changes@optionauthormarkuptext}{name}}%
-				{\@namedef{Changes@AuthorText}{\@nameuse{Changes@AuthorName#3}}}%
-				{}%
-			{%
+      \ifthenelse{\equal{\Changes@optionauthormarkuptext}{id}}%
+        {\@namedef{Changes@AuthorText}{#3}}%
+        {}%
+      \ifthenelse{\equal{\Changes@optionauthormarkuptext}{name}}%
+        {\@namedef{Changes@AuthorText}{\@nameuse{Changes@AuthorName#3}}}%
+        {}%
+      {%
 %    \end{macrocode}
 %	Change color, if colored text is used.
 %    \begin{macrocode}
-				\ifthenelse{\boolean{Changes@colored}}%
-					{\color{Changes@Color#3}}%
-					{}%
+        \ifthenelse{\boolean{Changes@colored}}%
+          {\color{Changes@Color#3}}%
+          {}%
 %    \end{macrocode}
 %	Output author text if author's id is given and text should appear left of changes.
 %    \begin{macrocode}
-				\ifthenelse{\equal{\Changes@optionauthormarkupposition}{left} \and \not\equal{#3}{\@empty}}%
-					{\Changes@Markup@Author{\@nameuse{Changes@AuthorText}}}%
-					{}%
+        \ifthenelse{\equal{\Changes@optionauthormarkupposition}{left} \and \not\equal{#3}{\@empty}}%
+          {\Changes@Markup@Author{\@nameuse{Changes@AuthorText}}}%
+          {}%
 %    \end{macrocode}
 %	Output changed text.
 %    \begin{macrocode}
-				{#1}%
+        {#1}%
 %    \end{macrocode}
 %	Output author text if author's id is given and text should appear right of changes.
 %    \begin{macrocode}
-				\ifthenelse{\equal{\Changes@optionauthormarkupposition}{right} \and \not\equal{#3}{\@empty}}%
-					{\Changes@Markup@Author{\@nameuse{Changes@AuthorText}}}%
-					{}%
+        \ifthenelse{\equal{\Changes@optionauthormarkupposition}{right} \and \not\equal{#3}{\@empty}}%
+          {\Changes@Markup@Author{\@nameuse{Changes@AuthorText}}}%
+          {}%
 %    \end{macrocode}
 %	Output remark if a remark is given.
 %    \begin{macrocode}
-				\ifthenelse{\not\equal{#4}{\@empty}}%
-					{\Changes@Remark{#3}{#4}}%
-					{}%
-			}%
-		}%
+        \ifthenelse{\not\equal{#4}{\@empty}}%
+          {\Changes@Remark{#3}{#4}}%
+          {}%
+      }%
+    }%
 %    \end{macrocode}
 %	Output unchanged text (option \choption{final} was set).
 %    \begin{macrocode}
-		{#2}%
+    {#2}%
 }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\Changes@temp}
-% Temporary variable for exchange of optional parameters between interlocked commands.
-%    \begin{macrocode}
-\newcommand{\Changes@temp}{\@empty}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\added}
 %  The command formats text as new text.
-%  Defining a command with two optional parameters is rather complicated.
 %
 %  Mandatory argument: added text.
-%  Optional arguments: author's id, remark
+%  Optional argument (key-value): author's id, remark
 %    \begin{macrocode}
-\newcommand{\added}[1][\@empty]{%
-	\renewcommand{\Changes@temp}{#1}%
-	\Changes@added%
-}
-\newcommand{\Changes@added}[2][\@empty]{%
-	\Changes@output
-		{\Changes@Markup@Added{#2}}
-		{#2}
-		{\Changes@temp}
-		{#1}%
-	\stepcounter{Changes@AddCount\Changes@temp}%
+\newcommand{\added}[2][\@empty]{%
+% Call \emph{setkeys} in order to evaluate the key-value-options and fill the value storage.
+%    \begin{macrocode}
+  \setkeys{Changes@added}{#1}
+%    \end{macrocode}
+%
+  \Changes@output
+    {\Changes@Markup@Added{#2}}
+    {#2}
+    {\Changes@added@id}
+    {\Changes@added@remark}%
+  \stepcounter{Changes@AddCount\Changes@added@id}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -749,19 +793,20 @@
 %  It solves the problem of additional space caused by an empty command.
 %
 %  Mandatory argument: deleted text.
-%  Optional arguments: author's id, remark
+%  Optional argument (key-value): author's id, remark
 %    \begin{macrocode}
-\newcommand{\deleted}[1][\@empty]{%
-	\renewcommand{\Changes@temp}{#1}%
-	\Changes@deleted%
-}
-\newcommand{\Changes@deleted}[2][\@empty]{%
-	\Changes@output
-		{\Changes@Markup@Deleted{#2}}
-		{\@bsphack \expandafter \@esphack}
-		{\Changes@temp}
-		{#1}%
-	\stepcounter{Changes@DeleteCount\Changes@temp}%
+\newcommand{\deleted}[2][\@empty]{%
+% Call \emph{setkeys} in order to evaluate the key-value-options and fill the value storage.
+%    \begin{macrocode}
+  \setkeys{Changes@deleted}{#1}
+%    \end{macrocode}
+%
+  \Changes@output
+    {\Changes@Markup@Deleted{#2}}
+    {\@bsphack \expandafter \@esphack}
+    {\Changes@deleted@id}
+    {\Changes@deleted@remark}%
+  \stepcounter{Changes@DeleteCount\Changes@deleted@id}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -770,19 +815,20 @@
 %  The command formats text as replaced text.
 %
 %  Mandatory arguments: new text and old text.
-%  Optional arguments: author's id, remark
+%  Optional argument (key-value): author's id, remark
 %    \begin{macrocode}
-\newcommand{\replaced}[1][\@empty]{%
-	\renewcommand{\Changes@temp}{#1}%
-	\Changes@replaced%
-}
-\newcommand{\Changes@replaced}[3][\@empty]{%
-	\Changes@output
-		{{\Changes@Markup@Added{#2}}{\Changes@Markup@Deleted{#3}}}
-		{#2}
-		{\Changes@temp}
-		{#1}%
-	\stepcounter{Changes@ReplaceCount\Changes@temp}%
+\newcommand{\replaced}[3][\@empty]{%
+% Call \emph{setkeys} in order to evaluate the key-value-options and fill the value storage.
+%    \begin{macrocode}
+  \setkeys{Changes@replaced}{#1}
+%    \end{macrocode}
+%
+  \Changes@output
+    {{\Changes@Markup@Added{#2}}{\Changes@Markup@Deleted{#3}}}
+    {#2}
+    {\Changes@replaced@id}
+    {\Changes@replaced@remark}%
+  \stepcounter{Changes@ReplaceCount\Changes@replaced@id}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -796,12 +842,12 @@
 %  The contents have to be separated by a semicolon.
 %    \begin{macrocode}
 \def\changes@chopline#1;#2;#3;#4;#5;#6 \\{
-	\def\Changes@InID{#1}
-	\def\Changes@InColor{#2}
-	\def\Changes@InName{#3}
-	\def\Changes@InAdded{#4}
-	\def\Changes@InDeleted{#5}
-	\def\Changes@InReplaced{#6}
+  \def\Changes@InID{#1}
+  \def\Changes@InColor{#2}
+  \def\Changes@InName{#3}
+  \def\Changes@InAdded{#4}
+  \def\Changes@InDeleted{#5}
+  \def\Changes@InReplaced{#6}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -812,48 +858,48 @@
 %  If no loc-file exists, an according message is generated.
 %    \begin{macrocode}
 \newcommand{\listofchanges}{%
-	\ifthenelse{\boolean{Changes@optiondraft}}
-		{
-			\section*{\listchangesname}
-			\IfFileExists{\jobname.\Changes@extension}
-				{
-					\newboolean{Changes@MoreLines}
-					\setboolean{Changes@MoreLines}{true}
-					\newread\Changes@InFile
-					\openin\Changes@InFile = \jobname.\Changes@extension
-					\whiledo{\boolean{Changes@MoreLines}}{
-						\read\Changes@InFile to \Changes@Line
-						\ifeof\Changes@InFile
-							\setboolean{Changes@MoreLines}{false}
-						\else
-							\expandafter\changes@chopline\Changes@Line\\
-							\begin{tabbing}
-								mm\=mmmmmm\=\kill
-								{
-									\ifthenelse{\boolean{Changes@colored}}
-										{\color{\Changes@InColor}}
-										{}
-									\ifthenelse{\equal{\Changes@InID}{\@empty}}
-										{\changesauthorname: \changesanonymousname}
-										{
-											\changesauthorname: \Changes@InID
-											\ifthenelse{\equal{\Changes@InName}{\@empty}}
-												{}
-												{(\Changes@InName)}
-										}
-								}\\
-								\>\changesaddname:\>\Changes@InAdded\\
-								\>\changesdeletename:\>\Changes@InDeleted\\
-								\>\changesreplacename:\>\Changes@InReplaced\\
-							\end{tabbing}
-						\fi
-					}
-					\closein\Changes@InFile
-				}{
-					\emph{\changesnoloc}
-					\PackageWarning{changes}{LaTeX rerun needed for list of changes}
-				}
-		}{}
+  \ifthenelse{\boolean{Changes@optiondraft}}
+    {
+      \section*{\listchangesname}
+      \IfFileExists{\jobname.\Changes@extension}
+        {
+          \newboolean{Changes@MoreLines}
+          \setboolean{Changes@MoreLines}{true}
+          \newread\Changes@InFile
+          \openin\Changes@InFile = \jobname.\Changes@extension
+          \whiledo{\boolean{Changes@MoreLines}}{
+            \read\Changes@InFile to \Changes@Line
+            \ifeof\Changes@InFile
+              \setboolean{Changes@MoreLines}{false}
+            \else
+              \expandafter\changes@chopline\Changes@Line\\
+              \begin{tabbing}
+                mm\=mmmmmm\=\kill
+                {
+                  \ifthenelse{\boolean{Changes@colored}}
+                    {\color{\Changes@InColor}}
+                    {}
+                  \ifthenelse{\equal{\Changes@InID}{\@empty}}
+                    {\changesauthorname: \changesanonymousname}
+                    {
+                      \changesauthorname: \Changes@InID
+                      \ifthenelse{\equal{\Changes@InName}{\@empty}}
+                        {}
+                        {(\Changes@InName)}
+                    }
+                }\\
+                \>\changesaddname:\>\Changes@InAdded\\
+                \>\changesdeletename:\>\Changes@InDeleted\\
+                \>\changesreplacename:\>\Changes@InReplaced\\
+              \end{tabbing}
+            \fi
+          }
+          \closein\Changes@InFile
+        }{
+          \emph{\changesnoloc}
+          \PackageWarning{changes}{LaTeX rerun needed for list of changes}
+        }
+    }{}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -865,20 +911,20 @@
 %  The contents have to be separated by a semicolon.
 %    \begin{macrocode}
 \AtEndDocument{
-	\newwrite\Changes@OutFile
-	\immediate\openout\Changes@OutFile = \jobname.\Changes@extension
-	\setcounter{Changes@iAuthor}{0}
-	\whiledo{\value{Changes@iAuthor} < \value{Changes@AuthorCount}}{
-		\stepcounter{Changes@iAuthor}
-		\def\Changes@ID{\@nameuse{Changes@AuthorID\theChanges@iAuthor}}
-		\immediate\write\Changes@OutFile{\Changes@ID;%
-			\@nameuse{Changes@AuthorColor\Changes@ID};%
-			\@nameuse{Changes@AuthorName\Changes@ID};%
-			\the\value{Changes@AddCount\Changes@ID};%
-			\the\value{Changes@DeleteCount\Changes@ID};%
-			\the\value{Changes@ReplaceCount\Changes@ID}}
-	}
-	\closeout\Changes@OutFile
+  \newwrite\Changes@OutFile
+  \immediate\openout\Changes@OutFile = \jobname.\Changes@extension
+  \setcounter{Changes@Author}{0}
+  \whiledo{\value{Changes@Author} < \value{Changes@AuthorCount}}{
+    \stepcounter{Changes@Author}
+    \def\Changes@ID{\@nameuse{Changes@AuthorID\theChanges@Author}}
+    \immediate\write\Changes@OutFile{\Changes@ID;%
+      \@nameuse{Changes@AuthorColor\Changes@ID};%
+      \@nameuse{Changes@AuthorName\Changes@ID};%
+      \the\value{Changes@AddCount\Changes@ID};%
+      \the\value{Changes@DeleteCount\Changes@ID};%
+      \the\value{Changes@ReplaceCount\Changes@ID}}
+  }
+  \closeout\Changes@OutFile
 }
 %    \end{macrocode}
 %
