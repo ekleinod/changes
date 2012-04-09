@@ -63,13 +63,13 @@ Für Details lesen Sie bitte \autoref{sec:user:options} und \autoref{sec:user:cu
 \minisec{Autoren definieren}
 
 Das \chpackage{changes}-Paket stellt einen vordefinierten anonymen Autor zur Verfügung.
-Wenn Sie jedoch die Änderungen per AutorIn verfolgen wollen, müssen Sie die entsprechenden AutorInnen definieren.
+Wenn Sie jedoch die Änderungen per Autor\_in verfolgen wollen, müssen Sie die entsprechenden Autor\_innen definieren.
 Dies geht wie folgt:
 
 \chcommand{definechangesauthor[<optionen>]\{ID\}}
 
-Über die ID werden der/die AutorIn und die zugehörigen Textänderungen eindeutig identifiziert.
-Optional können Sie einen Namen angeben und dem/der AutorIn eine eigene Farbe zuweisen.
+Über die ID werden der/die Autor\_in und die zugehörigen Textänderungen eindeutig identifiziert.
+Optional können Sie einen Namen angeben und dem/der Autor\_in eine eigene Farbe zuweisen.
 
 Für Details lesen Sie bitte \autoref{sec:user:authormanagement}.
 
@@ -104,7 +104,7 @@ Dies erfolgt mit dem Kommando:
 \chcommand{listofchanges}
 
 Die Ausgabe ist gedacht als Analogon zur Liste von Tabellen oder Abbildungen.
-Sie dient dazu, einen schnellen Überblick über Art und Anzahl der Änderungen abhängig von dem/der AutorIn zu bekommen.
+Sie dient dazu, einen schnellen Überblick über Art und Anzahl der Änderungen abhängig von dem/der Autor\_in zu bekommen.
 
 Bei jedem \LaTeX-Lauf werden die Daten für diese Liste in eine Hilfsdatei geschrieben.
 Beim nächsten \LaTeX-Lauf werden dann diese Daten genutzt, um die Änderungsliste anzuzeigen.
@@ -379,7 +379,7 @@ Der Befehl \chcommand{definechangesauthor} definiert einen neuen Autor/eine neue
 Es muss eine eindeutige Autor-ID angegeben werden, die keine Sonder- oder Leerzeichen enthalten darf.
 Optional kann eine Farbe und ein Name angegeben werden.
 Wird keine Farbe angegeben, wird schwarz genutzt.
-Der AutorInnenname wird in der Änderungsliste sowie im Markup benutzt, im Markup jedoch nur, wenn die entsprechende Option gesetzt ist.
+Der Autor\_innenname wird in der Änderungsliste sowie im Markup benutzt, im Markup jedoch nur, wenn die entsprechende Option gesetzt ist.
 
 \input{userdoc/command_definechangesauthor}
 
@@ -519,6 +519,15 @@ Dies sind in alphabetischer Reihenfolge:
 \section{Versionen}
 \label{sec:versions}
 
+\minisec{Version 1.0.0}
+
+Date: 2012/??/??
+\begin{itemize}
+	\item Key-Value-Interface für Änderungsmanagement-Kommandos
+	\item Fehler (Crash) in Änderungsliste gefixt, der bei Sonderzeichen auftrat
+	\item Leerzeichen vor Autor\_innenname in Änderungsliste
+\end{itemize}
+
 \minisec{Version 0.6.0}
 
 Datum: 11.\,01.~2012
@@ -528,7 +537,7 @@ Datum: 11.\,01.~2012
 	\item Restrukturierung und Codeverbesserung
 	\item verbesserte Dokumentation mit typischem Anwendungsfall
 	\item Beispieldateien für alle Optionen und Befehle
-	\item Anmerkunge sind per Default nicht mehr farbig
+	\item Anmerkungen sind per Default nicht mehr farbig
 \end{itemize}
 
 \minisec{Version 0.5.4}
