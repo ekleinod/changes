@@ -64,38 +64,38 @@
 
 % example environment
 \newenvironment{chusage}{
-  \small
-  \begin{tabbing}
-    m\=\kill
-    \usagecall
+	\small
+	\begin{tabbing}
+		m\=\kill
+		\usagecall
 }{%
-  \end{tabbing}
+	\end{tabbing}
 }
 \newcommand{\usagecall}{
-  \ifENGLISH
-    \textsl{Call}\\
-  \fi
-  \ifGERMAN
-    \textsl{Aufruf}\\
-  \fi
+	\ifENGLISH
+		\textsl{Call}\\
+	\fi
+	\ifGERMAN
+		\textsl{Aufruf}\\
+	\fi
 }
 \newcommand{\usageexample}{
-  \ifENGLISH
-    \textsl{Examples}\\
-  \fi
-  \ifGERMAN
-    \textsl{Beispiele}\\
-  \fi
+	\ifENGLISH
+		\textsl{Examples}\\
+	\fi
+	\ifGERMAN
+		\textsl{Beispiele}\\
+	\fi
 }
 
 % document title
 \ifENGLISH
-  \title{The \chpackage{changes}-package}
-  \subtitle{Manual change markup --- version 0.7.0}
+	\title{The \chpackage{changes}-package}
+	\subtitle{Manual change markup --- version 1.0.0}
 \fi
 \ifGERMAN
-  \title{Das \chpackage{changes}-Paket}
-  \subtitle{Manuelle Änderungsmarkierung -- Version 0.7.0}
+	\title{Das \chpackage{changes}-Paket}
+	\subtitle{Manuelle Änderungsmarkierung -- Version 1.0.0}
 \fi
 
 \author{Ekkart Kleinod}
@@ -107,7 +107,7 @@
 % content
 \begin{document}
 
-  \DocInput{changes.dtx}
+	\DocInput{changes.dtx}
 
 \end{document}
 
