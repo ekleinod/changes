@@ -1,4 +1,4 @@
-% \CheckSum{822}
+% \CheckSum{841}
 %
 % \iffalse meta-comment
 %
@@ -775,8 +775,6 @@
 % Call \emph{setkeys} in order to evaluate the key-value-options and fill the value storage.
 %    \begin{macrocode}
 	\setkeys{Changes@added}{#1}%
-%    \end{macrocode}
-%
 	\Changes@output
 		{\Changes@Markup@Added{#2}}
 		{#2}
@@ -801,8 +799,6 @@
 % Call \emph{setkeys} in order to evaluate the key-value-options and fill the value storage.
 %    \begin{macrocode}
 	\setkeys{Changes@deleted}{#1}%
-%    \end{macrocode}
-%
 	\Changes@output
 		{\Changes@Markup@Deleted{#2}}
 		{\@bsphack \expandafter \@esphack}
@@ -824,8 +820,6 @@
 % Call \emph{setkeys} in order to evaluate the key-value-options and fill the value storage.
 %    \begin{macrocode}
 	\setkeys{Changes@replaced}{#1}%
-%    \end{macrocode}
-%
 	\Changes@output
 		{{\Changes@Markup@Added{#2}}{\Changes@Markup@Deleted{#3}}}
 		{#2}
