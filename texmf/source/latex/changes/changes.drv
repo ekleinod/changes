@@ -10,7 +10,8 @@
 \usepackage[font=charter]{basis}
 
 % language selection
-\selectlanguage{english}
+%\selectlanguage{english}
+\selectlanguage{ngerman}
 
 % use change management ;)
 \usepackage{changes}

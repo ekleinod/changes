@@ -81,13 +81,13 @@ Now everything is set to markup the changed text.
 Please use the following commands according to your change:
 
 for newly added text:\\
-\chcommand{added[<id>][<remark>]\{text\}}
+\chcommand{added[id=<id>, remark=<remark>]\{text\}}
 
 for deleted text:\\
-\chcommand{deleted[<id>][<remark>]\{text\}}
+\chcommand{deleted[id=<id>, remark=<remark>]\{text\}}
 
 for replaced text:\\
-\chcommand{replaced[<id>][<remark>]\{text\}}
+\chcommand{replaced[id=<id>, remark=<remark>]\{text\}}
 
 Stating the author's id and/or a remark is optional.
 
@@ -320,19 +320,19 @@ Two or more option have to be embraced in curly brackets.
 
 The command \chcommand{added} marks new text.
 The new text is the mandatory argument for the command, thus it is written in curly braces.
-There are two optional arguments: author-id and remark.
+The optional argument contains key-value-pairs for author-id and remark.
 The author-id has to be defined using \chcommand{definechangesauthor}.
-Use an empty author for an anonymous remark.
+If the remark contains special characters or spaces, use curly brackets to enclose the remark.
 
 \begin{chusage}
-		\>\chcommand{added[\meta{author's id}][\meta{remark}]\{\meta{new text}\}}\\
+		\>\chcommand{added[id=\meta{author's id}, remark=\meta{remark}]\{\meta{new text}\}}\\
 	\usageexample
-		\>\texttt{This is \chcommand{added}[EK]\{new\} text.}\\
-		\>This is \added[EK]{new} text.\\
-		\>\texttt{This is \chcommand{added}[EK][has to be in it]\{new\} text.}\\
-		\>This is \added[EK][has to be in it]{new} text.\\
-		\>\texttt{This is \chcommand{added}[][anonymous]\{new\} text.}\\
-		\>This is \added[][anonymous]{new} text.
+		\>\texttt{This is \chcommand{added}[id=EK]\{new\} text.}\\
+		\>This is \added[id=EK]{new} text.\\
+		\>\texttt{This is \chcommand{added}[id=EK, remark=\{has to be in it\}]\{new\} text.}\\
+		\>This is \added[id=EK, remark={has to be in it}]{new} text.\\
+		\>\texttt{This is \chcommand{added}[remark=anonymous]\{new\} text.}\\
+		\>This is \added[remark=anonymous]{new} text.
 \end{chusage}
 
 
@@ -343,10 +343,10 @@ The command \chcommand{deleted} marks deleted text.
 For arguments see \chcommand{added}.
 
 \begin{chusage}
-		\>\chcommand{deleted[\meta{author's id}][\meta{remark}]\{\meta{deleted text}\}}\\
+		\>\chcommand{deleted[id=\meta{author's id}, remark=\meta{remark}]\{\meta{deleted text}\}}\\
 	\usageexample
-		\>\texttt{This is \chcommand{deleted}[][obsolete]\{bad\} text.}\\
-		\>This is \deleted[][obsolete]{bad} text.
+		\>\texttt{This is \chcommand{deleted}[remark=obsolete]\{bad\} text.}\\
+		\>This is \deleted[remark=obsolete]{bad} text.
 \end{chusage}
 
 
@@ -358,10 +358,10 @@ Mandatory arguments are the new text and the old text.
 For optional arguments see \chcommand{added}.
 
 \begin{chusage}
-		\>\chcommand{replaced[\meta{author's id}][\meta{remark}]\{\meta{new text}\}\{\meta{old text}\}}\\
+		\>\chcommand{replaced[id=\meta{author's id}, remark=\meta{remark}]\{\meta{new text}\}\{\meta{old text}\}}\\
 	\usageexample
-		\>\texttt{This is \chcommand{replaced}[EK]\{nice\}\{bad\} text.}\\
-		\>This is \replaced[EK]{nice}{bad} text.
+		\>\texttt{This is \chcommand{replaced}[id=EK]\{nice\}\{bad\} text.}\\
+		\>This is \replaced[id=EK]{nice}{bad} text.
 \end{chusage}
 
 
