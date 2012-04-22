@@ -79,13 +79,13 @@ Jetzt ist alles vorbereitet, um den geänderten Text zu markieren.
 Benutzen Sie bitte je nach Änderung die folgenden Befehle:
 
 für neu zugefügten Text:\\
-\chcommand{added[<ID>][<Anmerkung>]\{Text\}}
+\chcommand{added[id=<ID>, remark=<Anmerkung>]\{Text\}}
 
 für gelöschten Text:\\
-\chcommand{deleted[<ID>][<Anmerkung>]\{Text\}}
+\chcommand{deleted[id=<ID>, remark=<Anmerkung>]\{Text\}}
 
 für geänderten Text:\\
-\chcommand{replaced[<ID>][<Anmerkung>]\{neuer Text\}\{alter Text\}}
+\chcommand{replaced[id=<ID>, remark=<Anmerkung>]\{neuer Text\}\{alter Text\}}
 
 Die Angabe von Autoren-ID und einer Anmerkung ist optional.
 
@@ -312,19 +312,19 @@ Zwei oder mehr Optionen müssen in geschweifte Klammern gesetzt werden.
 
 Der Befehl \chcommand{added} markiert zugefügten Text.
 Der neue Text wird als notwendiges Argument in geschweiften Klammern übergeben.
-Optional können eine Autor-ID sowie eine Anmerkung übergeben werden.
+Das optionale Argument enthält Key-Value-Paare für die Angabe von Autor-ID sowie einer Anmerkung.
 Die Autor-ID muss mit einer mit dem \chcommand{definechangesauthor}-Befehl definierten ID übereinstimmen.
-Soll nur eine Anmerkung (ohne Autor) eingegeben werden, so ist statt des Autors ein leeres Argument zu übergeben.
+Enthält die Anmerkung Sonderzeichen oder Leerzeichen, ist sie in geschweifte Klammern einzuschließen.
 
 \begin{chusage}
-		\>\chcommand{added[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{neuer Text}\}}\\
+		\>\chcommand{added[id=\meta{Autor-ID}, remark=\meta{Anmerkung}]\{\meta{neuer Text}\}}\\
 	\usageexample
-		\>\texttt{Das ist \chcommand{added}[EK]\{neuer\} Text.}\\
-		\>Das ist \added[EK]{neuer} Text.\\
-		\>\texttt{Das ist \chcommand{added}[EK][muss rein]\{neuer\} Text.}\\
-		\>Das ist \added[EK][muss rein]{neuer} Text.\\
-		\>\texttt{Das ist \chcommand{added}[][anonym]\{neuer\} Text.}\\
-		\>Das ist \added[][anonym]{neuer} Text.
+		\>\texttt{Das ist \chcommand{added}[id=EK]\{neuer\} Text.}\\
+		\>Das ist \added[id=EK]{neuer} Text.\\
+		\>\texttt{Das ist \chcommand{added}[id=EK, remark=\{muss rein\}]\{neuer\} Text.}\\
+		\>Das ist \added[id=EK, remark={muss rein}]{neuer} Text.\\
+		\>\texttt{Das ist \chcommand{added}[remark=anonym]\{neuer\} Text.}\\
+		\>Das ist \added[remark=anonym]{neuer} Text.
 \end{chusage}
 
 
@@ -335,10 +335,10 @@ Der Befehl \chcommand{deleted} markiert gelöschten Text.
 Argumente: siehe \chcommand{added}.
 
 \begin{chusage}
-		\>\chcommand{deleted[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{gelöschter Text}\}}\\
+		\>\chcommand{deleted[id=\meta{Autor-ID}, remark=\meta{Anmerkung}]\{\meta{gelöschter Text}\}}\\
 	\usageexample
-		\>\texttt{Das ist \chcommand{deleted}[][obsolet]\{schlechter\} Text.}\\
-		\>Das ist \deleted[][obsolet]{schlechter} Text.
+		\>\texttt{Das ist \chcommand{deleted}[remark=obsolet]\{schlechter\} Text.}\\
+		\>Das ist \deleted[remark=obsolet]{schlechter} Text.
 \end{chusage}
 
 
@@ -350,10 +350,10 @@ Notwendige Argumente sind der neue sowie der alte Text.
 Optionale Argumente: siehe \chcommand{added}.
 
 \begin{chusage}
-		\>\chcommand{replaced[\meta{Autor-ID}][\meta{Anmerkung}]\{\meta{neuer Text}\}\{\meta{alter Text}\}}\\
+		\>\chcommand{replaced[id=\meta{Autor-ID}, remark=\meta{Anmerkung}]\{\meta{neuer Text}\}\{\meta{alter Text}\}}\\
 	\usageexample
-		\>\texttt{Das ist \chcommand{replaced}[EK]\{schöner\}\{schlechter\} Text.}\\
-		\>Das ist \replaced[EK]{schöner}{schlechter} Text.
+		\>\texttt{Das ist \chcommand{replaced}[id=EK]\{schöner\}\{schlechter\} Text.}\\
+		\>Das ist \replaced[id=EK]{schöner}{schlechter} Text.
 \end{chusage}
 
 
