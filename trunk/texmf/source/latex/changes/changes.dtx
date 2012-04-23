@@ -1,4 +1,4 @@
-% \CheckSum{841}
+% \CheckSum{844}
 %
 % \iffalse meta-comment
 %
@@ -914,9 +914,11 @@
 	\newwrite\Changes@OutFile
 	\immediate\openout\Changes@OutFile = \jobname.\Changes@extension
 %    \end{macrocode}
-% Redefine expandeable of protects in order to write correct special characters.
+% Redefine expandable of \chcommand{protect} in order to write correct special characters.
+% Store original definition for resetting \chcommand{protect}.
 %    \begin{macrocode}
-\let\protect\@unexpandable@protect
+	\let\Changes@protect\protect
+	\let\protect\@unexpandable@protect
 %    \end{macrocode}
 % Output data for list of changes.
 %    \begin{macrocode}
@@ -924,18 +926,21 @@
 	\whiledo{\value{Changes@Author} < \value{Changes@AuthorCount}}{
 		\stepcounter{Changes@Author}
 		\def\Changes@ID{\@nameuse{Changes@AuthorID\theChanges@Author}}
-		\edef\reserved@a{\immediate\write\Changes@OutFile{\Changes@ID;%
+		\immediate\write\Changes@OutFile{\Changes@ID;%
 			\@nameuse{Changes@AuthorColor\Changes@ID};%
 			\@nameuse{Changes@AuthorName\Changes@ID};%
 			\the\value{Changes@AddCount\Changes@ID};%
 			\the\value{Changes@DeleteCount\Changes@ID};%
-			\the\value{Changes@ReplaceCount\Changes@ID}}}
-		\reserved@a
+			\the\value{Changes@ReplaceCount\Changes@ID}}
 	}
 %    \end{macrocode}
 % Close output file.
 %    \begin{macrocode}
 	\immediate\closeout\Changes@OutFile
+%    \end{macrocode}
+% Restore original definition of \chcommand{protect}.
+%    \begin{macrocode}
+	\let\protect\Changes@protect
 }
 %    \end{macrocode}
 %
