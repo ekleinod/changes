@@ -33,7 +33,6 @@
 %% doc/latex/changes/changes.english.pdf
 %% doc/latex/changes/changes.english.withcode.pdf
 %% doc/latex/changes/changes.ngerman.pdf
-%% doc/latex/changes/changes.ngerman.withcode.pdf
 %% 
 %% doc/latex/changes/examples/changes.example.*.tex
 %% doc/latex/changes/examples/changes.example.*.pdf
@@ -42,8 +41,8 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{changes}
-[2012/01/11 v0.6.0 changes-Paket]
-\typeout{*** changes-Paket 2012/01/11 v0.6.0 ***}
+[2012/02/07 v0.7.0 changes-Paket]
+\typeout{*** changes-Paket 2012/02/07 v0.7.0 ***}
 \RequirePackage{xkeyval}
 \RequirePackage{xifthen}
 \newboolean{Changes@optiondraft}
@@ -205,6 +204,24 @@
 name=\@empty,
 color=black
 }{}
+\DeclareOptionX<Changes@added>{id}{\def\Changes@added@id{#1}}
+\DeclareOptionX<Changes@added>{remark}{\def\Changes@added@remark{#1}}
+\presetkeys{Changes@added}{
+id=\@empty,
+remark=\@empty
+}{}
+\DeclareOptionX<Changes@deleted>{id}{\def\Changes@deleted@id{#1}}
+\DeclareOptionX<Changes@deleted>{remark}{\def\Changes@deleted@remark{#1}}
+\presetkeys{Changes@deleted}{
+id=\@empty,
+remark=\@empty
+}{}
+\DeclareOptionX<Changes@replaced>{id}{\def\Changes@replaced@id{#1}}
+\DeclareOptionX<Changes@replaced>{remark}{\def\Changes@replaced@remark{#1}}
+\presetkeys{Changes@replaced}{
+id=\@empty,
+remark=\@empty
+}{}
 \ProcessOptionsX*\relax
 \newboolean{Changes@colored}
 \setboolean{Changes@colored}{true}
@@ -283,7 +300,7 @@ color=black
 }
 \newcounter{Changes@AuthorCount}
 \setcounter{Changes@AuthorCount}{0}
-\newcounter{Changes@iAuthor}
+\newcounter{Changes@Author}
 \newcommand*\definechangesauthor[2][]{%
 \setkeys{Changes@definechangesauthor}{#1}
 \stepcounter{Changes@AuthorCount}
@@ -367,9 +384,23 @@ color=black
 \newcommand{\setdeletedmarkup}[1]{
 \renewcommand{\Changes@Markup@Deleted}[1]{#1}
 }
+\newboolean{Changes@WrongID}
 \newcommand{\Changes@output}[4]{%
 \ifthenelse{\boolean{Changes@optiondraft}}%
 {%
+\setboolean{Changes@WrongID}{true}%
+\setcounter{Changes@Author}{0}%
+\whiledo{\value{Changes@Author} < \value{Changes@AuthorCount}}{%
+\stepcounter{Changes@Author}%
+\ifthenelse{\equal{#3}{\@nameuse{Changes@AuthorID\theChanges@Author}}}%
+{\setboolean{Changes@WrongID}{false}}%
+{}%
+}%
+\ifthenelse{\boolean{Changes@WrongID}}%
+{\PackageError{changes}%
+{Undefined changes author: #3}%
+{You have to define the author #3 with e.g.: \definechangesauthor{#3}}}%
+{}%
 \ifthenelse{\equal{\Changes@optionauthormarkuptext}{id}}%
 {\@namedef{Changes@AuthorText}{#3}}%
 {}%
@@ -394,42 +425,32 @@ color=black
 }%
 {#2}%
 }
-\newcommand{\Changes@temp}{\@empty}
-\newcommand{\added}[1][\@empty]{%
-\renewcommand{\Changes@temp}{#1}%
-\Changes@added%
-}
-\newcommand{\Changes@added}[2][\@empty]{%
+\newcommand{\added}[2][\@empty]{%
+\setkeys{Changes@added}{#1}%
 \Changes@output
 {\Changes@Markup@Added{#2}}
 {#2}
-{\Changes@temp}
-{#1}%
-\stepcounter{Changes@AddCount\Changes@temp}%
+{\Changes@added@id}
+{\Changes@added@remark}%
+\stepcounter{Changes@AddCount\Changes@added@id}%
 }
-\newcommand{\deleted}[1][\@empty]{%
-\renewcommand{\Changes@temp}{#1}%
-\Changes@deleted%
-}
-\newcommand{\Changes@deleted}[2][\@empty]{%
+\newcommand{\deleted}[2][\@empty]{%
+\setkeys{Changes@deleted}{#1}%
 \Changes@output
 {\Changes@Markup@Deleted{#2}}
 {\@bsphack \expandafter \@esphack}
-{\Changes@temp}
-{#1}%
-\stepcounter{Changes@DeleteCount\Changes@temp}%
+{\Changes@deleted@id}
+{\Changes@deleted@remark}%
+\stepcounter{Changes@DeleteCount\Changes@deleted@id}%
 }
-\newcommand{\replaced}[1][\@empty]{%
-\renewcommand{\Changes@temp}{#1}%
-\Changes@replaced%
-}
-\newcommand{\Changes@replaced}[3][\@empty]{%
+\newcommand{\replaced}[3][\@empty]{%
+\setkeys{Changes@replaced}{#1}%
 \Changes@output
 {{\Changes@Markup@Added{#2}}{\Changes@Markup@Deleted{#3}}}
 {#2}
-{\Changes@temp}
-{#1}%
-\stepcounter{Changes@ReplaceCount\Changes@temp}%
+{\Changes@replaced@id}
+{\Changes@replaced@remark}%
+\stepcounter{Changes@ReplaceCount\Changes@replaced@id}%
 }
 \def\changes@chopline#1;#2;#3;#4;#5;#6 \\{
 \def\Changes@InID{#1}
@@ -467,7 +488,7 @@ mm\=mmmmmm\=\kill
 \changesauthorname: \Changes@InID
 \ifthenelse{\equal{\Changes@InName}{\@empty}}
 {}
-{(\Changes@InName)}
+{ (\Changes@InName)}
 }
 }\\
 \>\changesaddname:\>\Changes@InAdded\\
@@ -486,10 +507,12 @@ mm\=mmmmmm\=\kill
 \AtEndDocument{
 \newwrite\Changes@OutFile
 \immediate\openout\Changes@OutFile = \jobname.\Changes@extension
-\setcounter{Changes@iAuthor}{0}
-\whiledo{\value{Changes@iAuthor} < \value{Changes@AuthorCount}}{
-\stepcounter{Changes@iAuthor}
-\def\Changes@ID{\@nameuse{Changes@AuthorID\theChanges@iAuthor}}
+\let\Changes@protect\protect
+\let\protect\@unexpandable@protect
+\setcounter{Changes@Author}{0}
+\whiledo{\value{Changes@Author} < \value{Changes@AuthorCount}}{
+\stepcounter{Changes@Author}
+\def\Changes@ID{\@nameuse{Changes@AuthorID\theChanges@Author}}
 \immediate\write\Changes@OutFile{\Changes@ID;%
 \@nameuse{Changes@AuthorColor\Changes@ID};%
 \@nameuse{Changes@AuthorName\Changes@ID};%
@@ -497,7 +520,8 @@ mm\=mmmmmm\=\kill
 \the\value{Changes@DeleteCount\Changes@ID};%
 \the\value{Changes@ReplaceCount\Changes@ID}}
 }
-\closeout\Changes@OutFile
+\immediate\closeout\Changes@OutFile
+\let\protect\Changes@protect
 }
 %% Copyright 2007-2012 Ekkart Kleinod
 %%
