@@ -1,4 +1,4 @@
-% \CheckSum{844}
+% \CheckSum{860}
 %
 % \iffalse meta-comment
 %
@@ -709,13 +709,32 @@
 %		\item author's id
 %		\item remark
 % \end{enumerate}
+% Define boolean for author test.
 %    \begin{macrocode}
+\newboolean{Changes@WrongID}
 \newcommand{\Changes@output}[4]{%
 %    \end{macrocode}
 %	Output changed text if option \choption{draft} is set, otherwise output unchanged text.
 %    \begin{macrocode}
 	\ifthenelse{\boolean{Changes@optiondraft}}%
 		{%
+%    \end{macrocode}
+%	Check if the author exists, error message otherwise.
+% I have the feeling that this code is optimizable.
+%    \begin{macrocode}
+			\setboolean{Changes@WrongID}{true}%
+			\setcounter{Changes@Author}{0}%
+			\whiledo{\value{Changes@Author} < \value{Changes@AuthorCount}}{%
+				\stepcounter{Changes@Author}%
+				\ifthenelse{\equal{#3}{\@nameuse{Changes@AuthorID\theChanges@Author}}}%
+					{\setboolean{Changes@WrongID}{false}}%
+					{}%
+			}%
+			\ifthenelse{\boolean{Changes@WrongID}}%
+				{\PackageError{changes}%
+					{Undefined changes author: #3}%
+					{You have to define the author #3 with e.g.: \definechangesauthor{#3}}}%
+				{}%
 %    \end{macrocode}
 %	Save author text for output.
 %    \begin{macrocode}
