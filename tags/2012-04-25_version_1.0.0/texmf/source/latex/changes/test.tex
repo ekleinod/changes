@@ -1,0 +1,43 @@
+\documentclass[11pt, a4paper, notitlepage, halfparskip, ngerman]{scrartcl}
+%\documentclass[11pt, a4paper, notitlepage, halfparskip, english]{scrartcl}
+
+\usepackage[nojura, nohyper]{basis}
+
+
+%\usepackage{changes}
+\usepackage[draft, ulem={normalem, normalbf}]{changes}
+%\usepackage[draft, ulem={normalem, normalbf}, xcolor={gray}]{changes}
+
+% Metainformationen über das Dokument
+\title{Test}
+\author{Ekkart Kleinod} % Autor ist Pflicht für die Titelseite
+
+\definechangesauthor[name={Täst}, color=green]{Test}
+\definechangesauthor[name={Ekkärt Kleinöd}, color=orange]{EK}
+
+ % ab hier beginnt der Inhalt
+\begin{document}
+
+	%\maketitle
+
+	Hallo
+
+	\listofchanges
+
+	\minisec{Autor EK}
+
+	Hier sehen wir \added[id=EK, remark={klingt besser}]{eingefügten} Text.
+
+	Hier sehen wir \deleted[id=EK]{gelöschten} Text.
+
+	Hier sehen wir \replaced[id=EK]{geänderten}{alten} Text.
+
+	\minisec{Autor leer}
+
+	Hier sehen wir \added[remark=unwichtig]{eingefügten} Text.
+
+	\minisec{Autor Test}
+
+	Hier sehen wir \added[id=Test, remark=unwichtig]{eingefügten} Text.
+
+\end{document}
