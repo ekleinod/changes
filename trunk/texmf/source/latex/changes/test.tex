@@ -1,7 +1,7 @@
 \documentclass[11pt, a4paper, notitlepage, halfparskip, ngerman]{scrartcl}
 %\documentclass[11pt, a4paper, notitlepage, halfparskip, english]{scrartcl}
 
-\usepackage[nojura, nohyper]{basis}
+\usepackage[nojura]{basis}
 
 
 %\usepackage{changes}
@@ -14,6 +14,7 @@
 
 \definechangesauthor[name={Täst}, color=green]{Test}
 \definechangesauthor[name={Ekkärt Kleinöd}, color=orange]{EK}
+%\definechangesauthor[name={Ekkárt Kleinàd}, color=orange]{EK2}
 
  % ab hier beginnt der Inhalt
 \begin{document}
@@ -24,6 +25,16 @@
 
 	\listofchanges
 
+	\listofchanges[style=list]
+
+	\listofchanges[style=summary]
+
+	\listofchanges[style=]
+
+	\listofchanges[style=summar]
+
+	\listofchanges[style=summary]
+
 	\minisec{Autor EK}
 
 	Hier sehen wir \added[id=EK, remark={klingt besser}]{eingefügten} Text.
@@ -31,6 +42,14 @@
 	Hier sehen wir \deleted[id=EK]{gelöschten} Text.
 
 	Hier sehen wir \replaced[id=EK]{geänderten}{alten} Text.
+
+%	\minisec{Autor EK2}
+
+%	Hier sehen wir \added[id=EK2, remark={klingt besser}]{eingefügten} Text.
+
+%	Hier sehen wir \deleted[id=EK2]{gelöschten} Text.
+
+%	Hier sehen wir \replaced[id=EK2]{geänderten}{alten} Text.
 
 	\minisec{Autor leer}
 

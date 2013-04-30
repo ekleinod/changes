@@ -48,6 +48,7 @@
 % \changes{v0.5.4}{2011/04/25}{extract user documentation; default language changed to English; script for removal of commands}
 % \changes{v0.6.0}{2012/01/11}{redefined user interface for setting options, markup, authors; newly structured documentation}
 % \changes{v1.0.0}{2012/04/25}{key-value-interface for change commands; special characters in list of changes}
+% \changes{v2.0.0}{2013/05/01}{fixed problem with special characters in tabbing environment (loc), real list of changes}
 % \GetFileInfo{changes.dtx}
 % \RecordChanges
 %
@@ -87,8 +88,8 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{changes}
-[2012/04/25 v1.0.0 changes-Paket]
-\typeout{*** changes-Paket 2012/04/25 v1.0.0 ***}
+[2013/05/01 v2.0.0 changes-Paket]
+\typeout{*** changes-Paket 2013/05/01 v2.0.0 ***}
 %    \end{macrocode}
 %
 % Package \chpackage{xkeyval} provides options with key-value-pairs.
@@ -374,6 +375,20 @@
 }{}
 %    \end{macrocode}
 %
+% \minisec{\chcommand{listofchanges}}
+%
+% Declare available options of the command, define value storage.
+%    \begin{macrocode}
+\DeclareOptionX<Changes@loc>{style}{\def\Changes@loc@style{#1}}
+%    \end{macrocode}
+%
+% Set the default values of the options.
+%    \begin{macrocode}
+\presetkeys{Changes@loc}{
+	style=list
+}{}
+%    \end{macrocode}
+%
 % \subsubsection{Option processing}
 %
 % Process the options.
@@ -429,7 +444,8 @@
 %    \begin{macrocode}
 \ifthenelse{\isundefined{\addto}}
 	{
-		\def\listchangesname{Changes}
+		\def\listofchangesname{List of changes}
+		\def\summaryofchangesname{Changes}
 		\def\changesaddname{Added}
 		\def\changesdeletename{Deleted}
 		\def\changesreplacename{Replaced}
@@ -437,7 +453,8 @@
 		\def\changesanonymousname{anonymous}
 		\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}
 	}{
-		\addto\captionsngerman{\def\listchangesname{\"Anderungen}}
+		\addto\captionsngerman{\def\listofchangesname{Liste der \"Anderungen}}
+		\addto\captionsngerman{\def\summaryofchangesname{\"Anderungen}}
 		\addto\captionsngerman{\def\changesaddname{Eingef\"ugt}}
 		\addto\captionsngerman{\def\changesdeletename{Gel\"oscht}}
 		\addto\captionsngerman{\def\changesreplacename{Ersetzt}}
@@ -445,7 +462,8 @@
 		\addto\captionsngerman{\def\changesanonymousname{Anonym}}
 		\addto\captionsngerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
 
-		\addto\captionsgerman{\def\listchangesname{\"Anderungen}}
+		\addto\captionsgerman{\def\listofchangesname{Liste der \"Anderungen}}
+		\addto\captionsgerman{\def\summaryofchangesname{\"Anderungen}}
 		\addto\captionsgerman{\def\changesaddname{Eingef\"ugt}}
 		\addto\captionsgerman{\def\changesdeletename{Gel\"oscht}}
 		\addto\captionsgerman{\def\changesreplacename{Ersetzt}}
@@ -453,7 +471,8 @@
 		\addto\captionsgerman{\def\changesanonymousname{Anonym}}
 		\addto\captionsgerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
 
-		\addto\captionsenglish{\def\listchangesname{Changes}}
+		\addto\captionsenglish{\def\listofchangesname{List of changes}}
+		\addto\captionsenglish{\def\summaryofchangesname{Changes}}
 		\addto\captionsenglish{\def\changesaddname{Added}}
 		\addto\captionsenglish{\def\changesdeletename{Deleted}}
 		\addto\captionsenglish{\def\changesreplacename{Replaced}}
@@ -461,7 +480,8 @@
 		\addto\captionsenglish{\def\changesanonymousname{anonymous}}
 		\addto\captionsenglish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
 
-		\addto\captionsitalian{\def\listchangesname{Modifiche}}
+		\addto\captionsitalian{\def\listofchangesname{Lista delle modifiche}}
+		\addto\captionsitalian{\def\summaryofchangesname{Modifiche}}
 		\addto\captionsitalian{\def\changesaddname{Aggiunte}}
 		\addto\captionsitalian{\def\changesdeletename{Cancellazioni}}
 		\addto\captionsitalian{\def\changesreplacename{Sostituzioni}}
@@ -474,9 +494,9 @@
 % \subsection{File extension}
 %
 % \begin{macro}{\Changes@extension}
-% Store file extension in variable, set default to \texttt{loc}.
+% Store file extension in variable, set default to \texttt{soc} (summary of changes).
 %    \begin{macrocode}
-\newcommand{\Changes@extension}{loc}
+\newcommand{\Changes@extension}{soc}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -708,11 +728,13 @@
 %		\item unchanged text
 %		\item author's id
 %		\item remark
+%		\item text for list of changes
+%		\item change type for list of changes
 % \end{enumerate}
 % Define boolean for author test.
 %    \begin{macrocode}
 \newboolean{Changes@WrongID}
-\newcommand{\Changes@output}[4]{%
+\newcommand{\Changes@output}[6]{%
 %    \end{macrocode}
 %	Output changed text if option \choption{draft} is set, otherwise output unchanged text.
 %    \begin{macrocode}
@@ -774,6 +796,13 @@
 					{\Changes@Remark{#3}{#4}}%
 					{}%
 			}%
+%    \end{macrocode}
+%	Store line for list of changes.
+%    \begin{macrocode}
+			\ifthenelse{\equal{\@empty}{#3}}
+				{\def\Changes@locid{}}
+				{\def\Changes@locid{~(#3)}}
+			\addcontentsline{loc}{subsection}{#6\Changes@locid: \truncate{.3\textwidth}{#5}}
 		}%
 %    \end{macrocode}
 %	Output unchanged text (option \choption{final} was set).
@@ -794,11 +823,13 @@
 % Call \emph{setkeys} in order to evaluate the key-value-options and fill the value storage.
 %    \begin{macrocode}
 	\setkeys{Changes@added}{#1}%
-	\Changes@output
-		{\Changes@Markup@Added{#2}}
-		{#2}
-		{\Changes@added@id}
+	\Changes@output%
+		{\Changes@Markup@Added{#2}}%
+		{#2}%
+		{\Changes@added@id}%
 		{\Changes@added@remark}%
+		{#2}%
+		{\changesaddname}%
 	\stepcounter{Changes@AddCount\Changes@added@id}%
 }
 %    \end{macrocode}
@@ -818,11 +849,13 @@
 % Call \emph{setkeys} in order to evaluate the key-value-options and fill the value storage.
 %    \begin{macrocode}
 	\setkeys{Changes@deleted}{#1}%
-	\Changes@output
-		{\Changes@Markup@Deleted{#2}}
-		{\@bsphack \expandafter \@esphack}
-		{\Changes@deleted@id}
+	\Changes@output%
+		{\Changes@Markup@Deleted{#2}}%
+		{\@bsphack \expandafter \@esphack}%
+		{\Changes@deleted@id}%
 		{\Changes@deleted@remark}%
+		{#2}%
+		{\changesdeletename}%
 	\stepcounter{Changes@DeleteCount\Changes@deleted@id}%
 }
 %    \end{macrocode}
@@ -844,12 +877,19 @@
 		{#2}
 		{\Changes@replaced@id}
 		{\Changes@replaced@remark}%
+		{#2}%
+		{\changesreplacename}%
 	\stepcounter{Changes@ReplaceCount\Changes@replaced@id}%
 }
 %    \end{macrocode}
 % \end{macro}
 %
 % \subsection{List of changes}
+%
+% The list of changes truncates text, therefore the \chpackage{truncate} package is used.
+%    \begin{macrocode}
+\RequirePackage[breakall]{truncate}
+% \end{macro}
 %
 % \begin{macro}{\changes@chopline}
 %  Auxiliary command for reading the content of the loc-files.
@@ -869,53 +909,84 @@
 % \end{macro}
 %
 % \begin{macro}{\listofchanges}
-%  This command outputs the list of changes, separated by authors.
-%  The values are read from the loc-file, if it exists.
-%  If no loc-file exists, an according message is generated.
+%		This command outputs the list of changes.
+%
+% 	Two styles are available: \option{list} (default) and \option{summary}.
+% 	\option{list} prints the list of changes lika a list of figures.
+% 	\option{summary} prints a summary of changes separated by authors.
+%
+% 	For the list, the values are read from the auxiliary file.
+%
+%		For the summary, the values are read from the loc-file, if it exists.
+%		If no loc-file exists, an according message is generated.
 %    \begin{macrocode}
-\newcommand{\listofchanges}{%
-	\ifthenelse{\boolean{Changes@optiondraft}}
+\newboolean{Changes@MoreLines}
+\newcommand{\listofchanges}[1][style=list]{%
+	\setkeys{Changes@loc}{#1}%
+	\ifthenelse{\equal{\@empty}{\Changes@loc@style}}
+		{\def\Changes@loc@style{list}}
 		{
-			\section*{\listchangesname}
-			\IfFileExists{\jobname.\Changes@extension}
+			\ifthenelse{
+				\equal{\Changes@loc@style}{list}\or
+				\equal{\Changes@loc@style}{summary}
+			}
+				{}
+				{\def\Changes@loc@style{list}}
+		}
+%    \end{macrocode}
+%	Print list.
+%    \begin{macrocode}
+	\ifthenelse{\equal{\Changes@loc@style}{list}}
+		{
+			\section*{\listofchangesname}
+			\@starttoc{loc}
+		}
+%    \end{macrocode}
+%	Print summary, but only in draft mode.
+%    \begin{macrocode}
+		{
+			\ifthenelse{\boolean{Changes@optiondraft}}
 				{
-					\newboolean{Changes@MoreLines}
-					\setboolean{Changes@MoreLines}{true}
-					\newread\Changes@InFile
-					\openin\Changes@InFile = \jobname.\Changes@extension
-					\whiledo{\boolean{Changes@MoreLines}}{
-						\read\Changes@InFile to \Changes@Line
-						\ifeof\Changes@InFile
-							\setboolean{Changes@MoreLines}{false}
-						\else
-							\expandafter\changes@chopline\Changes@Line\\
-							\begin{tabbing}
-								mm\=mmmmmm\=\kill
-								{
-									\ifthenelse{\boolean{Changes@colored}}
-										{\color{\Changes@InColor}}
-										{}
-									\ifthenelse{\equal{\Changes@InID}{\@empty}}
-										{\changesauthorname: \changesanonymousname}
+					\section*{\summaryofchangesname}
+					\IfFileExists{\jobname.\Changes@extension}
+						{
+							\setboolean{Changes@MoreLines}{true}
+							\newread\Changes@InFile
+							\openin\Changes@InFile = \jobname.\Changes@extension
+							\whiledo{\boolean{Changes@MoreLines}}{
+								\read\Changes@InFile to \Changes@Line
+								\ifeof\Changes@InFile
+									\setboolean{Changes@MoreLines}{false}
+								\else
+									\expandafter\changes@chopline\Changes@Line\\
+									\begin{tabbing}
+										mm\=mmmmmm\=\kill
 										{
-											\changesauthorname: \Changes@InID
-											\ifthenelse{\equal{\Changes@InName}{\@empty}}
+											\ifthenelse{\boolean{Changes@colored}}
+												{\color{\Changes@InColor}}
 												{}
-												{ (\Changes@InName)}
-										}
-								}\\
-								\>\changesaddname:\>\Changes@InAdded\\
-								\>\changesdeletename:\>\Changes@InDeleted\\
-								\>\changesreplacename:\>\Changes@InReplaced\\
-							\end{tabbing}
-						\fi
-					}
-					\closein\Changes@InFile
-				}{
-					\emph{\changesnoloc}
-					\PackageWarning{changes}{LaTeX rerun needed for list of changes}
-				}
-		}{}
+											\ifthenelse{\equal{\Changes@InID}{\@empty}}
+												{\changesauthorname: \changesanonymousname}
+												{
+													\changesauthorname: \Changes@InID
+													\ifthenelse{\equal{\Changes@InName}{\@empty}}
+														{}
+														{ (\Changes@InName)}
+												}
+										}\\
+										\>\changesaddname:\>\Changes@InAdded\\
+										\>\changesdeletename:\>\Changes@InDeleted\\
+										\>\changesreplacename:\>\Changes@InReplaced\\
+									\end{tabbing}
+								\fi
+							}
+							\closein\Changes@InFile
+						}{
+							\emph{\changesnoloc}
+							\PackageWarning{changes}{LaTeX rerun needed for list of changes}
+						}
+				}{}
+		}
 }
 %    \end{macrocode}
 % \end{macro}
