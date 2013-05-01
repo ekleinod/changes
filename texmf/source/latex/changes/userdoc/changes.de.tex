@@ -101,10 +101,12 @@ Durch die Übersetzung wird der geänderte Text so markiert, wie Sie das mittels
 Sie können sich eine Liste der Änderungen ausgeben lassen.
 Dies erfolgt mit dem Kommando:
 
-\chcommand{listofchanges}
+\chcommand{listofchanges[style=<list|summary>]}
 
 Die Ausgabe ist gedacht als Analogon zur Liste von Tabellen oder Abbildungen.
-Sie dient dazu, einen schnellen Überblick über Art und Anzahl der Änderungen abhängig von dem/der Autor\_in zu bekommen.
+
+Die Angabe des Stils ist optional, standardmäßig wird \choption{style=list} gewählt.
+Um einen schnellen Überblick über Art und Anzahl der Änderungen abhängig von dem/der Autor\_in zu bekommen, verwenden Sie den Befehl mit der Option \choption{style=summary}.
 
 Bei jedem \LaTeX-Lauf werden die Daten für diese Liste in eine Hilfsdatei geschrieben.
 Beim nächsten \LaTeX-Lauf werden dann diese Daten genutzt, um die Änderungsliste anzuzeigen.
@@ -360,9 +362,12 @@ Optionale Argumente: siehe \chcommand{added}.
 \subsubsection{\chcommand{listofchanges}}
 \DescribeMacro{\listofchanges}
 
-Der Befehl \chcommand{listofchanges} gibt eine Liste der Änderungen aus.
+Der Befehl \chcommand{listofchanges} gibt eine Liste oder Zusammenfassung der Änderungen aus.
 Im ersten \LaTeX-Lauf wird eine Hilfsdatei angelegt, deren Daten im zweiten Durchlauf eingebunden werden.
 Für eine aktuelle Liste der Änderungen sind daher zwei \LaTeX-Läufe notwendig.
+
+Die\marginpar{neu ab v2.0.0} Angabe des Stils ist optional, standardmäßig wird die Liste der Änderungen ausgegeben.
+Wenn Sie eine Zusammenfassung ausgeben wollen, geben Sie das Argument \choption{style=summary} an.
 
 \input{userdoc/command_listofchanges}
 
@@ -455,16 +460,16 @@ Werte für Definition: beliebige \LaTeX-Befehle, die Autor-ID wird mit "`\#1"' b
 \input{userdoc/command_setremarkmarkup}
 
 
-\subsubsection{\chcommand{setlocextension}}
-\DescribeMacro{\setlocextension}
+\subsubsection{\chcommand{setsocextension}}
+\DescribeMacro{\setsocextension}
 
-Der Befehl \chcommand{setlocextension} legt das Suffix der Hilfsdatei für die Änderungsliste (loc-Datei\footnote{%
-	"`loc"' steht dabei für "`list of changes"'.
+Der\marginpar{neu ab v2.0.0} Befehl \chcommand{setsocextension} legt das Suffix der Hilfsdatei für die Änderungszusammenfassung (soc-Datei\footnote{%
+	"`soc"' steht dabei für "`summary of changes"'.
 }) fest.
-Ohne andere Definition gilt das Suffix "`\texttt{loc}"'.
-Im unten angegebenen Beispiel würde für "`\texttt{foo.tex}"' eine Hilfsdatei erzeugt werden, die "`\texttt{foo.changes}"' statt des Standardnamens "`\texttt{foo.loc}"' hieße.
+Ohne andere Definition gilt das Suffix "`\texttt{soc}"'.
+Im unten angegebenen Beispiel würde für "`\texttt{foo.tex}"' eine Hilfsdatei erzeugt werden, die "`\texttt{foo.changes}"' statt des Standardnamens "`\texttt{foo.soc}"' hieße.
 
-\input{userdoc/command_setlocextension}
+\input{userdoc/command_setsocextension}
 
 
 %^^A ---- other
@@ -518,6 +523,15 @@ Dies sind in alphabetischer Reihenfolge:
 %^^A ---- Versions
 \section{Versionen}
 \label{sec:versions}
+
+\minisec{Version 2.0.0}
+
+Datum: 02.\,05.~2013
+\begin{itemize}
+	\item "`richtige"' Liste der Änderungen, alte Zusammenfassung jetzt über den optionalen Parameter \choption{style=summary}
+	\item Problem mit einigen Sonderzeichen in der tabbing-Umgebung (loc) gelöst
+	\item \chcommand{setlocextension} umbenannt in \chcommand{setsocextension}
+\end{itemize}
 
 \minisec{Version 1.0.0}
 
