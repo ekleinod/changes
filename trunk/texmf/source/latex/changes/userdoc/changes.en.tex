@@ -103,12 +103,14 @@ By processing your document the changed text is layouted as you stated by the co
 
 You can print a list of changes using:
 
-\chcommand{listofchanges}
+\chcommand{listofchanges[style=<list|summary>]}
 
 The list is meant to be the analogon to the list of tables, or the list of figures.
-It provides a quick overview of the number and kind of changes of every author.
 
-By runnning \LaTeX\ the data of the list is written into an auxiliary file.
+Stating the style is optional, default is \choption{style=list}.
+In order to print a quick overview of the number and kind of changes of every author, use the option \choption{style=summary}.
+
+By running \LaTeX\ the data of the list is written into an auxiliary file.
 This data is used in the next \LaTeX\ run for typesetting the list of changes.
 Therefore, two \LaTeX\ runs are needed after every change in order to typeset an up-to-date list of changes.
 
@@ -369,9 +371,12 @@ For optional arguments see \chcommand{added}.
 \subsubsection{\chcommand{listofchanges}}
 \DescribeMacro{\listofchanges}
 
-The command \chcommand{listofchanges} outputs a list of changes.
+The command \chcommand{listofchanges} outputs a list or summary of changes.
 The first \LaTeX-run creates an auxiliary file, the second run uses the data of this file.
 Therefore you need two \LaTeX-runs for an up-to-date list of changes.
+
+The\marginpar{new since v2.0.0} style argument is optional, by default the list of changes is printed.
+If you want to print a summary you have to use the option \choption{style=summary}.
 
 \input{userdoc/command_listofchanges}
 
@@ -464,16 +469,16 @@ Using the author's id you can use the author's color with \texttt{Changes@Color\
 \input{userdoc/command_setremarkmarkup}
 
 
-\subsubsection{\chcommand{setlocextension}}
-\DescribeMacro{\setlocextension}
+\subsubsection{\chcommand{setsocextension}}
+\DescribeMacro{\setsocextension}
 
-The command \chcommand{setlocextension} sets the extension of the auxiliary file for the list of changes (loc-file\footnote{%
-	``loc'' stands for ``list of changes''.
+The\marginpar{new since v2.0.0} command \chcommand{setsocextension} sets the extension of the auxiliary file for the summary of changes (soc-file\footnote{%
+	``soc'' stands for ``summary of changes''.
 }).
-The default extension is ``\texttt{loc}''.
-In the example stated below, the loc-file for ``\texttt{foo.tex}'' would be named ``\texttt{foo.changes}'' instead of the default name ``\texttt{foo.loc}''.
+The default extension is ``\texttt{soc}''.
+In the example stated below, the soc-file for ``\texttt{foo.tex}'' would be named ``\texttt{foo.changes}'' instead of the default name ``\texttt{foo.soc}''.
 
-\input{userdoc/command_setlocextension}
+\input{userdoc/command_setsocextension}
 
 
 %^^A ---- other
@@ -527,6 +532,15 @@ The authors are (in alphabetical order):
 %^^A -- Versions -------------------------------------------------------------
 \section{Versions}
 \label{sec:versions}
+
+\minisec{Version 2.0.0}
+
+Date: 2013/05/02
+\begin{itemize}
+	\item ``real'' list of changes, old summary now with optional parameter \choption{style=summary}
+	\item fixed problem with special characters in tabbing environment (loc)
+	\item renamed \chcommand{setlocextension} to \chcommand{setsocextension}
+\end{itemize}
 
 \minisec{Version 1.0.0}
 

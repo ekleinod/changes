@@ -1,8 +1,8 @@
-% \CheckSum{860}
+% \CheckSum{920}
 %
 % \iffalse meta-comment
 %
-%  Copyright (C) 2007-2012
+%  Copyright (C) 2007-2013
 %  Ekkart Kleinod (ekleinod@edgesoft.de)
 % --------------------------------------------------------------------------
 %
@@ -48,7 +48,7 @@
 % \changes{v0.5.4}{2011/04/25}{extract user documentation; default language changed to English; script for removal of commands}
 % \changes{v0.6.0}{2012/01/11}{redefined user interface for setting options, markup, authors; newly structured documentation}
 % \changes{v1.0.0}{2012/04/25}{key-value-interface for change commands; special characters in list of changes}
-% \changes{v2.0.0}{2013/05/01}{fixed problem with special characters in tabbing environment (loc), real list of changes}
+% \changes{v2.0.0}{2013/05/02}{fixed problem with special characters in tabbing environment (loc), real list of changes}
 % \GetFileInfo{changes.dtx}
 % \RecordChanges
 %
@@ -88,8 +88,8 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{changes}
-[2013/05/01 v2.0.0 changes-Paket]
-\typeout{*** changes-Paket 2013/05/01 v2.0.0 ***}
+[2013/05/02 v2.0.0 changes-Paket]
+\typeout{*** changes-Paket 2013/05/02 v2.0.0 ***}
 %    \end{macrocode}
 %
 % Package \chpackage{xkeyval} provides options with key-value-pairs.
@@ -889,7 +889,7 @@
 % The list of changes truncates text, therefore the \chpackage{truncate} package is used.
 %    \begin{macrocode}
 \RequirePackage[breakall]{truncate}
-% \end{macro}
+%    \end{macrocode}
 %
 % \begin{macro}{\changes@chopline}
 %  Auxiliary command for reading the content of the loc-files.
@@ -911,9 +911,9 @@
 % \begin{macro}{\listofchanges}
 %		This command outputs the list of changes.
 %
-% 	Two styles are available: \option{list} (default) and \option{summary}.
-% 	\option{list} prints the list of changes lika a list of figures.
-% 	\option{summary} prints a summary of changes separated by authors.
+% 	Two styles are available: \choption{list} (default) and \choption{summary}.
+% 	\choption{list} prints the list of changes lika a list of figures.
+% 	\choption{summary} prints a summary of changes separated by authors.
 %
 % 	For the list, the values are read from the auxiliary file.
 %
