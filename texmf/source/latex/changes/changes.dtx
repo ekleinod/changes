@@ -452,6 +452,7 @@
 		\def\changesauthorname{Author}
 		\def\changesanonymousname{anonymous}
 		\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}
+		\def\changesnosoc{Summary of changes is available after the next \LaTeX\ run.}
 	}{
 		\addto\captionsngerman{\def\listofchangesname{Liste der \"Anderungen}}
 		\addto\captionsngerman{\def\summaryofchangesname{\"Anderungen}}
@@ -460,7 +461,8 @@
 		\addto\captionsngerman{\def\changesreplacename{Ersetzt}}
 		\addto\captionsngerman{\def\changesauthorname{Autor}}
 		\addto\captionsngerman{\def\changesanonymousname{Anonym}}
-		\addto\captionsngerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
+		\addto\captionsngerman{\def\changesnoloc{Liste der \"Anderungen nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
+		\addto\captionsngerman{\def\changesnosoc{\"Anderungen nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
 
 		\addto\captionsgerman{\def\listofchangesname{Liste der \"Anderungen}}
 		\addto\captionsgerman{\def\summaryofchangesname{\"Anderungen}}
@@ -469,7 +471,8 @@
 		\addto\captionsgerman{\def\changesreplacename{Ersetzt}}
 		\addto\captionsgerman{\def\changesauthorname{Autor}}
 		\addto\captionsgerman{\def\changesanonymousname{Anonym}}
-		\addto\captionsgerman{\def\changesnoloc{\"Anderungsliste nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
+		\addto\captionsgerman{\def\changesnoloc{Liste der \"Anderungen nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
+		\addto\captionsgerman{\def\changesnosoc{\"Anderungen nach dem n\"achsten \LaTeX-Lauf verf\"ugbar.}}
 
 		\addto\captionsenglish{\def\listofchangesname{List of changes}}
 		\addto\captionsenglish{\def\summaryofchangesname{Changes}}
@@ -479,6 +482,7 @@
 		\addto\captionsenglish{\def\changesauthorname{Author}}
 		\addto\captionsenglish{\def\changesanonymousname{anonymous}}
 		\addto\captionsenglish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
+		\addto\captionsenglish{\def\changesnosoc{Summary of changes is available after the next \LaTeX\ run.}}
 
 		\addto\captionsitalian{\def\listofchangesname{Lista delle modifiche}}
 		\addto\captionsitalian{\def\summaryofchangesname{Modifiche}}
@@ -488,6 +492,7 @@
 		\addto\captionsitalian{\def\changesauthorname{Autore}}
 		\addto\captionsitalian{\def\changesanonymousname{anonimo}}
 		\addto\captionsitalian{\def\changesnoloc{La lista delle modifiche sar\`a disponibile alla prossima esecuzione di \LaTeX.}}
+		\addto\captionsitalian{\def\changesnosoc{Le modifiche sar\`a disponibile alla prossima esecuzione di \LaTeX.}}
 	}
 %    \end{macrocode}
 %
@@ -924,7 +929,7 @@
 %	In further versions: compute length of bounding box für summary.
 %    \begin{macrocode}
 \newlength{\Changes@Len@summ}
-\setlength{\Changes@Len@summ}{.3\textwidth}
+\setlength{\Changes@Len@summ}{.2\textwidth}
 \newboolean{Changes@MoreLines}
 %    \end{macrocode}
 % The definition of \chcommand{listofchanges}.
@@ -947,6 +952,11 @@
 	\ifthenelse{\equal{\Changes@loc@style}{list}}
 		{
 			\section*{\listofchangesname}
+			\IfFileExists{\jobname.loc}
+				{}{
+					\emph{\changesnoloc}
+					\PackageWarning{changes}{LaTeX rerun needed for list of changes}
+				}
 			\@starttoc{loc}
 		}
 %    \end{macrocode}
@@ -987,9 +997,9 @@
 								\fi
 							}
 							\closein\Changes@InFile
-						}{
-							\emph{\changesnoloc}
-							\PackageWarning{changes}{LaTeX rerun needed for list of changes}
+						}{%
+							\emph{\changesnosoc}
+							\PackageWarning{changes}{LaTeX rerun needed for summary of changes}
 						}
 				}{}
 		}
