@@ -919,8 +919,16 @@
 %
 %		For the summary, the values are read from the loc-file, if it exists.
 %		If no loc-file exists, an according message is generated.
+%
+% Some definitions that have to reside outside the command in order to use the command multiple times.
+%	In further versions: compute length of bounding box für summary.
 %    \begin{macrocode}
+\newlength{\Changes@Len@summ}
+\setlength{\Changes@Len@summ}{.3\textwidth}
 \newboolean{Changes@MoreLines}
+%    \end{macrocode}
+% The definition of \chcommand{listofchanges}.
+%    \begin{macrocode}
 \newcommand{\listofchanges}[1][style=list]{%
 	\setkeys{Changes@loc}{#1}%
 	\ifthenelse{\equal{\@empty}{\Changes@loc@style}}
@@ -959,25 +967,23 @@
 									\setboolean{Changes@MoreLines}{false}
 								\else
 									\expandafter\changes@chopline\Changes@Line\\
-									\begin{tabbing}
-										mm\=mmmmmm\=\kill
-										{
-											\ifthenelse{\boolean{Changes@colored}}
-												{\color{\Changes@InColor}}
-												{}
-											\ifthenelse{\equal{\Changes@InID}{\@empty}}
-												{\changesauthorname: \changesanonymousname}
-												{
-													\changesauthorname: \Changes@InID
-													\ifthenelse{\equal{\Changes@InName}{\@empty}}
-														{}
-														{ (\Changes@InName)}
-												}
-										}\\
-										\>\changesaddname:\>\Changes@InAdded\\
-										\>\changesdeletename:\>\Changes@InDeleted\\
-										\>\changesreplacename:\>\Changes@InReplaced\\
-									\end{tabbing}
+									\textbf{%
+										\ifthenelse{\boolean{Changes@colored}}
+											{\color{\Changes@InColor}}
+											{}
+										\ifthenelse{\equal{\Changes@InID}{\@empty}}
+											{\changesauthorname: \changesanonymousname}
+											{%
+												\changesauthorname: \Changes@InID
+												\ifthenelse{\equal{\Changes@InName}{\@empty}}
+													{}
+													{ (\Changes@InName)}
+											}
+									}\\
+									\parbox{\Changes@Len@summ}{\changesaddname~\dotfill~\Changes@InAdded}\\
+									\parbox{\Changes@Len@summ}{\changesdeletename~\dotfill~\Changes@InDeleted}\\
+									\parbox{\Changes@Len@summ}{\changesreplacename~\dotfill~\Changes@InReplaced}
+									\par
 								\fi
 							}
 							\closein\Changes@InFile
