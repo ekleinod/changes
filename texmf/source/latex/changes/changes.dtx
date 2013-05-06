@@ -1,4 +1,4 @@
-% \CheckSum{920}
+% \CheckSum{965}
 %
 % \iffalse meta-comment
 %
@@ -48,7 +48,7 @@
 % \changes{v0.5.4}{2011/04/25}{extract user documentation; default language changed to English; script for removal of commands}
 % \changes{v0.6.0}{2012/01/11}{redefined user interface for setting options, markup, authors; newly structured documentation}
 % \changes{v1.0.0}{2012/04/25}{key-value-interface for change commands; special characters in list of changes}
-% \changes{v2.0.0}{2013/05/02}{fixed problem with special characters in tabbing environment (loc), real list of changes}
+% \changes{v2.0.0}{2013/05/07}{fixed problem with special characters in tabbing environment (loc), real list of changes, authormarkup}
 % \GetFileInfo{changes.dtx}
 % \RecordChanges
 %
@@ -88,8 +88,8 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{changes}
-[2013/05/02 v2.0.0 changes-Paket]
-\typeout{*** changes-Paket 2013/05/02 v2.0.0 ***}
+[2013/05/07 v2.0.0 changes-Paket]
+\typeout{*** changes-Paket 2013/05/07 v2.0.0 ***}
 %    \end{macrocode}
 %
 % Package \chpackage{xkeyval} provides options with key-value-pairs.
@@ -237,7 +237,8 @@
 				\equal{#1}{superscript}\or
 				\equal{#1}{subscript}\or
 				\equal{#1}{brackets}\or
-				\equal{#1}{footnote}
+				\equal{#1}{footnote}\or
+				\equal{#1}{none}
 			}
 				{\renewcommand{\Changes@optionauthormarkup}{#1}}
 				{\PackageWarning{changes}{authormarkup '#1' unknown, using '\Changes@optionauthormarkup'}}
@@ -588,6 +589,7 @@
 	\ifthenelse{\equal{\Changes@optionauthormarkup}{subscript}}{\textsubscript{#1}}{}%
 	\ifthenelse{\equal{\Changes@optionauthormarkup}{brackets}}{(#1)}{}%
 	\ifthenelse{\equal{\Changes@optionauthormarkup}{footnote}}{\footnote{#1}}{}%
+	\ifthenelse{\equal{\Changes@optionauthormarkup}{none}}{}{}%
 }
 %    \end{macrocode}
 % \end{macro}
