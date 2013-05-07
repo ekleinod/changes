@@ -74,6 +74,7 @@
 
 		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${language}.drv" />
 
+		<replace file="${file:targetname}.${language}.drv" token=", english]" value=", ${language}]" />
 		<replace file="${file:targetname}.${language}.drv" token="\selectlanguage{english}" value="\selectlanguage{${language}}" />
 		<replace file="${file:targetname}.${language}.drv" token="%\OnlyDescription" value="\OnlyDescription" />
 
@@ -142,7 +143,7 @@
 		<echo message="Remove temporary files." />
 		<defaultexcludes remove="**/*~" />
 		<delete>
-			<fileset dir="." includes="**/*.aux, **/*.bak.vthought, **/*.bak, **/*.bbl, **/*.blg, **/*.changes, **/*.dvi, **/*.glo, **/*.idx, **/*.ilg, **/*.ind, **/*.loc, **/*.lof, **/*.lot, **/*.lop, **/*.nav, **/*.out, **/*.ps, **/*.snm, **/*.toc, **/*.url, **/*.*~"/>
+			<fileset dir="." includes="**/*.aux, **/*.bak.vthought, **/*.bak, **/*.bbl, **/*.blg, **/*.changes, **/*.dvi, **/*.glo, **/*.idx, **/*.ilg, **/*.ind, **/*.loc, **/*.lof, **/*.lot, **/*.lop, **/*.nav, **/*.out, **/*.ps, **/*.snm, **/*.soc, **/*.toc, **/*.url, **/*.*~"/>
 		</delete>
 		<defaultexcludes default="true" />
 	</target>
