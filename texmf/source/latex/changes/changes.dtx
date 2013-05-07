@@ -806,10 +806,10 @@
 %    \end{macrocode}
 %	Store line for list of changes.
 %    \begin{macrocode}
-			\ifthenelse{\equal{\@empty}{#3}}
-				{\def\Changes@locid{}}
-				{\def\Changes@locid{~(#3)}}
-			\addcontentsline{loc}{subsection}{#6\Changes@locid: \truncate{.3\textwidth}{#5}}
+			\ifthenelse{\equal{\@empty}{#3}}%
+				{\def\Changes@locid{}}%
+				{\def\Changes@locid{~(#3)}}%
+			\addcontentsline{loc}{subsection}{#6\Changes@locid: \truncate{.3\textwidth}{#5}}%
 		}%
 %    \end{macrocode}
 %	Output unchanged text (option \choption{final} was set).
