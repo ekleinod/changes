@@ -1,7 +1,7 @@
 %%%
 % driver file of changes package
 
-\documentclass[twoside, titlepage, parskip=half, toc=flat, cleardoublepage=empty, captions=nooneline, origlongtable, ngerman, english]{scrartcl}
+\documentclass[twoside, titlepage, parskip=half, toc=flat, cleardoublepage=empty, captions=nooneline, origlongtable, english]{scrartcl}
 
 % code definition and documentation
 \usepackage{doc}
@@ -91,11 +91,11 @@
 % document title
 \ifENGLISH
 	\title{The \chpackage{changes}-package}
-	\subtitle{Manual change markup --- version 1.0.0}
+	\subtitle{Manual change markup --- version 2.0.0}
 \fi
 \ifGERMAN
 	\title{Das \chpackage{changes}-Paket}
-	\subtitle{Manuelle Änderungsmarkierung -- Version 1.0.0}
+	\subtitle{Manuelle Änderungsmarkierung -- Version 2.0.0}
 \fi
 
 \author{Ekkart Kleinod}

@@ -46,9 +46,9 @@
 % Different package options.
 %
 %    \begin{macrocode}
-%<*example:simple|example:setlocextension|example:setaddedmarkup|example:setdeletedmarkup|example:setauthormarkup|example:setauthormarkupposition|example:setauthormarkuptext|example:setremarkmarkup>
+%<*example:simple|example:setsocextension|example:setaddedmarkup|example:setdeletedmarkup|example:setauthormarkup|example:setauthormarkupposition|example:setauthormarkuptext|example:setremarkmarkup|example:listofchanges:list|example:listofchanges:summary|example:listofchanges:both|example:listofchanges:wrong>
 \usepackage{changes}
-%</example:simple|example:setlocextension|example:setaddedmarkup|example:setdeletedmarkup|example:setauthormarkup|example:setauthormarkupposition|example:setauthormarkuptext|example:setremarkmarkup>
+%</example:simple|example:setsocextension|example:setaddedmarkup|example:setdeletedmarkup|example:setauthormarkup|example:setauthormarkupposition|example:setauthormarkuptext|example:setremarkmarkup|example:listofchanges:list|example:listofchanges:summary|example:listofchanges:both|example:listofchanges:wrong>
 %
 %<*example:draft>
 \usepackage[draft]{changes}
@@ -213,9 +213,9 @@
 \setremarkmarkup{\footnote{#2 as was written by #1}}
 %</example:setremarkmarkup>
 %
-%<*example:setlocextension>
-\setlocextension{changes}
-%</example:setlocextension>
+%<*example:setsocextension>
+\setsocextension{changes}
+%</example:setsocextension>
 %    \end{macrocode}
 %
 % Define some authors.
@@ -232,7 +232,19 @@
 
 %<example:simple>\section*{Changes Example: Simple}
 
+%<*example:listofchanges:list>
 \listofchanges
+%</example:listofchanges:list>
+%<*example:listofchanges:summary>
+\listofchanges[style=summary]
+%</example:listofchanges:summary>
+%<*example:listofchanges:both>
+\listofchanges
+\listofchanges[style=summary]
+%</example:listofchanges:both>
+%<*example:listofchanges:wrong>
+\listofchanges[style=wrong]
+%</example:listofchanges:wrong>
 
 \subsection*{Changes by default author}
 
