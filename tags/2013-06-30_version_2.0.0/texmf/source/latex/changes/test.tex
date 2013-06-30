@@ -1,0 +1,56 @@
+\documentclass[11pt, a4paper, notitlepage, halfparskip, ngerman]{scrartcl}
+%\documentclass[11pt, a4paper, notitlepage, halfparskip, english]{scrartcl}
+%\documentclass[11pt, a4paper, notitlepage, halfparskip, italian]{scrartcl}
+
+\usepackage[nojura]{basis}
+
+
+%\usepackage{changes}
+%\usepackage[draft, ulem={normalem, normalbf}]{changes}
+%\usepackage[draft, ulem={normalem, normalbf}, xcolor={gray}]{changes}
+\usepackage[authormarkup=none]{changes}
+
+% Metainformationen über das Dokument
+\title{Test}
+\author{Ekkart Kleinod} % Autor ist Pflicht für die Titelseite
+
+\definechangesauthor[name={Täst}, color=green]{Test}
+\definechangesauthor[name={Ekkärt Kleinöd}, color=orange]{EK}
+\definechangesauthor[name={Ekkárt Kleinàd}, color=orange]{EK2}
+
+ % ab hier beginnt der Inhalt
+\begin{document}
+
+	%\maketitle
+
+	Hallo
+
+	\listofchanges
+
+	\listofchanges[style=summary]
+
+	\minisec{Autor EK}
+
+	Hier sehen wir \added[id=EK, remark={klingt besser}]{eingefügten} Text.
+
+	Hier sehen wir \deleted[id=EK]{gelöschten} Text.
+
+	Hier sehen wir \replaced[id=EK]{geänderten}{alten} Text.
+
+	\minisec{Autor EK2}
+
+	Hier sehen wir \added[id=EK2, remark={klingt besser}]{eingefügten} Text.
+
+	Hier sehen wir \deleted[id=EK2]{gelöschten} Text.
+
+	Hier sehen wir \replaced[id=EK2]{geänderten}{alten} Text.
+
+	\minisec{Autor leer}
+
+	Hier sehen wir \added[remark=unwichtig]{eingefügten} Text.
+
+	\minisec{Autor Test}
+
+	Hier sehen wir \added[id=Test, remark=unwichtig]{eingefügten} Text.
+
+\end{document}
