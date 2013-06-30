@@ -1,0 +1,13 @@
+The changes-package allows the user to manually markup changes of text, such as additions, deletions, or replacements.
+Changed text is shown in a different colour; deleted text is striked out.
+The package allows free defining of additional authors and their associated colour.
+It also allows you to change the markup of changes, authors, or annotations.
+
+Release 2.0.0 changes the output of the list of changes.
+Default is a list similar to the list of tables or figures.
+The summary of v1.* can be achieved using \listofchanges[style=summary].
+Several bugfixes were introduced as well.
+See version info in documentation for more information.
+
+Please inform me about any errors or improvements as you see fit.
+
