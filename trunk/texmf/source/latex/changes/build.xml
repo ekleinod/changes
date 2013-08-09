@@ -265,6 +265,9 @@
 			</fileset>
 		</copy>
 
+		<!-- in all files convert line ending to lf, otherwise the files are refused by ctan -->
+		<fixcrlf srcDir="${path:ctan}" includes="**/*" eol="lf" />
+
 		<!-- Archive -->
 		<zip
 			destfile="${path:ctan}${file:targetname}.tds.zip"

@@ -6,10 +6,10 @@ This package provides means for manual change markup.
 Any comments, thoughts or improvements are welcome.
 The package is maintained at \emph{sourceforge}, please see
 
-\input{userdoc/url}
+\url{http://changes.sourceforge.net/}
 
 for source code access, bug and feature tracker, forum etc.
-If you want to contact me directly, please send an email to \input{userdoc/email}.
+If you want to contact me directly, please send an email to \href{mailto:ekleinod@edgesoft.de}{ekleinod@edgesoft.de}.
 Please start your email subject with \texttt{[changes]}.
 
 \begin{quote}
@@ -120,14 +120,14 @@ Therefore, two \LaTeX\ runs are needed after every change in order to typeset an
 Often you want to remove the change markup after acknowledging or rejecting the changes.
 You can suppress the output of changes with:
 
-\input{userdoc/option_final}
+\chcommand{usepackage[final]\{changes\}}
 
 \subsection{Available scripts}
 
 In order to remove the markup from the \LaTeX\ source code  you can use a script from Silvano Chiaradonna.
 You find the script in the directory:
 
-\input{userdoc/path_scripts}
+\texttt{<texpath>/scripts/changes/}
 
 The script removes all markups.
 You can select or deselect markup from removal using the interactive mode.
@@ -141,14 +141,14 @@ The \chpackage{changes}-package was carefully programmed and tested.
 Yet the possibility of errors in the package exists, you might encounter problem during use, or you might miss functionionality.
 In that case, please go to
 
-\input{userdoc/url.tex}
+\url{http://changes.sourceforge.net/}
 
 There you can report errors, ask for help in the forum, or give advice to other users.
 You can view the source code, and change it according to your needs.
 I will try to include your changes in the maintained package.
 If you are a registered \emph{sourceforge} user you can be a co-author of the \chpackage{changes}-package.
 
-You can write me an email too, please send it to \input{userdoc/email}.
+You can write me an email too, please send it to \href{mailto:ekleinod@edgesoft.de}{ekleinod@edgesoft.de}.
 In that case, please start your email subject with \texttt{[changes]}.
 
 Change markup of texts works well, it is possible to markup whole paragraphs.
@@ -180,7 +180,7 @@ This section describes the user interface of the \chpackage{changes}-package, i.
 Every option respectively new command is described.
 If you want to see the options and commands in action, please refer to the examples in
 
-\input{userdoc/path_examples}
+\texttt{<texpath>/doc/latex/changes/examples/}
 
 The example files are named with the used option respectively command.
 
@@ -201,7 +201,7 @@ This option is the default option, if no other option is selected.
 The \chpackage{changes} package reuses the declaration of \choption{draft} in \chcommand{documentclass}.
 The local declaration of \choption{final} overrules the declaration of \choption{draft} in \chcommand{documentclass}.
 
-\input{userdoc/option_draft}
+\chcommand{usepackage[draft]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}
 
 \subsubsection{final}
 The \choption{final}-option disables markup of changes, only the correct text will be shown.
@@ -210,7 +210,7 @@ The list of changes is disabled, too.
 The \chpackage{changes} package reuses the declaration of \choption{final} in \chcommand{documentclass}.
 The local declaration of \choption{draft} overrules the declaration of \choption{final} in \chcommand{documentclass}.
 
-\input{userdoc/option_final}
+\chcommand{usepackage[final]\{changes\}}
 
 
 \subsubsection{markup}
@@ -227,7 +227,15 @@ The following values are allowed:
 	\item [\choption{nocolor}] no colored markup, underlined for added text, striked out for deleted text
 \end{description}
 
-\input{userdoc/option_markup}
+\begin{chusage}
+		\>\chcommand{usepackage[markup=\meta{markup}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[markup=default]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}\\
+		\>\chcommand{usepackage[markup=underlined]\{changes\}}\\
+		\>\chcommand{usepackage[markup=bfit]\{changes\}}\\
+		\>\chcommand{usepackage[markup=nocolor]\{changes\}}
+\end{chusage}
+
 
 \subsubsection{addedmarkup, deletedmarkup}
 
@@ -252,8 +260,21 @@ The following values are allowed:
 	\item [\choption{em}] emphasized text -- \emph{example}
 \end{description}
 
-\input{userdoc/option_addedmarkup}
-\input{userdoc/option_deletedmarkup}
+\begin{chusage}
+		\>\chcommand{usepackage[addedmarkup=\meta{markup}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[addedmarkup=none]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}\\
+		\>\chcommand{usepackage[addedmarkup=uline]\{changes\}}\\
+\end{chusage}
+
+\begin{chusage}
+		\>\chcommand{usepackage[deletedmarkup=\meta{markup}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[deletedmarkup=sout]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}\\
+		\>\chcommand{usepackage[deletedmarkup=xout]\{changes\}}\\
+		\>\chcommand{usepackage[deletedmarkup=uwave]\{changes\}}
+\end{chusage}
+
 
 
 \subsubsection{authormarkup}
@@ -270,7 +291,16 @@ The following values are allowed:
 	\item [\choption{none}] no author identification
 \end{description}
 
-\input{userdoc/option_authormarkup}
+\begin{chusage}
+		\>\chcommand{usepackage[authormarkup=\meta{markup}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[authormarkup=superscript]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}\\
+		\>\chcommand{usepackage[authormarkup=subscript]\{changes\}}\\
+		\>\chcommand{usepackage[authormarkup=brackets]\{changes\}}\\
+		\>\chcommand{usepackage[authormarkup=footnote]\{changes\}}\\
+		\>\chcommand{usepackage[authormarkup=none]\{changes\}}
+\end{chusage}
+
 
 
 \subsubsection{authormarkupposition}
@@ -284,7 +314,13 @@ The following values are allowed:
 	\item [\choption{left}] left of the text -- \textsuperscript{example}text
 \end{description}
 
-\input{userdoc/option_authormarkupposition}
+\begin{chusage}
+		\>\chcommand{usepackage[authormarkupposition=\meta{markup}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[authormarkupposition=right]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}\\
+		\>\chcommand{usepackage[authormarkupposition=left]\{changes\}}
+\end{chusage}
+
 
 
 \subsubsection{authormarkuptext}
@@ -298,7 +334,13 @@ The following values are allowed:
 	\item [\choption{name}] author's name -- text\textsuperscript{authorname}
 \end{description}
 
-\input{userdoc/option_authormarkuptext}
+\begin{chusage}
+		\>\chcommand{usepackage[authormarkuptext=\meta{markup}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[authormarkuptext=id]\{changes\}} \Corresponds\ \chcommand{usepackage\{changes\}}\\
+		\>\chcommand{usepackage[authormarkuptext=name]\{changes\}}
+\end{chusage}
+
 
 
 \subsubsection{ulem}
@@ -306,7 +348,13 @@ The following values are allowed:
 All options for the \chpackage{ulem} package can be specified as parameters of the \choption{ulem}-option.
 Two or more options have to be put in curly brackets.
 
-\input{userdoc/option_ulem}
+\begin{chusage}
+		\>\chcommand{usepackage[ulem=\meta{options}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[ulem=normalem]\{changes\}}\\
+		\>\chcommand{usepackage[ulem=\{normalem,normalbf\}]\{changes\}}
+\end{chusage}
+
 
 
 \subsubsection{xcolor}
@@ -314,7 +362,13 @@ Two or more options have to be put in curly brackets.
 All options for the \chpackage{xcolor} package can be specified as parameters of the \choption{xcolor}-option.
 Two or more option have to be embraced in curly brackets.
 
-\input{userdoc/option_xcolor}
+\begin{chusage}
+		\>\chcommand{usepackage[xcolor=\meta{options}]\{changes\}}\\
+	\usageexample
+		\>\chcommand{usepackage[xcolor=dvipdf]\{changes\}}\\
+		\>\chcommand{usepackage[xcolor=\{dvipdf,gray\}]\{changes\}}
+\end{chusage}
+
 
 
 %^^A -- Change management ----------------------------------------------------------
@@ -382,7 +436,9 @@ Therefore you need two \LaTeX-runs for an up-to-date list of changes.
 The\marginpar{new since v2.0.0} style argument is optional, by default the list of changes is printed.
 If you want to print a summary you have to use the option \choption{style=summary}.
 
-\input{userdoc/command_listofchanges}
+\begin{chusage}
+		\>\chcommand{listofchanges[style=<list|summary>]}
+\end{chusage}
 
 
 %^^A -- Author management -----------------------------------------------------
@@ -398,7 +454,14 @@ You may define a corresponding color and the author's name.
 If you do not define a color, black is used.
 The author's name is used in the list of changes and in the markup, if you set the corresponding option.
 
-\input{userdoc/command_definechangesauthor}
+\begin{chusage}
+		\>\chcommand{definechangesauthor[name=\{\meta{author's name}\}, color=\{\meta{color}\}]\{\meta{author's id}\}}\\
+	\usageexample
+		\>\chcommand{definechangesauthor\{EK\}}\\
+		\>\chcommand{definechangesauthor[color=orange]\{EK\}}\\
+		\>\chcommand{definechangesauthor[name=\{Ekkart Kleinod\}]\{EK\}}\\
+		\>\chcommand{definechangesauthor[name=\{Ekkart Kleinod\}, color=orange]\{EK\}}
+\end{chusage}
 
 
 %^^A -- Adaptation of the output -----------------------------------------------------
@@ -414,7 +477,12 @@ The default markup is colored text, or the markup set with the option \choption{
 
 Values for definition: any \LaTeX-commands, added text can be used with ``\#1''.
 
-\input{userdoc/command_setaddedmarkup}
+\begin{chusage}
+		\>\chcommand{setaddedmarkup\{\meta{definition}\}}\\
+	\usageexample
+		\>\chcommand{setaddedmarkup\{}\chcommand{emph\{\#1\}}\}\\
+		\>\chcommand{setaddedmarkup\{+++: \#1\}}
+\end{chusage}
 
 
 \subsubsection{\chcommand{setdeletedmarkup}}
@@ -425,7 +493,12 @@ The default markup is striked-out, or the markup set with the option \choption{m
 
 Values for definition: any \LaTeX-commands, deleted0 text can be used with ``\#1''.
 
-\input{userdoc/command_setdeletedmarkup}
+\begin{chusage}
+		\>\chcommand{setdeletedmarkup\{\meta{definition}\}}\\
+	\usageexample
+		\>\chcommand{setdeletedmarkup\{}\chcommand{emph\{\#1\}}\}\\
+		\>\chcommand{setdeletedmarkup\{---: \#1\}}
+\end{chusage}
 
 
 \subsubsection{\chcommand{setauthormarkup}}
@@ -436,7 +509,13 @@ The default markup is a superscripted author's text.
 
 Values for definition: any \LaTeX-commands, author's text can be used with ``\#1''.
 
-\input{userdoc/command_setauthormarkup}
+\begin{chusage}
+		\>\chcommand{setauthormarkup\{\meta{definition}\}}\\
+	\usageexample
+		\>\chcommand{setauthormarkup\{(\#1)\}}\\
+		\>\chcommand{setauthormarkup\{(\#1)\textasciitilde{}-{}-\textasciitilde{}\}}\\
+		\>\chcommand{setauthormarkup\{}\chcommand{marginpar\{\#1\}\}}
+\end{chusage}
 
 
 \subsubsection{\chcommand{setauthormarkupposition}}
@@ -447,7 +526,12 @@ The default position is right of the changed text.
 
 Possible values: \emph{left} == left of the changes; all other values: right
 
-\input{userdoc/command_setauthormarkupposition}
+\begin{chusage}
+		\>\chcommand{setauthormarkupposition\{\meta{position}\}}\\
+	\usageexample
+		\>\chcommand{setauthormarkupposition\{left\}}
+\end{chusage}
+
 
 
 \subsubsection{\chcommand{setauthormarkuptext}}
@@ -458,7 +542,12 @@ The default markup is the author's id.
 
 Possible values: \emph{name} == author's name; all other values: author's id
 
-\input{userdoc/command_setauthormarkuptext}
+\begin{chusage}
+		\>\chcommand{setauthormarkuptext\{\meta{text}\}}\\
+	\usageexample
+		\>\chcommand{setauthormarkuptext\{name\}}
+\end{chusage}
+
 
 
 \subsubsection{\chcommand{setremarkmarkup}}
@@ -470,7 +559,13 @@ The default markup typesets the remark in a footnote.
 Values for definition: any \LaTeX-commands, author's id can be used with ``\#1'', the remark can be shown using ``\#2''.
 Using the author's id you can use the author's color with \texttt{Changes@Color\#1}.
 
-\input{userdoc/command_setremarkmarkup}
+\begin{chusage}
+		\>\chcommand{setremarkmarkup\{\meta{definition}\}}\\
+	\usageexample
+		\>\chcommand{setremarkmarkup\{(\#2 --- \#1)\}}\\
+		\>\chcommand{setremarkmarkup\{\chcommand{footnote}\{\#1:\chcommand{textcolor\{Changes@Color\#1\}}\{\#2\}\}\}}
+\end{chusage}
+
 
 
 \subsubsection{\chcommand{setsocextension}}
@@ -482,7 +577,12 @@ The\marginpar{new since v2.0.0} command \chcommand{setsocextension} sets the ext
 The default extension is ``\texttt{soc}''.
 In the example stated below, the soc-file for ``\texttt{foo.tex}'' would be named ``\texttt{foo.changes}'' instead of the default name ``\texttt{foo.soc}''.
 
-\input{userdoc/command_setsocextension}
+\begin{chusage}
+		\>\chcommand{setsocextension\{\meta{extension}\}}\\
+	\usageexample
+		\>\chcommand{setsocextension\{changes\}}
+\end{chusage}
+
 
 
 %^^A ---- other
@@ -530,7 +630,14 @@ The following packages are sometimes required and have to be installed if used b
 
 Several authors contributed to the \chpackage{changes}-package.
 The authors are (in alphabetical order):
-\input{userdoc/authors}
+\begin{itemize}
+	\item Chiaradonna, Silvano
+	\item Giovannini, Daniele
+	\item Kleinod, Ekkart
+	\item Wölfel, Philipp
+	\item Wolter, Steve
+\end{itemize}
+
 
 
 %^^A -- Versions -------------------------------------------------------------
@@ -661,7 +768,7 @@ Date: 2007/01/16
 %^^A ---- copyright, license
 \section{Distribution, Copyright, License}
 
-\input{userdoc/copyright}
+Copyright 2007-2013 Ekkart Kleinod (\href{mailto:ekleinod@edgesoft.de}{ekleinod@edgesoft.de})
 
 This work may be distributed and/or modified under the conditions of the \LaTeX\ Project Public License, either version~1.3 of this license or any later version.
 The latest version of this license is in \url{http://www.latex-project.org/lppl.txt} and version~1.3 or later is part of all distributions of \LaTeX\ version 2005/12/01 or later.
@@ -671,11 +778,33 @@ The current maintainer of this work is Ekkart Kleinod.
 
 This work consists of the files
 
-\input{userdoc/files_original}
+\begin{tabbing}
+	mm\=\kill
+	\>\texttt{source/latex/changes/changes.drv}\\
+	\>\texttt{source/latex/changes/changes.dtx}\\
+	\>\texttt{source/latex/changes/changes.ins}\\
+	\>\texttt{source/latex/changes/examples.dtx}\\
+	\>\texttt{source/latex/changes/README}\\
+	\>\texttt{source/latex/changes/userdoc/*.tex}\\
+
+	\>\texttt{scripts/changes/delcmdchanges.bash}
+\end{tabbing}
+
 
 and the derived files
 
-\input{userdoc/files_generated}
+\begin{tabbing}
+	mm\=\kill
+	\>\texttt{doc/latex/changes/changes.english.pdf}\\
+	\>\texttt{doc/latex/changes/changes.english.withcode.pdf}\\
+	\>\texttt{doc/latex/changes/changes.ngerman.pdf}\\
+
+	\>\texttt{doc/latex/changes/examples/changes.example.*.tex}\\
+	\>\texttt{doc/latex/changes/examples/changes.example.*.pdf}\\
+
+	\>\texttt{tex/latex/changes/changes.sty}
+\end{tabbing}
+
 
 %^^A end of user documentation
 
