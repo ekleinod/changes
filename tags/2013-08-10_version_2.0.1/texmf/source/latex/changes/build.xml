@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+	This script creates all files for a new version.
+
+	Targets: all (default), docstrip, pdf, deploy, ctan
+-->
+
+<project name="changes" default="all" basedir=".">
+
+	<property name="file:targetname" value="${ant.project.name}" /> <!-- zu generierender Dateiname -->
+	<property name="file:log" value="build.log" />                  <!-- Log-Datei -->
+	<property name="count:runs" value="1" />                        <!-- LaTeX-Durchlaufzähler -->
+
+	<property name="path:latex:base" value="../../../" />
+	<property name="path:latex:doc" value="doc/latex/" />
+	<property name="path:examples" value="examples/" />
+	<property name="path:latex:scripts" value="scripts/" />
+	<property name="path:latex:tex" value="tex/latex/" />
+	<property name="path:latex:source" value="source/latex/" />
+	<property name="path:latex:userdoc" value="userdoc/" />
+
+	<property name="path:ctan" value="ctan/" /> <!-- CTAN-Ausgabe-Pfad -->
+	<property name="path:texmf" value="texmf/" /> <!-- LaTeX-texmf-Pfad -->
+
+	<property name="documentation:full" value="withcode" /> <!-- full documentation -->
+
+	<property name="lang:de" value="ngerman" /> <!-- language: german -->
+	<property name="lang:en" value="english" /> <!-- language: english -->
+
+	<!-- create all files -->
+	<target name="all" depends="clearLog">
+
+		<echo message="Create all files: start."/>
+
+		<!-- create stripped files -->
+		<antcall target="docstrip" />
+
+		<!-- create all documentation files -->
+		<antcall target="documentation">
+			<param name="language" value="${lang:en}" />
+		</antcall>
+		<antcall target="documentation_full">
+			<param name="language" value="${lang:en}" />
+		</antcall>
+		<antcall target="documentation">
+			<param name="language" value="${lang:de}" />
+		</antcall>
+
+		<!-- create all example pdfs -->
+		<antcall target="examples" />
+		<antcall target="examples" />
+
+		<!-- remove temporary files -->
+		<antcall target="clear" />
+
+		<echo message="Created all files: deploy files with 'ant deploy'."/>
+
+		<echo message="Create all files: stop."/>
+
+	</target>
+
+	<!-- create stripped files -->
+	<target name="docstrip">
+		<echo message="docstrip-run"/>
+		<exec executable="latex" output="build.log" append="true" resultproperty="changes.result">
+			<arg line="-interaction=nonstopmode ${file:targetname}.ins" />
+		</exec>
+		<antcall target="checkResult" />
+	</target>
+
+	<!-- create normal documentation -->
+	<target name="documentation">
+
+		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${language}.drv" />
+
+		<replace file="${file:targetname}.${language}.drv" token=", english]" value=", ${language}]" />
+		<replace file="${file:targetname}.${language}.drv" token="\selectlanguage{english}" value="\selectlanguage{${language}}" />
+		<replace file="${file:targetname}.${language}.drv" token="%\OnlyDescription" value="\OnlyDescription" />
+
+		<antcall target="pdf_complete">
+			<param name="file:targetname" value="${file:targetname}.${language}.drv" />
+		</antcall>
+
+		<delete file="${file:targetname}.${language}.drv" />
+
+	</target>
+
+	<!-- create documentation with code -->
+	<target name="documentation_full">
+
+		<copy file="${file:targetname}.drv" tofile="${file:targetname}.${language}.${documentation:full}.drv" />
+
+		<replace file="${file:targetname}.${language}.${documentation:full}.drv" token="\selectlanguage{english}" value="\selectlanguage{${language}}" />
+
+		<antcall target="pdf_complete">
+			<param name="file:targetname" value="${file:targetname}.${language}.${documentation:full}.drv" />
+		</antcall>
+
+		<delete file="${file:targetname}.${language}.${documentation:full}.drv" />
+
+	</target>
+
+	<!-- all pdf files -->
+	<target name="pdf_complete">
+		<antcall target="pdf"><param name="count:runs" value="1" /></antcall>
+		<antcall target="pdf"><param name="count:runs" value="2" /></antcall>
+		<antcall target="pdf"><param name="count:runs" value="3" /></antcall>
+	</target>
+
+	<!-- single pdf file -->
+	<target name="pdf">
+		<echo message="pdflatex run #${count:runs} -> ${file:targetname}"/>
+		<exec executable="pdflatex" output="${file:log}" append="true" resultproperty="changes.result">
+			<arg line="-interaction=nonstopmode ${file:targetname}" />
+		</exec>
+		<antcall target="checkResult" />
+	</target>
+
+	<!-- create example pdfs -->
+	<target name="examples">
+		<apply executable="pdflatex" output="${file:log}" append="true" resultproperty="changes.result" parallel="false">
+			<srcfile/>
+			<fileset dir="." includes="changes.example.*.tex"/>
+		</apply>
+	</target>
+
+	<!-- check if result != 0 (error) -->
+	<target name="checkResult" description="check if result != 0 (error)">
+		<condition property="changes.error">
+			<and>
+				<isset property="changes.result" />
+				<not>
+					<equals arg1="${changes.result}" arg2="0" />
+				</not>
+			</and>
+		</condition>
+		<fail message="Canceled execution. Log file: '${file:log}'" if="changes.error" />
+	</target>
+
+	<!-- remove temporary files -->
+	<target name="clear">
+		<echo message="Remove temporary files." />
+		<defaultexcludes remove="**/*~" />
+		<delete>
+			<fileset dir="." includes="**/*.aux, **/*.bak.vthought, **/*.bak, **/*.bbl, **/*.blg, **/*.changes, **/*.dvi, **/*.glo, **/*.idx, **/*.ilg, **/*.ind, **/*.loc, **/*.lof, **/*.lot, **/*.lop, **/*.nav, **/*.out, **/*.ps, **/*.snm, **/*.soc, **/*.toc, **/*.url, **/*.*~"/>
+		</delete>
+		<defaultexcludes default="true" />
+	</target>
+
+	<!-- clear log -->
+	<target name="clearLog">
+		<echo message="" file="${file:log}" />
+		<delete>
+			<fileset dir="." includes="**/*.log" />
+		</delete>
+	</target>
+
+	<!-- deploy generated files -->
+	<target name="deploy">
+		<echo message="Deploy generated files." />
+
+		<move
+			file="${file:targetname}.sty"
+			todir="${path:latex:base}${path:latex:tex}${file:targetname}/"
+			failonerror="false" />
+
+		<move todir="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}" failonerror="false">
+			<fileset dir=".">
+				<include name="${file:targetname}.example.*.tex" />
+				<include name="${file:targetname}.example.*.pdf" />
+			</fileset>
+		</move>
+
+		<move todir="${path:latex:base}${path:latex:doc}${file:targetname}/" failonerror="false">
+			<fileset dir=".">
+				<include name="${file:targetname}*.pdf" />
+			</fileset>
+		</move>
+
+		<echo message="Deployed files: create CTAN archive with 'ant ctan'."/>
+
+	</target>
+
+	<!-- bundle files in a CTAN archive -->
+	<target name="ctan">
+		<echo message="Generating the CTAN archive." />
+
+		<delete file="${path:ctan}${file:targetname}.zip" failonerror="false" />
+
+		<!-- directories -->
+		<delete dir="${path:ctan}" failonerror="false" />
+
+		<mkdir dir="${path:ctan}${path:texmf}${path:latex:tex}${file:targetname}" />
+		<mkdir dir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}" />
+		<mkdir dir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/${path:examples}" />
+		<mkdir dir="${path:ctan}${path:texmf}${path:latex:scripts}${file:targetname}" />
+		<mkdir dir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}" />
+		<mkdir dir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/${path:latex:userdoc}" />
+
+		<!-- files -->
+		<!-- files:styles -->
+		<copy todir="${path:ctan}${path:texmf}${path:latex:tex}${file:targetname}/">
+			<fileset dir="${path:latex:base}${path:latex:tex}${file:targetname}/">
+				<include name="*.sty" />
+			</fileset>
+		</copy>
+
+		<!-- files:documentation -->
+		<copy todir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/">
+			<fileset dir="${path:latex:base}${path:latex:doc}${file:targetname}/">
+				<include name="*.pdf" />
+			</fileset>
+		</copy>
+		<copy todir="${path:ctan}${file:targetname}/">
+			<fileset dir="${path:latex:base}${path:latex:doc}${file:targetname}/">
+				<include name="*.pdf" />
+			</fileset>
+		</copy>
+		<copy todir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/${path:examples}">
+			<fileset dir="${path:latex:base}${path:latex:doc}${file:targetname}/${path:examples}">
+				<include name="*.tex" />
+				<include name="*.pdf" />
+			</fileset>
+		</copy>
+
+		<!-- files:scripts -->
+		<copy todir="${path:ctan}${path:texmf}${path:latex:scripts}${file:targetname}">
+			<fileset dir="${path:latex:base}${path:latex:scripts}${file:targetname}">
+				<include name="*.bash" />
+			</fileset>
+		</copy>
+		<copy todir="${path:ctan}${file:targetname}">
+			<fileset dir="${path:latex:base}${path:latex:scripts}${file:targetname}">
+				<include name="*.bash" />
+			</fileset>
+		</copy>
+
+		<!-- files:drv -->
+		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
+			file="${file:targetname}.drv" />
+		<copy todir="${path:ctan}${file:targetname}/"
+			file="${file:targetname}.drv" />
+
+		<!-- files:dtx -->
+		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
+			file="${file:targetname}.dtx" />
+		<copy todir="${path:ctan}${file:targetname}/"
+			file="${file:targetname}.dtx" />
+		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
+			file="examples.dtx" />
+		<copy todir="${path:ctan}${file:targetname}/"
+			file="examples.dtx" />
+
+		<!-- files:ins -->
+		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
+			file="${file:targetname}.ins" />
+		<copy todir="${path:ctan}${file:targetname}/"
+			file="${file:targetname}.ins" />
+
+		<!-- files:README -->
+		<copy todir="${path:ctan}${path:texmf}${path:latex:doc}${file:targetname}/"
+			file="README" />
+		<copy todir="${path:ctan}${file:targetname}/"
+			file="README" />
+
+		<!-- files:user documentation -->
+		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/${path:latex:userdoc}">
+			<fileset dir="${path:latex:base}${path:latex:source}${file:targetname}/${path:latex:userdoc}">
+				<include name="*.tex" />
+			</fileset>
+		</copy>
+		<copy todir="${path:ctan}${file:targetname}/${path:latex:userdoc}">
+			<fileset dir="${path:latex:base}${path:latex:source}${file:targetname}/${path:latex:userdoc}">
+				<include name="*.tex" />
+			</fileset>
+		</copy>
+
+		<!-- in all files convert line ending to lf, otherwise the files are refused by ctan -->
+		<fixcrlf srcDir="${path:ctan}" includes="**/*" eol="lf" />
+
+		<!-- Archive -->
+		<zip
+			destfile="${path:ctan}${file:targetname}.tds.zip"
+			basedir="${path:ctan}${path:texmf}" />
+		<delete dir="${path:ctan}${path:texmf}" failonerror="false" />
+
+		<zip
+			destfile="${path:ctan}${file:targetname}.zip"
+			basedir="${path:ctan}" />
+
+		<move todir="."
+			file="${path:ctan}${file:targetname}.zip" />
+
+		<delete dir="${path:ctan}" failonerror="false" />
+
+	</target>
+
+</project>
