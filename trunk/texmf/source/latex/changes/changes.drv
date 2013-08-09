@@ -91,11 +91,11 @@
 % document title
 \ifENGLISH
 	\title{The \chpackage{changes}-package}
-	\subtitle{Manual change markup --- version 2.0.0}
+	\subtitle{Manual change markup --- version 2.0.1}
 \fi
 \ifGERMAN
 	\title{Das \chpackage{changes}-Paket}
-	\subtitle{Manuelle Änderungsmarkierung -- Version 2.0.0}
+	\subtitle{Manuelle Änderungsmarkierung -- Version 2.0.1}
 \fi
 
 \author{Ekkart Kleinod}
