@@ -186,6 +186,8 @@
 	<target name="ctan">
 		<echo message="Generating the CTAN archive." />
 
+		<delete file="${path:ctan}${file:targetname}.zip" failonerror="false" />
+
 		<!-- directories -->
 		<delete dir="${path:ctan}" failonerror="false" />
 
@@ -237,6 +239,8 @@
 		<!-- files:drv -->
 		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
 			file="${file:targetname}.drv" />
+		<copy todir="${path:ctan}${file:targetname}/"
+			file="${file:targetname}.drv" />
 
 		<!-- files:dtx -->
 		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
@@ -244,6 +248,8 @@
 		<copy todir="${path:ctan}${file:targetname}/"
 			file="${file:targetname}.dtx" />
 		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/"
+			file="examples.dtx" />
+		<copy todir="${path:ctan}${file:targetname}/"
 			file="examples.dtx" />
 
 		<!-- files:ins -->
@@ -260,6 +266,11 @@
 
 		<!-- files:user documentation -->
 		<copy todir="${path:ctan}${path:texmf}${path:latex:source}${file:targetname}/${path:latex:userdoc}">
+			<fileset dir="${path:latex:base}${path:latex:source}${file:targetname}/${path:latex:userdoc}">
+				<include name="*.tex" />
+			</fileset>
+		</copy>
+		<copy todir="${path:ctan}${file:targetname}/${path:latex:userdoc}">
 			<fileset dir="${path:latex:base}${path:latex:source}${file:targetname}/${path:latex:userdoc}">
 				<include name="*.tex" />
 			</fileset>
