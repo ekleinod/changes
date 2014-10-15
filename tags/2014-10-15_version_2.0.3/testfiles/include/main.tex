@@ -1,0 +1,27 @@
+% include example main
+\documentclass{article}
+
+\usepackage[draft]{changes}
+
+\definechangesauthor{EK}{orange}
+
+\begin{document}
+
+	This is an ``include'' example.
+
+	\listofchanges
+
+	main: Some unmodified text.
+
+	main: Some \added[EK]{added} Text.
+	
+	\include{include1}
+	
+	\include{include2}
+	
+	End of inclusion.
+	
+	main: Some \deleted[EK]{deleted} text.
+
+\end{document}
+

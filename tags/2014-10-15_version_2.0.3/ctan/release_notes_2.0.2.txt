@@ -1,0 +1,12 @@
+The changes-package allows the user to manually markup changes of text, such as additions, deletions, or replacements.
+Changed text is shown in a different color; deleted text is striked out.
+The package allows free defining of additional authors and their associated color.
+It also allows you to change the markup of changes, authors, or annotations.
+
+Release 2.0.2 contains no changes in code or behavior.
+It fixed the problem that the documentation PDFs in CTAN were corrupt.
+The documentation itself was slightly extended and bugfixed.
+See version info in documentation for more information.
+
+Please inform me about any errors or improvements as you see fit.
+
