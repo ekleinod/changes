@@ -51,6 +51,7 @@
 % \changes{v2.0.0}{2013/06/30}{fixed problem with special characters in tabbing environment (loc), real list of changes, authormarkup}
 % \changes{v2.0.1}{2013/08/10}{no changes in behavior or code; fixed problems with CTAN upload}
 % \changes{v2.0.2}{2013/08/13}{again no changes in behavior or code; fixed CTAN upload - pdf files were corrupt; improved documentation}
+% \changes{v2.0.3}{2014/10/15}{bugfix when using with amsart}
 % \GetFileInfo{changes.dtx}
 % \RecordChanges
 %
@@ -90,8 +91,8 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{changes}
-[2013/08/13 v2.0.2 changes-Paket]
-\typeout{*** changes-Paket 2013/08/13 v2.0.2 ***}
+[2014/10/15 v2.0.3 changes package]
+\typeout{*** changes package 2014/10/15 v2.0.3 ***}
 %    \end{macrocode}
 %
 % Package \chpackage{xkeyval} provides options with key-value-pairs.
@@ -961,7 +962,7 @@
 					\emph{\changesnoloc}
 					\PackageWarning{changes}{LaTeX rerun needed for list of changes}
 				}
-			\@starttoc{loc}
+			\@starttoc{loc}{}
 		}
 %    \end{macrocode}
 %	Print summary, but only in draft mode.
