@@ -41,8 +41,8 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{changes}
-[2013/08/13 v2.0.2 changes-Paket]
-\typeout{*** changes-Paket 2013/08/13 v2.0.2 ***}
+[2014/10/15 v2.0.3 changes package]
+\typeout{*** changes package 2014/10/15 v2.0.3 ***}
 \RequirePackage{xkeyval}
 \RequirePackage{xifthen}
 \newboolean{Changes@optiondraft}
@@ -510,7 +510,7 @@ style=list
 \emph{\changesnoloc}
 \PackageWarning{changes}{LaTeX rerun needed for list of changes}
 }
-\@starttoc{loc}
+\@starttoc{loc}{}
 }
 {
 \ifthenelse{\boolean{Changes@optiondraft}}
