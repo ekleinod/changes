@@ -12,7 +12,7 @@ body {
 	margin: 2% 10% 2% 3%;
 	padding: 0;
 	color: black;
-	background: url(logo.png) no-repeat 95% 5% fixed white;
+	background-color: white;
 }
 
 header, footer, nav, article {
@@ -28,7 +28,7 @@ article {
 	float: left;
 }
 
-nav {
+div.img {
 	width: 37%;
 	float: right;
 }
@@ -62,6 +62,14 @@ footer {
 dt {
 	padding-top: 2ex;
 	padding-bottom: 1ex;
+}
+
+/* images */
+img {
+	margin: 1em 2em 1em 1em;
+	padding: 3px;
+	border: 1px solid;
+	border-color: gainsboro grey grey gainsboro;
 }
 
 /* other */
