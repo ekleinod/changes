@@ -337,13 +337,19 @@
 %    \begin{macrocode}
 \DeclareOptionX<Changes@added>{id}{\def\Changes@added@id{#1}}
 \DeclareOptionX<Changes@added>{remark}{\def\Changes@added@remark{#1}}
+\DeclareOptionX<Changes@added>{decision}{\def\Changes@added@dec{#1}}
+\DeclareOptionX<Changes@added>{decisionid}{\def\Changes@added@decid{#1}}
+\DeclareOptionX<Changes@added>{decisionremark}{\def\Changes@added@decrem{#1}}
 %    \end{macrocode}
 %
 % Set the default values of the options.
 %    \begin{macrocode}
 \presetkeys{Changes@added}{
 	id=\@empty,
-	remark=\@empty
+	remark=\@empty,
+	decision=\@empty,
+	decisionid=\@empty,
+	decisionremark=\@empty
 }{}
 %    \end{macrocode}
 %
@@ -353,13 +359,19 @@
 %    \begin{macrocode}
 \DeclareOptionX<Changes@deleted>{id}{\def\Changes@deleted@id{#1}}
 \DeclareOptionX<Changes@deleted>{remark}{\def\Changes@deleted@remark{#1}}
+\DeclareOptionX<Changes@deleted>{decision}{\def\Changes@deleted@dec{#1}}
+\DeclareOptionX<Changes@deleted>{decisionid}{\def\Changes@deleted@decid{#1}}
+\DeclareOptionX<Changes@deleted>{decisionremark}{\def\Changes@deleted@decrem{#1}}
 %    \end{macrocode}
 %
 % Set the default values of the options.
 %    \begin{macrocode}
 \presetkeys{Changes@deleted}{
 	id=\@empty,
-	remark=\@empty
+	remark=\@empty,
+	decision=\@empty,
+	decisionid=\@empty,
+	decisionremark=\@empty
 }{}
 %    \end{macrocode}
 %
@@ -369,13 +381,19 @@
 %    \begin{macrocode}
 \DeclareOptionX<Changes@replaced>{id}{\def\Changes@replaced@id{#1}}
 \DeclareOptionX<Changes@replaced>{remark}{\def\Changes@replaced@remark{#1}}
+\DeclareOptionX<Changes@replaced>{decision}{\def\Changes@replaced@dec{#1}}
+\DeclareOptionX<Changes@replaced>{decisionid}{\def\Changes@replaced@decid{#1}}
+\DeclareOptionX<Changes@replaced>{decisionremark}{\def\Changes@replaced@decrem{#1}}
 %    \end{macrocode}
 %
 % Set the default values of the options.
 %    \begin{macrocode}
 \presetkeys{Changes@replaced}{
 	id=\@empty,
-	remark=\@empty
+	remark=\@empty,
+	decision=\@empty,
+	decisionid=\@empty,
+	decisionremark=\@empty
 }{}
 %    \end{macrocode}
 %
@@ -740,11 +758,14 @@
 %		\item remark
 %		\item text for list of changes
 %		\item change type for list of changes
+%		\item decision (accept or reject}
+%		\item decision author's id
+%		\item decision remark
 % \end{enumerate}
 % Define boolean for author test.
 %    \begin{macrocode}
 \newboolean{Changes@WrongID}
-\newcommand{\Changes@output}[6]{%
+\newcommand{\Changes@output}[9]{%
 %    \end{macrocode}
 %	Output changed text if option \choption{draft} is set, otherwise output unchanged text.
 %    \begin{macrocode}
@@ -768,14 +789,47 @@
 					{You have to define the author #3 with e.g.: \definechangesauthor{#3}}}%
 				{}%
 %    \end{macrocode}
+%	Check if the decision's author exists, error message otherwise.
+%    \begin{macrocode}
+			\ifthenelse{\not\equal{#8}{\@empty}}%
+				{%
+					\setboolean{Changes@WrongID}{true}%
+					\setcounter{Changes@Author}{0}%
+					\whiledo{\value{Changes@Author} < \value{Changes@AuthorCount}}{%
+						\stepcounter{Changes@Author}%
+						\ifthenelse{\equal{#8}{\@nameuse{Changes@AuthorID\theChanges@Author}}}%
+							{\setboolean{Changes@WrongID}{false}}%
+							{}%
+					}%
+				\ifthenelse{\boolean{Changes@WrongID}}%
+					{\PackageError{changes}%
+						{Undefined changes author: #8}%
+						{You have to define the author #8 with e.g.: \definechangesauthor{#8}}}%
+					{}%
+				}%
+				{}%
+%    \end{macrocode}
 %	Save author text for output.
 %    \begin{macrocode}
 			\ifthenelse{\equal{\Changes@optionauthormarkuptext}{id}}%
-				{\@namedef{Changes@AuthorText}{#3}}%
+				{%
+					\@namedef{Changes@AuthorText}{#3}%
+					\ifthenelse{\not\equal{#8}{\@empty}}%
+						{\@namedef{Changes@DecAuthorText}{#8}}%
+						{}%
+				}%
 				{}%
 			\ifthenelse{\equal{\Changes@optionauthormarkuptext}{name}}%
-				{\@namedef{Changes@AuthorText}{\@nameuse{Changes@AuthorName#3}}}%
+				{%
+					\@namedef{Changes@AuthorText}{\@nameuse{Changes@AuthorName#3}}%
+					\ifthenelse{\not\equal{#8}{\@empty}}%
+						{\@namedef{Changes@DecAuthorText}{\@nameuse{Changes@AuthorName#8}}}%
+						{}%
+				}%
 				{}%
+%    \end{macrocode}
+%	Begin output
+%    \begin{macrocode}
 			{%
 %    \end{macrocode}
 %	Change color, if colored text is used.
@@ -826,7 +880,7 @@
 %  The command formats text as new text.
 %
 %  Mandatory argument: added text.
-%  Optional argument (key-value): author's id, remark
+%  Optional argument (key-value): author's id, remark, decision, decision author's id, decision remark
 %    \begin{macrocode}
 \newcommand{\added}[2][\@empty]{%
 %    \end{macrocode}
@@ -840,6 +894,9 @@
 		{\Changes@added@remark}%
 		{#2}%
 		{\changesaddname}%
+		{\Changes@added@dec}%
+		{\Changes@added@decid}%
+		{\Changes@added@decremark}%
 	\stepcounter{Changes@AddCount\Changes@added@id}%
 }
 %    \end{macrocode}
@@ -852,7 +909,7 @@
 %  It solves the problem of additional space caused by an empty command.
 %
 %  Mandatory argument: deleted text.
-%  Optional argument (key-value): author's id, remark
+%  Optional argument (key-value): author's id, remark, decision, decision author's id, decision remark
 %    \begin{macrocode}
 \newcommand{\deleted}[2][\@empty]{%
 %    \end{macrocode}
@@ -866,6 +923,9 @@
 		{\Changes@deleted@remark}%
 		{#2}%
 		{\changesdeletename}%
+		{\Changes@deleted@dec}%
+		{\Changes@deleted@decid}%
+		{\Changes@deleted@decremark}%
 	\stepcounter{Changes@DeleteCount\Changes@deleted@id}%
 }
 %    \end{macrocode}
@@ -875,7 +935,7 @@
 %  The command formats text as replaced text.
 %
 %  Mandatory arguments: new text and old text.
-%  Optional argument (key-value): author's id, remark
+%  Optional argument (key-value): author's id, remark, decision, decision author's id, decision remark
 %    \begin{macrocode}
 \newcommand{\replaced}[3][\@empty]{%
 %    \end{macrocode}
@@ -889,6 +949,9 @@
 		{\Changes@replaced@remark}%
 		{#2}%
 		{\changesreplacename}%
+		{\Changes@replaced@dec}%
+		{\Changes@replaced@decid}%
+		{\Changes@replaced@decremark}%
 	\stepcounter{Changes@ReplaceCount\Changes@replaced@id}%
 }
 %    \end{macrocode}
