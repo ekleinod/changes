@@ -207,21 +207,39 @@ color=black
 }{}
 \DeclareOptionX<Changes@added>{id}{\def\Changes@added@id{#1}}
 \DeclareOptionX<Changes@added>{remark}{\def\Changes@added@remark{#1}}
+\DeclareOptionX<Changes@added>{decision}{\def\Changes@added@dec{#1}}
+\DeclareOptionX<Changes@added>{decisionid}{\def\Changes@added@decid{#1}}
+\DeclareOptionX<Changes@added>{decisionremark}{\def\Changes@added@decrem{#1}}
 \presetkeys{Changes@added}{
 id=\@empty,
-remark=\@empty
+remark=\@empty,
+decision=\@empty,
+decisionid=\@empty,
+decisionremark=\@empty
 }{}
 \DeclareOptionX<Changes@deleted>{id}{\def\Changes@deleted@id{#1}}
 \DeclareOptionX<Changes@deleted>{remark}{\def\Changes@deleted@remark{#1}}
+\DeclareOptionX<Changes@deleted>{decision}{\def\Changes@deleted@dec{#1}}
+\DeclareOptionX<Changes@deleted>{decisionid}{\def\Changes@deleted@decid{#1}}
+\DeclareOptionX<Changes@deleted>{decisionremark}{\def\Changes@deleted@decrem{#1}}
 \presetkeys{Changes@deleted}{
 id=\@empty,
-remark=\@empty
+remark=\@empty,
+decision=\@empty,
+decisionid=\@empty,
+decisionremark=\@empty
 }{}
 \DeclareOptionX<Changes@replaced>{id}{\def\Changes@replaced@id{#1}}
 \DeclareOptionX<Changes@replaced>{remark}{\def\Changes@replaced@remark{#1}}
+\DeclareOptionX<Changes@replaced>{decision}{\def\Changes@replaced@dec{#1}}
+\DeclareOptionX<Changes@replaced>{decisionid}{\def\Changes@replaced@decid{#1}}
+\DeclareOptionX<Changes@replaced>{decisionremark}{\def\Changes@replaced@decrem{#1}}
 \presetkeys{Changes@replaced}{
 id=\@empty,
-remark=\@empty
+remark=\@empty,
+decision=\@empty,
+decisionid=\@empty,
+decisionremark=\@empty
 }{}
 \DeclareOptionX<Changes@loc>{style}{\def\Changes@loc@style{#1}}
 \presetkeys{Changes@loc}{
@@ -257,18 +275,25 @@ style=list
 }
 {\RequirePackage[normalem,normalbf]{ulem}}
 {}
-\ifthenelse{\isundefined{\addto}}
+\newcommand*\listofchangesname{List of changes}
+\newcommand*\summaryofchangesname{Changes}
+\newcommand*\changesaddname{Added}
+\newcommand*\changesdeletename{Deleted}
+\newcommand*\changesreplacename{Replaced}
+\newcommand*\changesauthorname{Author}
+\newcommand*\changesanonymousname{anonymous}
+\newcommand*\changesnoloc{List of changes is available after the next \LaTeX\ run.}
+\newcommand*\changesnosoc{Summary of changes is available after the next \LaTeX\ run.}
+\newboolean{Changes@langpackage}
+\setboolean{Changes@langpackage}{false}
+\@ifpackageloaded{babel}
+{\setboolean{Changes@langpackage}{true}}
+{}
+\@ifpackageloaded{polyglossia}
+{\setboolean{Changes@langpackage}{true}}
+{}
+\ifthenelse{\boolean{Changes@langpackage}}
 {
-\def\listofchangesname{List of changes}
-\def\summaryofchangesname{Changes}
-\def\changesaddname{Added}
-\def\changesdeletename{Deleted}
-\def\changesreplacename{Replaced}
-\def\changesauthorname{Author}
-\def\changesanonymousname{anonymous}
-\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}
-\def\changesnosoc{Summary of changes is available after the next \LaTeX\ run.}
-}{
 \addto\captionsngerman{\def\listofchangesname{Liste der \"Anderungen}}
 \addto\captionsngerman{\def\summaryofchangesname{\"Anderungen}}
 \addto\captionsngerman{\def\changesaddname{Eingef\"ugt}}
@@ -299,6 +324,16 @@ style=list
 \addto\captionsenglish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
 \addto\captionsenglish{\def\changesnosoc{Summary of changes is available after the next \LaTeX\ run.}}
 
+\addto\captionsbritish{\def\listofchangesname{List of changes}}
+\addto\captionsbritish{\def\summaryofchangesname{Changes}}
+\addto\captionsbritish{\def\changesaddname{Added}}
+\addto\captionsbritish{\def\changesdeletename{Deleted}}
+\addto\captionsbritish{\def\changesreplacename{Replaced}}
+\addto\captionsbritish{\def\changesauthorname{Author}}
+\addto\captionsbritish{\def\changesanonymousname{anonymous}}
+\addto\captionsbritish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
+\addto\captionsbritish{\def\changesnosoc{Summary of changes is available after the next \LaTeX\ run.}}
+
 \addto\captionsitalian{\def\listofchangesname{Lista delle modifiche}}
 \addto\captionsitalian{\def\summaryofchangesname{Modifiche}}
 \addto\captionsitalian{\def\changesaddname{Aggiunte}}
@@ -309,6 +344,7 @@ style=list
 \addto\captionsitalian{\def\changesnoloc{La lista delle modifiche sar\`a disponibile alla prossima esecuzione di \LaTeX.}}
 \addto\captionsitalian{\def\changesnosoc{Le modifiche sar\`a disponibile alla prossima esecuzione di \LaTeX.}}
 }
+{}
 \newcommand{\Changes@extension}{soc}
 \newcommand{\setsocextension}[1]{
 \renewcommand{\Changes@extension}{#1}
@@ -401,7 +437,7 @@ style=list
 \renewcommand{\Changes@Markup@Deleted}[1]{#1}
 }
 \newboolean{Changes@WrongID}
-\newcommand{\Changes@output}[6]{%
+\newcommand{\Changes@output}[9]{%
 \ifthenelse{\boolean{Changes@optiondraft}}%
 {%
 \setboolean{Changes@WrongID}{true}%
@@ -417,11 +453,38 @@ style=list
 {Undefined changes author: #3}%
 {You have to define the author #3 with e.g.: \definechangesauthor{#3}}}%
 {}%
+\ifthenelse{\not\equal{#8}{\@empty}}%
+{%
+\setboolean{Changes@WrongID}{true}%
+\setcounter{Changes@Author}{0}%
+\whiledo{\value{Changes@Author} < \value{Changes@AuthorCount}}{%
+\stepcounter{Changes@Author}%
+\ifthenelse{\equal{#8}{\@nameuse{Changes@AuthorID\theChanges@Author}}}%
+{\setboolean{Changes@WrongID}{false}}%
+{}%
+}%
+\ifthenelse{\boolean{Changes@WrongID}}%
+{\PackageError{changes}%
+{Undefined changes author: #8}%
+{You have to define the author #8 with e.g.: \definechangesauthor{#8}}}%
+{}%
+}%
+{}%
 \ifthenelse{\equal{\Changes@optionauthormarkuptext}{id}}%
-{\@namedef{Changes@AuthorText}{#3}}%
+{%
+\@namedef{Changes@AuthorText}{#3}%
+\ifthenelse{\not\equal{#8}{\@empty}}%
+{\@namedef{Changes@DecAuthorText}{#8}}%
+{}%
+}%
 {}%
 \ifthenelse{\equal{\Changes@optionauthormarkuptext}{name}}%
-{\@namedef{Changes@AuthorText}{\@nameuse{Changes@AuthorName#3}}}%
+{%
+\@namedef{Changes@AuthorText}{\@nameuse{Changes@AuthorName#3}}%
+\ifthenelse{\not\equal{#8}{\@empty}}%
+{\@namedef{Changes@DecAuthorText}{\@nameuse{Changes@AuthorName#8}}}%
+{}%
+}%
 {}%
 {%
 \ifthenelse{\boolean{Changes@colored}}%
@@ -454,6 +517,9 @@ style=list
 {\Changes@added@remark}%
 {#2}%
 {\changesaddname}%
+{\Changes@added@dec}%
+{\Changes@added@decid}%
+{\Changes@added@decremark}%
 \stepcounter{Changes@AddCount\Changes@added@id}%
 }
 \newcommand{\deleted}[2][\@empty]{%
@@ -465,6 +531,9 @@ style=list
 {\Changes@deleted@remark}%
 {#2}%
 {\changesdeletename}%
+{\Changes@deleted@dec}%
+{\Changes@deleted@decid}%
+{\Changes@deleted@decremark}%
 \stepcounter{Changes@DeleteCount\Changes@deleted@id}%
 }
 \newcommand{\replaced}[3][\@empty]{%
@@ -476,6 +545,9 @@ style=list
 {\Changes@replaced@remark}%
 {#2}%
 {\changesreplacename}%
+{\Changes@replaced@dec}%
+{\Changes@replaced@decid}%
+{\Changes@replaced@decremark}%
 \stepcounter{Changes@ReplaceCount\Changes@replaced@id}%
 }
 \RequirePackage[breakall]{truncate}
