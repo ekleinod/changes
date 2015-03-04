@@ -1,8 +1,8 @@
-% \CheckSum{966}
+% \CheckSum{1086}
 %
 % \iffalse meta-comment
 %
-%  Copyright (C) 2007-2013
+%  Copyright (C) 2007-2015
 %  Ekkart Kleinod (ekleinod@edgesoft.de)
 % --------------------------------------------------------------------------
 %
@@ -460,22 +460,32 @@
 %
 % \subsection{Language dependent texts}
 %
-% Declaration of language dependent names and identifiers.
-% The check for \chcommand{addto} is a check for the \chpackage{babel} package.
-% If the babel package is not loaded, the default language is English, in order to use another language, the user has to redefine the variables.
+% If the \chpackage{babel} package is not loaded, the default language is English, in order to use another language, the user has to redefine the variables.
+% If the \chpackage{babel} or the \chpackage{polyglossia} package is loaded, the default language is English too for undefined languages.
 %    \begin{macrocode}
-\ifthenelse{\isundefined{\addto}}
+\newcommand*\listofchangesname{List of changes}
+\newcommand*\summaryofchangesname{Changes}
+\newcommand*\changesaddname{Added}
+\newcommand*\changesdeletename{Deleted}
+\newcommand*\changesreplacename{Replaced}
+\newcommand*\changesauthorname{Author}
+\newcommand*\changesanonymousname{anonymous}
+\newcommand*\changesnoloc{List of changes is available after the next \LaTeX\ run.}
+\newcommand*\changesnosoc{Summary of changes is available after the next \LaTeX\ run.}
+%    \end{macrocode}
+%
+% The check for \chpackage{babel} or \chpackage{polyglossia}, define language dependent texts afterwards.
+%    \begin{macrocode}
+\newboolean{Changes@langpackage}
+\setboolean{Changes@langpackage}{false}
+\@ifpackageloaded{babel}
+	{\setboolean{Changes@langpackage}{true}}
+	{}
+\@ifpackageloaded{polyglossia}
+	{\setboolean{Changes@langpackage}{true}}
+	{}
+\ifthenelse{\boolean{Changes@langpackage}}
 	{
-		\def\listofchangesname{List of changes}
-		\def\summaryofchangesname{Changes}
-		\def\changesaddname{Added}
-		\def\changesdeletename{Deleted}
-		\def\changesreplacename{Replaced}
-		\def\changesauthorname{Author}
-		\def\changesanonymousname{anonymous}
-		\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}
-		\def\changesnosoc{Summary of changes is available after the next \LaTeX\ run.}
-	}{
 		\addto\captionsngerman{\def\listofchangesname{Liste der \"Anderungen}}
 		\addto\captionsngerman{\def\summaryofchangesname{\"Anderungen}}
 		\addto\captionsngerman{\def\changesaddname{Eingef\"ugt}}
@@ -506,6 +516,16 @@
 		\addto\captionsenglish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
 		\addto\captionsenglish{\def\changesnosoc{Summary of changes is available after the next \LaTeX\ run.}}
 
+		\addto\captionsbritish{\def\listofchangesname{List of changes}}
+		\addto\captionsbritish{\def\summaryofchangesname{Changes}}
+		\addto\captionsbritish{\def\changesaddname{Added}}
+		\addto\captionsbritish{\def\changesdeletename{Deleted}}
+		\addto\captionsbritish{\def\changesreplacename{Replaced}}
+		\addto\captionsbritish{\def\changesauthorname{Author}}
+		\addto\captionsbritish{\def\changesanonymousname{anonymous}}
+		\addto\captionsbritish{\def\changesnoloc{List of changes is available after the next \LaTeX\ run.}}
+		\addto\captionsbritish{\def\changesnosoc{Summary of changes is available after the next \LaTeX\ run.}}
+
 		\addto\captionsitalian{\def\listofchangesname{Lista delle modifiche}}
 		\addto\captionsitalian{\def\summaryofchangesname{Modifiche}}
 		\addto\captionsitalian{\def\changesaddname{Aggiunte}}
@@ -516,6 +536,7 @@
 		\addto\captionsitalian{\def\changesnoloc{La lista delle modifiche sar\`a disponibile alla prossima esecuzione di \LaTeX.}}
 		\addto\captionsitalian{\def\changesnosoc{Le modifiche sar\`a disponibile alla prossima esecuzione di \LaTeX.}}
 	}
+	{}
 %    \end{macrocode}
 %
 % \subsection{File extension}
@@ -758,7 +779,7 @@
 %		\item remark
 %		\item text for list of changes
 %		\item change type for list of changes
-%		\item decision (accept or reject}
+%		\item decision (accept or reject)
 %		\item decision author's id
 %		\item decision remark
 % \end{enumerate}
