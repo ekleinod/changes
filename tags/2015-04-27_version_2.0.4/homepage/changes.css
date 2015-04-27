@@ -1,0 +1,82 @@
+/*
+	The aXBench team
+	www.axbench.de
+*/
+
+/*
+	Overall definitions
+*/
+body {
+	font-family: sans-serif;
+	font-size: normal;
+	margin: 2% 10% 2% 3%;
+	padding: 0;
+	color: black;
+	background-color: white;
+}
+
+header, footer, nav, article {
+	display: block;
+}
+
+header {
+	width: 60%;
+}
+
+article {
+	width: 60%;
+	float: left;
+}
+
+div.img {
+	width: 37%;
+	float: right;
+}
+
+footer {
+	clear: both;
+	width: 100%;
+}
+
+/* links */
+a {
+	color: grey;
+}
+
+a:visited {
+	color: grey;
+}
+
+/* header */
+header h1 {
+	font-size: 300%;
+}
+
+/* footer */
+footer {
+	font-size: smaller;
+	font-style: italic;
+}
+
+/* lists */
+dt {
+	padding-top: 2ex;
+	padding-bottom: 1ex;
+}
+
+/* images */
+img {
+	margin: 1em 2em 1em 1em;
+	padding: 3px;
+	border: 1px solid;
+	border-color: gainsboro grey grey gainsboro;
+}
+
+/* other */
+.mono {
+	font-family: monospace;
+	font-style: normal;
+}
+
+/* EOF */
+
