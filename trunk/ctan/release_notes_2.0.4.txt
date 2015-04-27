@@ -1,0 +1,10 @@
+The changes-package allows the user to manually markup changes of text, such as additions, deletions, or replacements.
+Changed text is shown in a different color; deleted text is striked out.
+The package allows free defining of additional authors and their associated color.
+It also allows you to change the markup of changes, authors, or annotations.
+
+Release 2.0.4 is a bugfix release fixing the following problem: the changes package produced
+a LaTeX error when used with an unknown language.
+
+Please inform me about any errors or improvements as you see fit.
+
