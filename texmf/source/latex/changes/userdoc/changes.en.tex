@@ -81,13 +81,13 @@ Now everything is set to markup the changed text.
 Please use the following commands according to your change:
 
 for newly added text:\\
-\chcommand{added[id=<id>, remark=<remark>]\{text\}}
+\chcommand{added[id=<id>, remark=<remark>]\{new text\}}
 
 for deleted text:\\
-\chcommand{deleted[id=<id>, remark=<remark>]\{text\}}
+\chcommand{deleted[id=<id>, remark=<remark>]\{old text\}}
 
 for replaced text:\\
-\chcommand{replaced[id=<id>, remark=<remark>]\{text\}}
+\chcommand{replaced[id=<id>, remark=<remark>]\{\meta{new text}\}\{\meta{old text}\}}
 
 Stating the author's id and/or a remark is optional.
 
